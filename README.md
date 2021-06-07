@@ -200,9 +200,9 @@
 ##  8. <a name='donate'></a>捐赠作者
 给作者一些动力,帮他买一杯 :coffee:
 
-![](readme_images/alipay.jpg | width=100)
+![]("readme_images/alipay.jpg" | width=100)
 
-![](readme_images/wechat_pay.jpg | width=100)
+![]("readme_images/wechat_pay.jpg" | width=100)
 
 
 <!-- ACKNOWLEDGEMENTS -->
