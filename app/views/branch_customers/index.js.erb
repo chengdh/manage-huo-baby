@@ -1,0 +1,11 @@
+<%if flash[:alert].present?%>
+$.notifyBar({
+      html: "<%=flash[:alert]%>",
+      delay: 3000,
+      animationSpeed: "normal",
+      cls : 'error'
+  });
+<%end%>
+
+var customers = '<%= escape_javascript(render("customers")) %>';
+$('#customers_wrap').html(customers);

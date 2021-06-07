@@ -1,0 +1,21 @@
+<tr>
+  <td style='padding-left : <%="#{@cur_level*30}px"%>;'>
+    <% if can? :update,resource_class %>
+      <%=link_to goods_cat.name,edit_goods_cat_path(goods_cat,:format => :js),:class => 'fancybox'%>
+    <%else%>
+      <%=goods_cat.name%>
+    <%end%>
+  </td>
+  <td><%=goods_cat.bottom_price %></td>
+  <td><%=goods_cat.default_price %></td>
+  <td><%=goods_cat.easy_code %></td>
+  <td><%=goods_cat.is_active? ? "是" : "否"%></td>
+  <td><%=goods_cat.order_by %></td>
+  <td><%=goods_cat.note %></td>
+  <td>&nbsp;</td>
+</tr>
+<%@goods_cats.select {|the_goods_cat| goods_cat.id == the_goods_cat.parent_id }.sort{|a,b| a.order_by <=> b.order_by}.each do |child_goods_cat|%>
+  <% @cur_level+=1 %>
+  <%= render "goods_cats_recursive",:goods_cat => child_goods_cat %>
+  <% @cur_level-=1 %>
+<%end%>

@@ -1,0 +1,11 @@
+<div class='actions-bar'>
+  <input type='text' size="10" class="search_box search_box_transit_deliver_info" 
+  data-params = '{"search[state_eq]" : "transited","search[type_in][]" : ["TransitBill","HandTransitBill"],"show_multi" :1,<%=show_or_hidden_fields_to_str(:transit_deliver_info_form) %>}'/>
+  <input type='checkbox' id="cbx_transit_deliver_info_return_bill" />
+  <label for="cbx_transit_deliver_info_return_bill">
+    查询退货单
+  </label>
+</div>
+<div class='enter2tab'>
+  <%= render "shared/carrying_bills/table_no_paginate" %>
+</div>

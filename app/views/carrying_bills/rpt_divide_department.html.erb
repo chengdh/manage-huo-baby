@@ -1,0 +1,42 @@
+<div class="block">
+  <div class="content">
+    <h2 class="title">分理处运费分成统计表</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_for @search,:url => {:action => :rpt_divide_department},:method => :post  do |f|%>
+            <%= select_tag "search[from_org_id_in][]",orgs_option_groups_string(true,false),
+            :multiple => "multiple",
+            :class => "select_org_multi",
+            :style => "width : 300px;"
+          %>
+        &rarr;
+          <%= select_tag "search[to_org_id_in][]",orgs_option_groups_string(false,true),
+            :multiple => "multiple",
+            :class => "select_org_multi",
+            :style => "width : 300px;"
+          %>
+
+        <%= f.label :deliver_info_deliver_date_gte,"提货日期:"%>
+        <%= f.text_field :deliver_info_deliver_date_gte,:class => "datepicker", :readonly => true,:size => 15,:value => 1.months.ago.beginning_of_month.to_date %>
+        <%= f.label :deliver_info_deliver_date_lte,"~"%>
+        <%= f.text_field :deliver_info_deliver_date_lte,:class => "datepicker", :readonly => true,:size => 15,:value => 1.months.ago.end_of_month.to_date  %>
+        <%= f.submit "统计",:class => "sexybutton sexysimple sexyblue" %>
+      <%end%>
+    </div>
+  </div>
+  <ul class='tabs'>
+    <li class='active'><%= link_to '运费合计统计表',"#",:id => "tab_show_rpt_divide_department_sum"%></li>
+    <li><%= link_to '运费分项统计表',"#",:id => "tab_show_rpt_divide_department_detail"%></li>
+  </ul>
+
+  <div style='overflow-x : auto;width : 100%;' id="rpt_divide_department_sum_wrapper">
+    <%= render "rpt_divide_department_sum",:bills => @carrying_bills,:search => @search  %>
+  </div>
+
+  <div style='display: none;overflow-x : auto;width : 100%;' id="rpt_divide_department_detail_wrapper">
+    <%= render "rpt_divide_department_detail",:bills => @carrying_bills  %>
+  </div>
+</div>
+</div>
+</div>

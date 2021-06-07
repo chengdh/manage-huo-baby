@@ -1,0 +1,15 @@
+<%= semantic_form_for CarryingBill.search,:url => {:action => :new},:html => {:id => "simple_search_bill_form",:method => :get } do |f|%>
+  <%= f.inputs do %>
+    <%= f.input :bill_no_eq,:label => "运单编号",:as => :string,:input_html =>{:size => 20} %>
+    <%= f.input :bill_date_gte,:label => "票据日期",:as => :hidden,:input_html =>{:value => '2013-09-01',:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :bills_in_yard,:label => "发货地",:as => :select,:collection => all_summary_orgs_for_select,:include_blank => false %>
+    <%= f.input :to_org_id_or_transit_org_id_eq,:label =>"到货地",:as => :select,:collection => exclude_current_ability_orgs_for_select %>
+    <%= f.input :pay_type_eq,:label => "支付方式",:as => :select,:collection => CarryingBill.pay_types %>
+    <%= f.input :type_eq,:label => "运单类型",:as => :select,:collection => bill_types_for_select %>
+    <%= f.input :state_eq,:label => "票据状态",:as => :select,:collection => states_for_select  %>
+    <%= f.hidden_field :state_ne,:value => "invalided"%>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "生成盘货单据",:class => "sexybutton sexysimple sexyblue",:disable_with => "正在查询..." %>
+  <% end %>
+<% end%>

@@ -1,0 +1,30 @@
+<tr>
+  <td style='padding-left : <%="#{@cur_level*30}px"%>;'>
+    <% if can? :update_all,resource_class %>
+      <%=link_to org.name,edit_org_path(org,:format => :js),:class => 'fancybox'%>
+    <%else%>
+      <%=org.name%>
+    <%end%>
+  </td>
+  <td><%=org.simp_name %></td>
+  <td><%=org.code %></td>
+  <td><%=org.phone %></td>
+  <td><%=org.manager %></td>
+  <td><%=org.location %></td>
+  <td class='text-center'>
+    <%lock_input_time = org.lock_input_time.blank? ? "未设置" : org.lock_input_time %>
+    <%if can? :only_edit_lock_time,resource_class %>
+      <%=link_to lock_input_time,edit_org_path(org,:format => :js),:class => 'fancybox'%>
+    <%else%>
+      <%=lock_input_time%>
+    <%end%>
+  </td>
+  <td><%=org.is_active? ? "是" : "否"%></td>
+  <td><%=org.order_by%></td>
+  <td><%=link_to "限制到货地!",show_org_permits_org_path(org,:format => :js),:class => :fancybox%></td>
+</tr>
+<%@orgs.select {|the_org| org.id == the_org.parent_id }.sort{|a,b| a.order_by <=> b.order_by}.each do |child_org|%>
+  <% @cur_level+=1 %>
+  <%= render "orgs_recursive",:org => child_org %>
+  <% @cur_level-=1 %>
+<%end%>

@@ -1,0 +1,12 @@
+<%= semantic_form_for ScanLine.search,:url => report_workload_scan_header_teams_path ,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= f.hidden_field :scan_header_type_eq,:value => "ScanHeaderTeam" %>
+  <%= f.inputs do %>
+    <%= f.input :scan_header_bill_date_gte,:label => "装卸日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :scan_header_bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :scan_header_to_org_id_eq,:label => "装卸组",:as => :select,:collection => org_loads_for_select %>
+    <%= f.input :scan_header_user_id_eq,:label => "操作员",:as => :select,:collection => users_for_select %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<%= render "form_before" %>
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "goods_exception_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs "异常信息" do%>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :org_id ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false %>
+    <%= f.input :op_org_id ,:as => :select,:collection => branches_for_select,:hint => "请选择理赔部门",:input_html => {:class => :op_org_id} %>
+    <%= f.input :exception_type ,:as => :select,:collection => GoodsException.exception_types,:include_blank => false %>
+    <%= f.input :except_num %>
+    <%= f.input :note ,:as => :string,:input_html => {:size => 100} %>
+  <%end%>
+<% end%>

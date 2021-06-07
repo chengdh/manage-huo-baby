@@ -1,0 +1,16 @@
+<table style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th>手机号</th>
+      <th>短信内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.sort_by {|bill| bill.payment_list_sort_seq}.each_with_index do |bill,index| %>
+      <tr>
+        <td><%= bill.try(:from_customer).try(:mobile)%></td>
+        <td><%= "您单号#{bill.bill_no}金额#{bill.act_pay_fee}已转入(#{resource.bank})账户" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

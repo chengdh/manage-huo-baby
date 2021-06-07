@@ -1,0 +1,62 @@
+<table class="table">
+  <tr>
+    <td colspan="6" style="font-weight: bold;text-align: right;color: red;">
+      <span style="padding: 3px;border: 1px solid red;">
+        <%= resource.human_state_name %>
+      </span>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <span style="padding: 3px;border: 1px solid red;">
+        <%= resource.audit_state_des %>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6" s><h3><%= resource.title %></h3></td>
+  </tr>
+  <tr>
+    <th>发布人:</td>
+    <td><%= resource.creator %></td>
+    <th>发布日期:</td>
+    <td><%= resource.created_at.strftime("%Y-%m-%d")%></td>
+    <th>计划完成日期:</td>
+    <td><%= resource.plan_complete_date%></td>
+  </tr>
+  <tr>
+    <th>负责人:</td>
+    <td><%= resource.users_list%></td>
+    <th>接收日期:</td>
+    <td><%= resource.accept_date.try(:strftime,"%Y-%m-%d")%></td>
+    <th>完成日期:</td>
+    <td><%= resource.submit_date.try(:strftime,"%Y-%m-%d") %></td>
+  </tr>
+  <tr>
+    <th>参与人:</td>
+    <td colspan="3"><%= resource.users_list%></td>
+    <th>审核日期:</td>
+    <td><%= resource.audit_date.try(:strftime,"%Y-%m-%d") %></td>
+  </tr>
+  <tr>
+    <th>任务描述:</td>
+    <td colspan="5"><%= resource.content.html_safe %></td>
+  </tr>
+  <tr>
+    <th colspan="6" style="text-align: center;">任务回复</td>
+  </tr>
+  <% resource.task_progresses.each_with_index do |p,i| %>
+    <tr>
+      <td><%= p.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= p.user %></td>
+      <td colspan="5"><%= p.content.html_safe %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th>完成情况:</td>
+    <td colspan="5"><%= resource.finsh_content %></td>
+  </tr>
+  <tr>
+    <th>审核意见:</td>
+    <td colspan="5"><%= resource.note %></td>
+  </tr>
+</table>

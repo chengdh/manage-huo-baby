@@ -1,0 +1,77 @@
+<!--运单-->
+<table style='width: 100%;border-collapse : collapse;font-size : 12px;margin : 0;padding : 0;border: 1px sold #000;'>
+  <tr style="font-size: 14px;border: 1px solid #000;">
+    <td colspan="2" ><%= IlConfig.client_name %></td>
+    <td style="text-align: right;"><span style="border: 1px solid gray;">客户联</span></td>
+  </tr>
+  <tr style="border: 1px solid #000;">
+    <td><%= bill.to_org_name%></td>
+    <td><%= bill.bill_no %>&nbsp;&nbsp;<%= bill.goods_no %></td>
+    <td style="text-align: right;">
+      <span style="border: 1px solid gray;"><%= bill.service_note %></span>
+    </td>
+  </tr>
+
+  <tr style="border: 1px solid #000;">
+    <td colspan="2"><%= bill.from_org_name %></td>
+    <td style="text-align: right;">
+      <span><%= bill.created_at_str%></span>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;border-bottom: none;">寄</td>
+    <td style="border: 1px solid #000;">寄件人:<%= bill.from_customer_name %>
+    <td style="border: 1px solid #000;">电话:<%= bill.from_customer_mobile %>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;;border-top : none;">方</td>
+    <td style="border: 1px solid #000;" colspan="2">客户卡号:<%= bill.from_customer_code%></td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;border-bottom: none;">收</td>
+    <td style="border: 1px solid #000;">收件人:<%= bill.to_customer_name %>
+    <td style="border: 1px solid #000;">电话:<%= bill.to_customer_mobile %>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;;border-top : none;">方</td>
+    <td style="border: 1px solid #000;" colspan="2">地址:</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;" rowspan="2"><div>货</div><div>物</div></td>
+    <td style="border: 1px solid #000;">名称:<%= bill.goods_info %></td>
+    <td style="border: 1px solid #000;">件数:<%= bill.goods_num %></td>
+  </tr>
+
+  <tr>
+    <td style="border: 1px solid #000;">重量:<%= bill.goods_weight%>公斤</td>
+    <td style="border: 1px solid #000;">体积:<%= bill.goods_volume %>方 &nbsp;&nbsp;包装:<%= bill.package %></td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;" rowspan="2"><div>费</div><div>用</div></td>
+    <td style="border: 1px solid #000;">运费:&yen;<%= bill.carrying_fee %></td>
+    <td style="border: 1px solid #000;">
+      接货费:&yen;<%= bill.from_short_carrying_fee%>
+      &nbsp;&nbsp;
+      送货费:&yen;<%= bill.to_short_carrying_fee%>
+    </td>
+  </tr>
+
+  <!-->
+  <tr>
+    <td style="border: 1px solid #000;">外转费:&yen;<%= bill.transit_carrying_fee %></td>
+    <td style="border: 1px solid #000;">保价费:&yen;<%= bill.insured_fee%></td>
+  </tr>
+  -->
+
+  <tr>
+    <td style="border: 1px solid #000;">代收货款:&yen;<%= bill.goods_fee %></td>
+    <td style="border: 1px solid #000;">付款方式:<%= bill.pay_type_des%></td>
+  </tr>
+
+  <tr>
+    <td style="border: 1px solid #000;" colspan="3">寄件人签名:</td>
+  </tr>
+  <tr>
+    <td colspan="3">客服:400-818-5856</td>
+  </tr>
+</table>

@@ -1,0 +1,2 @@
+module VoteConfigWithOrgsHelper
+end

@@ -1,0 +1,8 @@
+<%=f.semantic_fields_for :claim do |claim|%>
+  <%= claim.inputs "理赔信息" do%>
+    <%= claim.hidden_field :user_id,:value => current_user.id if claim.object.new_record?%>
+    <%= claim.input :bill_date,:as => :string,:input_html => {:size => 10,:readonly => true,:class => 'datepicker'} %>
+    <%= claim.input :act_compensate_fee %>
+    <%= claim.input :note ,:as => :string,:input_html => {:size => 100} %>
+  <%end%>
+<%end%>

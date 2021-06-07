@@ -1,0 +1,46 @@
+<table class='table inventory_table'>
+  <thead>
+    <tr>
+        <th class='text-center'>序号</th>
+        <th class='text-center'>票号</th>
+        <th class='text-center'>货号</th>
+        <th class='text-center'>起止点</th>
+        <th class='text-center'>付款方式</th>
+        <th class='text-center'>运费</th>
+        <th class='text-center'>代收货款</th>
+        <th class='text-center'>保价费</th>
+        <th class='text-center'>运费合计</th>
+        <th class='text-center'>备注</th>
+        <th class='text-center'>货物件数</th>
+        <th class='text-center'>分理处发出数</th>
+        <th class='text-center'>分理处滞留数</th>
+        <th class='text-center'>货场发出数</th>
+        <th class='text-center'>货场滞留件数</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+      #排序
+      sorted = @carrying_bills.sort_by {|b| b.try(:from_org).try(:order_by) +  b.try(:to_org).try(:order_by)}
+    %>
+    <%sorted.each_with_index do |bill,index| %>
+      <tr>
+      <td><%= index + 1 %></td>
+      <td><%= link_to bill.bill_no,carrying_bill_path(bill,:format => :js),:class => 'fancybox'%></td>
+      <td><%= bill.goods_no%></td>
+      <td><%= bill.from_org%>~<%= bill.to_org%></td>
+      <td><%= pay_type_des bill.pay_type%></td>
+      <td><%= bill.carrying_fee%></td>
+      <td><%= bill.goods_fee%></td>
+      <td><%= bill.insured_fee%></td>
+      <td><%= bill.carrying_fee_total%></td>
+      <td><%= bill.note%></td>
+      <td><%= bill.goods_num%></td>
+      <td><%= bill.branch_reached_num%></td>
+      <td><%= bill.branch_rest_num%></td>
+      <td><%= bill.load_num%></td>
+      <td><%= bill.rest_num%></td>
+    </tr>
+  <%end%>
+    </tbody>
+  </table>

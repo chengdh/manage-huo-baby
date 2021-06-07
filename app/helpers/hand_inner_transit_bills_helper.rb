@@ -1,0 +1,2 @@
+module HandInnerTransitBillsHelper
+end

@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= form_tag search_service_carrying_bills_path,:method => :get do %>
+      <div class="form-group">
+        <%=text_area_tag :bill_nos,nil,:placeholder => "录入运单编号,多票查询,以逗号分割运单号",:size => "25x4",:id => 'search_text',:class => 'form-control' %>
+      </div>
+      <button type="submit" class="btn btn-block btn-primary">查询运单</button>
+    <% end%>
+  </div>
+</div>

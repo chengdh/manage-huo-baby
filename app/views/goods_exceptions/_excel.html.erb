@@ -1,0 +1,45 @@
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr>
+      <th colspan="10" style="text-align: center;">货损理赔信息列表</th>
+    </tr>
+    <tr>
+      <th>序号</th>
+      <th>日期</th>
+      <th>机构</th>
+      <th>运单号</th>
+      <th>异常类别</th>
+      <th>异常数量</th>
+      <th>发货地赔付</th>
+      <th>到货地赔付</th>
+      <th>状态</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@search.all.each_with_index do |v,index|%>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= v.bill_date %></td>
+        <td><%= v.org %></td>
+        <td><%= v.try(:carrying_bill).try(:bill_no)%></td>
+        <td>&nbsp;<%= v.except_des %></td>
+        <td><%= v.except_num %></td>
+        <td><%= v.from_fee%></td>
+        <td><%= v.to_fee%></td>
+        <td><%= v.human_state_name%></td>
+        <td>&nbsp;<%= v.note %></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='5'>合计:</td>
+      <td><%= @search.all.sum(&:except_num) %></td>
+      <td><%= @search.all.sum(&:from_fee) %></td>
+      <td><%= @search.all.sum(&:to_fee)%></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tfoot>
+</table>

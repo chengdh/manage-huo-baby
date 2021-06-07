@@ -1,0 +1,153 @@
+<!--热敏票据打印单-->
+<table style='border-collapse : collapse;font-size: 10px;'>
+  <tr>
+    <td colspan='4' style='text-align : center;'>
+      <h4 style="padding : 0;margin : 0;"><%= IlConfig.client_name%></h4>
+      <h4 style="padding : 5px;margin : 0;">运输协议单</h4>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='4' style='text-align : center;height : 18mm;'>
+      <div class='barcode' style='margin : auto;'></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='4' style='text-align : center;'>
+      <div class="bill_no_barcode"></div>
+      <p><%= bill.bill_no %></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid #000;">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</td>
+    <td style="border-top: 1px solid #000;" colspan="3"><%= bill.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+  </tr>
+  <tr>
+    <td>货&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
+    <td  style="font-weight : bold;font-size : 14px;" colspan="3">
+      <%= bill.goods_no %>
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top: 1px solid gray;">发&nbsp;&nbsp;货&nbsp;&nbsp;地:</td>
+    <td style="border-top: 1px solid gray;" colspan="3">
+      <%= bill.from_org %>
+    </td>
+  </tr>
+  <tr>
+    <td>到&nbsp;&nbsp;货&nbsp;&nbsp;地:</td>
+    <td  colspan="3" style="font-weight : bold;font-size : 14px;">
+      <%= bill.to_org %>
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top: 1px solid #000;">客户卡号:</td>
+    <td colspan="3" style="border-top: 1px solid #000;">
+      <%= bill.from_customer.try(:code) %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>发&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+    <td>
+      <%= bill.from_customer_name %>
+    </td>
+    <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+    <td>
+      <%= bill.from_customer_mobile  %>
+    </td>
+  </tr>
+  <tr>
+    <td>收&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+    <td><%= bill.to_customer_name %></td>
+    <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+    <td>
+      <%= bill.to_customer_mobile %>
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top: 1px solid #000;">支付方式:</td>
+    <td colspan="3" style="border-top: 1px solid #000;">
+      <%= bill.pay_type_des %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>运费总计:</td>
+    <td>
+      <%= bill.carrying_fee_total %>
+    </td>
+    <td>保&nbsp;&nbsp;险&nbsp;&nbsp;费:</td>
+    <td>
+      <%= bill.insured_fee %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>代收货款:</td>
+    <td colspan="3">
+      <%= bill.goods_fee %>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid #000;"  colspan="2">货物名称</td>
+    <td style="border-top: 1px solid #000;"  colspan="2">数量</td>
+  </tr>
+  <tr>
+    <td style="border-top: 1px solid #000;" colspan="2">
+      <%= bill.goods_info %>
+    </td>
+    <td style="border-top: 1px solid #000;" colspan="2">
+      <%= bill.goods_num %>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="border-top: 1px solid #000;" >备注:</td>
+    <td style="border-top: 1px solid #000;" colspan="3"><%= bill.note %></td>
+  </tr>
+  <tr>
+    <td>开票人:</td>
+    <td colspan="3"><%= bill.user %></td>
+  </tr>
+  <tr>
+    <td>发货人签字:</td>
+    <td colspan="3" style="border-bottom: 1px solid #000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      1.本票据以我公司同期票据运输协议条款为依据
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      2.本协议等同运输合同，有效期为三十天
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      3.严禁托运国家规定的危险品，违禁管制物品及假冒伪劣产品
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      4.发货人请核对发货票据信息,如有问题请及时更正票据信息
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      5.未盖我公司收货章为无效票;
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      6.温馨提示:此票为热敏票据,请妥善保存!
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      全国统一客服热线:400-619-4448
+    </td>
+  </tr>
+</table>

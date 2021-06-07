@@ -1,0 +1,50 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "#{resource_class.name.underscore}_form",:style => "width : 400px;",:class => get_org_edit_permission_class } do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs :name,:simp_name  %>
+  <%= f.inputs do %>
+    <%= f.input :parent_id,:as => :select,:collection => orgs_for_select,:include_blank => true %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :yard_id,:as => :select,:collection => allocations_for_select,:include_blank => true %>
+  <% end %>
+
+  <%=f.inputs :phone,:manager,:location,:code,
+    :lock_input_time,:py,:is_yard,:is_summary,:is_allocation,:is_visible,:is_active,:order_by,
+    :auto_generate_to_short_carrying_fee,
+    :agtscf_rate,:fixed_to_short_carrying_fee,
+    :auto_generate_from_short_carrying_fee,
+    :agfscf_rate,:fixed_from_short_carrying_fee
+  %>
+  <%= f.inputs do %>
+    <%= f.input :carrying_fee_gte_on_insured_fee,:label => "保险费设置",:hint => "空为不限制,否则运费大于设置值时生成保险费" %>
+    <%= f.input :fixed_insured_fee %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :limit_goods_fee,:label => "收取货款限制",:hint => "0为不允许收取货款,大于0时只能收取设定金额之下的货款" %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :note,:input_html => {:rows => 3} %>
+  <% end %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>分类</th>
+        <th>运费下限</th>
+        <th>运费上限</th>
+      </tr>
+    </thead>
+    <%=f.semantic_fields_for :customer_level_configs do |config|%>
+      <tr>
+        <td>
+          <%=config.hidden_field :name%>
+          <%=CustomerLevelConfig.levels[config.object.name]%>
+        </td>
+        <td><%= config.text_field :from_fee %></td>
+        <td><%= config.text_field :to_fee %></td>
+      </tr>
+    <%end%>
+  </table>
+  <%=f.actions do%>
+    <%= f.action :submit,:label => "保存机构信息",:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '正在保存...'} %>
+  <%end%>
+<%end%>

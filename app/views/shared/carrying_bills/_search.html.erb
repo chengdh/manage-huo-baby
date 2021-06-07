@@ -1,0 +1,50 @@
+<%= semantic_form_for resource_class.search,:remote => params[:not_remote].blank?,:html => {:id => "search_bill_form",:method => :get,:style => "width : 400px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%
+      params[:show_fields] ||= ""
+      params[:show_fields] += ",.carrying_fee_total,.insured_fee,.print_counter"
+  %>
+  <%= hidden_field_tag :show_fields,params[:show_fields] %>
+  <%= hidden_field_tag :hide_fields,params[:hide_fields] %>
+  <%= hidden_field_tag :set_disable,params[:set_disable] %>
+  <%if params[:search].present?%>
+    <%params[:search].each do |search_key,search_val|%>
+      <%if search_val.is_a? Array%>
+        <%search_val.each do |a|%>
+          <%= f.hidden_field "#{search_key}][",:value => a %>
+        <%end%>
+      <%else%>
+        <%= f.hidden_field search_key,:value => search_val %>
+      <%end%>
+    <%end%>
+  <%end%>
+  <%= f.inputs do %>
+    <%= f.input :bill_no_or_goods_no_or_from_customer_name_or_to_customer_name_or_from_customer_phone_or_to_customer_mobile_or_from_customer_mobile_or_to_customer_phone_like,:label =>"关键字",:hint => "票据号/货号/发货人/收货人/电话",:input_html => {:size => 30,:id => "keyword"} %>
+    <%= f.input params[:bill_date_gte].present? ? params[:bill_date_gte] : :bill_date_gte,:label => "票据日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input params[:bill_date_lte].present? ? params[:bill_date_lte] : :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :from_org_id_eq,:label => "发货地",:as => :select,:collection => branches_for_select,:input_html => {:class => :select_org} %>
+    <%= f.input :to_org_id_or_transit_org_id_eq,:label =>"到货地",:as => :select,:collection => branches_for_select,:input_html => {:class => :select_org} %>
+    <%= f.input :pay_type_eq,:label => "支付方式",:as => :select,:collection => CarryingBill.pay_types_for_search %>
+    <%= f.input :state_eq,:label => "票据状态",:as => :select,:collection => states_for_select  %>
+    <%= f.input :deliver_region_bills,
+      :label => "到货区域",
+      :as => :select,
+      :collection => deliver_regions_for_select(current_user.default_org_id)
+    %>
+
+    <%= f.input :additional_state_eq,:label => "附加票据状态",:as => :select,:collection => additional_states_for_select,:include_blank => false%>
+    <%= f.input :from_short_fee_state_eq,:label => "发货短途费状态",:as => :select,:collection => short_fee_states_for_select  %>
+    <%= f.input :to_short_fee_state_eq,:label => "到货短途费状态",:as => :select,:collection => short_fee_states_for_select  %>
+    <%= f.input :print_counter_gte,:label => "票据打印次数",:as => :select,:collection => print_counter_for_select  %>
+    <%= f.input :from_short_carrying_fee_gte,:label => "仅查询有发货短途费票据",:as => :boolean,:checked_value=> 0.1,:unchecked_value => 0 %>
+    <%= f.input :to_short_carrying_fee_gte,:label => "仅查询有到货短途费票据",:as => :boolean,:checked_value=> 0.1,:unchecked_value => 0 %>
+    <%= f.input "bill_association_object_is_urgent_eq",:label => "加急单",:as => :boolean,:checked_value=> 1,:unchecked_value => ""  %>
+    <%= f.input "bill_association_object_is_receipt_eq",:label => "带回单",:as => :boolean,:checked_value=> 1,:unchecked_value => ""  %>
+    <%= f.input "bill_association_object_is_outside_eq",:label => "外部票",:as => :boolean,:checked_value=> 1,:unchecked_value => ""  %>
+    <%= f.input "completed_eq",:label => "查询历史运单",:as => :boolean %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

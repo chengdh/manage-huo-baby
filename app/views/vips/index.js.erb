@@ -1,0 +1,35 @@
+<% if params[:in_wich].present?%>
+  <%if collection.blank?%>
+    $.notifyBar({
+      html: "未查询到客户信息,请检查客户编号!",
+      delay: 3000,
+      animationSpeed: "normal",
+      cls : 'error'
+    });
+    $('#customer_code').html('');
+    $('#from_customer_id').val('');
+    $('#from_customer_name').val('');
+    $('#from_customer_phone').val('');
+    $('#from_customer_mobile').val('');
+    $('#customer_code').html('');
+    $('#customer_code').focus();
+    $("#pay_type option[value='RE']").remove();
+  <%else%>
+      //更新对应的运单相关字段
+    $('#from_customer_id').val('<%=collection.first.id%>');
+    $('#from_customer_name').val('<%=collection.first.name%>');
+    $('#from_customer_phone').val('<%=collection.first.phone%>');
+    $('#from_customer_mobile').val('<%=collection.first.mobile%>');
+
+    //判断是否月结客户
+    <% if collection.first.is_month_pay %>
+      $("#pay_type option[value='RE']").remove()
+      $("#pay_type").append("<option value='RE'>月结</option>");
+      $("#pay_type").val("RE")
+    <% else %>
+      $("#pay_type option[value='RE']").remove();
+    <% end %>
+  <%end%>
+<%else%>
+    $('#table_wrap').html('<%= escape_javascript(render("table")) %>');
+<%end%>

@@ -1,0 +1,34 @@
+<% if resource.blank?%>
+  <div class="block">
+    <div class="content">
+      <div class="inner">
+        <p>没有找到有效的投票设置,请与管理员联系!</p>
+      </div>
+    </div>
+  </div>
+<% end%>
+<% if resource.present?%>
+  <div class="block">
+    <%= render "dynamic_toolbar" %>
+    <div class="content">
+      <h2 class="title"><%= resource.name%></h2>
+      <div class="inner">
+        <%= hidden_field_tag :vote_config_id,resource.id,:id => "vote_scope" %>
+        <table class="table single_vote_config_table">
+          <%resource.votable_items.each do |vi|%>
+            <tr>
+              <th>
+                <span class="vote_item"><%= vi.name%></span>
+              </th>
+              <td>
+                <%= radio_button_tag "#{vi.id}",1,false,:id => "one_#{vi.id}",:class => "radio-single-vote"%>
+                <%= label_tag "one_#{vi.id}","选择",:style => "font-size : 16px;font-weight : bold;" %>
+              </td>
+            </tr>
+          <%end%>
+        </table>
+      </div>
+    </div>
+    <%= render "dynamic_toolbar" %>
+  </div>
+<%end%>

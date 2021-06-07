@@ -1,0 +1,6 @@
+<li class="first">
+  <%= link_to image_tag("grid.png",:alt => "发出的装车清单列表") , collection_path("search[from_org_id_in]" => current_user.current_ability_org_ids),:title => "发出的装车清单列表",:class => "tipsy btn_index"  %>
+</li>
+<li>
+  <%= link_to image_tag("box-up.png",:size => '16x16',:alt => "收到的装车清单列表") , collection_path("search[to_org_id_in]" => current_user.current_ability_org_ids),:title => "收到的装车清单列表",:class => "tipsy btn_index"  %>
+</li>

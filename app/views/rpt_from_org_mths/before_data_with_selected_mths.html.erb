@@ -1,0 +1,31 @@
+<div class="block">
+  <div class="secondary-navigation">&nbsp;</div>
+  <div class="content">
+    <h2 class="title">营业数据统计</h2>
+    <div class='inner'>
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= select_tag :org_ids,orgs_option_groups_string,:multiple => "multiple",:class => "select_org_multi",:style => "width : 300px;" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= select_tag :mth,months_options_groups,:multiple => "multiple",:class => "select_mth_multi",:style => "width : 150px;"  %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <%= select_tag :fee_type,options_for_select(fee_types_for_select),:class => "select_fee_type"  %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= select_tag :chart_type,options_for_select(chart_types_for_select),:class => "select_chart_type"  %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= check_box_tag :data_to_org,"to_org" %>
+          <%= label_tag :data_to_org,"统计到货数据" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+
+          <%= button_tag "查询",:class => "btn_chart sexybutton sexysimple sexyblue" %>
+        </div>
+      </div>
+
+      <div class='actions-bar wat-cf'>
+        <div id="legend_wrapper" class="actions"></div>
+      </div>
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</div>

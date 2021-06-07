@@ -1,0 +1,60 @@
+<table class='table'>
+  <tr>
+    <td>日期:</td>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <td>发货地:</td>
+    <td><%=resource.from_org%></td>
+    <td>到货地:</td>
+    <td><%=resource.to_org%></td>
+    <td>操作员:</td>
+    <td><%=resource.user%></td>
+    <td>状态:</td>
+    <td><%=resource.human_state_name%></td>
+  </tr>
+</table>
+<div id="table_wrap">
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>运单号</th>
+        <th>货号</th>
+        <th>发货地</th>
+        <th>到货地</th>
+        <th>支付方式</th>
+        <th>货款</th>
+        <th>运费</th>
+        <th>发货地短途费</th>
+        <th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index|%>
+        <tr>
+          <td><%=index + 1%></td>
+          <td><%= link_to bill.bill_no,polymorphic_path(bill,:format => :js),:class => :fancybox %></td>
+          <td><%= link_to bill.goods_no,polymorphic_path(bill,:format => :js),:class => :fancybox %></td>
+          <td><%=bill.from_org%></td>
+          <td><%=bill.to_org%></td>
+          <td><%=pay_type_des(bill.pay_type)%></td>
+          <td><%=bill.goods_fee%></td>
+          <td><%=bill.carrying_fee%></td>
+          <td><%=bill.from_short_carrying_fee%></td>
+          <td><%=bill.note%></td>
+        </tr>
+      <%end%>
+    </tbody>
+    <tfoot>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><%=resource.carrying_bills.sum(:goods_fee)%></td>
+      <td><%=resource.carrying_bills.sum(:carrying_fee)%></td>
+      <td><%=resource.carrying_bills.sum(:from_short_carrying_fee)%></td>
+      <td>&nbsp;</td>
+    </tfoot>
+  </table>
+</div>

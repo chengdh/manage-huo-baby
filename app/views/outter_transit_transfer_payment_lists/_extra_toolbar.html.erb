@@ -1,0 +1,40 @@
+<%if params[:action] == "show" or params[:action] == 'process_handle'%>
+  <%if can? :transfer,resource and resource.payment_listed?%>
+    <li>
+      <%= link_to image_tag("tick-octagon-frame.png",:alt => "转账确认") ,
+        process_handle_outter_transit_transfer_payment_list_path(resource),
+        :title => "转账确认",
+        :class => "tipsy"  %>
+    </li>
+  <%end%>
+  <li>
+    <%= link_to image_tag("pufa_logo.jpg",:size => '18x18',:alt => "导出为浦发转账EXCEL"),
+      export_excel_outter_transit_transfer_payment_list_path(resource),
+      :title => "导出为浦发转账EXCEL",
+      :class => "tipsy"  %>
+  </li>
+  <li>
+    <%= link_to image_tag("ccb_logo.gif",:size => '18x18',:alt => "导出为建设银行转账文本"),
+      resource_path(resource,:format => :text,:bank => "ccb"),
+      :title => "导出为建设银行转账文本",:class => "tipsy"  %>
+  </li>
+  <li>
+    <%= link_to image_tag("cib_logo.gif",:size => '18x18',:alt => "导出为兴业银行转账文本"), 
+      resource_path(resource,:format => :text,:bank =>"cib"),
+      :title => "导出为兴业银行转账文本",:class => "tipsy"  %>
+  </li>
+  <li>
+    <%= link_to image_tag("notice_sms.png",:size => '18x18',:alt => "导出短信群发excel"),
+      export_sms_excel_outter_transit_transfer_payment_list_path(resource),
+      :title => "导出为短信群发excel",:class => "tipsy"  %>
+  </li>
+<%end%>
+<!--生成凭证-->
+<%if can? :build_accounting_document_transfer_payment_list,CarryingBill %>
+  <li>
+    <%= link_to image_tag("money--arrow.png",:alt => "生成凭证"),"#",
+      "data-href" => build_accounting_document_transfer_payment_list_carrying_bills_path(:a => :b ),
+      :title => "凭证生成",:style => "display : none;",
+      :class => "tipsy btn_build_accounting_document_transfer_payment_list"  %>
+  </li>
+<%end%>

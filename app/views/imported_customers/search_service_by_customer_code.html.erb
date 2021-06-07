@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered">
+      <%if @imported_customers.blank?%>
+        <tr class="danger">
+          <td colspan='11' style="text-align: center;">您所查询的客户信息不存在!</td>
+        </tr>
+      <%end%>
+      <tr>
+        <td>序号</td>
+        <!-- <td>开卡地</td> -->
+        <td>卡号</td>
+        <td>姓名</td>
+        <td>手机</td>
+        <!-- <td>发货地</td> -->
+        <td>客户专员</td>
+        <!-- <td>当年运费合计</td> -->
+        <td>级别</td>
+        <td>积分</td>
+        <!-- <td>状态</td> -->
+      </tr>
+      <%@imported_customers.each_with_index do |customer,i|%>
+        <tr>
+          <td><%= i + 1 %></td>
+          <!-- <td><%= customer.own_org %></td> -->
+          <td><%= customer.try(:code) %></td>
+          <td><%= link_to customer.name,fee_lines_imported_customer_path(customer,:format => :js),:class => :fancybox %></td>
+          <td><%= customer.mobile %></td>
+          <!-- <td><%= customer.usually_location%></td> -->
+          <td><%= customer.sales_man %></td>
+          <!-- <td><%= customer.cur_fee %></td> -->
+          <td><%= customer.level_star %></td>
+          <td><%= customer.cur_year_sum_points%></td>
+          <!-- <td style="text&#45;align: center;"><span style="color: green;font&#45;weight: bold;"><%= raw(imported_customer_state_des(customer.state))%></span></td> -->
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

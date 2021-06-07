@@ -1,0 +1,55 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='10' style='text-align : center;font-size : 14px;'>货物运输清单(<%=resource.bill_no%>)</th>
+    </tr>
+  <tr>
+    <th>司机:</th>
+    <th><%=resource.driver %></th>
+    <th>车牌号:</th>
+    <th><%=resource.vehicle_no %></th>
+    <th>备注:</th>
+    <th colspan="5"><%= resource.note %></th>
+  </tr>
+    <tr>
+      <th width="30">序号</th>
+      <th width="64">运单号</th>
+      <th width="160">货号</th>
+      <th width="55">发货人</th>
+      <th width="55">收货人</th>
+      <th width="60">运费合计</th>
+      <th width="50">代收货款</th>
+      <th width="50">返款备注</th>
+      <th width="50">运费支付方式</th>
+      <th width="40">备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td>&nbsp;<%= bill.bill_no %></td>
+        <td><%= bill.goods_no %></td>
+        <td><%= bill.from_customer_name %></td>
+        <td><%= bill.to_customer_name %></td>
+        <td><%= bill.carrying_fee_total %></td>
+        <td><%= bill.goods_fee %></td>
+        <td></td>
+        <td><%= bill.pay_type_des %></td>
+        <td><%= bill.note.try(:[],(0..5)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <!--
+  <tfoot>
+    <tr>
+      <td colspan='5' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><load_list.carrying_bills.to_a.sum(&:carrying_fee_total)%></td>
+      <td style='border : thin solid #000;'><load_list.carrying_bills.sum(:goods_fee)%></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+  -->
+</table>

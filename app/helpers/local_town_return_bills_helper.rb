@@ -1,0 +1,2 @@
+module LocalTownReturnBillsHelper
+end

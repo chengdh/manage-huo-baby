@@ -1,0 +1,27 @@
+<hr />
+<%if params[:show_multi].present?%>
+  <div class='actions-bar text-right wat-cf'>
+    <div class='float-left'>
+      <%=form_for (params[:for_summary_org].present? ? SummaryOrgInnerTransitTransferPaymentList.search : InnerTransitTransferPaymentList.search),:remote => true do |f|%>
+        <%=f.label :bill_date_gte,"查询转账支付清单:",:readonly => true,:class => "datepicker" %>
+        <%=f.text_field :bill_date_gte,:value => Date.today,:readonly => true,:class => "datepicker",:size => 10%>
+        <%=f.label :bill_date_lte,"~"%>
+        <%=f.text_field :bill_date_lte,:value => Date.today,:readonly => true,:class => "datepicker",:size => 10%>
+        <%=f.hidden_field :carrying_bills_from_customer_id_is_not_null,:value => "1"%>
+        <%=f.hidden_field :carrying_bills_state_eq,:value => "payment_listed"%>
+        <%=f.hidden_field :state_eq,:value => "transfered"%>
+        <%=hidden_field_tag :show_select,1 %>
+        <%=image_submit_tag "arrow-circle-double-135.png",:class => "tipsy",:title => "查询还有未提款的代收货款转账支付清单" %>
+      <%end%>
+    </div>
+    <%= link_to image_tag("plus-white.png") + "生成批量提款清单",
+      carrying_bills_path,
+      :remote => true,
+      :class => 'tipsy sexybutton sexysimple sexyblue',
+      :title => "生成批量提款清单",
+      :id => 'btn_generate_inner_transit_transfer_pay_info' %>
+  </div>
+  <div id="table_wrap"></div>
+<%else%>
+  <%= render "shared/pay_infos/form_before" %>
+<%end%>

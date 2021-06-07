@@ -1,0 +1,144 @@
+<table class='table' id="goods_exception_show">
+  <tr>
+    <td>上报机构</td>
+    <td><%=resource.org.name%></td>
+    <td>上报日期</td>
+    <td><%=resource.bill_date.strftime("%Y-%m-%d")%></td>
+    <td>上报人</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <td>异常类型</td>
+    <td><%=exception_type_des(resource.exception_type) %></td>
+    <td>异常数量</td>
+    <td><%=resource.except_num%></td>
+    <td>运单号/货号</td>
+    <td>
+      <%=link_to "#{resource.carrying_bill.bill_no}/#{resource.carrying_bill.goods_no}",polymorphic_path(resource.carrying_bill,:format => :js),:class => 'fancybox'%>
+    </td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='3'><%=resource.note%></td>
+    <td>状态</td>
+    <td><%=resource.human_state_name%></td>
+  </tr>
+  <tr>
+    <td colspan="6" style="text-align : center">
+      <%= link_to image_tag(resource.photo.url(:thumb)),resource.photo.url,:class => :fancybox %>
+    </td>
+  </tr>
+
+  <%if resource.gexception_authorize_info.present?%>
+    <tr>
+      <td>核销时间</td>
+      <td><%=resource.gexception_authorize_info.bill_date.strftime("%Y-%m-%d")%></td>
+      <td>赔偿方式</td>
+      <td><%=exception_op_type_des(resource.gexception_authorize_info.op_type) %></td>
+      <td>拟赔金额</td>
+      <td><%=resource.gexception_authorize_info.compensation_fee %></td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td colspan='3'><%=resource.gexception_authorize_info.note %></td>
+      <td>核销人</td>
+      <td><%=resource.gexception_authorize_info.user%></td>
+    </tr>
+  <%end%>
+  <%if resource.claim.present?%>
+    <tr>
+      <td>理赔时间</td>
+      <td><%=resource.claim.bill_date.strftime("%Y-%m-%d")%></td>
+      <td>实赔金额</td>
+      <td><%=resource.claim.act_compensate_fee %></td>
+      <td>理赔人</td>
+      <td><%=resource.claim.user %></td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td colspan='5'><%=resource.claim.note %></td>
+    </tr>
+  <%end%>
+  <%if resource.goods_exception_identify.present?%>
+    <tr>
+      <td>鉴定时间</td>
+      <td colspan="5"><%=resource.goods_exception_identify.bill_date.strftime("%Y-%m-%d")%></td>
+    </tr>
+    <tr>
+      <td>发货地赔付</td>
+      <td><%=resource.goods_exception_identify.from_org_fee %></td>
+      <td>到货地赔付</td>
+      <td><%=resource.goods_exception_identify.to_org_fee %></td>
+      <td>司机赔付</td>
+      <td><%=resource.goods_exception_identify.driver_fee %></td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td colspan='3'><%=resource.goods_exception_identify.note %></td>
+      <td>鉴定人</td>
+      <td><%=resource.goods_exception_identify.user %></td>
+    </tr>
+  <%end%>
+</table>
+<div style='display : none;'>
+  <table class='table' id="goods_exception_print">
+    <tr>
+      <td colspan='6' style='text-align : center;'><%=IlConfig.client_name%></td>
+    </tr>
+    <tr>
+      <td colspan='6' style='text-align : center;'>
+        货物赔偿处理清单
+        <%= resource.posted? ? "(已核销)" : ""%>
+      </td>
+  </tr>
+  <tr>
+    <td>上报机构</td>
+    <td><%=resource.org.name%></td>
+    <td>上报日期</td>
+    <td><%=resource.bill_date.strftime("%Y-%m-%d")%></td>
+    <td>理赔时间</td>
+    <td><%=resource.claim.try(:bill_date)%></td>
+  </tr>
+  <tr>
+    <td>运单/货号</td>
+    <td colspan='3'>
+      <%="#{resource.carrying_bill.bill_no}/#{resource.carrying_bill.goods_no}"%>
+    </td>
+    <td>上报人</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <td>货物名称</td>
+    <td><%=resource.carrying_bill.goods_info%></td>
+    <td>异常类型</td>
+    <td><%=exception_type_des(resource.exception_type) %></td>
+    <td>异常数量</td>
+    <td><%=resource.except_num%></td>
+  </tr>
+  <tr>
+    <td>赔偿原因</td>
+    <td colspan='5'><%=resource.note%></td>
+  </tr>
+  <tr>
+    <td>赔偿金额</td>
+    <td colspan='3'>人民币(大写):<%=convertNumToChinese(resource.claim.try(:act_compensate_fee ).to_i)%></td>
+    <td colspan='2'>&yen;:<%=resource.claim.try(:act_compensate_fee).to_i%></td>
+  </tr>
+  <tr>
+    <td><%=resource.carrying_bill.from_org%></td>
+    <td><%=resource.goods_exception_identify.try(:from_org_fee )%></td>
+    <td><%=resource.carrying_bill.to_org%><%=resource.carrying_bill.try(:transit_org)%></td>
+    <td><%=resource.goods_exception_identify.try(:to_org_fee )%></td>
+    <td>司机赔付:<%=resource.goods_exception_identify.try(:driver_fee )%></td>
+    <td>鉴定人:<%=resource.goods_exception_identify.try(:user )%></td>
+  </tr>
+  <tr>
+    <td>经理签字:</td>
+    <td>&nbsp;</td>
+    <td>理赔人签字:</td>
+    <td>&nbsp;</td>
+    <td>货主签字:</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</div>

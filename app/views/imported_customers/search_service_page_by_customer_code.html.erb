@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= form_tag search_service_by_customer_code_imported_customers_path,:method => :get,:target => "_blank",:id => "imported_customer_search_service_form",:class => "well well-sm" do %>
+      <div class="form-group">
+        <%=text_field_tag "search[code_eq]",nil,:placeholder => "请输入会员卡号",:id => 'search_code',:class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%=text_field_tag "search[name_eq]",nil,:placeholder => "请输入会员姓名",:id => 'search_name',:class => 'form-control' %>
+      </div>
+      <button type="button" class="btn btn-block btn-primary" id="btn_imported_customer_query_submit">查询积分</button>
+    <% end %>
+  </div>
+</div>

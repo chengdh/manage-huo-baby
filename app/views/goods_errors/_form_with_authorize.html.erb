@@ -1,0 +1,9 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "goods_error_form"} do |f|%>
+  <%=f.error_messages %>
+  <%=f.semantic_fields_for :gerror_authorize do |a_info|%>
+    <%= a_info.inputs "核销信息" do%>
+      <%= a_info.hidden_field :user_id,:value => current_user.id if a_info.object.new_record?%>
+      <%= a_info.input :note ,:as => :string,:input_html => {:size => 100} %>
+    <%end%>
+  <%end%>
+<% end%>

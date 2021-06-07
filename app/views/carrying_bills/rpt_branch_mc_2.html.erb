@@ -1,0 +1,88 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">预付分公司管控报表</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_for CarryingBill.search,:method => :post,:html => {:id =>"form_search_rpt_branch_mc_2"},:url => {:action => :rpt_branch_mc_2} do |f|%>
+            <%# <%= f.select :to_org_id_in,orgs_option_groups_string,{},
+            <%#   :id => "select_to_org_ids_in_rpt_turnover",
+            <%#   :multiple => "multiple",
+            <%#   :class => "select_org_multi",
+            <%#   :style => "width : 300px;" %>
+            <%= select_tag "search[to_org_id_in][]",branches_option_groups_string,
+            :id => "select_to_org_ids_in_rpt_branch_mc_1",
+            :multiple => "multiple",
+            :class => "select_org_multi",
+            :style => "width : 300px;"
+          %>
+        <%= hidden_field_tag "search[type_in][]",'ComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'AutoCalculateComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'HandBill'%>
+        <%= hidden_field_tag "search[type_in][]",'ReturnBill'%>
+        &nbsp;&nbsp;
+        <%= f.submit "统计",:class => "sexybutton sexysimple sexyblue" %>
+      <%end%>
+    </div>
+  </div>
+  <div style='overflow-x : auto;width : 100%;'>
+    <table class='table' id='rpt_branch_mc_2'>
+      <thead>
+        <tr>
+          <th>分公司</th>
+          <th>目前欠款</th>
+          <th>未到货</th>
+          <th>当天收货</th>
+          <th>内部中转</th>
+          <th>应汇合计</th>
+          <th>实收汇款</th>
+          <th>差额</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@carrying_bills.each do |b|%>
+          <tr class="tr_rpt_branch_mc">
+            <td><%=b[:org_name]%></td>
+            <td>
+              <%= text_field_tag :now_debts,b[:now_debts],:class => "txt_now_debts",:size => 20%>
+            </td>
+            <td>
+              <span class="th_amount_no_reached">
+                <%=b[:th_amount_no_reached]%>
+              </span>
+            </td>
+            <td>
+              <span class="th_amount_today_bills">
+                <%=b[:th_amount_today_bills]%>
+              </span>
+            </td>
+            <td>
+              <span class="th_amount_inner_today_refund">
+                <%=b[:th_amount_inner_today_refund]%>
+              </span>
+            </td>
+            <td>
+              <span class="sum_th_amount">
+                <%=b[:sum_th_amount]%>
+              </span>
+            </td>
+            <td>
+              <%= text_field_tag :act_pay_fee,b[:act_pay_fee],:class => "txt_act_pay_fee",:size => 20 %>
+            </td>
+            <td>
+              <span class="sum_diff">
+                <%=b[:sum_diff]%>
+              </span>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+  <div id='table_wrap'>
+  </div>
+</div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

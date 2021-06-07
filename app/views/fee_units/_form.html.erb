@@ -1,0 +1,11 @@
+<%= semantic_form_for resource,:html => {:id => "fee_unit_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :unit_simp %>
+    <%= f.input :price_type,:as => :select,:collection => price_types_for_select,:include_blank => false %>
+    <%= f.input :default_price %>
+    <%= f.input :order_by %>
+    <%= f.input :is_active %>
+  <% end%>
+<% end%>

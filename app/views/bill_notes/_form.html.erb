@@ -1,0 +1,6 @@
+<%= form_for BillNote.new(:carrying_bill => carrying_bill),:method => :post,:id => "bill_note_form",:remote => true do |f| %>
+  <%= f.hidden_field :user_id,:value => current_user.id  %>
+  <%= f.hidden_field :carrying_bill_id %>
+  <%= f.text_field :note,:placehodler => "请录入运单备注信息", :size => 60,:max_size => 60 %>
+  <%= f.submit "保存", :id => "btn_create_bill_note_embed_carrying_bill_show",:class => "sexybutton sexysimple sexyblue" ,:disable_with => "正在保存..." %>
+<% end %>

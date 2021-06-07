@@ -1,0 +1,68 @@
+<table class='table'>
+  <tr>
+    <th>日期:</th>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <th>机构:</th>
+    <td><%=resource.org%></td>
+    <th>操作员:</th>
+    <td><%=resource.user%></td>
+    <th>状态:</th>
+    <td><%=resource.human_state_name%></td>
+  </tr>
+</table>
+<table class='table show-color-tr'>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>发货地</th>
+      <th>到货地</th>
+      <th>支付方式</th>
+      <th>货款</th>
+      <th>运费(提)</th>
+      <th>发货短途(提)</th>
+      <th>到货短途(提)</th>
+      <th>保险费(提)</th>
+      <th>管理费(提)</th>
+      <th>滞留天数</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index|%>
+    <tr class="<%= cycle("odd", "even") %> <%=stranded_class(bill.stranded_days)%>">
+    <td><%=index + 1%></td>
+    <td><%= link_to bill.bill_no,polymorphic_path(bill,:format => :js),:class => :fancybox%></td>
+    <td><%= link_to bill.goods_no,polymorphic_path(bill,:format => :js),:class => :fancybox%></td>
+    <td><%=bill.from_org%></td>
+    <td><%=bill.to_org%></td>
+    <td><%=pay_type_des(bill.pay_type)%></td>
+    <td><%=bill.goods_fee%></td>
+    <td><%=bill.carrying_fee_th%></td>
+    <td><%=bill.from_short_carrying_fee_th%></td>
+    <td><%=bill.to_short_carrying_fee_th%></td>
+    <td><%=bill.insured_fee_th%></td>
+    <td><%=bill.manage_fee_th%></td>
+    <td><%=bill.stranded_days %></td>
+    <td><%=bill.note%></td>
+  </tr>
+<%end%>
+  </tbody>
+  <tfoot>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><%=resource.sum_goods_fee%></td>
+    <td><%=resource.sum_carrying_fee_th%></td>
+    <td><%=resource.sum_from_short_carrying_fee_th%></td>
+    <td><%=resource.sum_to_short_carrying_fee_th%></td>
+    <td><%=resource.sum_insured_fee_th%></td>
+    <td><%=resource.sum_manage_fee_th%></td>
+    <td>罚金</td>
+    <td><%=resource.sum_fine  %></td>
+  </tfoot>
+</table>

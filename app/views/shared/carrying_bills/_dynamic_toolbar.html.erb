@@ -1,0 +1,244 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show" or params[:action] == "edit"%>
+      <li>
+        <%= link_to image_tag("arrow-turn-180-left.png",:size =>"16x16",:alt => "返回"),  :back,:title => "返回",:class => "tipsy" %>
+      </li>
+    <%end%>
+
+    <%if can? :read,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") , collection_path("search[from_org_id_in]" => current_user.current_ability_org_ids,"search[completed_eq]" => 0,"search[bill_date_eq]" => Date.today,:sort => "carrying_bills.bill_date desc,goods_no",:direction => "asc"),:title => "#{resource_class.model_name.human}列表",:class => "tipsy btn_index"  %>
+      </li>
+      <li>
+        <%= link_to image_tag("grid-snap.png",:size =>"16x16",:alt => "返程/中转#{resource_class.model_name.human}列表") , collection_path("search[to_org_id_or_transit_org_id_in]" => current_user.current_ability_org_ids,"search[state_ni]" =>['billed','loaded','shipped'],"search[completed_eq]" => 0,"search[bill_date_eq]" => Date.today),:title => "返程/中转#{resource_class.model_name.human}列表",:class => "tipsy"  %>
+      </li>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <li>
+        <%= link_to image_tag("application-search-result.png",:size =>"16x16",:alt => "查询运单"),defined?(search_bill_path) ? search_bill_path : self.send("search_#{controller_name.tableize}_path",:format => :js,:sort => "carrying_bills.bill_date desc,goods_no",:direction => "asc",:not_remote => true),:title => "查询运单",:class => "fancybox tipsy btn_search" %>
+        </li>
+      <%end%>
+    <%end%>
+    <%if can? :create,resource_class%>
+      <li>
+        <%= link_to image_tag("application--plus.png",:size =>"16x16",:alt => "新建#{resource_class.model_name.human}"), new_resource_path,:title => "新建#{resource_class.model_name.human}",:class => "tipsy btn_new"  %>
+      </li>
+    <%end%>
+
+    <%if params[:action] == "new"%>
+      <li>
+        <%= link_to_function image_tag("disk-black.png",:size =>"16x16",:alt => "保存#{resource_class.model_name.human}"), "$('#carrying_bill_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy btn_save"  %>
+      </li>
+    <%end%>
+    <%if params[:action] == "edit"%>
+      <li>
+        <%= link_to_function image_tag("disk-black.png",:size =>"16x16",:alt => "保存#{resource_class.model_name.human}"), "$('#carrying_bill_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy btn_save"  %>
+      </li>
+      <%if can? :destroy,resource_class%>
+        <li>
+          <%= link_to image_tag("cross.png",:size =>"16x16",:alt => "删除该记录"), resource,:method => :delete,:class =>"tipsy btn_destroy",:title => "删除该记录",:confirm => "你确定要删除吗?" %>
+        </li>
+      <%end%>
+    <%end%>
+    <%if params[:action] == "show"%>
+      <li>
+        <%= link_to image_tag("load.png",:size =>"16x16",:alt => "刷新当前记录"),  resource,:title => "刷新当前记录",:class => "tipsy btn_modify" %>
+      </li>
+
+      <%if can?(:update_all,resource) or can?(:update_goods_fee,resource) or can?(:update_carrying_fee_20,resource) or can?(:update_carrying_fee_50,resource) or can?(:update_carrying_fee_100,resource)%>
+        <li>
+          <%= link_to image_tag("application--pencil.png",:size =>"16x16",:alt => "修改当前记录"),  edit_resource_path(resource),:title => "修改当前记录",:class => "tipsy btn_modify" %>
+        </li>
+      <%end%>
+      <%if can? :reset,resource%>
+        <li>
+          <%= link_to image_tag("minus-shield.png",:size =>"16x16",:alt =>"重置运单"),  reset_carrying_bill_path(resource),:method => :put,:title => "重置运单",:class => "tipsy btn_reset",:confirm => "重置后,将丢失运单所有的操作信息,您确定吗？" %>
+        </li>
+      <%end%>
+      <%if can? :invalidate,resource%>
+        <li>
+        <%= link_to image_tag("denied.png",:size =>"16x16",:alt =>"运单作废"), self.send("invalidate_#{resource_class.model_name.underscore}_path",resource),:method => :put,:title => "运单作废",:class => "tipsy btn_invalidate",:confirm => "作废后,该运单将不能再使用,您确定吗？" %>
+        </li>
+      <%end%>
+      <%if can? :cancel,resource%>
+        <li>
+          <%= link_to image_tag("minus-button.png",:size =>"16x16",:alt =>"运单注销"), self.send("cancel_#{resource_class.model_name.underscore}_path",resource),:method => :put,:title => "运单注销",:class => "tipsy btn_cancel" %>
+        </li>
+      <%end%>
+
+      <!--运单暂扣-->
+
+      <%if can? :detain,resource%>
+        <li>
+          <%= link_to image_tag("lock.png",:size =>"16x16",:alt =>"运单暂扣"), self.send(:detain_carrying_bill_path,resource),:method => :put,:title => "运单暂扣",:class => "tipsy" %>
+        </li>
+      <%end%>
+      <!--解除暂扣-->
+      <%if can? :undetain,resource%>
+        <li>
+          <%= link_to image_tag("unlock.png",:size =>"16x16",:alt =>"解除运单暂扣"), self.send(:undetain_carrying_bill_path,resource),:method => :put,:title => "解除运单暂扣",:class => "tipsy" %>
+        </li>
+      <%end%>
+      <!--挂失-->
+      <%if can? :report_loss,resource%>
+        <li>
+        <%= link_to image_tag("umbrella.png",:size =>"16x16",:alt =>"运单挂失"), self.send(:report_loss_carrying_bill_path,resource),:method => :put,:title => "运单挂失",:class => "tipsy btn_bill_report_loss" %>
+        </li>
+      <%end%>
+
+      <%if can? :destroy,resource%>
+        <li>
+          <%= link_to image_tag("cross.png",:size =>"16x16",:alt => "删除该记录"), resource,:method => :delete,:class =>"tipsy btn_destroy",:title => "删除该记录",:confirm => "你确定要删除吗?" %>
+        </li>
+
+      <%end%>
+      <%if can? :print,resource%>
+        <li>
+          <%= link_to_function image_tag("printer.png",:size =>"16x16",:alt => "打印运单"), "",
+            :class =>"tipsy print_carrying_bill_v2 btn_print",
+            :title => "打印运单",
+            "data-print" => "#{resource.to_print_json}",
+            "data-print-bill" => "#{render 'shared/carrying_bills/print_bill',:bill => resource }"
+          %>
+        </li>
+        <!--
+        <li>
+          <%= link_to_function image_tag("printer.png",:size =>"16x16",:alt => "打印运单"), "",
+            :class =>"tipsy print_carrying_bill btn_print",
+            :title => "打印运单",
+            "data-print" => "#{resource.to_print_json}" %>
+        </li>
+        -->
+      <%end%>
+      <%if can? :print_thermal,resource%>
+        <!--
+        <li>
+          <%= link_to_function image_tag("printer.png",:size =>"16x16",:alt => "打印热敏运单"), "",
+            :class =>"tipsy print_thermal_carrying_bill btn_print",
+            :title => "打印热敏运单",
+            "data-print" => "#{resource.to_print_json}",
+            "data-print-bill" => "#{render 'shared/carrying_bills/thermal_bill',:bill => resource }"
+          %>
+        </li>
+        -->
+      <%end%>
+      <%if can? :print_barcode,resource%>
+        <li>
+          <%= link_to image_tag("barcode-icon.png",:size=>"16x16",:alt => "打印条码"), "#",
+            :class =>"tipsy print_barcode",
+            :title => "打印运单条码",
+            "data-max-barcode-count" => IlConfig.max_barcode_print_count,
+            "data-template" => "#{render 'shared/carrying_bills/print_label'}",
+            "data-print" => "#{resource.to_print_json}"
+          %>
+        </li>
+      <%end%>
+      <%if can? :print_barcode,resource%>
+        <li>
+        <%= link_to image_tag("barcode-ex.png",:size=>"16x16",:alt => "打印剩余条码"), "#",:class =>"tipsy print_barcode_ex",:title => "打印剩余条码","data-max-barcode-count" => IlConfig.max_barcode_print_count,"data-print" => "#{resource.to_print_json}" %>
+        </li>
+      <%end%>
+
+    <%end%>
+    <%if params[:action] == "index"%>
+      <!--
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为EXCEL"), collection_path(:search => params[:origin_search],:format => :csv),:title => "导出为EXCEL",:class => "tipsy"  %>
+      </li>
+      -->
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为EXCEL"), self.send("export_excel_#{controller_name.tableize}_path",:search => params[:origin_search],:show_fields => params[:show_fields],:hide_fields => params[:hide_fields],:sort => params[:sort],:direction => params[:direction],:without_paginate => 1),:title => "导出为EXCEL",:class => "tipsy"  %>
+      </li>
+      <% if self.respond_to?("export_excel_for_kingdee_#{controller_name.tableize}_path".to_sym) %>
+        <li>
+          <%= link_to image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为金蝶接口EXCEL"), self.send("export_excel_for_kingdee_#{controller_name.tableize}_path",:search => params[:origin_search],:show_fields => params[:show_fields],:hide_fields => params[:hide_fields],:sort => params[:sort],:direction => params[:direction],:without_paginate => 1),:title => "导出为金蝶接口EXCEL",:class => "tipsy"  %>
+        </li>
+      <% end %>
+      <!--提货未提款统计-->
+      <%if params[:rpt_type].eql?('rpt_no_pay') %>
+        <%if can? :export_sms_txt_for_rpt_no_pay,CarryingBill %>
+          <li>
+            <%= link_to_function image_tag("sms.png",:size =>"16x16",:alt => "导出货款提取短信群发文件",:size => "16x16"), "",:title => "导出货款提取短信群发文件",:class => "btn_export_sms_txt_for_rpt_no_pay tipsy"%>
+          </li>
+        <%end%>
+      <% end %>
+
+      <!--未提货票据生成到货通知清单-->
+      <%if params[:rpt_type].eql?('rpt_no_delivery') %>
+        <%if can? :build_notice,CarryingBill %>
+          <li>
+            <%= link_to image_tag("notice_phone.png",:size =>"16x16",:alt => "生成到货通知清单/导出短信通知文件",:size => '16x16') ,new_with_no_delivery_notices_path(:format => :js),:remote => true,:title => "生成到货通知清单/导出短信通知文件",:class => "tipsy btn_build_notice_with_no_delivery"  %>
+          </li>
+          <li>
+            <%= link_to_function image_tag("disk-black.png",:size =>"16x16",:alt => "保存到货通知清单"), "$('#notice_form').trigger('submit')",:title => "保存到货通知清单",:class => "tipsy btn_save btn_create_notice_with_no_delivery",:style => "display : none;"  %>
+          </li>
+        <%end%>
+        <%if can? :export_sms_txt,CarryingBill %>
+          <li>
+            <%= link_to_function image_tag("sms.png",:size =>"16x16",:alt => "导出短信群发文件",:size => "16x16"), "",:title => "导出短信群发文件",:class => "btn_export_sms_txt_with_no_delivery tipsy",:style => "display : none;"  %>
+          </li>
+        <%end%>
+      <%end%>
+
+      <%if can? :batch_destroy,CarryingBill %>
+        <li>
+          <%= link_to image_tag("mouse--minus.png",:size =>"16x16",:alt => "批量删除运单"), batch_destroy_carrying_bills_path(:format => :js),:method => :delete,:remote => true,:title => "批量删除运单[草稿]",:confirm =>"所有选中的草稿状态运单将被删除,不可恢复,确定要删除吗?",:class => "bill_selector tipsy"  %>
+        </li>
+      <%end%>
+
+    <%end%>
+    <%if params[:action] == "rpt_turnover"%>
+      <li>
+        <%= link_to_function image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为EXCEL"), "",:title => "导出为EXCEL",:class => "tipsy",:id => "btn_export_turnover","data-table" => "#rpt_turnover"  %>
+      </li>
+    <%end%>
+    <%if params[:action] == "rpt_turnover_by_from_org"%>
+      <li>
+        <%= link_to_function image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为EXCEL"), "",:title => "导出为EXCEL",:class => "tipsy",:id => "btn_export_turnover_by_from_org","data-table" => "#rpt_turnover_by_from_org"  %>
+      </li>
+    <%end%>
+    <%if self.respond_to?("export_excel_only_from_to_info_#{controller_name.tableize}_path".to_sym) and
+        params[:rpt_type] == "carrying_fee_and_goods_fee_rpt" and
+        can? :export_excel_only_from_to_info,CarryingBill %>
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出发货人收货人信息"),
+          self.send("export_excel_only_from_to_info_#{controller_name.tableize}_path",
+                    :search => params[:origin_search],
+                    :show_fields => params[:show_fields],
+                    :hide_fields => params[:hide_fields],
+                    :sort => params[:sort],
+                    :direction => params[:direction]),
+          :title => "导出发货人收货人信息",
+          :class => "tipsy",:id => "btn_export_carrying_fee_and_goods_fee_rpt" %>
+      </li>
+    <%end%>
+
+    <%if params[:action] == "sum_goods_fee_inout"%>
+      <li>
+        <%= link_to_function image_tag("document-excel-table.png",:size =>"16x16",:alt => "导出为EXCEL"), "",:title => "导出为EXCEL",:class => "tipsy",:id => "btn_export_sum_goods_fee_inout","data-table" => "#sum_goods_fee_inout"  %>
+      </li>
+    <%end%>
+    <!--打印始发地现金付财务凭证-->
+    <%if can? :build_accounting_document_from_cash,CarryingBill and  params[:rpt_type] and params[:rpt_type].eql?('carrying_fee_and_goods_fee_rpt')%>
+      <li>
+      <%= link_to image_tag("money--arrow.png",:size =>"16x16",:alt => "生成始发货现金付凭证"), build_accounting_document_from_cash_carrying_bills_path(:search => params[:origin_search]),:class => 'tipsy',:title => "生成始发货现金付凭证" %>
+      </li>
+    <%end%>
+    <%if can? :build_accounting_document_to_cash,CarryingBill and  params[:rpt_type] and params[:rpt_type].eql?('rpt_return_goods_sum')%>
+      <li>
+      <%= link_to image_tag("money--arrow.png",:size =>"16x16",:alt => "生成返程货现金付凭证"), build_accounting_document_to_cash_carrying_bills_path(:search => params[:origin_search]),:class => 'tipsy',:title => "生成返程货现金付凭证" %>
+      </li>
+    <%end%>
+
+    <%if ["build_accounting_document_from_cash","build_accounting_document_from_th",
+          "build_accounting_document_to_th","build_accounting_document_to_cash",
+          "build_accounting_document_transfer_payment_list"].include? params[:action]%>
+      <li>
+        <%= link_to_function image_tag("printer.png",:size =>"16x16",:alt => "打印凭证"), "",:class =>"tipsy btn_print_voucher",:title => "打印凭证" %>
+      </li>
+    <%end%>
+
+    <%= render "extra_toolbar" %>
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+<%= semantic_form_for resource ,:html => {:id => "#{resource_class.name.underscore}_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :bill_type,:as => :select, :collection => divide_config_bill_types_for_select%>
+    <%= f.input :from_org_id,:as => :select, :collection => orgs_for_select %>
+    <%= f.input :from_org_divide_rate,:input_html => { :size => 10 }  %>
+    <%= f.input :transit_org_id,:as => :select, :collection => orgs_for_select %>
+
+    <%= f.input :transit_org_divide_rate,:input_html => { :size => 10 }  %>
+    <%= f.input :to_org_id,:as => :select, :collection => orgs_for_select %>
+
+    <%= f.input :to_org_divide_rate,:input_html => { :size => 10 }  %>
+    <%= f.input :summary_org_id,:as => :select, :collection => all_summary_orgs_for_select %>
+    <%= f.input :summary_org_divide_rate,:input_html => {:size => 10} %>
+  <% end %>
+<% end%>

@@ -1,0 +1,24 @@
+<div id="login_dialog" class="login_dialog">
+  <div class="top"></div>
+  <div class="bottom">
+    <%=form_tag update_session_default_path,:method => :put,:id => 'loginform_2' do %>
+      <div id="user_name_login" class="login_type">
+        <h1>请选择<strong>当前角色和机构</strong></h1>
+        <p>
+          <span class='overlay_wrapper'>
+            <%= hidden_field_tag :use_usb,current_user.use_usb %>
+            <%= hidden_field_tag :usb_pin,current_user.usb_pin %>
+            <%=select_tag :cur_role_id,options_for_select(user_roles_for_select(current_user)),:id => "current_role_select" %>
+          </span>
+        </p>
+        <p id='role_orgs_select'>
+            <%=select_tag :cur_org_id,options_for_select(user_orgs_for_select(current_user)),:id => "current_org_select" %>
+        </p>
+      </div>
+      <div id="signin_button">
+        <%= link_to_function "确定","",:id => 'btn_login_ok',:class => "sexybutton sexysimple sexylarge sexygreen" %>
+        <%= link_to "退出",destroy_user_session_path,:class => "sexybutton sexysimple sexylarge sexyred" %>
+      </div>
+    <%end%>
+  </div>
+</div>

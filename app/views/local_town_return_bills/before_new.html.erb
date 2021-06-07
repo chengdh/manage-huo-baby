@@ -1,0 +1,30 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">新建 <%= resource_name %></h2>
+    <div class="inner">
+      <div class='actions-bar'>
+        <%=form_tag new_local_town_return_bill_path,:method => :get,:id => 'local_town_return_bill_before_new_form' do %>
+          <p>
+            <%=label_tag "search[bill_no_eq]",'请录入要退货的运单号:' %>
+          </p>
+          <p>
+            <%=text_field_tag "search[bill_no_eq]","",:class => 'search_box_return_bill' %>
+            <%=submit_tag "生成退货单",:disable_with => "正在生成退货单...",:class => 'sexybutton sexysimple sexyblue'%>
+          </p>
+          <ul class='hint'>
+            <li>只有确认到货后的票据才能进行退货操作</li>
+            <li>已提货或已中转的票据不能再进行退货</li>
+            <li>未装车的票据可直接删除</li>
+          </ul>
+          <%=hidden_field_tag "search[to_org_id_eq]",current_user.default_org_id %>
+          <%=hidden_field_tag "search[type_in][]",'LocalTownBill'%>
+          <%=hidden_field_tag "search[type_in][]",'HandLocalTownBill'%>
+          <%=hidden_field_tag "search[state_in][]",'distributed'%>
+          <%=hidden_field_tag "search[state_in][]",'reached'%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

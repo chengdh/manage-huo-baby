@@ -1,0 +1,33 @@
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('<%= asset_path "login-bg.jpeg" %>');">
+    <div class="wrap-login100">
+      <%=form_tag update_session_default_path,:method => :put,:class => "login100-form validate-form",:id => 'loginform_2' do %>
+        <%= hidden_field_tag :use_usb,current_user.use_usb %>
+        <%= hidden_field_tag :usb_pin,current_user.usb_pin %>
+        <span class="login100-form-logo">
+          <%# <i class="zmdi zmdi-landscape"></i> %>
+          <%= image_tag "yujiu-logo.png",:size=> "100x50"%>
+        </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+          选择角色和机构
+        </span>
+        <div class="wrap-input100 validate-input" style="boder-bottom: none;">
+          <%=select_tag :cur_role_id,options_for_select(user_roles_for_select(current_user)),:id => "current_role_select", :class => "input100",:style => "color: red;"   %>
+        </div>
+        <div class="wrap-input100 validate-input"  style="boder-bottom: none;">
+          <%=select_tag :cur_org_id,options_for_select(user_orgs_for_select(current_user)),:id => "current_org_select", :class => "input100",:style => "color: red;"  %>
+        </div>
+        <div class="container-login100-form-btn">
+          <%= link_to_function "确定","",:id => 'btn_login_ok',:class => "login100-form-btn" %>
+          &nbsp;&nbsp;&nbsp;
+          <%= link_to "退出",destroy_user_session_path,:class => "login100-form-btn"  %>
+        </div>
+        <div class="text-center p-t-90">
+          <a class="txt1" href="#">
+          </a>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>

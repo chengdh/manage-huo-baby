@@ -1,0 +1,2 @@
+module RegionDivideConfigsHelper
+end

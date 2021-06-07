@@ -1,0 +1,56 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class='title'>发货短途费统计</h2>
+    <div class="inner">
+
+      <div id="table_wrap">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>运单号</th>
+              <th>货号</th>
+              <th>发货地</th>
+              <th>到货地</th>
+              <th>支付方式</th>
+              <th>货款</th>
+              <th>运费</th>
+              <th>发货地短途费</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%@from_short_fee_lines.each_with_index do |line,index|%>
+              <tr>
+                <td><%=index + 1%></td>
+                <td><%= link_to line.carrying_bill.bill_no,polymorphic_path(line.carrying_bill,:format => :js),:class => :fancybox %></td>
+                <td><%= link_to line.carrying_bill.goods_no,polymorphic_path(line.carrying_bill,:format => :js),:class => :fancybox %></td>
+                <td><%=line.carrying_bill.from_org%></td>
+                <td><%=line.carrying_bill.to_org%></td>
+                <td><%=pay_type_des(line.carrying_bill.pay_type)%></td>
+                <td><%=line.carrying_bill.goods_fee%></td>
+                <td><%=line.carrying_bill.carrying_fee%></td>
+                <td><%=line.carrying_bill.from_short_carrying_fee%></td>
+                <td><%=line.carrying_bill.note%></td>
+              </tr>
+            <%end%>
+          </tbody>
+          <tfoot>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><%=@from_short_fee_lines.sum(&:goods_fee)%></td>
+            <td><%=@from_short_fee_lines.sum(&:carrying_fee)%></td>
+            <td><%=@from_short_fee_lines.sum(&:from_short_carrying_fee)%></td>
+            <td>&nbsp;</td>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <%= render "dynamic_toolbar" %>
+  </div>
+</div>

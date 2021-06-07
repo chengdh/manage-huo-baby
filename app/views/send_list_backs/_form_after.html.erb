@@ -1,0 +1,8 @@
+<hr/>
+<div class='actions-bar text-right'>
+  <%= link_to image_tag("arrow-circle-double-135.png") + "送货员未交票统计", carrying_bills_path,:remote => true,
+    :id =>"btn_send_list_line_query",:class => 'tipsy sexybutton sexysimple sexyblue',
+    :title => "查询当前送货员未交票信息" %>
+</div>
+<hr/>
+<div id='table_wrap'></div>

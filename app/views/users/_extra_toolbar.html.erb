@@ -1,0 +1,26 @@
+<%if params[:action] == "show" or params[:action] == 'edit' or params[:action] == 'reset_usb_pin'%>
+  <%if can? :reset_usb_pin,resource_class%>
+    <li>
+      <%= link_to image_tag("usb-flash-drive--pencil.png",:alt => "重设usbkey") , reset_usb_pin_user_path(resource),:title => "重设usb key",:class => "tipsy"  %>
+    </li>
+  <%end%>
+<%end%>
+<%if params[:action] == "reset_usb_pin"%>
+  <li>
+    <%= link_to_function image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "$('##{resource_class.model_name.underscore}_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy"  %>
+  </li>
+<%end%>
+
+<%if params[:action] == "index"%>
+  <%if can? :update,resource_class%>
+    <li>
+      <%= link_to image_tag("application--pencil.png",:alt => "修改#{resource_class.model_name.human}"), "#",:title => "修改#{resource_class.model_name.human}",:class => "tipsy btn_edit"  %>
+    </li>
+  <%end%>
+  <%if can? :destroy,resource_class%>
+    <li>
+      <%= link_to image_tag("cross.png"), '#',:method => :delete,:class =>"tipsy btn_delete",:title => "删除该记录",:confirm => "你确定要删除吗?" %>
+    </li>
+  <%end%>
+<% end %>
+

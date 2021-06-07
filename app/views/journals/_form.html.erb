@@ -1,0 +1,120 @@
+<%= form_for resource,:html => {:id => "journal_form"} do |f| %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <table class='table'>
+    <caption>帐目盘点登记表</caption>
+    <thead>
+      <tr>
+        <th colspan='2'>
+          分公司:
+          <%= resource.org.try(:name) %>
+          <%=f.hidden_field :org_id%>
+        </th>
+        <th colspan='2'>
+          <%= resource.bill_date.strftime('%Y-%m-%d') %>
+          <%= f.hidden_field :bill_date %>
+        </th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th colspan='2'>帐目金额</th>
+        <th colspan='2'>库存金额</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>已结算未汇金额</td>
+        <td><%= f.text_field :settled_no_rebate_fee,:readonly => true %></td>
+        <td>库存现金</td>
+        <td><%= f.text_field :cash %></td>
+      </tr>
+      <tr>
+        <td>已提未结算金额</td>
+        <td><%= f.text_field :deliveried_no_settled_fee,:readonly => true %></td>
+        <td>银行存款</td>
+        <td><%= f.text_field :deposits %></td>
+      </tr>
+      <tr>
+        <td><%= f.text_field :input_name_1 %></td>
+        <td><%= f.text_field :input_fee_1 %></td>
+        <td>返程货款</td>
+        <td><%= f.text_field :goods_fee %></td>
+      </tr>
+      <tr>
+        <td><%= f.text_field :input_name_2 %></td>
+        <td><%= f.text_field :input_fee_2 %></td>
+        <td>短途及赔偿</td>
+        <td><%= f.text_field :short_fee %></td>
+      </tr>
+      <tr>
+        <td><%= f.text_field :input_name_3 %></td>
+        <td><%= f.text_field :input_fee_3 %></td>
+        <td>其他开支</td>
+        <td><%= f.text_field :other_fee %></td>
+      </tr>
+    </tbody>
+    <tr>
+      <td>合计</td>
+      <td><span id='journal_sum_1'><%=resource.sum_1%></span></td>
+      <td>合计</td>
+      <td><span id='journal_sum_2'><%=resource.sum_2%></span></td>
+    </tr>
+    <thead>
+      <tr>
+        <td colspan='2'>未提货票据</td>
+        <td colspan='2'>客户欠款</td>
+      </tr>
+    </thead>
+
+    <tr>
+      <td>黑票</td>
+      <td><%= f.text_field :black_bills,:readonly => true %></td>
+      <td>当日欠款</td>
+      <td><%= f.text_field :current_debt %></td>
+    </tr>
+    <tr>
+      <td>红票</td>
+      <td><%= f.text_field :red_bills,:readonly => true %></td>
+      <td>2-3日欠款</td>
+      <td><%= f.text_field :current_debt_2_3 %></td>
+    </tr>
+    <tr>
+      <td>黄票</td>
+      <td><%= f.text_field :yellow_bills,:readonly => true %></td>
+      <td>4-5日欠款</td>
+      <td><%= f.text_field :current_debt_4_5 %></td>
+    </tr>
+    <tr>
+      <td>绿票</td>
+      <td><%= f.text_field :green_bills,:readonly => true %></td>
+      <td>6日以上欠款</td>
+      <td><%= f.text_field :current_debt_ge_6 %></td>
+    </tr>
+    <tr>
+      <td>蓝票</td>
+      <td><%= f.text_field :blue_bills,:readonly => true %></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>白票</td>
+      <td><%= f.text_field :white_bills,:readonly => true %></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tfoot>
+      <tr>
+        <td>合计</td>
+        <td><%= resource.sum_3 %></td>
+        <td>合计</td>
+        <td><span id='journal_sum_4'><%= resource.sum_4 %></span></td>
+      </tr>
+      <tr>
+        <td>分公司经理</td>
+        <td>&nbsp;</td>
+        <td>会计</td>
+        <td><%=resource.user.try(:username) %></td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>

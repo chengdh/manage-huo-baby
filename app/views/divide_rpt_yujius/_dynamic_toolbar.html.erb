@@ -1,0 +1,40 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show"%>
+      <%= render :partial => 'toolbar_btn_back' %>
+    <%end%>
+    <%if can? :read,resource_class %>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") , customer_payment_infos_path("search[state_eq]" => "draft"),:title => "#{resource_class.model_name.human}列表",:class => "tipsy"  %>
+      </li>
+      <li><%= link_to image_tag("application-search-result.png",:alt => "查询#{resource_class.model_name.human}"),search_customer_payment_infos_path,:title => "查询#{resource_class.model_name.human}",:class => "fancybox tipsy" %></li>
+    <%end%>
+    <%if can? :create,resource_class%>
+      <li>
+        <%= link_to image_tag("application--plus.png",:alt => "新建#{resource_class.model_name.human}"), before_new_divide_rpt_yujius_path,:title => "新建#{resource_class.model_name.human}",:class => "tipsy"  %>
+      </li>
+    <%end%>
+
+    <%if params[:action] == "new"%>
+      <li>
+        <%= link_to_function image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "$('#divide_rpt_yujiu_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy"  %>
+      </li>
+    <%end%>
+
+    <%if params[:action] == "show"%>
+      <%if can? :confirm,resource %>
+        <li>
+          <%= link_to image_tag("glyph_check.png",:size => "16x16",:alt => "确认"),
+            process_handle_divide_rpt_yujiu_path(resource,:update_attrs => {:confirm_user_id => current_user.id}),
+            :title => "确认",
+            :class => "tipsy btn_process_handle",
+            :method => :put  %>
+        </li>
+      <%end%>
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_divide_rpt_yujiu_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+      </li>
+    <%end%>
+  </ul>
+</div>

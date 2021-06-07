@@ -1,0 +1,41 @@
+<table class='table' data-detailUrl='<%=base_settlement_carrying_bills_path(resource,show_or_hidden_fields)%>'>
+  <tr>
+    <td>结算员:</td>
+    <td><%=resource.user%></td>
+    <td>结算单位:</td>
+    <td><%=resource.org.name %></td>
+    <td>结算日期:</td>
+    <td> <%=resource.created_at.strftime('%Y-%m-%d')%></td>
+    <td colspan="2">&nbsp;</td>
+    <td><%= resource.human_state_name %></td>
+  </tr>
+  <tr>
+    <td>货款</td>
+    <td>+运费[提]</td>
+    <td>+保险费[提]</td>
+    <td>+管理费[提]</td>
+    <td>+发货短途[提]</td>
+    <td>+到货短途[提]</td>
+    <td>-中转运费</td>
+    <td>-中转手续费</td>
+    <td>=合计</td>
+  </tr>
+  <tr>
+    <td><span id='settlement_sum_goods_fee'><%= resource.sum_goods_fee %></span></td>
+    <td><span id='settlement_sum_carrying_fee_th'><%= resource.sum_carrying_fee_th %></span></td>
+    <td><span id='settlement_sum_insured_fee_th'><%= resource.sum_insured_fee_th %></span></td>
+    <td><span id='settlement_sum_manage_fee_th'><%= resource.sum_manage_fee_th %></span></td>
+    <td><span id='settlement_sum_from_short_carrying_fee_th'><%= resource.sum_from_short_carrying_fee_th %></span></td>
+    <td><span id='settlement_sum_to_short_carrying_fee_th'><%= resource.sum_to_short_carrying_fee_th %></span></td>
+    <td><span id='settlement_sum_transit_carrying_fee'><%=resource.sum_transit_carrying_fee %></span></td>
+    <td><span id='settlement_sum_transit_hand_fee'><%=resource.sum_transit_hand_fee %></span></td>
+    <td><span id='settlement_sum_th_amount'><%=resource.sum_th_amount %></span></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='8'>
+      <%=resource.note %>
+    </td>
+  </tr>
+</table>
+<div id="table_wrap"></div>

@@ -1,0 +1,52 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='12' style='text-align : center;font-size : 14px;'>货物运输清单(<%=resource.bill_no%>)</th>
+    </tr>
+    <tr>
+      <th style='border : thin solid #000;'>序号</th>
+      <th style='border : thin solid #000;'>运单号</th>
+      <th style='border : thin solid #000;'>货号</th>
+      <th style='border : thin solid #000;'>发货人</th>
+      <th style='border : thin solid #000;'>发货人手机</th>
+      <th style='border : thin solid #000;'>收货人</th>
+      <th style='border : thin solid #000;'>收货人手机</th>
+      <th style='border : thin solid #000;'>运费合计</th>
+      <th style='border : thin solid #000;'>代收货款</th>
+      <th style='border : thin solid #000;'>提货应收</th>
+      <th style='border : thin solid #000;'>返款备注</th>
+      <th style='border : thin solid #000;'>运费支付方式</th>
+      <th style='border : thin solid #000;'>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index| %>
+      <tr>
+        <td style='border : thin solid #000;'><%= index + 1 %></td>
+        <td style='border : thin solid #000;'>&nbsp;<%= bill.bill_no %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_no %></td>
+        <td style='border : thin solid #000;'><%= bill.from_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.from_customer_mobile %></td>
+        <td style='border : thin solid #000;'><%= bill.to_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.to_customer_mobile %></td>
+        <td style='border : thin solid #000;'><%= bill.carrying_fee_total %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.th_amount%></td>
+        <td style='border : thin solid #000;'></td>
+        <td style='border : thin solid #000;'><%= bill.pay_type_des%></td>
+        <td style='border : thin solid #000;'><%= bill.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='7' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:carrying_fee_total)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:goods_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:th_amount)%></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,165 @@
+/* -----------------------------------------------------------------------
+
+ RMSforms CSS Forms Framework 0.5
+ http://rmsjr.com
+
+   * Copyright (c) 2009-Present.
+
+----------------------------------------------------------------------- */
+
+
+/* CONTAINING DIV */
+.formContainer{ background-color:#efefef; overflow:hidden; height:1%; padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:70%; line-height:120%;}
+
+/* GLOBALS */
+body{ background-color:#000;}
+form{ margin:0; padding:0;}
+li{ width:100%; float:left;}
+ul{ margin:0; padding:0; list-style:none; overflow:hidden; height:1%; }
+fieldset{ margin-bottom:40px; display:block; } /*optional elememt */ 
+h2{ font-size:18px;}
+ul li ul{ background-color:#F8F3B8}
+em{color:#FF0000;}
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+										/* BASE FORM CLASS */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.form { margin:0 0 0 0; padding:10px; list-style:none; background-color:#FFFFFF;}
+.form ul{ padding:2px 5px 5px 5px; overflow:hidden; height:1%; }
+.form label{ width:120px; padding:3px 5px 3px 0px; float:left; display:inline; }
+.form li{margin:3px 0 0 0;  padding-bottom:3px; }
+.form li ul li{ border-bottom:0px solid #ff0000;}
+.form input{ float:left; display:inline; line-height:100%;}
+.form select{ float:left; display:inline;}
+.form textarea{ float:left; display:inline;}
+.form input[type='radio'] { border:0px; }
+.form input[type='checkbox'] { border:0px; }
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+										/* FORM MODIFIERS */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/*
+All of the modifier classes should be applied to form uls and are used to present the structure: <li><label></label><input/></li>.
+Each letter represented in the class name represents the orientation of the li - label - input elements respectively.
+
+h = horizontal block element (floated left)
+v = vertical block element 
+i = inline element
+
+for example, the class:.hvv  =  [LI:Horizontal Block Element]  [LABEL:Verticle block element]  [INPOUT:Vertical block element]
+*/
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+	
+.vvv li { display:block; clear:both; width:100%;} 
+.vvv label{ display:block;  width:100%; clear:both; float:none;} 
+.vvv input{ display:block; float:left;}
+.vvv select{ display:block; float:left;}
+.vvv textarea{ display:block; float:left;}
+
+.hvv{ overflow:hidden; height:1%; }
+.hvv li{ float:left; margin-right:10px; display:inline; width:auto; clear:none; }
+.hvv label{ display:block; width:auto; float:none;  }
+.hvv input{ display:block;}
+.hvv select{ display:block;}
+.hvv textarea{ display:block;}
+
+.hii{ overflow:hidden; height:1% }
+.hii li{ float:left; margin-right:10px; display:inline; width:auto; border-bottom:0;}
+.hii label{ display:inline; margin-right:0px; vertical-align:middle; text-align:left; width:auto;}
+.hii input{ display:inline; vertical-align:middle; }
+.hii select{ display:inline; vertical-align:middle;}
+.hii textarea{ display:inline; vertical-align:middle;} 
+.hii li li{ clear:both; } /* reset second level lis */
+
+.hhh{ overflow:hidden; height:1% }
+.hhh li{ float:left; margin-right:10px; display:inline; width:auto; border-bottom:0;}
+.hhh label{ float:left; width:100px; }
+.hhh input{ float:left}
+.hhh select{ float:left}
+.hhh textarea{ float:left} 
+.hhh li li{ clear:both; } /* reset second level lis */
+
+.vii{ float:left; display:inline; width:auto}
+.vii li{ display:block; float:left; width:auto; clear:both;}
+.vii label{ display:inline; width:auto; vertical-align:middle; float:none;}
+.vii input{display:inline;  vertical-align:middle;  float:none; }
+.vii select{ display:inline;  vertical-align:middle;  float:none;}
+.vii textarea{display:inline;  vertical-align:middle;  float:none;}
+
+.vhh{  float:left; display:inline;}
+.vhh li{ display:block; clear:both; float:left; width:auto; border-bottom:3px solid #efefef}
+.vhh label{ float:left; width:100px; display:inline; }
+.vhh input{ float:left; display:inline;}
+.vhh select{ float:left; display:inline;}
+.vhh textarea{ float:left; display:inline;}
+
+ 
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+										/* LABEL MODIFIERS */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+label.v { display:block; float:none; width:auto; padding:3px; text-align:left}
+label.h { display:block; float:left; width:auto; display:inline;}
+
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+										/* MULTI-SELECT BOX */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.multiSelect{ height:200px; width:200px; float:left; padding:0px; background-color:#FFFFFF; overflow:hidden; overflow:auto; border:0px inset #ccc; }
+.multiSelect .form{ height:auto; margin:0; padding:0; border:0;}
+.multiSelect .vhh{ margin:0; padding:0;}
+.multiSelect .vhh input{ float:left; } 
+.multiSelect .vhh label{ float:none; margin-left:20px; display:block; width:auto; clear:none; }
+.multiSelect .vhh li{ overflow:hidden; width:100%}
+.multiSelect .vii li{ width:100%;}
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+										/* OTHER STYLES */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+/* COLOR CODE - FOR CLARIFICATION & DEBUGGING
+ul { background-color:#666}
+ul li{ background-color:#999}
+ul li ul{ background-color:#ccc}
+ul li ul li{ background-color:#eee}
+label{ background-color:#A0EFED; }*/
+
+/* ie 6 no border class (put on all check boxes and radio buttons if a border is set on inputs*/
+.form input.noBorder{ border:0px;}
+
+/* REQUIRED FIELD STLES */
+.requiredDesignation{ display:block; padding:5px 5px 5px 5px; margin-bottom:10px; }
+.required{ color:#FF0000;}
+.required label:Before{ content:"* "}
+.requiredDesignation:before{ content:"* " }
+
+/* FORM NOTES */
+.leftNote{ padding:3px 5px 0 5px; color:#FF9933; float:left}
+.bottomNote{ padding:0; color:#FF9933;  clear:both; display:block;}
+.tar label{ text-align:right;}
+
+/* GENERAL TWEAKING STYLES */
+.fl{ float:left;}
+.cb{ clear:both;}
+.w100p{ width:100%;}
+.mr20{ margin-right:20px;}
+.ml20{ margin-left:20px;}
+.offset1{ margin-left:130px;}
+.offset2{ margin-left:105px;}
+
+

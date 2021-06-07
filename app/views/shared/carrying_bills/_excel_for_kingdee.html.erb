@@ -1,0 +1,43 @@
+<%sum_info = search_sum%>
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr>
+      <th class="first" width="30">序号</th>
+      <th class='bill_date'>票据日期</th>
+      <th class='from_org'>发货地</th>
+      <th class='to_org'>到货地</th>
+      <!--运费合计-->
+      <th class="carrying_fee_total">运费合计</th>
+      <!--保险费-->
+      <th class="insured_fee">保险费</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @search.all(:include => [:from_org,:to_org,:transit_org,:user]).each_with_index do |bill,index| %>
+    <tr>
+    <td><%= index + 1 %></td>
+    <td class='bill_date'><%=bill.bill_date.strftime('%y-%m-%d')%></td>
+    <td class='from_org'><%=bill.from_org_name%></td>
+    <% to_org_name = bill.to_org_name %>
+    <td class='to_org'><%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.area}" : bill.to_parent_org_name%></td>
+    <td class="carrying_fee_total">
+      <%=bill.carrying_fee_total %>
+    </td>
+    <!--保险费-->
+    <td class="insured_fee">
+      <%=bill.insured_fee %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class='first'>合计</td>
+      <td class='bill_date'></td>
+      <td class="from_org"></td>
+      <td class="to_org"></td>
+      <td class="carrying_fee_total"><%=sum_info[:sum_carrying_fee_total]%></td>
+      <td class="insured_fee"><%=sum_info[:sum_insured_fee]%></td>
+    </tr>
+  </tfoot>
+</table>

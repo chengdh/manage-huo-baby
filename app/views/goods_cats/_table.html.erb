@@ -1,0 +1,22 @@
+<div id="goods_cat_table">
+  <table class='table'>
+    <thead>
+      <tr>
+        <td>名称</td>
+        <td>起步价</td>
+        <td>系统默认单价</td>
+        <td>拼音简写</td>
+        <td>有效</td>
+        <td>排序</td>
+        <td>备注</td>
+        <td>&nbsp;</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%@goods_cats.select {|goods_cat| goods_cat.parent_id.blank?}.sort{|a,b| a.order_by <=> b.order_by}.each do |child_cat|%>
+        <% @cur_level = 1 %>
+        <%= render "goods_cats_recursive", :goods_cat => child_cat %>
+      <%end%>
+    </tbody>
+  </table>
+</div>

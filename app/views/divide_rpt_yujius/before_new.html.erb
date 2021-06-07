@@ -1,0 +1,19 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">新建<%= resource_name %></h2>
+    <div class="inner">
+      <%= semantic_form_for :divide_rpt_yujiu,:url => new_divide_rpt_yujiu_path,:method => :get,:id => 'divide_rpt_yujiu_before_new_form' do |f| %>
+        <%= f.inputs do %>
+          <%= f.input :mth,:label =>"月份",:input_html => {:size => 30,:readonly => true,:value => 1.months.ago.strftime("%Y%m")} %>
+    
+          <%= f.input :org_id,:label => "分理处/分公司",:as => :select,:collection => orgs_for_select,:include_blank =>false,:input_html => {:class => :select_org} %>
+        <%end%>
+        <%=f.actions do %>
+          <%= f.action :submit,:label => "生成分成表",:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '处理中...' } %>
+        <% end %>
+      <%end%>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

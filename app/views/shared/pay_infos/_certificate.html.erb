@@ -1,0 +1,49 @@
+<!--客户提款凭条-->
+<table class='pay_info_certificate' style='border-collapse : collapse;table-layout: fixed;width: 186mm;'>
+  <thead>
+    <tr>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td colspan='2' style='text-align : right;'>
+        <%=resource.bill_date.year%>&nbsp;&nbsp;&nbsp;
+        <%=resource.bill_date.month%>&nbsp;&nbsp;&nbsp;
+        <%=resource.bill_date.day%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style='height : 9mm;'>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'><%=resource.account_name %></td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td colspan='3' style='width : 75mm;'><%= resource.account_no %></td>
+    </tr>
+    <tr>
+      <td rowspan='2' style='width : 26mm;'>&nbsp;</td>
+      <td style='width : 26mm;'>&nbsp;</td>
+      <td colspan='5' style='padding : 0;maring : 0;width : 125mm;'>
+        <% bills = resource.carrying_bills %>
+        <table style='border-collapse : collapse;padding : 0;margin : 0;'>
+          <%(0..10).step(5) do |step|%>
+            <tr style='height : 11mm;'>
+              <%(step + 0 .. 4 + step).each do |index|%>
+                <td style='width : 26mm;text-align : center;'>&nbsp;<%= bills[index].try(:bill_no) %></td>
+              <%end%>
+            </tr>
+          <%end%>
+        </table>
+      </td>
+    </tr>
+    <tr style='height : 11mm;'>
+      <td>&nbsp;</td>
+      <td style="width : 50mm;text-align : center;"><%=resource.carrying_bills.size %></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan='2' style="width : 50mm;text-align : right;"><%=resource.sum_act_pay_fee %>&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

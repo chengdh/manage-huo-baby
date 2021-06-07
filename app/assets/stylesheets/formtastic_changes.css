@@ -1,0 +1,44 @@
+/* -------------------------------------------------------------------------------------------------
+
+Load this stylesheet after formtastic.css in your layouts to override the CSS to suit your needs.
+This will allow you to update formtastic.css with new releases without clobbering your own changes.
+
+For example, to make the inline hint paragraphs a little darker in color than the standard #666:
+
+form.formtastic fieldset > ol > li p.inline-hints { color:#333; }
+
+HINT:
+The following style may be *conditionally* included for improved support on older versions of IE(<8)
+form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
+
+--------------------------------------------------------------------------------------------------*/
+#carrying_bill_form  fieldset,#transit_info_form fieldset,
+#transit_deliver_form fieldset,#user_form fieldset,
+#deliver_info_form fieldset,#goods_exception_form fieldset,
+#goods_error_form fieldset,
+#transfer_pay_info_form fieldset,#cash_pay_info_form fieldset
+{
+  margin-top : 10px;
+  padding : 10px 5px 10px 5px;
+  border-top : 2px solid #E2E2E2;
+
+}
+#carrying_bill_form fieldset legend,#transit_info_form fieldset legend,
+#transit_deliver_form fieldset legend,#user_form fieldset legend,
+#deliver_info_form fieldset legend,#goods_exception_form fieldset legend,
+#goods_error_form fieldset legend,
+#transfer_pay_info_form fieldset legend,
+#vote_config_form fieldset legend,
+#cash_pay_info_form fieldset legend {
+  font-size : 1.2em;
+  margin-left : 10px;
+  padding : 5px;
+  font-weight :bold;
+}
+form.formtastic fieldset > ol > li fieldset ol {
+  padding: 8px 0 0 25%;
+}
+/**票据查询表单****/
+#simple_search_bill_form{ margin-left : 200px;}
+
+

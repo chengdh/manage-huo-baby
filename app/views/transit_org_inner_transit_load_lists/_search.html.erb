@@ -1,0 +1,16 @@
+<%= semantic_form_for resource_class.search,:url => collection_path,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :bill_no_like,:label =>"单据号",:input_html => {:size => 30} %>
+    <%= f.input :bill_date_gte,:label => "单据日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :from_org_id_eq,:label => "发货地",:as => :select,:collection => branches_for_select_ex%>
+    <%= f.input :transit_org_id_eq,:label => "总部",:as => :select,:collection => all_summary_orgs_for_select %>
+    <%= f.input :to_org_id_eq,:label =>"到货地",:as => :select,:collection =>  branches_for_select_ex%>
+    <%= f.input :state_eq,:label => "状态",:as => :select,:collection => load_list_states_for_select %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

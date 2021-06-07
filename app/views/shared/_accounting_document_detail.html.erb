@@ -1,0 +1,240 @@
+<!--凭证明细-->
+<% 
+    #计算借方和贷方合计
+    cr_sum = cr_detail_lines.sum {|l| l[:fee]}.to_s
+    dr_sum = dr_detail_lines.sum {|l| l[:fee]}.to_s
+    #当前行数
+    cur_row = 1
+%>
+
+<table class='table title_header'>
+  <thead>
+    <tr>
+      <th colspan='3' class='title' style='text-align : center;'><h3>科目明细表</h3></th>
+    </tr>
+    <tr>
+      <th class='org_name' style='text-align : left;'>单位:<%= context[:org_name] %></th>
+      <th class='page_num' style='text-align : center;'>1页</th>
+      <th class='date' style='text-align : left;'><%= Date.today%></th>
+    </tr>
+  </thead>
+</table>
+<table class='table'>
+  <tbody>
+  <tr class='header'>
+    <th rowspan='2' colspan='2' class='item_header'>项目</th>
+    <th colspan='10' class='cr_header'>借方金额</th>
+    <th></th>
+    <th colspan='10' class='dr_header'>贷方金额</th>
+  </tr>
+  <tr class='header'>
+    <th class='num'>千</th>
+    <th class='seprate num'>百</th>
+    <th class='num'>十</th>
+    <th class='num'>万</th>
+    <th class='seprate num'>千</th>
+    <th class='num'>百</th>
+    <th class='num'>十</th>
+    <th class='seprate num'>元</th>
+    <th class='num'>角</th>
+    <th class='num'>分</th>
+    <th class='blank'></th>
+    <!--借贷分割-->
+    <th class='num'>千</th>
+    <th class='seprate num'>百</th>
+    <th class='num'>十</th>
+    <th class='num'>万</th>
+    <th class='seprate num'>千</th>
+    <th class='num'>百</th>
+    <th class='num'>十</th>
+    <th class='seprate num'>元</th>
+    <th class='num'>角</th>
+    <th class='num'>分</th>
+  </tr>
+  <%dr_detail_lines.each do |dr|%>
+    <tr>
+    <td class='item'><%= dr[:item1]%></td>
+    <td class='item'><%= dr[:item2]%></td>
+    <td class='num'><%= dr[:fee_str][-8] %></td>
+    <td class='seprate num'><%= dr[:fee_str][-7] %></td>
+    <td class='num'><%= dr[:fee_str][-6] %></td>
+    <td class='num'><%= dr[:fee_str][-5] %></td>
+    <td class='seprate num'><%= dr[:fee_str][-4] %></td>
+    <td class='num'><%= dr[:fee_str][-3] %></td>
+    <td class='num'><%= dr[:fee_str][-2] %></td>
+    <td class='seprate num'><%= dr[:fee_str][-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+    <td class='blank'></td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    </tr>
+    <% cur_row += 1%>
+    <!--分页-->
+    <%if cur_row % 30 == 0%>
+      </tbody>
+    </table>
+    <p style="page-break-after:always">&nbsp;</p>
+    <table class='table title_header' style='display : none;'>
+      <thead>
+        <tr>
+          <th colspan='3' class='title' style='text-align : center;'><h3>科目明细表</h3></th>
+        </tr>
+        <tr>
+          <th class='org_name' style='text-align : left;'>单位:<%= context[:org_name] %></th>
+          <th class='page_num' style='text-align : center;'><%= "#{cur_row/30 + 1 }"%>页</th>
+          <th class='date' style='text-align : left;'><%= Date.today%></th>
+        </tr>
+      </thead>
+    </table>
+    <table class='table'>
+      <tbody>
+      <tr class='header' style='display : none;'>
+        <th rowspan='2' colspan='2' class='item_header'>项目</th>
+        <th colspan='10' class='cr_header'>借方金额</th>
+        <th></th>
+        <th colspan='10' class='dr_header'>贷方金额</th>
+      </tr>
+      <tr class='header' style='display : none;'>
+        <th class='num'>千</th>
+        <th class='seprate num'>百</th>
+        <th class='num'>十</th>
+        <th class='num'>万</th>
+        <th class='seprate num'>千</th>
+        <th class='num'>百</th>
+        <th class='num'>十</th>
+        <th class='seprate num'>元</th>
+        <th class='num'>角</th>
+        <th class='num'>分</th>
+        <th class='blank'></th>
+        <!--借贷分割-->
+        <th class='num'>千</th>
+        <th class='seprate num'>百</th>
+        <th class='num'>十</th>
+        <th class='num'>万</th>
+        <th class='seprate num'>千</th>
+        <th class='num'>百</th>
+        <th class='num'>十</th>
+        <th class='seprate num'>元</th>
+        <th class='num'>角</th>
+        <th class='num'>分</th>
+      </tr>
+    <%end%>
+  <%end%>
+  <%cr_detail_lines.each do |cr|%>
+    <tr>
+    <td class='item'><%= cr[:item1]%></td>
+    <td class='item'><%= cr[:item2]%></td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+
+    <th class='blank'></th>
+
+    <td class='num'><%= cr[:fee_str][-8] %></td>
+    <td class='seprate num'><%= cr[:fee_str][-7] %></td>
+    <td class='num'><%= cr[:fee_str][-6] %></td>
+    <td class='num'><%= cr[:fee_str][-5] %></td>
+    <td class='seprate num'><%= cr[:fee_str][-4] %></td>
+    <td class='num'><%= cr[:fee_str][-3] %></td>
+    <td class='num'><%= cr[:fee_str][-2] %></td>
+    <td class='seprate num'><%= cr[:fee_str][-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+    </tr>
+    <% cur_row += 1%>
+    <!--分页-->
+    <%if cur_row % 30 == 0%>
+      </tbody>
+    </table>
+    <p style="page-break-after:always">&nbsp;</p>
+    <table class='table title_header' style='display : none;'>
+      <thead>
+        <tr>
+          <th colspan='3' class='title' style='text-align : center;'><h3>科目明细表</h3></th>
+        </tr>
+        <tr>
+          <th class='org_name' style='text-align : left;'>单位:<%= context[:org_name] %></th>
+          <th class='page_num' style='text-align : center;'><%= "#{cur_row/30 + 1}"%>页</th>
+          <th class='date' style='text-align : left;'><%= Date.today%></th>
+        </tr>
+      </thead>
+    </table>
+
+    <table class='table'>
+      <tbody>
+      <tr class='header' style='display : none;'>
+        <th rowspan='2' colspan='2' class='item_header'>项目</th>
+        <th colspan='10' class='cr_header'>借方金额</th>
+        <th></th>
+        <th colspan='10' class='dr_header'>贷方金额</th>
+      </tr>
+      <tr class='header' style='display : none;'>
+        <th class='num'>千</th>
+        <th class='seprate num'>百</th>
+        <th class='num'>十</th>
+        <th class='num'>万</th>
+        <th class='seprate num'>千</th>
+        <th class='num'>百</th>
+        <th class='num'>十</th>
+        <th class='seprate num'>元</th>
+        <th class='num'>角</th>
+        <th class='num'>分</th>
+        <th class='blank'></th>
+        <!--借贷分割-->
+        <th class='num'>千</th>
+        <th class='seprate num'>百</th>
+        <th class='num'>十</th>
+        <th class='num'>万</th>
+        <th class='seprate num'>千</th>
+        <th class='num'>百</th>
+        <th class='num'>十</th>
+        <th class='seprate num'>元</th>
+        <th class='num'>角</th>
+        <th class='num'>分</th>
+      </tr>
+    <%end%>
+  <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+    <td colspan='2'>合计</td>
+    <td class='num'><%= dr_sum[-8] %></td>
+    <td class='seprate num'><%= dr_sum[-7] %></td>
+    <td class='num'><%= dr_sum[-6] %></td>
+    <td class='num'><%= dr_sum[-5] %></td>
+    <td class='seprate num'><%= dr_sum[-4] %></td>
+    <td class='num'><%= dr_sum[-3] %></td>
+    <td class='num'><%= dr_sum[-2] %></td>
+    <td class='seprate num'><%= dr_sum[-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+    <td class='blank'></td>
+    <td class='num'><%= cr_sum[-8] %></td>
+    <td class='seprate num'><%= cr_sum[-7] %></td>
+    <td class='num'><%= cr_sum[-6] %></td>
+    <td class='num'><%= cr_sum[-5] %></td>
+    <td class='seprate num'><%= cr_sum[-4] %></td>
+    <td class='num'><%= cr_sum[-3] %></td>
+    <td class='num'><%= cr_sum[-2] %></td>
+    <td class='seprate num'><%= cr_sum[-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+  </tr>
+  </tfoot>
+</table>

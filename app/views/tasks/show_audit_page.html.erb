@@ -1,0 +1,29 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">任务审核</h2>
+    <div class="inner">
+      <%= render "tasks/show" %>
+      <div id='<%="#{resource_class.name.underscore}_form_wrap" %>' >
+        <%= form_for resource,:url => {:action => :do_audit},:method => :put,:html => {:id => "task_form"} do |f|%>
+          <%= f.error_messages %>
+          <%= f.hidden_field :auditor_id,:value => current_user.id %>
+          <%= f.hidden_field :audit_date,:value => Date.today %>
+          <div style="padding: 5px;">
+            <label>
+              <%= f.radio_button :audit_state,"pass",:checked => true %>
+              同意
+            </label>
+            <label>
+              <%= f.radio_button :audit_state,"reject" %>
+              拒绝
+            </label>
+
+          </div>
+          <%= f.text_area :note,:row => 10,:cols => 120,:placeholder => "输入审批意见",:style => "width: 95%;height: 100px;" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

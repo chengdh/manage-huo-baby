@@ -1,0 +1,21 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if can? :create,ComputerBill%>
+      <li>
+        <%= link_to image_tag("application--plus.png",:alt => "新建机打运单"), new_computer_bill_path,:title => "新建机打运单",:class => "tipsy"  %>
+      </li>
+    <%end%>
+    <%if can? :create,DeliverInfo%>
+      <li>
+        <%= link_to image_tag("toolbox--arrow.png",:alt => "客户提货"), new_deliver_info_path,:title => "客户提货",:class => "tipsy"  %>
+      </li>
+    <%end%>
+    <%if can? :create,CashPayInfo%>
+      <li>
+        <%= link_to image_tag("money--arrow.png",:alt => "客户提款(现金)"), new_cash_pay_info_path,:title => "客户提款(现金)",:class => "tipsy"  %>
+      </li>
+    <%end%>
+
+  </ul>
+</div>

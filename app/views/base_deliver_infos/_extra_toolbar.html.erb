@@ -1,0 +1,40 @@
+<%if can? :create,resource_class%>
+  <li>
+    <%=link_to image_tag("cards-address.png",:alt => "批量提货:一次提取多票运单"),
+      send("new_#{resource_class.name.underscore}_path",:show_multi => 1),
+      :class => "tipsy",
+      :title => "批量提货:一次提取多票运单"%>
+  </li>
+<%end%>
+<%if params[:action] == "index"%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"),
+      collection_path(:search => params[:search],:format => :csv),
+      :title => "导出为EXCEL",
+      :class => "tipsy" %>
+  </li>
+<%end%>
+<%if params[:action] == "new" and can? :print_deliver,resource_class%>
+  <li>
+    <%= link_to_function image_tag("printer-share.png",:alt =>"打印提货" ),
+      "var form = $('##{resource_class.model_name.underscore}_form');var action = form.attr('action');form.attr('action',action + '?print=1');$('##{resource_class.model_name.underscore}_form').trigger('submit')",
+      :title => "打印提货",
+      :class => "tipsy"  %>
+  </li>
+<%end%>
+<%if params[:action] == "new" and can? :print,resource_class%>
+  <li>
+    <%= link_to image_tag("printer.png",:alt => "仅打印提货单"), "#",
+      :title => "仅打印提货单",
+      "data-print-template" => "#{render 'th_bill' }",
+      :class => "tipsy btn_deliver_only_print" %>
+  </li>
+<%end%>
+<%if params[:action] == "show" %>
+  <li>
+    <%= link_to image_tag("printer.png",:alt => "重新打印提货单"), "#",
+      :title => "重新打印提货单",
+      "data-print-template" => "#{render 'th_bill' }",
+      :class => "tipsy btn_deliver_re_print" %>
+  </li>
+<%end%>

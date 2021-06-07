@@ -1,0 +1,411 @@
+/* Override here any style defined by web-app-theme */
+/* reset */
+#main{
+  float : right;
+  width : 80%;
+}
+#sidebar{
+  float : left;
+  width : 16%;
+}
+#header {
+  background: #2d5499;
+  position : relative;
+  zoom : 1;   /*解决ie6下的bug*/
+}
+/*table_wrap样式*/
+#table_wrap{
+  width : 100%;
+  overflow-x : auto;
+  overflow-y : hidden;
+}
+
+
+/*左侧菜单显示样式*/
+#menu_bar a:link {}
+#menu_bar a:visited {}
+#menu_bar a:hover {font-weight : bold;color : blue;}
+#menu_bar a:active {font-weight : bold;color : blue;}
+#menu_bar .navigation {background : #fff;}
+#menu_bar .menu-group h3 {
+  /* background : #7A97B7; */
+  background: #2d5499;
+  color : #FFF;
+  font-weight : bold;
+  cursor : pointer;
+}
+/*柱状图显示*/
+.visualize{
+  margin : 10px 5px 5px 10px;
+}
+
+/* layout */
+.text-right {text-align : right;}
+.text-center {text-align : center;}
+.float-left {float : left;}
+.float-right {float : right;}
+.box {padding : 5px;}
+.with-bb{border-bottom : 1px solid #DDDDDD;}
+.with-tb{border-top : 1px solid #DDDDDD;}
+
+/* table 样式覆盖*/
+.table {
+  width : 98%;
+  border : '1px solid red';
+}
+.table thead tr{
+  background-color: #D9FFD9;
+  border-top: 1px solid     black;
+  border-bottom: 1px solid black;
+}
+
+.table tfoot tr{ background-color: #FFFFFF;}
+.table thead th{
+  padding: 0.5em;
+  white-space: nowrap;
+}
+.table tfoot th{
+  text-align: right;
+  padding-right: 0.5em;
+  letter-spacing: 1px;
+}
+.table tfoot td{
+  padding-left: 0.5em;
+  color: red;
+  font-weight: bold;
+}
+
+.table tfoot td:hover {
+  background-color: red;
+  color: white;
+}
+
+.table tr{background-color: #EAFDFF;}
+.table tr.odd{background-color: #FFFFFF;}
+.table tbody tr:hover{background-color: #FFCCCC;cursor : pointer;}
+
+.table td, .table th{border: 1px solid gray;}
+.table td, .table th{border-bottom: 1px solid black;}
+.table tbody td{
+  padding: 0.4em;
+  font-size : 0.9em;
+}
+.table td  a:link,.table th a:link {color: black;}
+.table td a:visited, .table th a:visited {
+  color: black;
+  text-decoration: line-through;
+}
+.table td a:hover,.table th a:hover {
+  color: purple;
+  text-decoration: underline;
+}
+.table td:last-child a:hover {
+  color: red;
+  text-decoration: underline overline;
+}
+
+/*主页面工具导航容器*/
+#util-navigation {
+    position : absolute;
+    right : 20px;
+    top : 10px;
+    width : 280px;
+}
+#util-navigation ul li {
+  float : left;
+  padding : 5px 10px;
+  list-style-type : none;
+}
+
+#util-navigation ul li a:link,#util-navigation ul li a:visited,#util-navigation ul li a:hover,#util-navigation ul li a:active {
+  color : #FFFFFF;
+  text-decoration : none;
+}
+#util-navigation a.logout {
+  -moz-border-radius:4px 4px 4px 4px;
+  background:none repeat scroll 0 0 #CC0000;
+  padding:2px 6px;
+}
+/*业务数据展示*/
+.main-business-data{
+    position : absolute;
+    right : 320px;
+    top : 10px;
+    width : 300px;
+}
+
+#home-search-form{
+	width: 200px;
+	margin:0 auto;
+}
+#home-search-form .search {
+	padding: 0 10px 0 30px;
+	margin: 4px;
+	background: url('/assets/search.png') no-repeat 8px 6px;
+}
+.rounded {
+	border-radius:15px;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+}
+/*首页上的查询框*/
+#home-search-box-wrap{
+  padding : 5px 0;
+}
+#home-search-box{
+  font-size : 14px;
+  height : 1.5em;
+}
+#adv-query-wrap a:hover, #adv-query-wrap a:active {
+  text-decoration : underline;
+}
+#user-navigation {
+  top : 62px;
+  width : 400px;
+}
+#adv-query-wrap {
+  margin-top : 7px;
+}
+
+/*error display*/
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation,#error_explanation {
+  position: relative;
+  border: 2px solid red;
+  padding : 5px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2,#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  margin : 0;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  color: #c00;
+}
+
+#errorExplanation p,#error_explanation p { padding : 10px;}
+
+#errorExplanation ul li,#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+  left : 15px;
+  position : relative;
+  border : 1px;
+}
+
+#logo{
+  width : 30px;
+  height : 30px;
+}
+/*角色功能列表样式*/
+#role_system_functions_list div {padding : 5px;}
+#role_system_functions_list h3 {padding : 5px;}
+#role_system_functions_list h4 {
+  font-size : 1em;
+  margin : 0;
+  padding : 5px;
+}
+/*角色部门列表样式*/
+#orgs_list li,#user_orgs_list li {padding : 5px;}
+.org-operates a {
+  margin-right : 20px;
+}
+
+.tabs{
+  font-size : 14px;
+  position:relative;
+  float:left;
+  width:100%;
+  margin:0;
+  list-style:none;
+  line-height:1em;
+}
+
+.tabs li {
+  float:left;
+  margin:0;
+  padding:0;
+}
+
+.tabs a {
+  display:block;
+  color:#444;
+  text-decoration:none;
+  font-weight:bold;
+  background:#DDDDDD;
+  margin:0;
+  padding:0.25em 1em;
+  border-left:1px solid #fff;
+  border-top:1px solid #fff;
+  border-right:1px solid #aaa;
+}
+
+.tabs a:hover,
+.tabs a:active,
+.tabs a.here:link,
+.tabs a.here:visited {
+  background:#406B9E;
+  color : #ffffff;
+}
+
+.tabs a.here:link,
+.tabs a.here:visited {
+  position:relative;
+  z-index:102;
+}
+
+/* type */
+small-font {font-size : 0.8em;}
+normal-font {font-size : 1em;}
+big-font {font-size : 1.2em;}
+bigger-font {font-size : 1.5em;}
+.tipsy {font-size : 1em;}
+/*watermark style*/
+.watermark {
+  color : gray;
+  font-style : italic;
+}
+.search_box_return_bill,.search_send_line_box,.search_box {
+  width : 200px;
+  height : 20px;
+  text-indent : 20px;
+  background :  url(<%= asset_path "magnifier-left.png" %>) no-repeat left center ;
+}
+
+/* color */
+
+/*排序图标*/
+th .current_sort_column {
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+th .asc {
+  background-image: url(<%= asset_path "sort--plus.png" %>);
+}
+
+th .desc {
+  background-image: url(<%= asset_path "sort--minus.png" %>);
+}
+/*退货单新建界面上的说明*/
+#return_bill_before_new_form,#local_town_return_bill_before_new_form { margin-left : 200px;}
+ul.hint {
+  margin : 5px 10px;
+  list-style : square;
+}
+ul.hint li {
+  padding : 5px 0;
+
+}
+
+/*dashboard 样式*/
+#dashboard ul {
+  list-style : none;
+  padding-left : 20px;
+}
+#dashboard h3 {
+  padding : 5px;
+  background : #F5F5F5;
+  border-top : 1px solid #ECECEC;
+  border-bottom : 1px solid #ECECEC;
+}
+#dashboard ul li {
+  float : left;
+  margin-right : 50px;
+}
+#dashboard ul li p {
+  text-align : center;
+  margin : 5px 0;
+}
+
+.dashboard-group { margin-top : 30px;}
+/*当前选中数据*/
+tr.cur_select {
+  color : #0F67A1;
+  font-weight : bold;
+}
+/*货物中转 中转提货录入框*/
+.transit_carrying_fee_edit input, .transit_hand_fee_edit input {
+  width : 40px;
+}
+.transit_bill_no_edit input,.transit_to_phone_edit input {width : 80px;}
+
+/*提示框*/
+.notify {
+  margin: 5px;
+  padding:5px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  color: #735005;
+  background-color: #F4A83D;
+  border-bottom : 1px solid #D6800C;
+  text-align : center;
+  font-size : 130%;
+  font-weight : bold;
+}
+
+span.notify-close{
+  background-color : #FAD163;
+  float : right;
+  margin-right : 20px;
+  border : 2px solid #735005;
+  display : block;
+  text-decoration : none;
+  cursor : pointer;
+  padding : 0 5px;
+}
+/*运单录入及显示按钮*/
+table.carrying_bill_show td,table.carrying_bill_show th {
+  background : #fff;
+  border : 1px solid gray;
+}
+/*日营业额统计*/
+#rpt_turnover td{
+  background : #fff;
+}
+/*录单界面*/
+table.bill_input td{border: 1px solid #CCCCCC;}
+
+/*未提货报表*/
+.rpt_no_delivery td a {color : #fff;}
+.rpt_no_delivery .white_bill td a {color : #000;}
+
+/*到货通知状态*/
+.notice_is_failed {color : red;}
+.notice_is_called {color : green;}
+
+/*运单显示*/
+#carrying_bill_show th{
+  background : #E2E2E2;
+
+}
+/*gritter 的显示样式*/
+#gritter-notice-wrapper{top : 70px;}
+
+/*费用相关数字显示*/
+.fee-number{
+  font-weight: bold;
+  font-size : 14px;
+}
+
+/*统计图图例*/
+.legend {
+}
+
+.legend .title {
+    margin: 0.5em;
+    border-style: solid;
+    border-width: 1em 0 0 0;
+    padding: 0 0.3em;
+}
+#ufd-container .list-wrapper {
+  z-index: 99999 !important;
+}

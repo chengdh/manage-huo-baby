@@ -1,0 +1,36 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show"%>
+      <%= render :partial => 'toolbar_btn_back' %>
+    <%end%>
+    <%if can? :read,resource_class%>
+      <%= render :partial => 'toolbar_btn_index' %>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <%= render :partial => 'toolbar_search' %>
+      <%end%>
+    <%end%>
+    <%if can? :create,resource_class%>
+      <%= render :partial => 'toolbar_btn_new' %>
+    <%end%>
+
+    <%if params[:action] == "new"%>
+      <%= render :partial => 'toolbar_btn_save' %>
+    <%end%>
+    <%if params[:action] == "edit" %>
+      <%= render :partial => 'toolbar_btn_save' %>
+      <%if can? :destroy,resource_class%>
+        <%= render :partial => 'toolbar_btn_destroy' %>
+      <%end%>
+    <%end%>
+    <%if params[:action] == "show"%>
+      <%if can? :update,resource%>
+        <%= render :partial => 'toolbar_btn_update' %>
+      <%end%>
+      <%if can? :destroy,resource%>
+        <%= render :partial => 'toolbar_btn_destroy' %>
+      <%end%>
+    <%end%>
+    <%= render "extra_toolbar" %>
+  </ul>
+</div>

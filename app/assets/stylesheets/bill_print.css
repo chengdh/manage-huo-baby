@@ -1,0 +1,33 @@
+.carrying_bill_show {
+  width : 160mm;
+  font-size : 12px;
+}
+.carrying_bill_show table{
+  font-size : 12px;
+}
+.bill-state {display : none;}
+.carrying_bill_show td { height : 7mm;}
+.carrying_bill_show .label {display : none;}
+.col_17mm { width : 17mm;}
+.col_20mm { width : 20mm;}
+.col_27mm { width : 27mm;}
+.col_10mm { width : 10mm;}
+.col_50mm { width : 50mm;}
+.col_55mm { width : 55mm;}
+.col_35mm { width : 35mm;}
+.col_23mm { width : 23mm;}
+.col_6mm { width : 6mm;}
+.col_38mm { width : 38mm;}
+.col_25mm { width : 25mm;}
+.col_24mm { width : 24mm;}
+.col_16mm { width : 16mm;}
+.col_14mm { width : 14mm;}
+.col_13mm { width : 13mm;}
+.col_43mm { width : 43mm;}
+.col_82mm { width : 82mm;}
+.col_18mm { width : 18mm;}
+.col_74mm { width : 74mm;}
+.col_30mm { width : 30mm;}
+.col_45mm { width : 45mm;}
+.col_19mm { width : 19mm;}
+

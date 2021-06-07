@@ -1,0 +1,229 @@
+<table class='table carrying_bill_show' data-bill="<%=show.to_json%>" data-print="<%=show.to_print_json%>" id="carrying_bill_show">
+  <tr>
+    <th>货款支付方式:</th>
+    <td style='font-size : 1.4em;font-weight : bold;color : blue;'><%= show.goods_fee_cash? ? "现金" : "转账"%></td>
+    <td colspan='4'>
+      <%= show.from_customer.try(:id_number) %>
+    </td>
+    <th>状态:</th>
+    <td class='col_74mm bill-state' style='font-size : 1.4em;font-weight : bold;color : blue;'> <%=show.human_state_name%> &nbsp;&nbsp;
+      <%=show.human_additional_state_name%>
+    </td>
+  </tr>
+  <tr>
+    <th class='col_17mm'><span class='label'>发货站:</span></th>
+    <td colspan='2' class='col_29mm'><%=show.from_org_name%></td>
+    <% if ["TransitBill","HandTransitBill"].include? show.type %>
+      <th class='col_17mm'><span class='label'>到货地</span></th>
+      <td colspan='2' class='col_29mm'><%= "#{show.try(:transit_org).try(:name)}~#{show.try(:area)}" %></td>
+    <%else%>
+      <th class='col_17mm'><span class='label'>到达站:</span></th>
+      <td colspan='2' class='col_29mm'><%=show.to_org_name%></td>
+    <%end%>
+    <th class='col_20mm'><span class='label'>运单编号</span></th>
+    <td class='col_27mm'><%=show.bill_no%></td>
+  </tr>
+  <tr>
+    <th class='col_10mm'><span class='label'>卡号</span></th>
+    <td class='col_50mm'><%=show.customer_code%></td>
+    <td class='col_50mm' style="color : red;">
+      <%= show.try(:from_customer).try(:level_star) %>
+    </td>
+    <td>
+      <%= check_box_tag :is_urgent,"1",show.try(:bill_association_object).try(:is_urgent?),:disabled => true %>
+      <label>加急</label>
+      <%= check_box_tag :is_receipt,"1",show.try(:bill_association_object).try(:is_receipt?),:disabled => true %>
+      <label>回单</label>
+      <%= check_box_tag :is_outside,"1",show.try(:bill_association_object).try(:is_outside?),:disabled => true %>
+      <label>外部票</label>
+    </td>
+    <td colspan='3' class='col_55mm'><span class='label'>货号:</span><%=show.goods_no%></td>
+    <td class='col_35mm'><%=show.bill_date.strftime('%Y年%m月%d日')%></td>
+  </tr>
+
+  <tr>
+    <th class='col_17mm'><span class='label'>发货人</span></th>
+    <td class='col_23mm'><%=show.from_customer_name%></td>
+    <th rowspan='2' class='col_6mm text-center'><span class='label'>电话</span></th>
+    <td class='col_35mm'><%=show.from_customer_phone%></td>
+    <th rowspan='2' class='col_6mm text-center'><span class='label'>手机</span></th>
+    <td colspan='2' class='col_38mm'><%=show.from_customer_mobile%></td>
+    <th class='col_25mm'><span class='label'>何地付运费</span></th>
+  </tr>
+    <tr>
+    <th class='col_17mm'><span class='label'>收货人</span></th>
+    <td class='col_23mm'><%=show.to_customer_name%></td>
+    <td class='col_35mm'><%=show.to_customer_phone%></td>
+    <td colspan='2' class='col_38mm'><%=show.to_customer_mobile%></td>
+    <td class='col_25mm'><%=pay_type_des(show.pay_type)%></td>
+  </tr>
+  <tr>
+    <th class='col_17mm'><span class='label'>银行</span></th>
+    <td class='col_23mm'><%=show.bank_name%></td>
+    <th class='col_6mm text-center'><span class='label'>卡号</span></th>
+    <td class='col_35mm' colspan="5"><%=show.card_no %></td>
+  </tr>
+  <%if show.respond_to?(:bill_lines) and show.bill_lines.present? %>
+    <%= render "shared/carrying_bills/bill_line",:bill_lines => show.try(:bill_lines) %>
+  <%else%>
+    <tr>
+      <th class='col_24mm'><span class='label'>货物名称</span></th>
+      <th class='col_16mm'><span class='label'>包装</span></th>
+      <th class='col_14mm'><span class='label'>数量</span></th>
+      <th class='col_14mm'><span class='label'>重量</span></th>
+      <th class='col_13mm'><span class='label'>体积</span></th>
+      <th class='col_13mm'><span class='label'>运费单价</span></th>
+      <th class='col_13mm'><span class='label'>运费合计</span></th>
+      <th class='col_43mm'><span class='label'>备注</span></th>
+    </tr>
+    <tr>
+      <td class='col_24mm'><%=show.goods_info%></td>
+      <td class='col_16mm'><%=show.package%></td>
+      <td class='col_14mm'><%=show.goods_num%></td>
+      <td class='col_14mm'><%=show.goods_weight%></td>
+      <td class='col_13mm'><%=show.goods_volume%></td>
+      <td class='col_13mm'>&nbsp;</td>
+      <td class='col_13mm'><%=show.carrying_fee%></td>
+      <td class='col_43mm'><%=show.note%></td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <th class='col_13mm'><span class='label'>提货应收金额</span></th>
+    <td colspan='6' class='col_82mm' style="color : red;font-weight : bold;"> <%= convertNumToChinese(show.th_amount) %></td>
+    <td class='col_43mm'>
+      <span class='label'>&yen;:</span>
+      <span style='font-size : 1.4em;font-weight : bold;color : red;'><%=show.th_amount %></span>
+    </td>
+  </tr>
+  <tr>
+    <th class='col_13mm'><span class='label'>保险费</span></th>
+    <td colspan='6' class='col_82mm'><%=convertNumToChinese show.insured_fee%></td>
+    <td class='col_43mm'><span class='label'>&yen;:</span><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.insured_fee %></span></td>
+  </tr>
+  <tr>
+    <th class='col_13mm'><span class='label'>运费总计</span></th>
+    <td colspan='6' class='col_82mm'><%=convertNumToChinese(show.carrying_fee_total)%></td>
+    <td class='col_43mm'><span class='label'>&yen;:</span><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.carrying_fee_total%></span></td>
+  </tr>
+  <tr>
+    <th class='col_13mm'><span class='label'>代收货款总计</span></th>
+    <td colspan='6' class='col_82mm'><%=convertNumToChinese(show.goods_fee)%></td>
+    <td class='col_43mm'><span class='label'>&yen;:</span><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.goods_fee%></span></td>
+  </tr>
+  <tr>
+    <th class='col_30mm'><span class='label'>发货地短途运费</span></th>
+    <td colspan='2' class='col_45mm'><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.from_short_carrying_fee%></span></td>
+    <th class='col_30mm'><span class='label'>到货地短途运费</span></th>
+    <td colspan='2' class='col_45mm'><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.to_short_carrying_fee%></span></td>
+    <th class='col_30mm'><span class='label'>管理费</span></th>
+    <td class='col_45mm'><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.manage_fee%></span></td>
+  </tr>
+  <% if ['InnerTransitBill','HandInnerTransitBill','InnerTransitReturnBill'].include? show.type %>
+    <tr>
+      <th class='col_30mm'><span class='label'>前段运费</span></th>
+      <td colspan='2' class='col_45mm'><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.try(:carrying_fee_1st)%></span></td>
+      <th class='col_30mm'><span class='label'>后段运费</span></th>
+      <td colspan='2' class='col_45mm'><span style='font-size : 1.4em;font-weight : bold;color : blue;'><%=show.try(:carrying_fee_2st)%></span></td>
+      <td colspan="4"></td>
+    </tr>
+    <tr style="display: none;">
+      <th>总部分成</th>
+      <td colspan="2">
+        <%= show.bill_association_object.try(:summary_org_divide_fee) %>
+      </td>
+      <th>发货地分成</th>
+      <td colspan="2">
+        <%= show.bill_association_object.try(:from_org_divide_fee) %>
+      </td>
+      <th>到货地分成</th>
+      <td>
+        <%= show.bill_association_object.try(:to_org_divide_fee) %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if ['TransitBill','HandTransitBill'].include? show.type %>
+    <tr>
+      <th class='col_30mm'><span class='label'>中转公司</span></th>
+      <td colspan='2' class='col_45mm'>
+        <span style='font-size : 1.4em;font-weight : bold;color : blue;'>
+          <%=show.try(:transit_info).try(:transit_company).try(:name)%>
+        </span>
+      </td>
+      <th class='col_30mm'><span class='label'>中转票号</span></th>
+      <td colspan="2" class='col_45mm'>
+        <span style='font-size : 1.4em;font-weight : bold;color : blue;'>
+          <%=show.try(:transit_bill_no)%>
+        </span>
+      </td>
+      <th class='col_30mm'><span class='label'>中转电话</span></th>
+      <td class='col_45mm'>
+        <span style='font-size : 1.4em;font-weight : bold;color : blue;'>
+          <%=show.try(:transit_to_phone)%>
+        </span>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <th  class='col_14mm'><span class='label'>送货地址:</span></th>
+    <td colspan="7"><%= show.try(:deliver_region) %></td>
+  </tr>
+  <tr>
+    <th  class='col_14mm'><span class='label'>提货日期:</span></th>
+    <td colspan='2' style='font-size : 1.4em;font-weight : bold;color : blue;'>
+      <%= show.deliver_info.try(:deliver_date)%>
+      <%= show.transit_deliver_info.try(:bill_date)%>
+    </td>
+    <th class='col_18mm'><span class='label'>提款日期:</span></th>
+    <td colspan='2' style='font-size : 1.4em;font-weight : bold;color : blue;'>
+      <%= show.pay_info.try(:bill_date)%>
+    </td>
+    <th>录入时间:</th>
+    <td><%= show.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+  </tr>
+  <tr>
+    <th class='col_14mm'><span class='label'>开票人:</span></th>
+    <td class='col_14mm'><%= show.user %></td>
+    <td colspan='4' style="text-align: center;">
+      <% if show.barcode_exceptions.count > 0 %>
+        <%= link_to  "#{show.barcode_exceptions.count}件异常",barcode_exceptions_carrying_bill_path(show,:format => :js),:class => "fancybox",:style =>"color: red;" %>
+      <% end %>
+    </td>
+    <td style='color : red;'><span id='bill_print_counter'><%="#{show.print_counter}次打印"%></span></td>
+    <td style='color : red;'><%=show.fee_changed? ? "*" : ""%>&nbsp;</td>
+  </tr>
+  <tr><td colspan="8" style="text-align: center;">货物流程追踪</td></tr>
+  <% (show.track_info + show.audit_infos).each_with_index do |l,idx| %>
+    <tr>
+      <th><%= idx + 1 %></th>
+      <td colspan='6'><%= l[:op_type] %></td>
+      <td><%= l[:username] %></td>
+    </tr>
+  <% end  %>
+
+  <tbody class="bill_notes_wrapper">
+    <% if show.bill_notes.present? %>
+      <tr><td colspan="8" style="text-align: center;">货物备注列表</td></tr>
+    <% end %>
+    <% show.bill_notes.each_with_index do |l,idx| %>
+      <tr class="bill_notes_tr">
+        <th><%= idx + 1 %></th>
+        <td colspan='6'>
+          <%= l.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          &nbsp;&nbsp;&nbsp;
+          <%= l.note %>
+        </td>
+        <td><%= l.user.try(:real_name) %></td>
+      </tr>
+    <% end  %>
+  </tbody>
+  <% if can? :create,BillNote %>
+    <tr>
+      <th>录入备注</th>
+      <td colspan="7">
+        <%= render "bill_notes/form",:carrying_bill => show %>
+      </td>
+    </tr>
+  <% end  %>
+</table>

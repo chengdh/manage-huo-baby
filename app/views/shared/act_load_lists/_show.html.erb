@@ -1,0 +1,78 @@
+<% sum_info = CarryingBill.search_sum(resource.carrying_bills.search)%>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>单据号:</th>
+      <th><%= resource.bill_no %></th>
+      <th colspan='2'>清单日期:</th>
+      <th><%= resource.bill_date %></th>
+      <th colspan='2'>发货地:</th>
+      <th><%= resource.from_org%></th>
+      <th>到货地:</th>
+      <th><%= resource.to_org%></th>
+      <th></th>
+      <th>状态:</th>
+      <th colspan="2"><%= resource.human_state_name %></th>
+    </tr>
+    <tr>
+      <th>备注:</th>
+      <th colspan='13'><%= resource.note %></th>
+   </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th class='text-center'>序号</th>
+      <th class='text-center'>票号</th>
+      <th class='text-center'>货号</th>
+      <th class='text-center'>起止点</th>
+      <th class='text-center'>付款方式</th>
+      <th class='text-center'>运费</th>
+      <th class='text-center'>代收货款</th>
+      <th class='text-center'>保价费</th>
+      <th class='text-center'>运费合计</th>
+      <th class='text-center'>货物数量</th>
+      <th class='text-center'>装车数量</th>
+      <th class='text-center'>确认数量</th>
+      <th class='text-center'>异常数量</th>
+      <th class='text-center'>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+        #排序操作
+      sorted = resource.act_load_list_lines.sort_by {|l| l.try(:order_by)}
+    %>
+  <% sorted.each_with_index do |line,index| %>
+      <tr style="<%= line.exception_num > 0 ? 'color : red;font-weight: bold;' : ''%>">
+        <td><%= index + 1%></td>
+        <td><%= link_to line.carrying_bill.bill_no,polymorphic_path(line.carrying_bill,:format => :js),:class => :fancybox%></td>
+        <td><%= line.carrying_bill.goods_no%></td>
+        <td><%= line.carrying_bill.from_org%>~<%= line.carrying_bill.to_org%></td>
+        <td><%= pay_type_des line.carrying_bill.pay_type%></td>
+        <td><%= line.carrying_bill.carrying_fee%></td>
+        <td><%= line.carrying_bill.goods_fee%></td>
+        <td><%= line.carrying_bill.insured_fee%></td>
+        <td><%= line.carrying_bill.carrying_fee_total%></td>
+        <td><%= line.carrying_bill.goods_num%></td>
+        <td><%= line.load_num %></td>
+        <td><%= line.confirm_num %></td>
+        <td><%= link_to  "#{line.exception_num}件异常",barcode_exceptions_carrying_bill_path(line.carrying_bill,:format => :js),:class => "fancybox" %></td>
+        <td><%= line.carrying_bill.note%></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class='text-right' colspan='5'>合计:</td>
+      <td><%= sum_info[:sum_carrying_fee]%></td>
+      <td><%= sum_info[:sum_goods_fee]%></td>
+      <td><%= sum_info[:sum_insured_fee]%></td>
+      <td><%= sum_info[:sum_carrying_fee_total]%></td>
+      <td><%= sum_info[:sum_goods_num]%></td>
+      <td><%= resource.act_load_list_lines.sum(:load_num)%></td>
+      <td><%= resource.act_load_list_lines.sum(:confirm_num)%></td>
+      <td><%= resource.act_load_list_lines.sum(:exception_num)%></td>
+      <td>&nbsp;</td>
+    </tr>
+  </tfoot>
+</table>

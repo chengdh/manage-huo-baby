@@ -1,0 +1,11 @@
+<div class='actions-bar'>
+  <%= link_to image_tag("plus-white.png") + "选择要装车的运单", search_carrying_bills_path(
+    show_or_hidden_fields.merge(:format => :js,:set_disable => 1)),
+  :id =>"btn_generate_load_list",
+  :class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+  :title => "录入查询条件,查询要装车的运单" %>
+  <!--只是选择外部中转运单及外部中转退货单-->
+  <%=hidden_field_tag :type_in,"","data-type" => ['TransitBill','HandTransitBill','OutterTransitReturnBill'].to_json %>
+  <%=hidden_field_tag :state_eq,:billed %>
+</div>
+<div id="table_wrap"></div>

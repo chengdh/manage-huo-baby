@@ -1,0 +1,18 @@
+#coding: utf-8
+class ChangeTaskDoAuditFunction < ActiveRecord::Migration
+  def up
+    subject = "Task"
+    sf = SystemFunction.find_by_subject_title('任务管理')
+    sf_hash = {
+      :subject => subject,
+      :function => {
+        :do_audit => {:title => "任务审核",:conditions =>"{:creator_id => user.id,:state => 'finished',:audit_state => ['draft','reject'] }"}
+      }
+    }
+    sf.update_by_hash(sf_hash) if sf.present?
+
+  end
+
+  def down
+  end
+end

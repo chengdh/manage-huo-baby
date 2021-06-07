@@ -1,0 +1,237 @@
+<%sum_info = search_sum%>
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr>
+      <th class="first" width="30">序号</th>
+      <!-- <th class='bill_date hide'>票据日期</th> -->
+      <!-- <th class='bill_no hide' width="64">票号</th> -->
+      <!-- <th class='goods_no hide' width="120">货号</th> -->
+      <!-- <th class='from_org hide'>发货地</th> -->
+      <!-- <th class='to_org hide'>到货地</th> -->
+      <th class='from_customer' width="55">发货人</th>
+      <th class='from_customer_mobile' width="55">发货人电话</th>
+      <th class='to_customer' width="55">收货人</th>
+      <th class='to_customer_mobile' width="55">收货人电话</th>
+      <!-- <th class='pay_type hide' width="50">付款方式</th> -->
+
+      <!-- <!&#45;&#45;运费&#45;&#45;> -->
+      <!-- <th class="carrying_fee hide">运费</th> -->
+      <!-- <th class="carrying_fee_th hide">运费[提]</th> -->
+      <!-- <th class="k_carrying_fee hide">运费[扣]</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;发货短途&#45;&#45;> -->
+      <!-- <th class="from_short_carrying_fee hide">发货短途</th> -->
+      <!-- <th class="from_short_carrying_fee_th hide">发货短途[提]</th> -->
+      <!-- <th class="k_from_short_carrying_fee hide">发货短途[扣]</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;到货短途&#45;&#45;> -->
+      <!-- <th class="to_short_carrying_fee hide">到货短途</th> -->
+      <!-- <th class="to_short_carrying_fee_th hide">到货短途[提]</th> -->
+      <!-- <th class="k_to_short_carrying_fee hide">到货短途[扣]</th> -->
+      <!--  -->
+      <!-- <th class="carrying_fee_1st hide">前段运费</th> -->
+      <!-- <th class="carrying_fee_2st hide">后段运费</th> -->
+      <!--  -->
+      <!--  -->
+      <!-- <!&#45;&#45;运费合计&#45;&#45;> -->
+      <!-- <th class="carrying_fee_total hide">运费合计</th> -->
+      <!-- <th class="carrying_fee_th_total hide">运费合计[提]</th> -->
+      <!-- <th class="k_carrying_fee_total hide">运费合计[扣]</th> -->
+      <!--  -->
+      <!--  -->
+      <!-- <th class="goods_fee hide">代收货款</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;保险费&#45;&#45;> -->
+      <!-- <th class="insured_fee hide">保险费</th> -->
+      <!-- <th class="insured_fee_th hide">保险费[提]</th> -->
+      <!-- <th class="k_insured_fee hide">保险费[扣]</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;管理费&#45;&#45;> -->
+      <!-- <th class="manage_fee hide">管理费</th> -->
+      <!-- <th class="manage_fee_th hide">管理费[提]</th> -->
+      <!-- <th class="k_manage_fee hide">管理费[扣]</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;中转相关费用&#45;&#45;> -->
+      <!-- <th class="transit_carrying_fee hide">中转运费</th> -->
+      <!-- <th class="transit_hand_fee hide">中转手续费</th> -->
+      <!-- <th class="agent_carrying_fee hide">代收运费</th> -->
+      <!--  -->
+      <!--  -->
+      <!-- <!&#45;&#45;提货应收&#45;&#45;> -->
+      <!-- <th class="th_amount hide">提货应收</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;扣手续费&#45;&#45;> -->
+      <!-- <th class="k_hand_fee hide">手续费[扣]</th> -->
+      <!-- <!&#45;&#45;实提货款&#45;&#45;> -->
+      <!-- <th class="act_pay_fee hide">实提货款</th> -->
+      <!--  -->
+      <!-- <!&#45;&#45;其他&#45;&#45;> -->
+      <!-- <th class='print_counter hide'>打印次数</th> -->
+      <!-- <th class='note hide' width="40">备注</th> -->
+      <!-- <th class='state hide'>状态</th> -->
+      <!-- <th class='from_short_fee_state hide'>短途运费状态</th> -->
+      <!-- <th class='to_short_fee_state hide'>短途运费状态</th> -->
+      <!-- <th class='stranded_days hide'>滞留天数</th> -->
+      <!-- <th class='deliver_date hide'>提货日期</th> -->
+      <!-- <th class='pay_date hide'>提款日期</th> -->
+    </tr>
+  </thead>
+  <tbody>
+  <% @search.all(:include => [:from_org,:to_org,:transit_org,:user]).each_with_index do |bill,index| %>
+    <tr>
+    <td><%= index + 1 %></td>
+    <!-- <td class='bill_date hide'><%=bill.bill_date.strftime('%y&#45;%m&#45;%d')%></td> -->
+    <!-- <td class='bill_no hide'>&#38;nbsp;<%=bill.bill_no%></td> -->
+    <!-- <td class='goods_no hide'><%=bill.goods_no%></td> -->
+    <!-- <td class='from_org hide'><%=bill.from_org_name%></td> -->
+    <!-- <td class='to_org hide'><%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.area}" : bill.to_org_name%></td> -->
+    <td class='from_customer'><%=bill.from_customer_name%></td>
+    <td class='from_customer_mobile'>&nbsp;<%=bill.from_customer_mobile%></td>
+    <td class='to_customer'><%=bill.to_customer_name%></td>
+    <td class='to_customer_mobile'>&nbsp;<%=bill.to_customer_mobile%></td>
+    <!-- <td class='pay_type hide'><%=pay_type_des(bill.pay_type) %></td> -->
+
+    <!--运费-->
+    <!-- <td class="carrying_fee hide"> -->
+    <!--   <%=bill.carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="carrying_fee_th hide"> -->
+    <!--   <%=bill.carrying_fee_th %> -->
+    <!-- </td> -->
+    <!-- <td class="k_carrying_fee hide"> -->
+    <!--   <%=bill.k_carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="from_short_carrying_fee hide"> -->
+    <!--   <%=bill.from_short_carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="from_short_carrying_fee_th hide"> -->
+    <!--   <%=bill.from_short_carrying_fee_th %> -->
+    <!-- </td> -->
+    <!-- <td class="k_from_short_carrying_fee hide"> -->
+    <!--   <%=bill.k_from_short_carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="to_short_carrying_fee hide"> -->
+    <!--   <%=bill.to_short_carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="to_short_carrying_fee_th hide"> -->
+    <!--   <%=bill.to_short_carrying_fee_th %> -->
+    <!-- </td> -->
+    <!-- <td class="k_to_short_carrying_fee hide"> -->
+    <!--   <%=bill.k_to_short_carrying_fee %> -->
+    <!-- </td> -->
+    <!-- <!&#45;&#45;前段运费及后段运费&#45;&#45;> -->
+    <!-- <td class="carrying_fee_1st hide"><%= bill.carrying_fee_1st %></td> -->
+    <!-- <td class="carrying_fee_2st hide"><%= bill.carrying_fee_2st %></td> -->
+    <!--  -->
+    <!-- <td class="carrying_fee_total hide"> -->
+    <!--   <%=bill.carrying_fee_total %> -->
+    <!-- </td> -->
+    <!-- <td class="carrying_fee_th_total hide"> -->
+    <!--   <%=bill.carrying_fee_th_total %> -->
+    <!-- </td> -->
+    <!-- <td class="k_carrying_fee_total hide"> -->
+    <!--   <%=bill.k_carrying_fee_total %> -->
+    <!-- </td> -->
+    <!--  -->
+    <!--  -->
+    <!-- <!&#45;&#45;代收货款&#45;&#45;> -->
+    <!-- <td class="goods_fee hide"><%=bill.goods_fee %></td> -->
+    <!--  -->
+    <!-- <!&#45;&#45;保险费&#45;&#45;> -->
+    <!-- <td class="insured_fee hide"> -->
+    <!--   <%=bill.insured_fee %> -->
+    <!-- </td> -->
+    <!-- <td class="insured_fee_th hide"> -->
+    <!--   <%=bill.insured_fee_th %> -->
+    <!-- </td> -->
+    <!-- <td class="k_insured_fee hide"> -->
+    <!--   <%=bill.k_insured_fee %> -->
+    <!-- </td> -->
+    <!--  -->
+    <!-- <!&#45;&#45;管理费&#45;&#45;> -->
+    <!-- <td class="manage_fee hide"><%= bill.manage_fee %></td> -->
+    <!-- <td class="manage_fee_th hide"><%= bill.manage_fee_th %></td> -->
+    <!-- <td class="k_manage_fee hide"><%= bill.k_manage_fee %></td> -->
+    <!--  -->
+    <!--  -->
+    <!-- <td class="transit_carrying_fee hide"><%=bill.transit_carrying_fee%></td> -->
+    <!-- <td class="transit_hand_fee hide"><%=bill.transit_hand_fee%></td> -->
+    <!-- <td class="agent_carrying_fee hide"><%=bill.agent_carrying_fee%></td> -->
+    <!-- <td class="th_amount hide"> -->
+    <!--   <%=bill.th_amount %> -->
+    <!-- </td> -->
+    <!-- <td class="k_hand_fee hide"><%=bill.k_hand_fee%></td> -->
+    <!-- <td class="act_pay_fee hide"><%= bill.act_pay_fee %></td> -->
+    <!-- <td class='print_counter hide'><%= bill.print_counter %></td> -->
+    <!-- <td class="note hide"> -->
+    <!--   <%= bill.note %> -->
+    <!-- </td> -->
+    <!-- <td class="state hide"><%= bill.human_state_name %></td> -->
+    <!-- <td class="from_short_fee_state hide"><%= bill.human_from_short_fee_state_name %></td> -->
+    <!-- <td class="to_short_fee_state hide"><%= bill.human_to_short_fee_state_name %></td> -->
+    <!-- <td class='stranded_days hide'><%=bill.stranded_days%>天</td> -->
+    <!-- <td class='deliver_date hide'><%=bill.deliver_info.try(:deliver_date)%></td> -->
+    <!-- <td class='pay_date hide'><%=bill.pay_info.try(:bill_date)%></td> -->
+  </tr>
+<% end %>
+  </tbody>
+  <!-- <tfoot> -->
+  <!--   <tr> -->
+  <!--     <td class='first'></td> -->
+  <!--     <td class='bill_date hide'></td> -->
+  <!--     <td class="bill_no hide"></td> -->
+  <!--     <td class="goods_no hide"></td> -->
+  <!--     <td class="from_org hide"></td> -->
+  <!--     <td class="to_org hide"></td> -->
+  <!--     <td class="from_customer hide"></td> -->
+  <!--     <td class="from_customer_mobile hide"></td> -->
+  <!--     <td class="to_customer hide"></td> -->
+  <!--     <td class="to_customer_mobile hide">总计</td> -->
+  <!--     <td class="pay_type hide"><%=sum_info[:sum_count]%>票</td> -->
+  <!--  -->
+  <!--     <td class="carrying_fee hide"><%=sum_info[:sum_carrying_fee]%></td> -->
+  <!--     <td class="carrying_fee_th hide"><%=sum_info[:sum_carrying_fee_th]%></td> -->
+  <!--     <td class="k_carrying_fee hide"><%=sum_info[:sum_k_carrying_fee]%></td> -->
+  <!--  -->
+  <!--     <td class="from_short_carrying_fee hide"><%=sum_info[:sum_from_short_carrying_fee]%></td> -->
+  <!--     <td class="from_short_carrying_fee_th hide"><%=sum_info[:sum_from_short_carrying_fee_th]%></td> -->
+  <!--     <td class="k_from_short_carrying_fee hide"><%=sum_info[:sum_k_from_short_carrying_fee]%></td> -->
+  <!--     <td class="to_short_carrying_fee hide"><%=sum_info[:sum_to_short_carrying_fee]%></td> -->
+  <!--     <td class="to_short_carrying_fee_th hide"><%=sum_info[:sum_to_short_carrying_fee_th]%></td> -->
+  <!--     <td class="k_to_short_carrying_fee hide"><%=sum_info[:sum_k_to_short_carrying_fee]%></td> -->
+  <!--     <!&#45;&#45;前段运费及后段运费&#45;&#45;> -->
+  <!--     <td class="carrying_fee_1st hide"><%= sum_info[:sum_carrying_fee_1st] %></td> -->
+  <!--     <td class="carrying_fee_2st hide"><%= sum_info[:sum_carrying_fee_2st] %></td> -->
+  <!--  -->
+  <!--     <td class="carrying_fee_total hide"><%=sum_info[:sum_carrying_fee_total]%></td> -->
+  <!--     <td class="carrying_fee_th_total hide"><%=sum_info[:sum_carrying_fee_th_total]%></td> -->
+  <!--     <td class="k_carrying_fee_total hide"><%=sum_info[:sum_k_carrying_fee_total]%></td> -->
+  <!--  -->
+  <!--  -->
+  <!--  -->
+  <!--     <td class="goods_fee hide"><%=sum_info[:sum_goods_fee]%></td> -->
+  <!--  -->
+  <!--     <td class="insured_fee hide"><%=sum_info[:sum_insured_fee]%></td> -->
+  <!--     <td class="insured_fee_th hide"><%=sum_info[:sum_insured_fee_th]%></td> -->
+  <!--     <td class="k_insured_fee hide"><%=sum_info[:sum_k_insured_fee]%></td> -->
+  <!--     <!&#45;&#45;管理费&#45;&#45;> -->
+  <!--     <td class="manage_fee hide"><%= sum_info[:sum_manage_fee] %></td> -->
+  <!--     <td class="manage_fee_th hide"><%= sum_info[:sum_manage_fee_th] %></td> -->
+  <!--     <td class="k_manage_fee hide"><%= sum_info[:sum_k_manage_fee] %></td> -->
+  <!--     <td class="transit_carrying_fee hide"><%=sum_info[:sum_transit_carrying_fee]%></td> -->
+  <!--     <td class="transit_hand_fee hide"><%=sum_info[:sum_transit_hand_fee]%></td> -->
+  <!--     <td class="agent_carrying_fee hide"><%=sum_info[:sum_agent_carrying_fee]%></td> -->
+  <!--     <td class="th_amount hide"><%=sum_info[:sum_th_amount]%></td> -->
+  <!--     <td class="k_hand_fee hide"><%=sum_info[:sum_k_hand_fee]%></td> -->
+  <!--     <td class="act_pay_fee hide"><%= sum_info[:sum_act_pay_fee] %></td> -->
+  <!--     <td class='print_counter hide'></td> -->
+  <!--     <td class='note hide'></td> -->
+  <!--     <td class='state hide'></td> -->
+  <!--     <td class='from_short_fee_state hide'></td> -->
+  <!--     <td class='to_short_fee_state hide'></td> -->
+  <!--     <td class='stranded_days hide'></td> -->
+  <!--     <td class='deliver_date hide'></td> -->
+  <!--     <td class='pay_date hide'></td> -->
+  <!--   </tr> -->
+  <!-- </tfoot> -->
+</table>

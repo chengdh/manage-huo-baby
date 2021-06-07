@@ -1,0 +1,61 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <td>序号</td>
+      <td>开卡地</td>
+      <td>卡号</td>
+      <td>姓名</td>
+      <td>手机</td>
+      <td>发货地</td>
+      <td>客户专员</td>
+      <td>当年运费合计</td>
+      <td>级别</td>
+      <td>积分</td>
+      <td>状态</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% collection.each_with_index do |customer,i| %>
+      <tr>
+        <td><%= order_no(i,params[:page]) %></td>
+        <td><%= customer.own_org %></td>
+        <td><%= customer.try(:code) %></td>
+        <td><%= link_to customer.name,fee_lines_imported_customer_path(customer,:format => :js),:class => :fancybox %></td>
+        <td><%= customer.mobile %></td>
+        <td><%= customer.usually_location%></td>
+        <td><%= customer.sales_man %></td>
+        <td><%= customer.cur_fee %></td>
+        <td><%= customer.level_star %></td>
+        <td><%= customer.cur_year_sum_points%></td>
+        <td style="text-align: center;"><span style="color: green;font-weight: bold;"><%= raw(imported_customer_state_des(customer.state))%></span></td>
+        <td>
+          <%if can? :edit,ImportedCustomer%>
+            <%= link_to "修改",edit_imported_customer_path(customer) %>
+          <%end%>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>合计</td>
+      <td>共<%=@search.count%>人</td>
+      <td><%=@search.sum(:cur_fee)%></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tfoot>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection %>
+  </div>
+</div>

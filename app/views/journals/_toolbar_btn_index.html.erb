@@ -1,0 +1,3 @@
+<li class="first">
+  <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") ,  current_user.default_org.is_summary? ? collection_path : collection_path("search[org_id_in]" => current_user.current_ability_org_ids),:title => "#{resource_class.model_name.human}列表",:class => "tipsy btn_index"  %>
+</li>

@@ -1,0 +1,2 @@
+module InnerTransitCashPaymentListsHelper
+end

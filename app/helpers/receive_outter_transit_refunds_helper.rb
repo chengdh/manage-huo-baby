@@ -1,0 +1,2 @@
+module ReceiveOutterTransitRefundsHelper
+end

@@ -1,0 +1,47 @@
+<table class='table'>
+  <tr>
+    <td>返款日期:</td>
+    <td> <%=resource.bill_date.strftime('%Y-%m-%d') %></td>
+    <td>付款单位:</td>
+    <td>
+      <%=resource.from_org.name %>
+    </td>
+    <td>收款单位:</td>
+    <td>
+      <%=resource.to_org.name %>
+    </td>
+    <td>结算员:</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <th>货款</th>
+    <th>+运费[提]</th>
+    <th>+保险费[提]</th>
+    <th>+发货短途[提]</th>
+    <th>+到货短途[提]</th>
+    <th>-中转运费</th>
+    <th>-中转手续费</th>
+    <th>=合计</th>
+  </tr>
+  <tr>
+    <td><span id='refound_sum_goods_fee'><%= resource.sum_goods_fee %></span></td>
+    <td><span id='refound_sum_carrying_fee_th'><%= resource.sum_carrying_fee_th %></span></td>
+    <td><span id='refound_sum_insured_fee_th'><%= resource.sum_insured_fee_th %></span></td>
+    <td><span id='refound_sum_from_short_carrying_fee_th'><%= resource.sum_from_short_carrying_fee_th %></span></td>
+    <td><span id='refound_sum_to_short_carrying_fee_th'><%= resource.sum_to_short_carrying_fee_th %></span></td>
+    <td><span id='refound_sum_transit_carrying_fee'><%=resource.sum_transit_carrying_fee %></span></td>
+    <td><span id='refound_sum_transit_hand_fee'><%=resource.sum_transit_hand_fee %></span></td>
+    <td><span id='refound_sum_th_amount'><%=resource.sum_th_amount %></span></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='5'>
+      <%=resource.note %>
+    </td>
+    <td>状态</td>
+    <td><%= resource.human_state_name %></td>
+  </tr>
+</table>
+<div id="table_wrap">
+  <%= render params[:show_group].present? ? 'show_group_lines' : 'show_lines' %>
+</div>

@@ -1,0 +1,38 @@
+<% group_bills_by_from_org = bills.group_by(&:from_org) %>
+<% group_bills_by_from_org.each do |f_org,bills| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <td colspan='100' style="text-align: center;"><%=f_org.name%></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th>支付方式</th>
+        <th>运费</th>
+        <th>发货短途</th>
+        <th>到货短途</th>
+        <th>运费总计</th>
+      </tr>
+      <% bills.each do |b| %>
+        <tr>
+          <th><%= b.pay_type_des %></th>
+          <th><%= b.carrying_fee %></th>
+          <th><%= b.from_short_carrying_fee %></th>
+          <th><%= b.to_short_carrying_fee %></th>
+          <th><%= b.carrying_fee + b.from_short_carrying_fee + b.to_short_carrying_fee %></th>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>合计:</td>
+        <td><%= bills.sum(&:carrying_fee) %></td>
+        <td><%= bills.sum(&:from_short_carrying_fee) %></td>
+        <td><%= bills.sum(&:to_short_carrying_fee) %></td>
+        <td><%= bills.sum(&:carrying_fee) + bills.sum(&:from_short_carrying_fee) + bills.sum(&:to_short_carrying_fee) %></td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>

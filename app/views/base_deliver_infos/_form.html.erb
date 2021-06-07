@@ -1,0 +1,14 @@
+<%= semantic_form_for resource, :validate => true,:remote => true,:html => {:multipart => true,:id => "#{resource_class.name.underscore}_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :deliver_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :org_id,:label =>"机构" ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id => "to_org_id"} %>
+    <%= f.input :customer_name,:label => "提货人姓名" %>
+    <%= f.input :customer_no,:label => "身份证号" %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+    <%= f.input :photo_1,:as => :file%>
+  <% end %>
+<% end%>
+<hr />
+<%= render "form_before" %>

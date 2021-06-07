@@ -1,0 +1,7 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "sender_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :org_id,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false %>
+  <% end%>
+  <%= f.inputs :name,:id_number,:mobile,:address,:is_active %>
+<% end%>

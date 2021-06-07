@@ -1,0 +1,7 @@
+<td>发货站</td>
+<td><%= f.select :from_org_id,current_ability_orgs_for_select,{},:readonly => true,:id => :from_org_id %></td>
+<td>中转站</td>
+<td><%= f.select :transit_org_id,all_yards_for_select ,{},:id => :transit_org_id%></td>
+<td>到货地</td>
+<td><%= f.select :area_id,areas_for_select,{:include_blank => true},:id => :area_id,:class => "select_areas" %></td>
+

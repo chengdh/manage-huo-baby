@@ -1,0 +1,9 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "#{resource_class.name.underscore}_form",:style => "width : 400px;",:class => get_org_edit_permission_class } do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :org_id,:as => :select ,:collection => current_ability_orgs_for_select,:include_blank => false %>
+    <%= f.input :deliver_region_id,:as => :select,
+      :collection => deliver_regions_for_select(current_user.default_org_id),:prompt => "--选择送货区域--" %>
+  <%end%>
+  <%= f.inputs :name,:mobile,:mobile_2,:mobile_3,:mobile_4,:phone,:address,:is_active %>
+<% end%>

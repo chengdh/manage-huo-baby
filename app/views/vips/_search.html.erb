@@ -1,0 +1,18 @@
+<%= semantic_form_for search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :name_like,:label =>"姓名",:input_html => {:size => 30} %>
+    <%= f.input :code_like,:label => "客户编号",:input_html =>{:size => 20} %>
+    <%= f.input :created_at_gte,:label => "录入时间",:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :created_at_lte,:label => "~",:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :id_number_like,:label => "身份证号",:input_html =>{:size => 20} %>
+    <%= f.input :org_id_in,:label => "所属机构",:as => :select,:collection => current_ability_orgs_for_select,:include_blank => current_user.default_org.is_summary?,:input_html => {:class => "select_org"} %>
+    <%# <%= f.input :org_id_in,:label => "所属机构",:as => :select,:collection => branches_for_select,:include_blank => true,:input_html => {:class => "select_org"} %>
+    <%= f.input :bank_id_eq,:label => "开户银行",:as => :select,:collection => Bank.where(:is_active => true) %>
+    <%= f.input :vip_state_eq,:label => "状态",:as => :select,:collection => vip_states_for_select %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询转账客户信息",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

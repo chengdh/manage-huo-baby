@@ -1,0 +1,15 @@
+<%if params[:action] == "show" %>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_branch_inventory_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+  <%if can? :ship,resource%>
+    <li>
+    <%= link_to image_tag("auction-hammer--arrow.png",:alt => "发货") , process_handle_branch_inventory_path(resource),:title => "发货",:class => "tipsy btn_process_handle",:method => :put  %>
+    </li>
+  <%end%>
+<%end%>
+<%if params[:action].eql?('do_search_bills')%>
+  <li>
+    <%= link_to_function image_tag("document-excel-table.png",:alt => "导出为EXCEL"), "",:title => "导出为EXCEL",:class => "tipsy btn_inventory_export"  %>
+  </li>
+<%end%>

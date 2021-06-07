@@ -1,0 +1,21 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <% if current_user.default_org.in_summary? %>
+      <%= f.input :customer_fee_info_org_id_eq,:label =>"所属机构",:as => :select,:collection => orgs_for_select,:include_blank => true %>
+    <% else %>
+      <%= f.input :customer_fee_info_org_id_eq,:label =>"所属机构",:as => :select,
+      :collection => branches_for_select,
+      :selected => current_user.default_org.id,
+      :include_blank => current_user.default_org.is_summary? %>
+    <% end %>
+    <%= f.input :name_or_phone_like,:label =>"姓名/手机",:input_html => {:size => 30} %>
+    <%= f.input :code_eq,:label =>"会员卡号",:input_html => {:size => 30} %>
+    <%= f.input :customer_fee_info_mth_gte,:label =>"月份",:as => :select,:collection => months_for_select,:include_blank => true %>
+    <%= f.input :customer_fee_info_mth_lte,:label =>"~",:as => :select,:collection => months_for_select,:include_blank => true %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询",:class => "sexybutton sexysimple sexyblue",:disable_with => "正在查询..." %>
+  <% end %>
+<% end%>

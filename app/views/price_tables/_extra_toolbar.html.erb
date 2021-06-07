@@ -1,0 +1,9 @@
+<%if can? :export_excel,resource_class%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"),
+      price_tables_path("search" => params[:search],:format => :xls),
+      :title => "导出为EXCEL",
+      :class => "tipsy"  %>
+  </li>
+<%end%>
+

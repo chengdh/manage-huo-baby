@@ -1,0 +1,37 @@
+<table class='table'>
+  <tr>
+    <th>分公司</th>
+    <td>
+      <%= resource.org %>
+    </td>
+    <td></td>
+    <th>有效</th>
+    <td>
+      <%= resource.is_active ? "是" : "否" %>
+    </td>
+  </tr>
+  <tr>
+    <th>计量名称</th>
+    <th>单位</th>
+    <th>单价(元)</th>
+    <th>运费下限(元)</th>
+    <th>分成比例</th>
+  </tr>
+  <% resource.price_list_lines.each do |line|%>
+    <tr>
+      <td>
+        <%= line.fee_unit.name%>
+      </td>
+      <td><%= line.fee_unit.unit_simp %></td>
+      <td>
+        <%= line.price %>
+      </td>
+      <td>
+        <%= line.min_price  %>
+      </td>
+      <td>
+        <%= line.divide_rate  %>
+      </td>
+    </tr>
+  <%end%>
+</table>

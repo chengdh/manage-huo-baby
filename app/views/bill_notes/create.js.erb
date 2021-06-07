@@ -1,0 +1,11 @@
+<%if resource.valid? %>
+    var note_count = $(".bill_note_tr").length;
+    var cur_index = note_count + 1;
+    var new_tr = $("<tr class='bill_notes_tr'>" +
+                   "<th>" + cur_index + "</th>" +
+                   "<td colspan='6'><%=resource.note %></td>" +
+                   "<td><%= resource.user.try(:real_name) %></td>"+
+                   "</tr>");
+    alert("ok");
+    $(".bill_notes_wrapper").append(new_tr);
+<%end%>

@@ -1,0 +1,20 @@
+<%if params[:action] == "show"%>
+  <%if can? :publish,resource%>
+    <li>
+      <%= link_to image_tag("auction-hammer--arrow.png",:alt => "发布") ,
+        publish_message_path(resource),:method => :put,
+        :title => "发布",
+        :class => "tipsy"
+      %>
+    </li>
+  <%end%>
+  <%if can? :unpublish,resource%>
+    <li>
+      <%= link_to image_tag("auction-hammer--arrow.png",:alt => "转为草稿") , unpublish_message_path(resource),
+        :title => "转为草稿",
+        :class => "tipsy"
+      %>
+    </li>
+  <%end%>
+<%end%>
+

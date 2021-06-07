@@ -1,0 +1,70 @@
+<table id="<%= resource_class.name.underscore.pluralize %>_index_table" class="table">
+  <tr>
+    <th><%=check_box_tag "check_all",1,false,:title => "选择/不选全部",:class => "tipsy cbx_select_all_for_build_accounting_doc" %></th>
+      <th>序号</th>
+      <th>清单日期</th>
+      <th>返款单位</th>
+      <th>收款单位</th>
+      <th>前段运费</th>
+      <th>后段运费</th>
+      <th>货款</th>
+      <th>运费[提]</th>
+      <th>保险费[提]</th>
+      <th>发货短途[提]</th>
+      <th>到货短途[提]</th>
+      <th>提货应收</th>
+      <th>状态</th>
+      <th>返款人</th>
+      <th></th>
+  </tr>
+  <% collection.each_with_index do |resource,index| %>
+    <tr class="<%= cycle 'odd', 'even' %>" data-dblclick='true'>
+      <td><%=check_box_tag "selector_#{resource.id}",resource.id,false,:class => "cbx_select_for_build_accounting_doc" %></td>
+      <td><%= order_no(index,params[:page],40) %></td>
+      <td><%= resource.bill_date.strftime('%Y-%m-%d') %></td>
+      <td><%= resource.from_org %></td>
+      <td><%= resource.to_org %></td>
+      <td><%= resource.sum_carrying_fee_1st %></td>
+      <td><%= resource.sum_carrying_fee_2st %></td>
+      <td><%= resource.sum_goods_fee %></td>
+      <td><%= resource.sum_carrying_fee_th %></td>
+      <td><%= resource.sum_insured_fee_th %></td>
+      <td><%= resource.sum_from_short_carrying_fee_th %></td>
+      <td><%= resource.sum_to_short_carrying_fee_th %></td>
+      <td><%= resource.sum_th_amount %></td>
+      <td><%= resource.human_state_name %></td>
+      <td><%= resource.user %></td>
+      <td>
+        <%= link_to "查看", resource_url(resource),:class => "show_link",:style => 'display : none;'%>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to image_tag("application--pencil.png"),  edit_resource_path(resource),:title => "修改当前记录",:class => "tipsy edit_link",:style => 'display : none;' if can? :update,resource%>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to image_tag("cross.png"), resource,:method => :delete,:class =>"tipsy delete_link",:style => 'display : none;',:title => "删除该记录",:confirm => "你确定要删除吗?" if can? :destroy,resource %>
+      </td>
+    </tr>
+  <% end %>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= collection.sum(&:sum_carrying_fee_1st) %></td>
+      <td><%= collection.sum(&:sum_carrying_fee_2st) %></td>
+      <td><%= collection.sum(&:sum_goods_fee) %></td>
+      <td><%= collection.sum(&:sum_carrying_fee_th) %></td>
+      <td><%= collection.sum(&:sum_insured_fee_th) %></td>
+      <td><%= collection.sum(&:sum_from_short_carrying_fee_th) %></td>
+      <td><%= collection.sum(&:sum_to_short_carrying_fee_th) %></td>
+      <td><%= collection.sum(&:sum_th_amount) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tfoot>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

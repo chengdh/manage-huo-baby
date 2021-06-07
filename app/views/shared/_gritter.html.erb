@@ -1,0 +1,7 @@
+<!--添加通知公告-->
+<%if defined? @unread_messages%>
+  <%@unread_messages.each do|m|%>
+    <%# <%= js add_gritter(link_to(m.title,message_path(m,:format =>:js),:style => "color : #FFF;",:class => "fancybox gritter-message"),:title => "#{m.try(:publish_date).try(:strftime,'%Y-%m-%d %H:%M')}  #{m.try(:org_name)}",:image => :notice,:sticky => true) %>
+    <%= js add_gritter(link_to(m.title,message_path(m,:format =>:js),:style => "color : #FFF;",:class => "fancybox gritter-message"),:title => "#{m.try(:publish_date).try(:strftime,'%Y-%m-%d %H:%M')}  #{m.try(:org_name)}",:image => :notice,:sticky => true) %>
+  <%end%>
+<%end%>

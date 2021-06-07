@@ -1,0 +1,195 @@
+<% 
+  #计算借方和贷方合计
+  cr_sum = cr_lines.sum {|l| l[:cr]}.to_s
+  dr_sum = dr_lines.sum {|l| l[:dr]}.to_s
+%>
+  <table class='table'>
+  <thead>
+    <tr>
+      <th colspan='26' class='title' style='text-align : center;'>
+        <h3>记&nbsp;&nbsp;账&nbsp;&nbsp;凭&nbsp;&nbsp;证</h3>
+      </th>
+    </tr>
+    <tr>
+      <td colspan='15'><%= Date.today.strftime('%Y年%m月%d日')%></td>
+      <td colspan='4'>&nbsp;</td>
+      <td colspan='2'>字第</td>
+      <td colspan='4'>&nbsp;</td>
+      <td>号</td>
+    </tr>
+  </thead>
+</table>
+<table class='table'>
+  <tbody>
+  <tr class='header'>
+    <th rowspan='2' class='description'>摘要</th>
+    <th rowspan='2' class='ge_led'>总账科目</th>
+    <th rowspan='2' class='sub_led'>明细科目</th>
+    <th colspan='11'>借方</th>
+    <th rowspan='2'>&nbsp;&nbsp;</th>
+    <th colspan='11'>贷方</th>
+  </tr>
+  <tr class='header'>
+    <th class='num'>亿</th>
+    <th class='num'>千</th>
+    <th class='seprate num'>百</th>
+    <th class='num'>十</th>
+    <th class='num'>万</th>
+    <th class='seprate num'>千</th>
+    <th class='num'>百</th>
+    <th class='num'>十</th>
+    <th class='seprate num'>元</th>
+    <th class='num'>角</th>
+    <th class='num'>分</th>
+    <!--借贷分割-->
+    <th class='num'>亿</th>
+    <th class='num'>千</th>
+    <th class='seprate num'>百</th>
+    <th class='num'>十</th>
+    <th class='num'>万</th>
+    <th class='seprate num'>千</th>
+    <th class='num'>百</th>
+    <th class='num'>十</th>
+    <th class='seprate num'>元</th>
+    <th class='num'>角</th>
+    <th class='num'>分</th>
+  </tr>
+  <%dr_lines.each do |dr|%>
+    <tr>
+    <td class='description'><%= dr[:description]%></td>
+    <td class='ge_led'><%= dr[:gen_led] %></td>
+    <td class='sub_led'><%= dr[:sub_led] %></td>
+
+    <td class='num'><%= dr[:dr_str][-9] %></td>
+    <td class='num'><%= dr[:dr_str][-8] %></td>
+    <td class='seprate num'><%= dr[:dr_str][-7] %></td>
+    <td class='num'><%= dr[:dr_str][-6] %></td>
+    <td class='num'><%= dr[:dr_str][-5] %></td>
+    <td class='seprate num'><%= dr[:dr_str][-4] %></td>
+    <td class='num'><%= dr[:dr_str][-3] %></td>
+    <td class='num'><%= dr[:dr_str][-2] %></td>
+    <td class='seprate num'><%= dr[:dr_str][-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+
+    <th></th>
+
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+  </tr>
+<%end%>
+
+  <%cr_lines.each do |cr|%>
+    <tr>
+    <td class='description'><%= cr[:description]%></td>
+    <td class='ge_led'><%= cr[:gen_led] %></td>
+    <td class='sub_led'><%= cr[:sub_led] %></td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='seprate num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+    <td class='num'>&nbsp;</td>
+
+    <th></th>
+
+    <td class='num'><%= cr[:cr_str][-9] %></td>
+    <td class='num'><%= cr[:cr_str][-8] %></td>
+    <td class='seprate num'><%= cr[:cr_str][-7] %></td>
+    <td class='num'><%= cr[:cr_str][-6] %></td>
+    <td class='num'><%= cr[:cr_str][-5] %></td>
+    <td class='seprate num'><%= cr[:cr_str][-4] %></td>
+    <td class='num'><%= cr[:cr_str][-3] %></td>
+    <td class='num'><%= cr[:cr_str][-2] %></td>
+    <td class='seprate num'><%= cr[:cr_str][-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+  </tr>
+<%end%>
+  <!--添加空行-->
+  <%(1..(6 - cr_lines.size - dr_lines.size)).each do%>
+    <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+
+    <th></th>
+
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+    <td class='seprate num'></td>
+    <td class='num'></td>
+    <td class='num'></td>
+  </tr>
+<%end%>
+  <tr>
+    <td>合计</td>
+    <td></td>
+    <td></td>
+    <td class='num'><%= dr_sum[-9] %></td>
+    <td class='num'><%= dr_sum[-8] %></td>
+    <td class='seprate num'><%= dr_sum[-7] %></td>
+    <td class='num'><%= dr_sum[-6] %></td>
+    <td class='num'><%= dr_sum[-5] %></td>
+    <td class='seprate num'><%= dr_sum[-4] %></td>
+    <td class='num'><%= dr_sum[-3] %></td>
+    <td class='num'><%= dr_sum[-2] %></td>
+    <td class='seprate num'><%= dr_sum[-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+
+    <td></td>
+    <td class='num'><%= cr_sum[-9] %></td>
+    <td class='num'><%= cr_sum[-8] %></td>
+    <td class='seprate num'><%= cr_sum[-7] %></td>
+    <td class='num'><%= cr_sum[-6] %></td>
+    <td class='num'><%= cr_sum[-5] %></td>
+    <td class='seprate num'><%= cr_sum[-4] %></td>
+    <td class='num'><%= cr_sum[-3] %></td>
+    <td class='num'><%= cr_sum[-2] %></td>
+    <td class='seprate num'><%= cr_sum[-1]%></td>
+    <td class='num'>0</td>
+    <td class='num'>0</td>
+  </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='2'>会计主管</td>
+      <td colspan='4'>记账</td>
+      <td colspan='11'>复核</td>
+      <td colspan='9'>制证&nbsp;<%=current_user.real_name%></td>
+    </tr>
+  </tfoot>
+</table>

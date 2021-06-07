@@ -1,0 +1,35 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='6' style='text-align : center;font-size : 14px;'>(<%="#{resource.org_name}-#{resource.bill_date}" %>)结算员交款清单</th>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>序号</td>
+      <td style='border : thin solid #000;'>到货地</td>
+      <td style='border : thin solid #000;'>发货地</td>
+      <td style='border : thin solid #000;'>运费[提]</td>
+      <td style='border : thin solid #000;'>代收货款</td>
+      <td style='border : thin solid #000;'>提货应收</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.each_with_index do |bill,index| %>
+      <tr>
+        <td style='border : thin solid #000;'><%= index + 1 %></td>
+        <td style='border : thin solid #000;'><%= bill.to_parent_org_name %></td>
+        <td style='border : thin solid #000;'><%= bill.from_org %></td>
+        <td style='border : thin solid #000;'><%= bill.carrying_fee_th %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.th_amount%></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='3' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.sum_carrying_fee_th%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_goods_fee%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_th_amount %></td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,60 @@
+<%= form_for resource ,:url => from_org_inner_transit_refunds_path,:remote => true,:html =>{:id => "#{resource_class.name.underscore}_form"}  do |f|%>
+  <%= f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <table class='table'>
+    <tr>
+      <th>返款日期:</th>
+      <td> <%=f.text_field :bill_date,:size => 10,:readonly => true %></td>
+      <th>结算员:</th>
+      <td><%=current_user%></td>
+      <td colspan='5'>&nbsp;</td>
+    </tr>
+    <tr>
+      <th>付款单位:</th>
+      <td>
+        <%=f.select :from_org_id,current_ability_orgs_for_select,{},{:id => "from_org_id"} %>
+      </td>
+      <th>总部:</th>
+      <td>
+        <%=f.select :transit_org_id,all_summary_orgs_for_select,{},{:id => "transit_org_id"} %>
+      </td>
+      <th>收款单位:</th>
+      <td>
+        <%=f.select :to_org_id,inner_bill_to_orgs_list(true),{},{:id => "to_org_id"} %>
+      </td>
+      <th>
+        <%= link_to_function image_tag("arrow-circle-double-135.png"),"",:id => 'btn_inner_transit_refund_refresh',:title => "刷新",:class => "tipsy"  %>
+      </th>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th>货款</th>
+      <th>+运费[提]</th>
+      <th>+保险费[提]</th>
+      <th>+管理费[提]</th>
+      <th>+发货短途[提]</th>
+      <th>+到货短途[提]</th>
+      <th>-中转运费</th>
+      <th>-中转手续费</th>
+      <th>=合计</th>
+    </tr>
+    <tr>
+      <td><span id='refound_sum_goods_fee'><%= resource.sum_goods_fee %></span></td>
+      <td><span id='refound_sum_carrying_fee_th'><%= resource.sum_carrying_fee_th %></span></td>
+      <td><span id='refound_sum_insured_fee_th'><%= resource.sum_insured_fee_th %></span></td>
+      <td><span id='refound_sum_manage_fee_th'><%= resource.sum_manage_fee_th %></span></td>
+      <td><span id='refound_sum_from_short_carrying_fee_th'><%= resource.sum_from_short_carrying_fee_th %></span></td>
+      <td><span id='refound_sum_to_short_carrying_fee_th'><%= resource.sum_to_short_carrying_fee_th %></span></td>
+      <td><span id='refound_sum_transit_carrying_fee'><%=resource.sum_transit_carrying_fee %></span></td>
+      <td><span id='refound_sum_transit_hand_fee'><%=resource.sum_transit_hand_fee %></span></td>
+      <td><span id='refound_sum_th_amount'><%=resource.sum_th_amount %></span></td>
+    </tr>
+    <tr>
+      <td>备注</td>
+      <td colspan='8'>
+        <%=f.text_field :note,:size => 100 %>
+      </td>
+    </tr>
+  </table>
+<% end%>

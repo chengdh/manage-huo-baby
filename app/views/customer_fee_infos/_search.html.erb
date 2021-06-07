@@ -1,0 +1,9 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 350px;" } do |f|%>
+  <%= f.inputs do %>
+    <%= f.input :org_id_eq,:label =>"分理处/分公司",:as => :select,:collection => current_ability_orgs_for_select %>
+    <%= f.input :mth_eq,:label => "月份",:as => :select,:collection => months_for_select,:input_html => {:value => 1.months.ago.strftime('%Y%m')} %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询贵宾客户资料",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

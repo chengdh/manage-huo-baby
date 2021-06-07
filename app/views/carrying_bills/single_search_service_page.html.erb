@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= form_tag single_search_service_carrying_bills_path,:method => :get,:id => "search_service_form",:target => "_blank",:class => "well well-sm" do %>
+      <div class="form-group">
+        <%=text_field_tag :bill_no,nil,:placeholder => "请输入运单编号",:id => 'search_text',:class => 'form-control' %>
+      </div>
+      <button type="button" class="btn btn-block btn-primary" id="btn_query_submit">查询运单</button>
+    <% end %>
+  </div>
+</div>

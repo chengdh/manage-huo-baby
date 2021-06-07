@@ -1,0 +1,12 @@
+﻿.ui-treeList {list-style-type:none;position:relative;margin:0px 0px 0px 0px;padding:5px 5px 5px 5px;}
+.ui-treeList ul{list-style-type:none;margin:0px 0px 0px 0px;padding:15px 5px 15px 5px;}
+.ui-treeList li {margin:5px 0px 0px 0px;padding:1px 1px 1px 1px;position:relative;}
+.ui-treeList li:first-letter {margin:0px 0px 0px 20px;}
+.ui-treeList li div.ui-treeList-toggle {width:16px;height:16px;margin:5px 0px 0px 0px;position:absolute;top:0px;left:2px;}
+.ui-treeList .ui-treeList-childs {}
+.ui-treeList .ui-treeList-open { }
+.ui-treeList .ui-treeList-item { }
+.ui-treeList .ui-treeList-itemEmpty {height:10px;}
+
+.ui-treeList .ui-sortable-placeholder {border-style:dashed; border-width:thin; min-height:20px;}
+.ui-treeList .ui-sortable-helper {border-style:dashed !important; border-width:thin !important;}

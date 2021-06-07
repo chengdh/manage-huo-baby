@@ -1,0 +1,64 @@
+<table class='table' <%= "data-detailUrl='#{base_load_list_carrying_bills_path(resource,show_or_hidden_fields)}'" if resource.scan_lines.blank? %>>
+  <tr>
+    <td>日期:</td>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <td>单据号:</td>
+    <td><%=resource.bill_no%></td>
+    <td>发货地:</td>
+    <td><%=resource.from_org_name%></td>
+    <td>到货地:</td>
+    <td><%=resource.to_org_name%></td>
+    <td>状态:</td>
+    <td><%=resource.human_state_name%></td>
+    <td>操作员:</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <td>司机:</td>
+    <td><%=resource.driver %></td>
+    <td>车牌号:</td>
+    <td><%=resource.vehicle_no %></td>
+    <td>备注:</td>
+    <td colspan="7"><%= resource.note %></td>
+  </tr>
+</table>
+
+<% if resource.scan_lines.present? %>
+  <table class="table">
+    <tr>
+      <th>序号</th>
+      <th>票据日期</th>
+      <th>票号</th>
+      <th>货号</th>
+      <th>付款方式</th>
+      <th>运费</th>
+      <th>起至地</th>
+      <th>发货人</th>
+      <th>收货人</th>
+      <th>货物名称</th>
+      <th>件数</th>
+      <th>装车状态</th>
+      <th>备注</th>
+    </tr>
+    <% resource.scan_lines.each_with_index do |sl,i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= sl.carrying_bill.bill_date %></td>
+        <td><%= sl.carrying_bill.bill_no %></td>
+        <td><%= sl.carrying_bill.goods_no %></td>
+        <td><%= sl.carrying_bill.pay_type_des %></td>
+        <td><%= sl.carrying_bill.carrying_fee %></td>
+        <td><%= "#{sl.carrying_bill.from_org_name}~#{sl.carrying_bill.to_org_name}" %></td>
+        <td><%= sl.carrying_bill.from_customer_name %></td>
+        <td><%= sl.carrying_bill.to_customer_name %></td>
+        <td><%= sl.carrying_bill.goods_info %></td>
+        <td><%= sl.carrying_bill.goods_num %></td>
+        <td><%= sl.goods_status_type_des %></td>
+        <td><%= sl.goods_status_note %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div id="table_wrap" class="bill_selector"></div>
+<% end %>
+

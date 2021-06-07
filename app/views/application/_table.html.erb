@@ -1,0 +1,41 @@
+<table id="<%= resource_class.name.underscore.pluralize %>_index_table" class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <% index_table_columns.each do |column| %>
+        <th><%= resource_class.human_attribute_name(column,:default => t("activerecord.attributes.public_attrs.#{column.to_s}"))%></th>
+      <% end %>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% collection.each_with_index do |resource,index| %>
+      <tr class="<%= cycle 'odd', 'even' %>",title="双击显示详细信息" class='tipsy' data-dblclick='true'>
+        <td>
+          <%= order_no(index,params[:page]) %>
+        </td>
+        <% index_table_columns.each do |column| %>
+          <%
+              value = resource.send(foreign_key_to_association(column))
+          value = '是' if value == true
+          value = '否' if value == false
+        %>
+      <td><%= value %></td>
+    <% end %>
+    <td>
+      <%= link_to "查看", resource_url(resource),:class => "show_link",:style => 'display : none;'%>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to image_tag("application--pencil.png"),  edit_resource_path(resource),:title => "修改当前记录",:class => "tipsy edit_link",:style => 'display : none;' if can? :update,resource%>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= link_to image_tag("cross.png"), resource,:method => :delete,:class =>"tipsy delete_link",:style => 'display : none;',:title => "删除该记录",:confirm => "你确定要删除吗?" if can? :destroy,resource %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+  <%= render  "table_foot" %>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

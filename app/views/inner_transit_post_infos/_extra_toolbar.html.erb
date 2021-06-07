@@ -1,0 +1,44 @@
+<%if params[:action] == "show"%>
+  <!--
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), resource_path(:format => :csv),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+    -->
+  <li>
+    <%= link_to image_tag("pufa_logo.jpg",:size => '18x18',:alt => "导出为浦发转账txt"), resource_path(resource,:format => :text,:bank => :spd),:title => "导出为浦发转账txt",:class => "tipsy"  %>
+  </li>
+  <li>
+    <%= link_to image_tag("ccb_logo.gif",:size => '18x18',:alt => "导出为建设银行转账文本"), resource_path(resource,:format => :text,:bank => "ccb"),:title => "导出为建设银行转账文本",:class => "tipsy"  %>
+  </li>
+
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_inner_transit_post_info_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+  <!--生成凭证-->
+  <%if can? :build_accounting_document,PostInfo%>
+    <li>
+      <%= link_to image_tag("money--arrow.png",:alt => "生成凭证"), build_accounting_document_post_info_path(resource),:title => "凭证生成",:class => "tipsy"  %>
+    </li>
+  <%end%>
+<%end%>
+<%if params[:action] == "build_accounting_document"%>
+  <li>
+    <%= link_to_function image_tag("printer.png",:alt => "打印凭证"), "",:class =>"tipsy btn_print_voucher",:title => "打印凭证" %>
+  </li>
+<%end%>
+<%if params[:action] == 'index' and can? :batch_export_with_bank,InnerTransitPostInfo%>
+  <li>
+  <%= link_to image_tag("pufa_logo.jpg",:size => '18x18',:alt => "批量导出为浦发转账txt"),'#',
+                        'data-href' => batch_export_with_bank_inner_transit_post_infos_path(:format => :text,:bank => :spd),
+                        :title => "批量导出为浦发转账txt",
+                        :style => "display : none;",
+                        :class => "tipsy btn_batch_export_with_bank"  %>
+  </li>
+  <li>
+  <%= link_to image_tag("ccb_logo.gif",:size => '18x18',:alt => "批量导出为建设银行转账文本"),"#",
+    'data-href' => batch_export_with_bank_inner_transit_post_infos_path(:format => :text,:bank => "ccb"),
+    :title => "批量导出为建设银行转账文本",
+    :style => "display : none;",
+    :class => "tipsy btn_batch_export_with_bank"  %>
+  </li>
+<%end%>

@@ -1,0 +1,12 @@
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if can? :fengongsi_export_excel,resource_class%>
+      <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"),
+      fengongsi_export_excel_carrying_fee_th_rpts_path("search[year]" => @date_range.first.year,"search[mth]" => @date_range.first.month),
+      :title => "导出为EXCEL",
+      :class => "tipsy"  %>
+    </li>
+    <%end%>
+  </ul>
+</div>

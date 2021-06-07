@@ -1,0 +1,100 @@
+<table style='border-collapse : collapse;border : thin solid #000;'>
+  <tr>
+    <th colspan='16' style='text-align : center;font-size : 14px;'>返款清单</th>
+  </tr>
+  <tr>
+    <td>返款单位:</td>
+    <td colspan='2'><%=resource.from_org.name%></td>
+    <td>收款单位:</td>
+    <td colspan='2'><%= resource.to_org.name %></td>
+    <td>返款日期:</td>
+    <td><%= resource.bill_date.strftime('%Y-%m-%d') %></td>
+    <td>经手人:</td>
+    <td><%= resource.user %></td>
+    <td colspan='6'>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>备注:</td>
+    <td colspan='13'><%=resource.note %></td>
+    <td>状态:</td>
+    <td><%= resource.human_state_name %></td>
+  </tr>
+
+  <tr>
+    <td colspan='2'>货款</td>
+    <td colspan='2'>运费[提]</td>
+    <td colspan='2'>保险费[提]</td>
+    <td colspan='2'>管理费[提]</td>
+    <td colspan='2'>发货短途[提]</td>
+    <td colspan='2'>到货短途[提]</td>
+    <td colspan='2'>中转运费</td>
+    <td colspan='2'>中转手续费</td>
+    <td colspan='2'>合计</td>
+  </tr>
+  <tr>
+    <td colspan='2'><%= resource.sum_goods_fee %></td>
+    <td colspan='2'><%= resource.sum_carrying_fee_th %></td>
+    <td colspan='2'><%= resource.sum_insured_fee_th %></td>
+    <td colspan='2'><%= resource.sum_manage_fee_th %></td>
+    <td colspan='2'><%= resource.sum_from_short_carrying_fee_th %></td>
+    <td colspan='2'><%= resource.sum_to_short_carrying_fee_th %></td>
+    <td colspan='2'><%=resource.sum_transit_carrying_fee %></td>
+    <td colspan='2'><%=resource.sum_transit_hand_fee %></td>
+    <td colspan='2'><%=resource.sum_th_amount %></td>
+  </tr>
+  <tr>
+    <td>序号</td>
+    <td>运单号</td>
+    <td>货号</td>
+    <td>发货人</td>
+    <td>收货人</td>
+    <td>运费[提]</td>
+    <td>保险费[提]</td>
+    <td>管理费[提]</td>
+    <td>发货短途[提]</td>
+    <td>到货短途[提]</td>
+    <td>运费合计[提]</td>
+    <td>代收货款</td>
+    <td>中转运费</td>
+    <td>中转手续费</td>
+    <td>提货应收</td>
+    <td>运费支付方式</td>
+    <td>备注</td>
+  </tr>
+  <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td>&nbsp;<%= bill.bill_no %></td>
+      <td><%= bill.goods_no %></td>
+      <td><%= bill.from_customer_name %></td>
+      <td><%= bill.to_customer_name %></td>
+      <td><%= bill.carrying_fee_th %></td>
+      <td><%= bill.insured_fee_th %></td>
+      <td><%= bill.manage_fee_th %></td>
+      <td><%= bill.from_short_carrying_fee_th %></td>
+      <td><%= bill.to_short_carrying_fee_th %></td>
+      <td><%= bill.carrying_fee_th_total %></td>
+      <td><%= bill.goods_fee%></td>
+      <td><%= bill.transit_carrying_fee%></td>
+      <td><%= bill.transit_hand_fee%></td>
+      <td><%= bill.th_amount%></td>
+      <td><%= bill.pay_type_des%></td>
+      <td><%= bill.note %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan='5' style='text-align : right;'>合计</td>
+    <td ><%=resource.sum_carrying_fee_th%></td>
+    <td><%=resource.sum_insured_fee_th%></td>
+    <td><%=resource.sum_manage_fee_th%></td>
+    <td><%=resource.sum_from_short_carrying_fee_th%></td>
+    <td><%=resource.sum_to_short_carrying_fee_th%></td>
+    <td><%=resource.sum_carrying_fee_th_total%></td>
+    <td><%=resource.sum_goods_fee%></td>
+    <td><%=resource.sum_transit_carrying_fee%></td>
+    <td><%=resource.sum_transit_hand_fee%></td>
+    <td><%=resource.sum_th_amount %></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>

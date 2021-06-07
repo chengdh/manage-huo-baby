@@ -1,0 +1,159 @@
+<%= semantic_form_for resource,:validate=> false,:remote=> true,:html => {:id => "carrying_bill_form",:class => "wat-cf carrying_bill #{get_bill_update_class(resource)} #{params[:action].eql?("edit") ? "carrying_bill_edit" : ''}"} do |f|%>
+  <%= f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <%= f.hidden_field :original_bill_id%>
+  <table class='table bill_input'>
+    <tbody>
+      <tr>
+        <td>单据编号</td>
+        <td><%= f.text_field :bill_no,:size => 20,:class => :bill_no,:maxlength => bill_no_length(resource.type) %></td>
+        <td>货号</td>
+        <td><%= f.text_field :goods_no,:size => 20,:class => :goods_no %></td>
+        <td>单据日期</td>
+        <td>
+          <%if current_user.default_org.input_expire?%>
+            <%= f.text_field :bill_date,:size => 10 ,:value => Date.tomorrow,:readonly => true,:class => :bill_date %>
+          <%else%>
+            <%= f.text_field :bill_date,:size => 10 ,:readonly => true,:class => :bill_date %>
+          <%end%>
+        </td>
+      </tr>
+      <tr>
+        <%= render 'org_select',:f => f %>
+      </tr>
+
+      <tr>
+        <td>客户编号</td>
+        <td><%= f.text_field :customer_code,:id => 'customer_code',:size => 20  %></td>
+        <%= f.fields_for :bill_association_object,
+            f.object.bill_association_object.blank? ? f.object.build_bill_association_object : f.object.bill_association_object do |c|%>
+            <td colspan="4">
+              <%= c.check_box :is_urgent,:id => "is_urgent" %>
+              <label for="is_urgent">加急</label>
+              <%= c.check_box :is_receipt,:id => "is_receipt"%>
+              <label for="is_receipt">回单</label>
+              <%= c.check_box :is_outside,:id => "is_outside"%>
+              <label for="is_outside">外部票</label>
+            </td>
+
+        <% end %>
+      </tr>
+      <tr>
+        <td>发货人</td>
+        <td>
+          <%= f.text_field :from_customer_name,:id => 'from_customer_name',:size => 20  %>
+        </td>
+        <td>手机</td>
+        <td>
+          <%= f.text_field :from_customer_mobile,:id => 'from_customer_mobile',:size => 20  %>
+          <%= f.fields_for :bill_association_object,
+            f.object.bill_association_object.blank? ? f.object.build_bill_association_object : f.object.bill_association_object do |c|%>
+            <%= c.hidden_field :from_customer_id,:id => "imported_from_customer_id" %>
+            <%= c.hidden_field :to_customer_id,:id => "imported_to_customer_id" %>
+          <% end %>
+          <div><span class='from_customer_detail'></span></div>
+          <a href='#' id="btn_find_from_customer"></a>
+        </td>
+        <td>电话</td>
+        <td><%= f.text_field :from_customer_phone,:id => 'from_customer_phone',:size => 20  %></td>
+      </tr>
+      <tr>
+        <td>银行</td>
+        <td>
+          <%= f.select :bank_name,bank_names_for_select,:id => 'bank_name'  %>
+        </td>
+        <td>银行卡号</td>
+        <td>
+          <%= f.text_field :card_no,:id => 'card_no',:size => 40  %>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>收货人</td>
+        <td>
+          <%= f.text_field :to_customer_name,:id => 'to_customer_name',:size => 20  %>
+        </td>
+        <td>手机</td>
+        <td>
+          <%= f.text_field :to_customer_mobile,:id => 'to_customer_mobile',:size => 20  %>
+          <a href='#' id="btn_find_to_customer"></a>
+          <div><span class='to_customer_detail'></span></div>
+        </td>
+
+        <td>电话</td>
+        <td><%= f.text_field :to_customer_phone,:id => 'to_customer_phone',:size => 20  %></td>
+      </tr>
+      <tr>
+        <td>运费支付方式</td>
+        <td><%= f.select :pay_type,resource_class.pay_types,{},:id => :pay_type %></td>
+        <td>运费</td>
+        <td><%= f.text_field :carrying_fee,:id => "carrying_fee",:class => "only_integer",:size => 15  %></td>
+        <td><span style="color:red;font-size: 14px;font-weight: bold;">代收货款</span></td>
+        <td><%= f.text_field :goods_fee,:id => "goods_fee",:size => 15,:class => "only_integer" %></td>
+      </tr>
+      <tr>
+        <td>保险费</td>
+        <td colspan='2'>
+          <!--分公司不用输入保险费、中转票需要保险费-->
+          <% if not ['TransitBill','HandTransitBill','OutterTransitReturnBill'].include?(f.object.type) %>
+            <% if current_user.default_org.in_summary? %>
+              <%=f.text_field :insured_fee,:id => "insured_fee",:readonly => true,
+                "data-carrying_fee_gte_on_insured_fee" =>IlConfig.carrying_fee_gte_on_insured_fee,
+                "data-config_insured_fee" =>IlConfig.insured_fee,
+                :size => 15 %>
+            <%else %>
+              <%= f.text_field :insured_fee,:id => "insured_fee",:value => 0,:readonly => true,:size => 15 %>
+            <%end %>
+          <%else %>
+            <!--分公司不用输入保险费、内外部中转票需要保险费-->
+            <%= f.text_field :insured_fee,:id => "insured_fee",:value => 0,:readonly => true,:size => 15 %>
+          <%end %>
+        </td>
+        <td>管理费</td>
+        <td colspan='2'>
+            <%=f.text_field :manage_fee,:id => "manage_fee",:readonly => true,:size => 15 %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>发货地短途运费</td>
+        <td colspan='2'>
+          <%= f.text_field :from_short_carrying_fee,:id => "from_short_carrying_fee",:class => "only_integer",:size => 15  %>
+          <span class='from_short_carrying_fee_alert' style='display : none;color : red;font-weight: bold;'>已重新计算费用!</span>
+        </td>
+        <td>到货地短途运费</td>
+        <td colspan='2'>
+          <%= f.text_field :to_short_carrying_fee,:id => "to_short_carrying_fee",:class => "only_integer",:size => 15  %>
+          <span class='to_short_carrying_fee_alert' style='display : none;color : red;font-weight: bold;'>已重新计算费用!</span>
+        </td>
+      </tr>
+      <tr>
+        <td>运费总计</td>
+        <td><span id='sum_carrying_fee'></span></td>
+        <td colspan='4'></td>
+      </tr>
+      <tr>
+        <td>货物名称</td>
+        <td colspan='3'>
+          <%= f.text_field :goods_info,:size => 60,:id => :goods_info %>
+        </td>
+        <td>包装</td>
+        <td><%= f.text_field :package,:size => 15,:id => :package %></td>
+      </tr>
+      <tr>
+        <td>数量</td>
+        <td><%= f.text_field :goods_num,:size => 15,:class => :goods_num %></td>
+        <td>重量</td>
+        <td><%= f.text_field :goods_weight,:size => 15  %></td>
+        <td>体积</td>
+        <td><%= f.text_field :goods_volume,:size => 15,:id => :goods_volume  %></td>
+      </tr>
+      <tr>
+        <td>备注</td>
+        <td colspan='5'><%= f.text_field :note,:size => 100,:id => :note %></td>
+      </tr>
+    </tbody>
+  </table>
+<%end%>

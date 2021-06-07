@@ -1,0 +1,183 @@
+<div class="block">
+  <div class="content">
+    <%= render :partial => "dynamic_toolbar" %>
+    <h2 class="title">业务看板</h2>
+    <div class="inner">
+      <div id='dashboard'>
+        <div class='dashboard-group'>
+          <h3><%=image_tag "light-bulb.png"%>提醒</h3>
+          <ul class='wat-cf'>
+            <% if can? :read_arrive,LoadList %>
+              <li>
+                <%= link_to "收货清单:(#{@shipped_load_list.to_a.sum(&:bill_count).to_i})张", arrive_load_lists_path %>
+              </li>
+            <%end%>
+
+            <% if can? :read_arrive,Refound %>
+              <li>
+                <%= link_to "收款清单:(#{@refunded.to_a.sum(&:bill_count).to_i})张", receive_refounds_path %>
+              </li>
+            <%end%>
+            <% if can? :local_rpt_no_delivery,CarryingBill %>
+              <li>
+                待提货票据:
+                <%= link_to "#{@ready_delivery.to_a.sum(&:bill_count).to_i}票", carrying_bills_path("search[state_eq]" =>:distributed,"search[to_org_id_in]" => current_user.current_ability_org_ids) %>
+              </li>
+            <%end%>
+            <% if can? :rpt_no_pay,CarryingBill %>
+              <li>
+                待提款票据:
+                <%= link_to "#{@reday_pay.to_a.sum(&:bill_count).to_i}票", carrying_bills_path("search[state_eq]" =>:payment_listed,"search[from_org_id_in]" => current_user.current_ability_org_ids) %>
+              </li>
+            <%end%>
+          </ul>
+        </div>
+
+        <div class='dashboard-group'>
+          <h3><%=image_tag "inbox.png"%>今日收货</h3>
+          <ul class='wat-cf'>
+            <li>
+            <p><%=image_tag "blue-documents-stack.png"%></p>
+            <p><%=@today_billed.to_a.sum(&:bill_count).to_i%>票</p>
+            </li>
+            <li>
+            <p><%=image_tag "currency-yen.png"%></p>
+            <p>运费:&yen;<%=@today_billed.to_a.sum {|bill| bill.carrying_fee}%></p>
+            </li>
+            <li>
+            <p><%=image_tag "currency-yen.png"%></p>
+            <p>保险费:&yen;<%=@today_billed.to_a.sum {|bill| bill.insured_fee}%></p>
+            </li>
+            <li>
+            <p><%=image_tag "currency-yen.png"%></p>
+            <p>发货短途:&yen;<%=@today_billed.to_a.sum {|bill| bill.from_short_carrying_fee}%></p>
+            </li>
+            <li>
+            <p><%=image_tag "currency-yen.png"%></p>
+            <p>到货短途:&yen;<%=@today_billed.to_a.sum {|bill| bill.to_short_carrying_fee}%></p>
+            </li>
+            <li>
+            <p><%=image_tag "envelope.png"%></p>
+            <p>代收货款:&yen;<%=@today_billed.to_a.sum(&:goods_fee)%></p>
+            </li>
+            <li>
+            <p><%=image_tag "box.png"%></p>
+            <p>
+            货物件数:
+            <%=@today_billed.to_a.sum(&:goods_num).to_i%>件
+            </p>
+            </li>
+          </ul>
+        </div>
+        <div class='dashboard-group'>
+          <h3><%=image_tag "inbox.png"%>合计</h3>
+          <ul class='wat-cf'>
+            <li>
+            <p><%=image_tag "currency-yen.png"%></p>
+            <p>现付:&yen;
+            <%=@today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_CASH) ?  bill.carrying_fee : 0 } +
+              @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_CASH) ?  bill.insured_fee : 0 } +
+              @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_CASH) ?  bill.from_short_carrying_fee : 0 } +
+              @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_CASH) ?  bill.to_short_carrying_fee : 0 }
+            %>
+            </p>
+              </li>
+              <li>
+              <p><%=image_tag "document-stamp.png"%></p>
+              <p>
+              提付:&yen;
+              <%=@today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_TH) ?  bill.carrying_fee : 0 } +
+                @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_TH) ?  bill.insured_fee : 0 } +
+                @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_TH) ?  bill.from_short_carrying_fee : 0 } +
+                @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_TH) ?  bill.to_short_carrying_fee : 0 }
+              %>
+              </p>
+                </li>
+                <li>
+                <p><%=image_tag "currency-yen.png"%></p>
+                <p>货款扣:&yen;
+                <%=@today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_K_GOODSFEE) ?  bill.carrying_fee : 0 } +
+                  @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_K_GOODSFEE) ?  bill.insured_fee : 0 } +
+                  @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_K_GOODSFEE) ?  bill.from_short_carrying_fee : 0 } +
+                  @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_K_GOODSFEE) ?  bill.to_short_carrying_fee : 0 }
+                %>
+                </p>
+                  </li>
+                  <li>
+                  <p><%=image_tag "currency-yen.png"%></p>
+                  <p>回执付:&yen;
+                  <%=@today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_RETURN) ?  bill.carrying_fee : 0 } +
+                    @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_RETURN) ?  bill.insured_fee : 0 } +
+                    @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_RETURN) ?  bill.from_short_carrying_fee : 0 } +
+                    @today_billed.to_a.sum {|bill| (bill.pay_type == CarryingBill::PAY_TYPE_RETURN) ?  bill.to_short_carrying_fee : 0 }
+                  %>
+                  </p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class='dashboard-group'>
+                  <h3><%=image_tag "inbox--arrow.png"%>今日提货</h3>
+                  <ul class='wat-cf'>
+                    <li>
+                    <p><%=image_tag "blue-documents-stack.png"%></p>
+                    <%=@today_deliveried.to_a.sum {|bill| ["ComputerBill","HandBill"].include?(bill.type)? bill.bill_count : 0}.to_i%>票
+                    /提付运费:&yen;
+                    <%=@today_deliveried.to_a.sum {|bill| bill.pay_type == CarryingBill::PAY_TYPE_TH ? bill.carrying_fee : 0}%>
+                    </li>
+                    <li>
+                    <p><%=image_tag "blue-documents-stack.png"%></p>
+                    中转提货:
+                    <%=@today_deliveried.to_a.sum {|bill| ["TransitBill","HandTransitBill"].include?(bill.type) ? bill.bill_count : 0 }.to_i%>票
+                    /中转提付运费:&yen;
+                    <%=@today_deliveried.to_a.sum {|bill| (["TransitBill","HandTransitBill"].include?(bill.type) and bill.pay_type == CarryingBill::PAY_TYPE_TH) ? bill.carrying_fee : 0}%>
+                    </li>
+                    <li>
+                    <p><%=image_tag "envelope.png"%></p>
+                    代收货款:&yen;
+                    <%=@today_deliveried.to_a.sum(&:goods_fee)%>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class='dashboard-group'>
+                  <h3><%= image_tag "money--arrow.png" %>今日提款</h3>
+                  <ul class='wat-cf'>
+                    <li>
+                    <%=@today_paid.to_a.sum(&:bill_count).to_i%>票
+                    </li>
+                    <li>
+                    应付货款:&yen;
+                    <%=@today_paid.to_a.sum(&:goods_fee)%>
+                    </li>
+                    <li>
+                    扣手续费:&yen;
+                    <%=@today_paid.to_a.sum(&:k_hand_fee)%>
+                    </li>
+                    <li>
+                    扣运费:&yen;
+                    <%=@today_paid.to_a.sum(&:k_carrying_fee)%>
+                    </li>
+                    <li>
+                    实付货款:&yen;
+                    <%=@today_paid.to_a.sum(&:act_pay_fee)%>
+                    </li>
+                  </ul>
+                </div>
+
+
+                <div class='dashboard-group'>
+                  <h3><%=image_tag "odata-balloon.png"%>最近票据</h3>
+                  <ul class='wat-cf'>
+                    <%@recent_bills.each do |bill|%>
+                    <li>
+                      <%=link_to "#{bill.goods_no}",polymorphic_path(bill,:format => :js),:class => 'fancybox' %>
+                    </li>
+                  <%end%>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <%= render :partial => "dynamic_toolbar" %>
+          </div>
+        </div>

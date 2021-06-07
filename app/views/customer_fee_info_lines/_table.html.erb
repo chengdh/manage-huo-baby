@@ -1,0 +1,38 @@
+<table id="<%= resource_class.name.underscore.pluralize %>_index_table" class="table">
+  <tr>
+    <th>序号</th>
+    <th>机构</th>
+    <th>月份</th>
+    <th>卡号</th>
+    <th>姓名</th>
+    <th>手机</th>
+    <th>运费合计</th>
+  </tr>
+  <% @customer_fee_info_lines.each_with_index do |l,index| %>
+    <tr class="<%= cycle 'odd', 'even' %>">
+      <td><%= order_no(index,params[:page]) %></td>
+      <td><%= l.try(:customer_fee_info).try(:org).try(:name) %></td>
+      <td><%= l.try(:customer_fee_info).try(:mth) %></td>
+      <td><%= l.try(:code) %></td>
+      <td><%= l.try(:name) %></td>
+      <td><%= l.try(:phone) %></td>
+      <td><%= l.try(:fee) %></td>
+    </tr>
+  <% end %>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= @search.sum(:fee) %></td>
+    </tr>
+  </tfoot>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

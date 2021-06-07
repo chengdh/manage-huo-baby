@@ -1,0 +1,16 @@
+//从未提货报表创建到货通知清单
+if($('#notice_form_wrap').length == 0)
+  $('#table_wrap').before("<div id='notice_form_wrap'></div>");
+
+$('#notice_form_wrap').html("<%= j render("form_with_no_delivery")%>");
+$('.btn_build_notice_with_no_delivery').hide();
+$('.btn_create_notice_with_no_delivery').show();
+$(".btn_export_sms_txt_with_no_delivery").show();
+//显示选择按钮
+$('#notice_select_group').show();
+//隐藏无需显示的字段
+$('.carrying_fee_total,.note').hide();
+$('.phone_notice_state_for_arrive,.sms_notice_state_for_arrive').show();
+//去掉rpt_no_deliver类
+$('.rpt_no_delivery').removeClass('rpt_no_delivery');
+$('td.bill_no,tr.white-bill,tr.blue-bill,tr.green-bill,tr.yellow-bill,tr.red-bill,tr.black-bill').removeAttr('style');

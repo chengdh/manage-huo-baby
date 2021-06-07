@@ -1,0 +1,12 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :carrying_bills_bill_no_or_carrying_bills_goods_no_or_carrying_bills_transit_bill_no_eq,:label =>"运单号",:input_html => {:size => 30} %>
+    <%= f.input :bill_date_gte,:label => "提货日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询中转提货信息",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

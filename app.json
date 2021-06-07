@@ -1,0 +1,8 @@
+{
+  "name": "il_yanzhao_new",
+  "scripts": {
+    "dokku": {
+      "predeploy": "bundle exec rake assets:precompile"
+    }
+  }
+}

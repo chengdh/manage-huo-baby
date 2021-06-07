@@ -1,0 +1,36 @@
+<%= semantic_form_for @search,:html => {:method => :get } do |f|%>
+  <%= f.inputs do %>
+    <%if params[:search].present?%>
+      <%params[:search].each do |search_key,search_val|%>
+        <%if search_val.is_a? Array%>
+          <%search_val.each_with_index do |a,index|%>
+            <%= f.hidden_field "#{search_key}][",:id => "search_key_#{index}" ,:value => a %>
+          <%end%>
+        <%else%>
+          <%= f.hidden_field search_key,:value => search_val %>
+        <%end%>
+      <%end%>
+    <%end%>
+    <%= hidden_field_tag :direction,params[:direction] %>
+    <%= hidden_field_tag :sort,params[:sort] %>
+    <%= hidden_field_tag :rpt_type,params[:rpt_type]%>
+    <%= hidden_field_tag :show_fields,params[:show_fields]%>
+    <%= hidden_field_tag :hide_fields,params[:hide_fields]%>
+    <%= hidden_field_tag "search[state_ni][]","billed" %>
+    <%= hidden_field_tag "search[state_ni][]","loaded" %>
+    <%= hidden_field_tag "search[state_ni][]","shipped" %>
+    <%= hidden_field_tag "search[state_ni][]","invalided"%>
+    <%= hidden_field_tag "search[state_ni][]","returned" %>
+    <%= render "types" %>
+    <%= f.input :load_list_reached_date_gte,:label => "到货日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :load_list_reached_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :from_org_id_eq,:label => "发货地",:as => :select,:collection => params[:from_org_select].present? ? self.send(params[:from_org_select]) : branches_for_select%>
+
+    <%= f.input :to_org_id_or_transit_org_id_eq,:label =>"到货地",:as => :select,:collection => params[:to_org_select].present? ? self.send(params[:to_org_select]) : branches_for_select %>
+
+    <%= f.input :pay_type_eq,:label => "支付方式",:as => :select,:collection => CarryingBill.pay_types_for_search %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询运单",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

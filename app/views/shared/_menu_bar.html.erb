@@ -1,0 +1,17 @@
+<% cache "menu_bar_#{current_user.id}_#{current_user.updated_at.to_i}" do %>
+  <div id='menu_bar' class="block">
+    <%current_user.default_role.system_function_groups.each do |f_group,functions|%>
+      <div class='menu-group'>
+        <h3 class='group_name' id="menu_group_<%=f_group.id%>"><%=f_group.name%></h3>
+        <ul class="navigation" style='display : none;'>
+          <%functions.each do |f|%>
+            <%begin%>
+              <li><%= link_to f.subject_title, instance_eval(f.default_action) %></li>
+            <%rescue%>
+            <%end%>
+          <%end%>
+        </ul>
+      </div>
+    <%end%>
+  </div>
+<%end%>

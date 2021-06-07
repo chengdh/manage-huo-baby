@@ -1,0 +1,104 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">未提货金额汇总表</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_for @search,:html => {:id =>"form_search_rpt_no_delivery"},:url => {:action => :rpt_no_delivery} do |f|%>
+            <%# <%= f.select :to_org_id_in,orgs_option_groups_string,{},
+            <%#   :id => "select_to_org_ids_in_rpt_turnover",
+            <%#   :multiple => "multiple",
+            <%#   :class => "select_org_multi",
+            <%#   :style => "width : 300px;" %>
+            <%= select_tag "search[to_org_id_in][]",orgs_option_groups_string,
+            :id => "select_to_org_ids_in_rpt_no_delivery",
+            :multiple => "multiple",
+            :class => "select_org_multi",
+            :style => "width : 300px;"
+          %>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= f.text_field :bill_date_gte,:class => "datepicker", :readonly => true,:size => 15 %>
+        &rarr;
+        <%= f.text_field :bill_date_lte,:class => "datepicker", :readonly => true,:size => 15 %>
+        <%= hidden_field_tag "search[type_in][]",'ComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'AutoCalculateComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'HandBill'%>
+        <%= hidden_field_tag "search[type_in][]",'ReturnBill'%>
+        &nbsp;&nbsp;
+        <%= f.submit "统计",:class => "sexybutton sexysimple sexyblue" %>
+      <%end%>
+    </div>
+  </div>
+  <div style='overflow-x : auto;width : 100%;'>
+    <table class='table' id='rpt_turnover'>
+      <thead>
+        <tr>
+          <th>到达地</th>
+          <th>运费</th>
+          <th>保险费</th>
+          <th>发货短途</th>
+          <th>到货短途</th>
+          <th>管理费</th>
+          <th>货款</th>
+          <th>提货应收</th>
+          <th>货物件数</th>
+          <th>票数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@carrying_bills.each do |b|%>
+          <tr>
+            <td>
+              <%= b.to_org %>
+            </td>
+            <td>
+              <%= b.sum_carrying_fee %>
+            </td>
+            <td>
+              <%= b.sum_insured_fee %>
+            </td>
+            <td>
+              <%= b.sum_from_short_carrying_fee %>
+            </td>
+            <td>
+              <%= b.sum_to_short_carrying_fee %>
+            </td>
+            <td>
+              <%= b.sum_manage_fee %>
+            </td>
+            <td>
+              <%= b.sum_goods_fee %>
+            </td>
+            <td>
+              <%= b.sum_th_amount%>
+            </td>
+            <td>
+              <%= b.sum_goods_num %>
+            </td>
+            <td>
+              <%= b.sum_bill_count %>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>合计</td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_carrying_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_insured_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_from_short_carrying_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_to_short_carrying_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_manage_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_goods_fee)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_th_amount)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_goods_num)%></td>
+          <td><%=@carrying_bills.to_a.sum(&:sum_bill_count)%></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</div>
+<%= render "dynamic_toolbar" %>
+</div>

@@ -1,0 +1,32 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title"><%= resource.name%>-情况汇总表</h2>
+    <div class="inner">
+      <table class="table">
+        <% resource.votable_items.each do |vi|%>
+          <tr>
+            <th colspan="3"><%= vi.name%></th>
+          </tr>
+          <tr>
+            <td style="width: 80%;">
+              <div style="border: 1px solid #000;">
+                <div style="height: 20px;width: <%= vi.percent(5) %>%;background: green;"></div>
+              </div>
+            </td>
+            <td>共<%= vi.find_votes_for(:vote_scope => resource.id).size%> 票</td>
+            <td>共<%= vi.find_votes_for(:vote_scope => resource.id).sum(:vote_weight)%> 分</td>
+          </tr>
+        <%end%>
+          <tr>
+            <td colspan="3">
+              <% resource.votable_items.first.find_votes_for(:vote_scope => resource.id).each do |vt|%>
+                <span><%= vt.voter.try(:default_org) %>,</span>
+              <% end %>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

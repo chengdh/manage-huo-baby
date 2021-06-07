@@ -1,0 +1,31 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <td colspan='10' style='text-align : center;font-size : 14px;'>短途运费核销信息<%="(#{@short_fee_info.org}-#{@short_fee_info.bill_date})"%></td>
+    </tr>
+    <tr>
+      <th style='border : thin solid #000;'>序号</th>
+      <th style='border : thin solid #000;'>发货地</th>
+      <th style='border : thin solid #000;'>到货地</th>
+      <th style='border : thin solid #000;'>短途费</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.short_fee_info_lines.each_with_index do |line,index|%>
+      <tr>
+        <td style='border : thin solid #000;'><%=index + 1%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.from_org%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.to_org%></td>
+        <td style='border : thin solid #000;'><%= @short_fee_info.org_id.eql?(line.carrying_bill.from_org_id) ? line.carrying_bill.from_short_carrying_fee : line.carrying_bill.to_short_carrying_fee%></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <td style='border : thin solid #000;'>合计</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>
+      <%=resource.carrying_bills.sum(:from_short_carrying_fee,:conditions => {:from_org_id => resource.org_id})+resource.carrying_bills.sum(:to_short_carrying_fee,:conditions => {:to_org_id => resource.org_id})%>
+    </td>
+  </tfoot>
+</table>

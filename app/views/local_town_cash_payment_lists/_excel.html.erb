@@ -1,0 +1,64 @@
+<table style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='11' style='text-align : center;font-size : 14px;'>代收货款支付清单(现金)</th>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>支付单位:</td>
+      <td colspan='2' style='border : thin solid #000;'><%=resource.org %></td>
+      <td style='border : thin solid #000;'>经手人:</td>
+      <td style='border : thin solid #000;' colspan='3'>&nbsp;</td>
+      <td colspan='2' style='border : thin solid #000;'><%= resource.user %></td>
+      <td style='border : thin solid #000;'>清单日期:</td>
+      <td  style='border : thin solid #000;'><%= resource.bill_date.strftime('%Y-%M-%d') %></td>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>备注:</td>
+      <td colspan='10' style='border : thin solid #000;'><%=resource.note %></td>
+    </tr>
+    <tr>
+      <th style='border : thin solid #000;'>序号</th>
+      <th style='border : thin solid #000;'>单据编号</th>
+      <th style='border : thin solid #000;'>实付代收货款</th>
+      <th style='border : thin solid #000;'>客户姓名</th>
+      <th style='border : thin solid #000;'>原代收货款</th>
+      <th style='border : thin solid #000;'>扣运费</th>
+      <th style='border : thin solid #000;'>扣手续费</th>
+      <th style='border : thin solid #000;'>扣保险费</th>
+      <th style='border : thin solid #000;'>扣发货短途</th>
+      <th style='border : thin solid #000;'>扣到货短途</th>
+      <th style='border : thin solid #000;'>货号</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.each_with_index do |bill,index| %>
+      <tr>
+        <td style='border : thin solid #000;'><%= index + 1 %></td>
+        <td style='border : thin solid #000;'>&nbsp;<%= bill.bill_no %></td>
+        <td style='border : thin solid #000;'><%= bill.act_pay_fee %></td>
+        <td style='border : thin solid #000;'><%= bill.from_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.k_carrying_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.k_hand_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.k_insured_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.k_from_short_carrying_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.k_to_short_carrying_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.goods_no %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='2' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:act_pay_fee)%></td>
+      <td style='text-align : right;border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:goods_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:k_carrying_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:k_hand_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:k_insured_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:k_from_short_carrying_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.to_a.sum(&:k_to_short_carrying_fee)%></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

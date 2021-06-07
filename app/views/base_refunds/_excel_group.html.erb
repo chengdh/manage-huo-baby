@@ -1,0 +1,98 @@
+<table style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='15' style='text-align : center;font-size : 14px;'>返款清单</th>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>返款单位:</td>
+      <td colspan='3' style='border : thin solid #000;'><%=resource.from_org.name%></td>
+      <td style='border : thin solid #000;'>收款单位:</td>
+      <td colspan='3' style='border : thin solid #000;'><%= resource.to_org.name %></td>
+      <td style='border : thin solid #000;'>返款日期:</td>
+      <td colspan='3' style='border : thin solid #000;'><%= resource.bill_date.strftime('%Y-%M-%d') %></td>
+      <td style='border : thin solid #000;'>经手人:</td>
+      <td colspan='2' style='border : thin solid #000;'><%= resource.user %></td>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>备注:</td>
+      <td colspan='14' style='border : thin solid #000;'><%=resource.note %></td>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <td style='border : thin solid #000;'>序号</td>
+      <td style='border : thin solid #000;'>运单号</td>
+      <td style='border : thin solid #000;'>货号</td>
+      <td style='border : thin solid #000;'>发货人</td>
+      <td style='border : thin solid #000;'>收货人</td>
+      <td style='border : thin solid #000;'>运费[提]</td>
+      <td style='border : thin solid #000;'>保险费[提]</td>
+      <td style='border : thin solid #000;'>发货短途[提]</td>
+      <td style='border : thin solid #000;'>到货短费[提]</td>
+      <td style='border : thin solid #000;'>运费合计[提]</td>
+      <td style='border : thin solid #000;'>代收货款</td>
+      <td style='border : thin solid #000;'>提货应收</td>
+      <td style='border : thin solid #000;'>返款备注</td>
+      <td style='border : thin solid #000;'>运费支付方式</td>
+      <td style='border : thin solid #000;'>备注</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%grouped_carrying_bills = resource.carrying_bills.sort_by {|bill| bill.from_org.try(:simp_name )}.group_by(&:from_org)%>
+    <%grouped_carrying_bills.each do |from_org,bills| %>
+      <tr>
+        <td style='border : thin solid #000;' colspan='10'><%= from_org.name %></td>
+      </tr>
+      <% bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index|%>
+        <tr>
+          <td style='border : thin solid #000;'><%= index + 1 %></td>
+          <td style='border : thin solid #000;'>&nbsp;<%= bill.bill_no %></td>
+          <td style='border : thin solid #000;'><%= bill.goods_no %></td>
+          <td style='border : thin solid #000;'><%= bill.from_customer_name %></td>
+          <td style='border : thin solid #000;'><%= bill.to_customer_name %></td>
+          <td style='border : thin solid #000;'><%= bill.carrying_fee_th %></td>
+          <td style='border : thin solid #000;'><%= bill.insured_fee_th %></td>
+          <td style='border : thin solid #000;'><%= bill.from_short_carrying_fee_th %></td>
+          <td style='border : thin solid #000;'><%= bill.to_short_carrying_fee_th %></td>
+          <td style='border : thin solid #000;'><%= bill.carrying_fee_th_total %></td>
+          <td style='border : thin solid #000;'><%= bill.goods_fee %></td>
+          <td style='border : thin solid #000;'><%= bill.th_amount %></td>
+          <td style='border : thin solid #000;'></td>
+          <td style='border : thin solid #000;'><%= bill.pay_type_des %></td>
+          <td style='border : thin solid #000;'><%= bill.note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan='5' style='text-align : right;border : thin solid #000;'>小计</td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:carrying_fee_th)%></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:insured_fee_th)%></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:from_short_carrying_fee_th)%></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:to_short_carrying_fee_th) %></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:carrying_fee_th_total) %></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:goods_fee)%></td>
+        <td style='border : thin solid #000;'><%=bills.to_a.sum(&:th_amount)%></td>
+        <td style='border : thin solid #000;'></td>
+        <td style='border : thin solid #000;'></td>
+        <td style='border : thin solid #000;'></td>
+      </tr>
+    </tfoot>
+  <%end%>
+  <tfoot>
+    <tr>
+      <td colspan='5' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.sum_carrying_fee_th %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_insured_fee_th %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_from_short_carrying_fee_th %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_to_short_carrying_fee_th %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_carrying_fee_th_total %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_goods_fee %></td>
+      <td style='border : thin solid #000;'><%=resource.sum_th_amount %></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

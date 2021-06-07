@@ -1,0 +1,146 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "divide_rpt_yujiu_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <%= f.hidden_field :org_id %>
+  <table class="table bill_input">
+    <thead>
+      <tr>
+        <th colspan="8" style="text-align: center;">运费分成明细表</th>
+      </tr>
+      <tr>
+        <th>分理处/分公司:</th>
+        <th colspan="7"><%= resource.org %></th>
+      </tr>
+      <tr>
+        <th>运费结算</th>
+        <th>金额</th>
+        <th>应补项目结算</th>
+        <th>金额</th>
+        <th>应扣项目结算</th>
+        <th>金额</th>
+        <th>其他应扣结算</th>
+        <th>金额</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>营业收入</td>
+        <td><%= f.text_field :carrying_fee_from,:size => 15,:readonly => true %></td>
+
+        <td><%= f.text_field :plus_item_name_1,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_1,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_1,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_1,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_1,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_1,:size => 15,:class => "other_deduct_fee" %></td>
+      </tr>
+      <tr>
+        <td>分成额</td>
+        <td><%= f.text_field :divide_carrying_fee_from,:size => 15,:class => "divide_fee",:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_2,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_2,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_2,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_2,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_2,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_2,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+
+      <tr>
+        <td>返程收入</td>
+        <td><%= f.text_field :carrying_fee_to,:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_3,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_3,:size => 15,:class => "plus_fee" %></td>
+
+        <td><%= f.text_field :deduct_item_name_3,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_3,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_3,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_3,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+
+      <tr>
+        <td>分成额</td>
+        <td><%= f.text_field :divide_carrying_fee_to,:class => "divide_fee",:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_4,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_4,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_4,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_4,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_4,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_4,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+      <tr>
+        <td>内部中转运费</td>
+        <td><%= f.text_field :inner_transit_carrying_fee_from,:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_5,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_5,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_5,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_5,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_5,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_5,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+      <tr>
+        <td>分成额</td>
+        <td><%= f.text_field :divide_inner_transit_carrying_fee_from,:class => "divide_fee",:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_6,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_6,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_6,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_6,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_6,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_6,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+
+      <tr>
+        <td>外部中转运费</td>
+        <td><%= f.text_field :outter_transit_carrying_fee_from,:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_7,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_7,:size => 15,:class => "plus_fee"%></td>
+
+        <td><%= f.text_field :deduct_item_name_7,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_7,:size => 15,:class => "deduct_fee" %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_7,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_7,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+      <tr>
+        <td>分成额</td>
+        <td><%= f.text_field :divide_outter_transit_carrying_fee_from ,:class => "divide_fee",:size => 15,:readonly => true %></td>
+        <td><%= f.text_field :plus_item_name_8,:size => 15 %></td>
+        <td><%= f.text_field :plus_fee_8,:size => 15,:class => "plus_fee" %></td>
+
+        <td><%= f.text_field :deduct_item_name_8,:size => 15 %></td>
+        <td><%= f.text_field :deduct_fee_8,:size => 15 %></td>
+
+        <td><%= f.text_field :other_deduct_item_name_8,:size => 15 %></td>
+        <td><%= f.text_field :other_deduct_fee_8,:size => 15,:class => "other_deduct_fee"  %></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>合计:</td>
+        <td><span id="sum_divide_fee"><%= resource.sum_divide_fee %></span></td>
+        <td>金额</td>
+        <td><span id="sum_plus_fee"><%= resource.sum_plus_fee %></span></td>
+        <td>金额</td>
+        <td><span id="sum_deduct_fee"><%= resource.sum_deduct_fee %></span></td>
+        <td>金额</td>
+        <td><span id="sum_other_deduct_fee"><%= resource.sum_other_deduct_fee %></span></td>
+      </tr>
+      <tr>
+        <td colspan="2">分部实提金额(人民币大写):</td>
+        <td colspan="4"><span id="sum_fee_chinese"><%= convertNumToChinese(resource.sum_fee) %></span></td>
+        <td>小写:</td>
+        <td><span id="sum_fee"><%= resource.sum_fee %></span></td>
+      </tr>
+    </tfoot>
+  </table>
+<% end%>

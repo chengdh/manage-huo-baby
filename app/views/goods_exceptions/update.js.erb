@@ -1,0 +1,12 @@
+<%if resource.valid? %>
+  var url = '<%=resource_path(resource)%>';
+  window.location = url;
+<%else%>
+  <%
+    form_partial='form'
+    form_partial='form_with_authorize_info' if params[:goods_exception][:gexception_authorize_info_attributes]
+    form_partial='form_with_claim' if params[:goods_exception][:claim_attributes]
+    form_partial='form_with_identify' if params[:goods_exception][:goods_exception_identify_attributes]
+  %>
+  $('#<%="#{resource_class.name.underscore}_form_wrap" %>').html('<%= escape_javascript(render(form_partial)) %>');
+<%end%>

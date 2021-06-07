@@ -1,0 +1,12 @@
+<%= semantic_form_for resource,:html => {:id => "vote_config_form"} do |f|%>
+  <%= f.error_messages%>
+  <%= f.inputs :name,:mth %>
+  <%= f.inputs :expire_date %>
+
+  <%= f.inputs "设置投票内容" do %>
+    <hr style="margin : 10px;"/>
+    <%= f.semantic_fields_for :votable_items do |i| %>
+      <%=i.inputs :name,:input_html => {:size => 10} %>
+    <%end%>
+  <%end%>
+<%end%>

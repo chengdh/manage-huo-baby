@@ -1,0 +1,15 @@
+<%if can? :batch_input,resource_class%>
+  <li>
+    <%=link_to image_tag("cards-address.png",:alt => "批量录入在库票据"),batch_input_in_stock_bills_path,:class => "tipsy",:title => "批量录入在库票据"%>
+  </li>
+<%end%>
+
+<%if params[:action] == "batch_input" and can? :create,resource_class%>
+  <%= render :partial => 'toolbar_btn_save' %>
+<%end%>
+
+<%if params[:action] == "show" or params[:action] == 'process_handle'%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_in_stock_bill_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>

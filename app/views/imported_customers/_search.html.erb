@@ -1,0 +1,36 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <% if current_user.default_org.in_summary? %>
+      <%= f.input :org_id_eq,:label =>"所属机构",:as => :select,:collection => orgs_for_select,:include_blank => true %>
+    <% else %>
+    <%= f.input :org_id_eq,:label =>"所属机构",:as => :select,
+      :collection => branches_for_select,
+      :selected => current_user.default_org.id,
+      :include_blank => current_user.default_org.is_summary? %>
+    <% end %>
+    <%= f.input :name_or_mobile_like,:label =>"姓名/手机",:input_html => {:size => 30} %>
+    <%= f.input :code_eq,:label =>"会员卡号",:input_html => {:size => 30} %>
+    <%= f.input :sales_man_eq,:label =>"服务专员",:input_html => {:size => 30} %>
+    <%= f.input :sales_man_mobile_eq,:label =>"服务专员手机",:input_html => {:size => 30} %>
+    <%= f.input :usually_location_like,:label =>"发货地",:input_html => {:size => 60} %>
+    <%= f.input :state_eq,:label =>"状态",:as => :select,:collection => imported_customer_states_for_select %>
+
+    <%= f.input :level_in,:label => "等级",:as => :check_boxes,:collection => customer_levels_for_select,:input_html => {:checked => true} %>
+    <%= f.input :code_is_not_null,
+      :label => "有卡",
+      :as => :boolean,
+      :input_html => {:id => :cbx_code_is_not_null_in_search_imported_customer}
+    %>
+
+    <%= f.input :code_is_null,
+      :label => "无卡",
+      :as => :boolean,
+      :input_html => {:id => :cbx_code_is_null_in_search_imported_customer}
+    %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询客户",:class => "sexybutton sexysimple sexyblue",:disable_with => "正在查询..." %>
+  <% end %>
+<% end%>

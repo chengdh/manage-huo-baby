@@ -1,0 +1,17 @@
+<%if params[:action] == "copy_price"%>
+  <li>
+    <%= link_to_function image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "$('##{resource_class.model_name.underscore}_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy"  %>
+  </li>
+<%end%>
+<%if params[:action] == "show"%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_goods_cat_fee_config_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>
+<%if params[:action] == "edit" and can? :show_batch_adjust,resource %>
+  <li>
+  <%= link_to image_tag("cards-address.png",:alt => "批量调整"), show_batch_adjust_goods_cat_fee_config_path(resource,:format => :js),:title => "批量调整",:class => "tipsy fancybox"  %>
+  <input type='hidden' value="<%= copy_price_goods_cat_fee_config_path(resource) %>" id="copy_price_path">
+  </li>
+<%end%>
+

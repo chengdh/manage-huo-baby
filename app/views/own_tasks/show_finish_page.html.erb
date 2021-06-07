@@ -1,0 +1,18 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">任务完成上报</h2>
+    <div class="inner">
+      <%= render "tasks/show" %>
+      <div id='<%="#{resource_class.name.underscore}_form_wrap" %>' >
+        <%= form_for resource,:url => {:action => :save_finish},:method => :put,:html => {:id => "task_form"} do |f|%>
+          <%= f.error_messages %>
+          <%= f.hidden_field :submitor_id,:value => current_user.id %>
+          <%= f.hidden_field :submit_date,:value => Date.today %>
+          <%= f.text_area :finsh_content,:row => 10,:cols => 120,:placeholder => "录入完成情况",:style => "width: 95%;height: 100px;" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

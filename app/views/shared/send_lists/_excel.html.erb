@@ -1,0 +1,45 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <td colspan='10' style='text-align : center;font-size : 14px;'><%=title%></td>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>序号</td>
+      <td style='border : thin solid #000;'>运单号</td>
+      <td style='border : thin solid #000;'>货号</td>
+      <td style='border : thin solid #000;'>发货人</td>
+      <td style='border : thin solid #000;'>收货人</td>
+      <td style='border : thin solid #000;'>运费</td>
+      <td style='border : thin solid #000;'>代收货款</td>
+      <td style='border : thin solid #000;'>运费支付方式</td>
+      <td style='border : thin solid #000;'>备注</td>
+      <td style='border : thin solid #000;'>送货备注</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.each_with_index do |bill,index| %>
+      <tr>
+        <td style='border : thin solid #000;'><%= index + 1 %></td>
+        <td style='border : thin solid #000;'>&nbsp;<%= bill.bill_no %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_no %></td>
+        <td style='border : thin solid #000;'><%= bill.from_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.to_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.carrying_fee %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.pay_type_des%></td>
+        <td style='border : thin solid #000;'><%= bill.note %></td>
+        <td style='border : thin solid #000;'>&nbsp;</td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='5' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:carrying_fee)%></td>
+      <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:goods_fee)%></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

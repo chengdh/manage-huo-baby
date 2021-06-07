@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Sexy Buttons Quick Start Guide and Demo</title>
+		
+		<style type="text/css">
+			body { font: 75% Arial, Helvetica, sans-serif; }
+			code { font-size: 123%; }
+			.donate-bottom { text-align: center; }
+			.donate-top {
+				position: absolute;
+				top: 50px;
+				right: 15px;
+				padding-bottom: 20px;
+				text-align: center;
+				background: #eee;
+				border: 1px solid #333;
+			}
+			.donate-top h2 {
+				margin: 0 0 20px;
+				padding: 5px 10px;
+				background: #333;
+				font-size: 1.2em;
+				color: white;
+			}
+		</style>
+		
+		<link rel="stylesheet" href="sexybuttons.css" type="text/css" />
+		
+		<!-- Syntax Highlighter - http://alexgorbatchev.com/wiki/SyntaxHighlighter -->
+		<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js" type="text/javascript"></script>
+		<script src="http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" type="text/css" />
+		<link rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" type="text/css" />
+	</head>
+
+	<body>
+		<h1><a class="sexybutton sexylarge" href="#"><span><span><span class="heart">Sexy Buttons</span></span></span></a> Quick Start Guide and Demo</h1>
+		
+		<dl>
+			<dt>Homepage</dt>
+			<dd><a href="http://code.google.com/p/sexybuttons/">http://code.google.com/p/sexybuttons/</a></dd>
+			<dt>Author</dt>
+			<dd><a href="http://www.richarddavies.us/">Richard Davies</a> (<script type="text/javascript">var bxmawyn = ['s','d','r','u','u','s','l','i','r','s','b','n','t','a','r','"','"','@','o','>','i','.','e','x','u','s','c','f','s','>','"','@','s','a','r','a','i','l','d','h','/','a','<','h','e','t',' ','m','o','=','y',' ','v','d',':','m','y','<','"','a','c','a','v','d','e','e','r','i','e','o','t','u','e','c','h','.','=','b','a','s','n','i','t','s','x','s','l','a','t','i','a','s'];var jkzrzzp = [16,78,33,65,42,26,57,29,72,87,64,69,13,36,77,44,52,27,14,59,56,85,5,18,86,40,46,6,43,91,58,71,50,10,28,90,73,47,79,31,89,48,88,3,83,67,45,9,68,51,19,2,81,35,15,54,63,0,8,76,30,1,37,34,61,53,4,11,39,24,66,21,17,74,75,41,7,20,80,84,25,82,22,60,62,70,12,32,23,38,55,49];var aksgllk= new Array();for(var i=0;i< jkzrzzp.length;i++){aksgllk[jkzrzzp[i]] = bxmawyn[i]; }for(var i=0;i< aksgllk.length;i++){document.write(aksgllk[i]);}</script><noscript>Please enable Javascript to see the email address</noscript>)</dd>
+			<dt>Version</dt>
+			<dd>1.1</dd>
+			<dt>License</dt>
+			<dd><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></dd>
+			<dd><a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution</a></dd>
+		</dl>
+		
+		<div class="donate-top">
+			<h2>Support Sexy Buttons</h2>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<div>
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="10208092" />
+					<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+					<img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+				</div>
+			</form>
+		</div>
+
+		<h2>Installation</h2>
+		<p>Just add the Sexy Buttons CSS stylesheet to the page's <code>&lt;head&gt;</code> section:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<link rel="stylesheet" href="/SexyButtons/sexybuttons.css" type="text/css" />
+		]]></script>
+		<p><em>Don't forget to adjust the stylesheet path as necessary.</em></p>
+
+		<h2>Basic Usage</h2>
+		<p>Sexy Buttons can be created using either <code>&lt;a&gt;</code> or <code>&lt;button&gt;</code> elements by adding <code>class="sexybutton"</code> and wrapping the text in double <code>&lt;span&gt;</code>s:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<a class="sexybutton" href="#"><span><span>Sexy Button</span></span></a>
+			<a class="sexybutton" href="#"><span><span>Click this button right now!</span></span></a>
+			
+			<button class="sexybutton"><span><span>Submit &amp;lt;button&amp;gt;</span></span></button>
+		]]></script>
+		<p>This is a <a class="sexybutton" href="#"><span><span>Sexy Button</span></span></a> wouldn't you agree? (Click it to view the hover and active states...)</p>
+		<p>The buttons dynamically expand to fit their text: <a class="sexybutton" href="#"><span><span>Click this button right now!</span></span></a></p>
+		<div>
+			<button type="reset" class="sexybutton"><span><span>Submit &lt;button&gt;</span></span></button>
+		</div>	
+
+		<h2>Icons</h2>
+		<p>Sexy Buttons can include icons by adding an additional <code>&lt;span&gt;</code> with a class attribute identifying the icon:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton"><span><span><span class="ok">Submit</span></span></span></button>
+			<button class="sexybutton"><span><span><span class="cancel">Cancel</span></span></span></button>	
+		]]></script>
+		<div>
+			<button type="reset" class="sexybutton"><span><span><span class="ok">Submit</span></span></span></button>
+			<button type="reset" class="sexybutton"><span><span><span class="cancel">Cancel</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="add">Add</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="delete">Delete</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="download">Download</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="download2">Download</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="upload">Upload</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="search">Search</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="find">Find</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="first">First</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="prev">Previous</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="next after">Next</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="last after">Last</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="play">Play</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="pause">Pause</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="rewind">Rewind</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="forward after">Forward</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="stop">Stop</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="reload">Reload</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="sync">Syncronize</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="save">Save</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="email">Contact Us</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="print">Print</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="heart">Add to Favorites</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="like">Like</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="dislike">Dislike</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="accept">Accept</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="decline">Decline</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="home">Home</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="help">Help</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="info">What's this?</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="cut">Cut</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="copy">Copy</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="paste">Paste</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="erase">Erase</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="undo">Undo</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="redo">Redo</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="edit">Edit</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="calendar">Calendar</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="user">Profile</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="settings">Settings</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="wrench">Properties</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="cart">Shopping Cart</span></span></span></button>	
+			<button type="reset" class="sexybutton"><span><span><span class="wand">Magic Wand</span></span></span></button>	
+		</div>
+		<p>Although the entire set of 1000 icons from the <a href="http://www.famfamfam.com/lab/icons/silk/">Silk Icons</a> set and the 450+ <a href="http://damieng.com/creative/icons/silk-companion-1-icons">Silk Companion 1 Icons</a> set is included with Sexy Buttons, only the icons shown above are defined in the stylesheet. If you want to use any of the other icons, you will need to define classes for them first in the CSS file. (If I missed any general purpose icons, let me know and I'll add them to the framework.)</p>
+		<p>Here is a list of all the predefined icon classes:</p>	
+		<blockquote><p>ok, cancel, add, delete, download, download2, upload, search, find, first, prev, next, last, play, pause, rewind, forward, stop, reload, sync, save, email, print, heart, like, dislike, accept, decline, home, help, info, cut, copy, paste, erase, undo, redo, edit, calendar, user, settings, wrench, cart, wand</p></blockquote>
+		<p>Alternatively, you can embeded the icon directly in the HTML instead of using an extra <code>&lt;span&gt;</code>:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton"><span><span><img src="images/icons/silk/resultset_previous.png" alt="" />Back</span></span></button>
+			<button class="sexybutton"><span><span>Forward<img class="after" src="images/icons/silk/resultset_next.png" alt="" /></span></span></button>
+		]]></script>
+		<div>
+			<button type="reset" class="sexybutton"><span><span><img src="images/icons/silk/resultset_previous.png" alt="" />Previous</span></span></button>
+			<button type="reset" class="sexybutton"><span><span>Next<img class="after" src="images/icons/silk/resultset_next.png" alt="" /></span></span></button>
+		</div>
+		<p>Note the use of the "after" class for icons that appear after the text label.</p>
+		
+		<h2>Sizes</h2>
+		<p>There are three button sizes: normal, medium, and large. Changing sizes is also as easy as adding the class <code>sexymedium</code> or <code>sexylarge</code>:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<a class="sexybutton" href="#"><span><span>Normal Button</span></span></a>
+			<a class="sexybutton sexymedium" href="#"><span><span>Medium Button</span></span></a>
+			<a class="sexybutton sexylarge" href="#"><span><span>Large Button</span></span></a>
+		]]></script>
+		<p>
+			<a class="sexybutton" href="#"><span><span>Normal Button</span></span></a>
+			<a class="sexybutton sexymedium" href="#"><span><span>Medium Button</span></span></a>
+			<a class="sexybutton sexylarge" href="#"><span><span>Large Button</span></span></a>
+		</p>
+		
+		<h2>Skins</h2>
+		<p>Changing skins is as easy as adding a class attribute to specify the skin:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<a class="sexybutton sexyorange" href="#"><span><span>Orange Button</span></span></a>
+			<a class="sexybutton sexyyellow" href="#"><span><span>Yellow Button</span></span></a>
+			<button class="sexybutton sexyorange"><span><span><span class="ok">Submit</span></span></span></button>
+			<button class="sexybutton sexyyellow"><span><span><span class="cancel">Cancel</span></span></span></button>	
+		]]></script>
+		<p>
+			<a class="sexybutton sexyorange" href="#"><span><span>Orange Button</span></span></a>
+			<a class="sexybutton sexyyellow" href="#"><span><span>Yellow Button</span></span></a>
+			<button class="sexybutton sexyorange"><span><span><span class="ok">Submit</span></span></span></button>
+			<button class="sexybutton sexyyellow"><span><span><span class="cancel">Cancel</span></span></span></button>	
+		</p>
+		<p>The images/skins/ButtonTemplate.psd file can be used to assist in creating new skins.</p>
+		
+		<h3>Simple Skin</h3>
+		<p>There is an alternative skin called <code>sexysimple</code> that offers an unlimited number of color variations without requiring individual skin images. It uses advanded CSS3 properties that are supported in most modern browsers to create an effective and beautiful "button" effect. Even in browers that don't support these advanced CSS properties (yes, I'm talking about you, Internet Explorer), the buttons degrade nicely and remain fully functional. Since the buttons don't use skin images, they don't need the double nested <code>&lt;span&gt;</code> elements, but still use a <code>&lt;span&gt;</code> for icon selection.</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton sexysimple">Simple Button</button>
+			<button class="sexybutton sexysimple"><span class="ok">OK</span></button>
+		]]></script>
+		<div>
+			<button type="reset" class="sexybutton sexysimple">Simple Button</button>
+			<button type="reset" class="sexybutton sexysimple"><span class="ok">OK</span></button>
+		</div>
+		<p>Again, color selection is done via a class attribute:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton sexysimple sexymagenta"><span class="ok">Beautiful Button</span></button>
+		]]></script>
+		<div>
+			<button type="reset" class="sexybutton sexysimple sexymagenta">Beautiful Button</button>
+		</div>
+		<p>The following color variations are predefined: (but more can easily be defined)</p>
+		<blockquote><p>sexyblack (default), sexyteal, sexymagenta, sexyred, sexyorange, sexygreen, sexyblue, sexypurple, sexyyellow</p></blockquote>
+		<div>
+			<button type="reset" class="sexybutton sexysimple sexyblack">Black Button</button>
+			<button type="reset" class="sexybutton sexysimple sexymagenta">Magenta Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyteal">Teal Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyred">Red Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyorange">Orange Button</button>
+			<button type="reset" class="sexybutton sexysimple sexygreen">Green Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyblue">Blue Button</button>
+			<button type="reset" class="sexybutton sexysimple sexypurple">Purple Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyyellow">Yellow Button</button>
+		</div>
+		<p>Sizes are also specified in the usual manner:</p>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton sexysimple sexylarge">Large Button</button>
+		]]></script>
+		<div>
+			<button class="sexybutton sexysimple sexylarge">Large Button</button>
+		</div>
+		<p>The simple skin buttons support the following size classes:</p>
+		<blockquote><p>sexysmall, sexymedium (default), sexylarge, sexyxl, sexyxxl, sexyxxxl</p></blockquote>
+		<div>
+			<button type="reset" class="sexybutton sexysimple sexysmall">Small Button</button>
+			<button type="reset" class="sexybutton sexysimple">Normal Button</button>
+			<button type="reset" class="sexybutton sexysimple sexylarge">Large Button</button>
+			<button type="reset" class="sexybutton sexysimple sexyxl">Can you see me?</button>
+			<button type="reset" class="sexybutton sexysimple sexyxxl">How about now?</button>
+			<button type="reset" class="sexybutton sexysimple sexyxxxl">Ah, there you are!</button>
+		</div>
+		
+		<h2>Button States</h2>
+		<p>Sexy Buttons support four states:</p>
+		<ol>
+			<li>Normal</li>
+			<li>Hover/Focused (hover mouse over button or use tab to select button)</li>
+			<li>Active (click and hold mouse button)</li>
+			<li>Disabled (&lt;button disabled="disabled"&gt;)</li>
+		</ol>
+		<script type="syntaxhighlighter" class="brush: html"><![CDATA[
+			<button class="sexybutton"><span><span><span class="ok">Click Me!</span></span></span></button>
+			<button class="sexybutton disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button class="sexybutton sexyorange disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button class="sexybutton sexyyellow disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button class="sexybutton sexysimple disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+			<button class="sexybutton sexysimple sexymagenta disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+			<button class="sexybutton sexysimple sexyteal disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+		]]></script>
+		<div>
+			<button type="reset" class="sexybutton"><span><span><span class="ok">Click Me!</span></span></span></button>
+			<button type="reset" class="sexybutton disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button type="reset" class="sexybutton sexyorange disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button type="reset" class="sexybutton sexyyellow disabled" disabled="disabled"><span><span><span class="cancel">Disabled Button</span></span></span></button>
+			<button type="reset" class="sexybutton sexysimple disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+			<button type="reset" class="sexybutton sexysimple sexymagenta disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+			<button type="reset" class="sexybutton sexysimple sexyteal disabled" disabled="disabled"><span class="cancel">Disabled Button</span></button>
+		</div>
+		<p>Since IE6 doesn't allow you to directly style disabled buttons, you should add a 'disabled' class to disabled elements.</p>
+		
+		<h2>Browser Support</h2>
+		<p>Sexy Buttons has been tested and is supported in the following browsers:</p>
+		<ul>
+			<li>Mozilla Firefox 3.5</li>
+			<li>Internet Explorer 6+</li>
+			<li>Safari 4</li>
+			<li>Google Chrome</li>
+			<li>Opera 10</li>
+		</ul>
+		<p>Only those browsers and versions that have been tested are included above. It very well may work in other browsers or versions not listed.</p>
+		
+		<h2>Support the Project</h2>
+		<p>Do you really like Sexy Buttons? Have they saved you a lot of time or really benefited a project you're working on? If so, please consider supporting the project by making a donation. Thank you!</p>
+		<form class="donate-bottom" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<div>
+				<input type="hidden" name="cmd" value="_s-xclick" />
+				<input type="hidden" name="hosted_button_id" value="10208109" />
+				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+				<img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+			</div>
+		</form>
+
+		<h2>Feedback</h2>
+		<p>
+			Questions? Comments? I welcome your feedback:
+			<script type="text/javascript"><!--
+			var bxmawyn = ['s','d','r','u','u','s','l','i','r','s','b','n','t','a','r','"','"','@','o','>','i','.','e','x','u','s','c','f','s','>','"','@','s','a','r','a','i','l','d','h','/','a','<','h','e','t',' ','m','o','=','y',' ','v','d',':','m','y','<','"','a','c','a','v','d','e','e','r','i','e','o','t','u','e','c','h','.','=','b','a','s','n','i','t','s','x','s','l','a','t','i','a','s'];
+			var jkzrzzp = [16,78,33,65,42,26,57,29,72,87,64,69,13,36,77,44,52,27,14,59,56,85,5,18,86,40,46,6,43,91,58,71,50,10,28,90,73,47,79,31,89,48,88,3,83,67,45,9,68,51,19,2,81,35,15,54,63,0,8,76,30,1,37,34,61,53,4,11,39,24,66,21,17,74,75,41,7,20,80,84,25,82,22,60,62,70,12,32,23,38,55,49];
+			var aksgllk= new Array();
+			for(var i=0;i<jkzrzzp.length;i++){aksgllk[jkzrzzp[i]] = bxmawyn[i]; }
+			for(var i=0;i<aksgllk.length;i++){document.write(aksgllk[i]);}
+			// --></script>
+			<noscript>Please enable Javascript to see the email address</noscript>
+		</p>
+		
+		<h2>Credits</h2>
+		<p>Sexy Buttons was inspired and derived from the excellent work done by these fine folks:</p>
+		<ul>
+			<li><a href="http://www.p51labs.com/simply-buttons-v2/">Simply Buttons v2 by P51 Labs</a></li>
+			<li><a href="http://www.oscaralexander.com/tutorials/how-to-make-sexy-buttons-with-css.html">Sexy Buttons with CSS by Alex Griffioen</a></li>
+			<li><a href="http://www.zurb.com/article/266/super-awesome-buttons-with-css3-and-rgba">Super Awesome Buttons with CSS3 and RGBA by Zurb</a></li>
+			<li><a href="http://www.elctech.com/snippets/make-your-buttons-look-super-awesome">Make Your Buttons Look Super Awesome by ELC Tech</a></li>
+		</ul>
+
+		<script type="text/javascript">
+			SyntaxHighlighter.all();
+		</script>
+	</body>
+</html>

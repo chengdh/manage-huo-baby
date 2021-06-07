@@ -1,0 +1,10 @@
+<%= semantic_form_for User.search,:html => {:id => "search_user_form",:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= f.inputs do %>
+    <%= f.input :username_eq,:label =>"登录名",:hint => "登录系统时使用的名称",:input_html => {:size => 30} %>
+    <%= f.input :real_name_eq,:label =>"姓名",:input_html => {:size => 30} %>
+    <%= f.input :is_active_eq,:label => "状态",:as => :select,:collection => user_states_for_select %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询用户",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

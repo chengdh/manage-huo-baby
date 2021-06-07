@@ -1,0 +1,13 @@
+/*参考http://www.qianduan.net/fix-ie6-dont-support-position-fixed-bug.html*/
+/*让position:fixed在IE6下可用! */
+
+.fixed-top /* 头部固定 */{position:fixed;bottom:auto;top:0px;}
+.fixed-bottom /* 底部固定 */{position:fixed;bottom:0px;top:auto;}
+.fixed-left /* 左侧固定 */{position:fixed;right:auto;left:0px;}
+.fixed-right /* 右侧固定 */{position:fixed;right:0px;left:auto;}
+/* 上面的是除了IE6的主流浏览器通用的方法 */
+* html,* html body /* 修正IE6振动bug */{background-image:url(about:blank);background-attachment:fixed;}
+* html .fixed-top /* IE6 头部固定 */{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop));}
+* html .fixed-right /* IE6 右侧固定 */ {position:absolute;right:auto;left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));}
+* html .fixed-bottom /* IE6 底部固定  */{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+* html .fixed-left /* IE6 左侧固定 */{position:absolute;right:auto;left:expression(eval(document.documentElement.scrollLeft));}

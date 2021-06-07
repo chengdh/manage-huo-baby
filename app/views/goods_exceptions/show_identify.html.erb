@@ -1,0 +1,16 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">责任鉴定</h2>
+    <div class="inner">
+      <%= render "show" %>
+      <div id='<%="#{resource_class.name.underscore}_form_wrap" %>' >
+        <%= semantic_form_for resource,:remote => true ,:html => {:id => "goods_exception_form"} do |f|%>
+          <%=f.error_messages %>
+          <%= render :partial => 'form_with_identify',:locals => {:f => f} %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

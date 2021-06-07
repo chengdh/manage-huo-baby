@@ -1,0 +1,58 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>日期</th>
+      <th>机构</th>
+      <th>银行</th>
+      <th>户名</th>
+      <th>卡号</th>
+      <th>货款</th>
+      <th>-运费[扣]</th>
+      <th>-保险费[扣]</th>
+      <th>-发货短途[扣]</th>
+      <th>-到货短途[扣]</th>
+      <th>-手续费[扣]</th>
+      <th>-中转手续费[扣]</th>
+      <th>=实提货款</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% resource.pay_infos.each_with_index do |pi,i|%>
+    <tr>
+    <td><%= i+1%></td>
+    <td><%= pi.bill_date%></td>
+    <td><%= pi.org %></td>
+    <td><%= pi.bank%></td>
+    <td><%= pi.account_name%></td>
+    <td><%= pi.account_no%></td>
+    <td><%= pi.sum_goods_fee%></td>
+    <td><%= pi.sum_k_carrying_fee%></td>
+    <td><%= pi.sum_k_insured_fee%></td>
+    <td><%= pi.sum_k_from_short_carrying_fee%></td>
+    <td><%= pi.sum_k_to_short_carrying_fee%></td>
+    <td><%= pi.sum_k_hand_fee%></td>
+    <td><%= pi.sum_transit_hand_fee%></td>
+    <td><%= pi.sum_act_pay_fee%></td>
+  </tr>
+<%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%=resource.sum_goods_fee %></td>
+      <td><%=resource.sum_k_carrying_fee %></td>
+      <td><%=resource.sum_k_insured_fee %></td>
+      <td><%=resource.sum_k_from_short_carrying_fee %></td>
+      <td><%=resource.sum_k_to_short_carrying_fee %></td>
+      <td><%=resource.sum_k_hand_fee %></td>
+      <td><%=resource.sum_transit_hand_fee %></td>
+      <td><%=resource.sum_act_pay_fee %></td>
+    </tr>
+  </tfoot>
+</table>

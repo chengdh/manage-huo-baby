@@ -1,0 +1,57 @@
+.tipswift { padding: 5px; position: absolute; z-index: 100000; border-color: black; }
+.tipswift-inner { padding: 5px 10px; background-color: black; color: white; text-align: center;
+  -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+  -moz-box-shadow: 0 0 6px black; -webkit-box-shadow: 0 0 6px black; box-shadow: 0 0 6px black;
+}
+
+.tipswift-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed; border-color: inherit;}
+
+.tipswift-n .tipswift-arrow { top: 0px; left: 50%; margin-left: -5px;
+  border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-nw .tipswift-arrow { top: 0; left: 10px;
+  border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-ne .tipswift-arrow { top: 0; right: 10px;
+  border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-s .tipswift-arrow { bottom: 0; left: 50%;
+  margin-left: -5px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-sw .tipswift-arrow { bottom: 0; left: 10px;
+  border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-se .tipswift-arrow { bottom: 0; right: 10px;
+  border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent;
+}
+.tipswift-e .tipswift-arrow { right: 0; top: 50%;
+  margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent;
+}
+.tipswift-w .tipswift-arrow { left: 0; top: 50%; margin-top: -5px;
+  border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent;
+}
+
+.tipswift.dialog input {
+  margin: 0 2px;
+  padding: 2px 2px;
+  background-color: #222;
+  border: 1px solid #555;
+  outline: none;
+  color: #fff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.tipswift.dialog input:hover {
+  background-color: #444;
+}
+
+.tipswift.dialog input[type=button] {
+  cursor: pointer;
+}
+
+.tipswift.dialog input:active {
+  background: #161616;
+  color: #c7c7c7;
+}

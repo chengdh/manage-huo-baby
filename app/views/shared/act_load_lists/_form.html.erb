@@ -1,0 +1,12 @@
+<%
+    #存在从load_list 创建yard_inventory的情况
+  if @yard_inventory
+    inventory = @yard_inventory
+  else
+    inventory = resource
+  end
+%>
+<%= form_for inventory,:remote => true,:html => {:class => "inventory_form",:id => "#{inventory.class.to_s.underscore}_form"} do |f|%>
+  <%= render 'shared/act_load_lists/form_partial',:f => f %>
+<% end%>
+

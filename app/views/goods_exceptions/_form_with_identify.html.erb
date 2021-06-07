@@ -1,0 +1,10 @@
+<%=f.semantic_fields_for :goods_exception_identify do |identify|%>
+  <%= identify.inputs "责任鉴定" do%>
+    <%= identify.hidden_field :user_id,:value => current_user.id if identify.object.new_record?%>
+    <%= identify.input :bill_date,:as => :string,:input_html => {:size => 10,:readonly => true,:class => 'datepicker'} %>
+    <%= identify.input :from_org_fee %>
+    <%= identify.input :to_org_fee %>
+    <%= identify.input :driver_fee %>
+    <%= identify.input :note ,:as => :string,:input_html => {:size => 100} %>
+  <%end%>
+<%end%>

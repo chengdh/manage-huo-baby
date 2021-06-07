@@ -1,0 +1,12 @@
+<%= semantic_form_for resource_class.search,:url => collection_path,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :bill_date_gte,:label => "日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :org_id_eq,:label =>"组织机构",:as => :select,:collection => (current_user.default_org.is_summary? ? exclude_current_ability_orgs_for_select : current_ability_orgs_for_select),:include_blank => current_user.default_org.is_summary? %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

@@ -1,0 +1,35 @@
+<table class='table'>
+  <tr>
+    <th>机构</th>
+    <th>提款日期</th>
+    <th>运单编号</th>
+    <th>货号</th>
+    <th>提款人</th>
+    <th>证件号码</th>
+    <th>原货款</th>
+    <th>扣运费</th>
+    <th>扣手续费</th>
+    <th>应付运费</th>
+  </tr>
+  <% collection.each do |pay_info|%>
+    <% pay_info.carrying_bills.each do |bill|%>
+      <tr data-dblclick='true'>
+        <td><%= pay_info.org.name %></td>
+        <td><%= pay_info.bill_date %></td>
+        <td><%= bill.bill_no %></td>
+        <td><%= bill.goods_no %></td>
+        <td><%= pay_info.customer_name %></td>
+        <td><%= pay_info.id_number %></td>
+        <td><%= bill.goods_fee %></td>
+        <td><%= bill.k_carrying_fee %></td>
+        <td><%= bill.k_hand_fee %></td>
+        <td><%= bill.act_pay_fee %></td>
+      </tr>
+    <% end%>
+  <%end%>
+</table>
+<div class='actions-bar wat-cf'>
+  <div class='actions'>
+    <%= will_paginate collection %>
+  </div>
+</div>

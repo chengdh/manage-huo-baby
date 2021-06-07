@@ -1,0 +1,58 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">代收货款收入-支出统计</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_tag sum_goods_fee_inout_carrying_bills_path,:method => :get do %>
+            <table class='table'>
+              <tr>
+                <td><%= text_field_tag :date_from,Date.today.beginning_of_month,:class => "datepicker", :readonly => true,:size => 10 %></td>
+                <td><%= text_field_tag :date_to,Date.today.end_of_month,:class => "datepicker", :readonly => true,:size => 10 %></td>
+                <td><%= submit_tag "统计",:class => "sexybutton sexysimple sexyblue" %></td>
+              </tr>
+            </table>
+          <%end%>
+        </div>
+      </div>
+      <table class="table" id="sum_goods_fee_inout" >
+        <thead>
+          <tr>
+            <th></th>
+            <th>机构名称</th>
+            <th>货款收入</th>
+            <th>货款支出</th>
+            <th>货款余额</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@sum_goods_fee_in.each_with_index do |bill,index|%>
+            <% bill_out = @sum_goods_fee_out.find {|the_bill_out| the_bill_out.from_org_id.eql?(bill.from_org_id) }%>
+            <tr>
+              <td><%=index + 1%></td>
+              <td><%=bill.from_org.name %></td>
+              <td><%=bill.sum_goods_fee_in %></td>
+              <td><%=bill_out.present? ? bill_out.sum_goods_fee_out : 0%></td>
+              <td><%=bill.sum_goods_fee_in - (bill_out.present? ? bill_out.sum_goods_fee_out : 0)%></td>
+            </tr>
+          <%end%>
+        </tbody>
+        <tfoot>
+          <%
+            sum_in = @sum_goods_fee_in.to_a.sum(&:sum_goods_fee_in)
+            sum_out = @sum_goods_fee_out.to_a.sum(&:sum_goods_fee_out)
+            sum_rest = sum_in - sum_out
+          %>
+          <tr>
+            <td colspan='2'>合计</td>
+            <td><%= sum_in %></td>
+            <td><%= sum_out%></td>
+            <td><%= sum_rest %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

@@ -1,0 +1,10 @@
+<div class='actions-bar'>
+  <input type='text' size="10" class="search_box delivery_search_box" 
+  data-params = '{"search[state_eq]" : "distributed","search[completed_eq]" : 0,"search[type_in][]" : ["LocalTownBill","HandLocalTownBill","LocalTownReturnBill"],<%= show_or_hidden_fields_to_str%>,"show_multi" : "<%=params[:show_multi].present? ? 1 : ""%>"}'/>
+</div>
+<hr />
+<%if params[:show_multi].blank?%>
+  <div id="table_wrap"></div>
+<%else%>
+  <%= render "shared/carrying_bills/table_no_paginate" %>
+<%end%>

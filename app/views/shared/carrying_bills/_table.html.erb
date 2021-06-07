@@ -1,0 +1,411 @@
+<% sum_info = search_sum;if params[:without_paginate].present? ;bills = @search.all;else;bills = collection;end;%>
+
+<table class="table <%=params[:rpt_type]%>" id="bills_table" data-ids='<%=search_ids%>' data-sum = '<%=sum_info.to_json%>' data-showfields='<%=gen_fields_selector(defined?(show_fields) ? show_fields : "")%>' data-hidefields='<%=gen_fields_selector(defined?(hide_fields) ? hide_fields : "",false)%>'>
+  <thead>
+    <tr class='select_bill_bar' style='display : none;'>
+      <th class="cbx_select_bill" style='display : none;'>&nbsp;</th>
+      <th class='bill_date' style='display : none;'>&nbsp;</th>
+      <th colspan="5">
+        选择:
+        <%=link_to_function "全选",'',:id => "btn_select_all",:title => "选中全部票据",:class => 'tipsy'%> |
+        <%=link_to_function "不选",'',:id => "btn_unselect_all",:title => "取消选中的票据",:class => 'tipsy'%>
+        <span id="notice_select_group" style='display : none;'>
+          |
+          <%=link_to_function "通知失败的",'',:id => "btn_select_notice_failed",:title => "选择到货通知失败的票据",:class => 'tipsy'%>
+          |
+          <%=link_to_function "未通知的",'',:id => "btn_select_notice_draft",:title => "选择还未进行到货通知的票据",:class => 'tipsy'%>
+          |
+          <%=link_to_function "已通知的",'',:id => "btn_select_notice_called",:title => "选择已经发送到货通知的票据",:class => 'tipsy'%>
+        </span>
+      </th>
+      <th class="pay_type"><span id="sum_count"></span></th>
+      <th class="carrying_fee"><span id="sum_carrying_fee"></span></th>
+      <th class="carrying_fee_th" style='display : none;'><span id="sum_carrying_fee_th"></span></th>
+      <th class="k_carrying_fee" style='display : none;'><span id="sum_k_carrying_fee"></span></th>
+      <th class="adjust_carrying_fee_plus" style='display : none;'><span id="sum_adjust_carrying_fee_plus"></span></th>
+      <th class="adjust_carrying_fee_minus" style='display : none;'><span id="sum_adjust_carrying_fee_minus"></span></th>
+
+      <th class="insured_fee" style='display : none;'><span id="sum_insured_fee"></span></th>
+      <th class="insured_fee_th" style='display : none;'><span id="sum_insured_fee_th"></span></th>
+      <th class="k_insured_fee" style='display : none;'><span id="sum_k_insured_fee"></span></th>
+
+      <th class="manage_fee" style='display : none;'><span id="sum_manage_fee"></span></th>
+      <th class="manage_fee_th" style='display : none;'><span id="sum_manage_fee_th"></span></th>
+      <th class="k_manage_fee" style='display : none;'><span id="sum_k_manage_fee"></span></th>
+
+      <th class="from_short_carrying_fee" style='display : none;'><span id="sum_from_short_carrying_fee"></span></th>
+      <th class="from_short_carrying_fee_th" style='display : none;'><span id="sum_from_short_carrying_fee_th"></span></th>
+      <th class="k_from_short_carrying_fee" style='display : none;'><span id="sum_k_from_short_carrying_fee"></span></th>
+      <th class="to_short_carrying_fee" style='display : none;'><span id="sum_to_short_carrying_fee"></span></th>
+      <th class="to_short_carrying_fee_th" style='display : none;'><span id="sum_to_short_carrying_fee_th"></span></th>
+      <th class="k_to_short_carrying_fee" style='display : none;'><span id="sum_k_to_short_carrying_fee"></span></th>
+
+
+      <th class="carrying_fee_1st" style='display : none;'><span id="sum_carrying_fee_1st"></span></th>
+      <th class="carrying_fee_2st" style='display : none;'><span id="sum_carrying_fee_2st"></span></th>
+
+      <th class="carrying_fee_total" style='display : none;'><span id="sum_carrying_fee_total"></span></th>
+      <th class="carrying_fee_th_total" style='display : none;'><span id="sum_carrying_fee_th_total"></span></th>
+      <th class="k_carrying_fee_total" style='display : none;'><span id="sum_k_carrying_fee_total"></span></th>
+
+
+      <th class="goods_fee"><span id="sum_goods_fee"></span></th>
+
+      <th class="transit_carrying_fee" style='display : none;'><span id="sum_transit_carrying_fee"></span></th>
+      <th class="transit_hand_fee" style='display : none;'><span id="sum_transit_hand_fee"></span></th>
+      <th class="agent_carrying_fee" style='display : none;'><span id="sum_agent_carrying_fee"></span></th>
+      <th class="th_amount" style='display : none;'><span id="sum_th_amount"></span></th>
+
+      <th class="k_hand_fee" style='display : none;'><span id="sum_k_hand_fee"></span></th>
+      <th class="act_pay_fee" style='display : none;'><span id="sum_act_pay_fee"></span></th>
+
+      <th class="transit_company" style='display : none;'>&nbps;</th>
+      <th class="transit_bill_no" style='display : none;'>&nbsp;</th>
+      <th class="transit_to_phone" style='display : none;'>&nbsp;</th>
+
+
+      <th class='state' style='display : none;'>&nbsp;</th>
+      <th class='from_short_fee_state' style='display : none;'>&nbsp;</th>
+      <th class='to_short_fee_state' style='display : none;'>&nbsp;</th>
+      <th class='send_state' style='display :none;'>&nbsp;</th>
+      <th class='stranded_days' style='display :none;'>&nbsp;</th>
+      <th class='deliver_date' style='display :none;'>&nbsp;</th>
+      <th class='deliver_region' style='display :none;'>&nbsp;</th>
+      <th class='pay_date' style='display :none;'>&nbsp;</th>
+      <th class='phone_notice_state_for_arrive' style='display :none;'>&nbsp;</th>
+      <th class='sms_notice_state_for_arrive' style='display :none;'>&nbsp;</th>
+      <th class='print_counter' style='display :none;'>&nbsp;</th>
+      <th class='note'>&nbsp;</th>
+
+      <!--吨/方合计-->
+      <th class='goods_weight' style='display :none;'><span id="sum_goods_weight"></span></th>
+      <th class='goods_volume' style='display :none;'><span id="sum_goods_volume"></span></th>
+
+      <!--运费分成设置 -->
+      <th class='from_org_divide_fee' style='display : none;'>&nbsp;</th>
+      <th class='transit_org_divide_fee' style='display : none;'>&nbsp;</th>
+      <th class='to_org_divide_fee' style='display : none;'>&nbsp;</th>
+      <th class='summary_org_divide_fee' style='display : none;'>&nbsp;</th>
+
+      <!--回单-->
+      <th class='is_receipt_des' style='display : none;'></th>
+      <!--加急-->
+      <th class='is_urgent_des' style='display : none;'></th>
+
+    <tr class='text-center table-header'>
+      <th class="cbx_select_bill text-center" style='display : none;'>&nbsp;</th>
+      <th class='bill_date text-center' style='display : none;'><%=sortable "bill_date","开票日期" %></th>
+      <th class="order_no text-center"></th>
+      <th class='bill_no text-center'><%=sortable "bill_no","票号" %></th>
+      <th class='goods_no text-center'><%=sortable "goods_no","货号" %></th>
+      <th class='from_to text-center'>起止点</th>
+      <th class='customer text-center'>发货人~收货人</th>
+
+      <th class='pay_type text-center'><%=sortable "pay_type","付款方式" %></th>
+      <th class="carrying_fee text-center">运费</th>
+      <th class="carrying_fee_th text-center" style='display : none;'>运费[提]</th>
+      <th class="k_carrying_fee text-center" style='display : none;'>运费[扣]</th>
+      <th class="adjust_carrying_fee_plus" style='display : none;'>增加运费</th>
+      <th class="adjust_carrying_fee_minus" style='display : none;'>减少运费</th>
+
+
+
+      <th class="insured_fee text-center" style='display : none;'>保险费</th>
+      <th class="insured_fee_th text-center" style='display : none;'>保险费[提]</th>
+      <th class="k_insured_fee text-center" style='display : none;'>保险费[扣]</th>
+
+      <th class="manage_fee" style='display : none;'>管理费</th>
+      <th class="manage_fee_th" style='display : none;'>管理费[提]</th>
+      <th class="k_manage_fee" style='display : none;'>管理费[扣]</th>
+
+      <th class="from_short_carrying_fee text-center" style='display : none;'>发货短途</th>
+      <th class="from_short_carrying_fee_th" style='display : none;'>发货短途[提]</th>
+      <th class="k_from_short_carrying_fee" style='display : none;'>发货短途[扣]</th>
+      <th class="to_short_carrying_fee text-center" style='display : none;'>到货短途</th>
+      <th class="to_short_carrying_fee_th" style='display : none;'>到货短途[提]</th>
+      <th class="k_to_short_carrying_fee" style='display : none;'>到货短途[扣]</th>
+
+      <th class="carrying_fee_1st" style='display : none;'>前段运费</th>
+      <th class="carrying_fee_2st" style='display : none;'>后段运费</th>
+
+
+      <th class="carrying_fee_total text-center" style='display : none;'>
+        <%=link_to_function '运费合计','',:class => "tipsy btn_carrying_fee_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+      <th class="carrying_fee_th_total" style='display : none;'>
+        <%=link_to_function '运费合计[提]','',:class => "tipsy btn_carrying_fee_th_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+      <th class="k_carrying_fee_total" style='display : none;'>
+        <%=link_to_function '运费合计[扣]','',:class => "tipsy btn_k_carrying_fee_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+
+      <th class="goods_fee text-center">代收货款</th>
+
+      <th class="transit_carrying_fee text-center" style='display : none;'>中转运费</th>
+      <th class="transit_hand_fee text-center" style='display : none;'>中转手续费</th>
+      <th class="agent_carrying_fee text-center" style='display : none;'>代收运费</th>
+      <th class="th_amount text-center" style='display : none;'>提货应收</th>
+
+      <th class="k_hand_fee text-center" style='display : none;'>手续费[扣]</th>
+      <th class="act_pay_fee text-center" style='display : none;'>实提货款</th>
+
+      <th class="transit_company text-center" style='display : none;'>中转公司</th>
+      <th class="transit_bill_no text-center" style='display : none;'>中转票号</th>
+      <th class="transit_to_phone text-center" style='display : none;'>到货电话</th>
+
+
+      <th class='state text-center' style='display : none;'>状态</th>
+      <th class='from_short_fee_state text-center' style='display :none;'>短途费状态</th>
+      <th class='to_short_fee_state text-center' style='display :none;'>短途费状态</th>
+      <th class='send_state text-center' style='display :none;'>送货状态</th>
+      <th class='stranded_days text-center' style='display :none;'>滞留天数</th>
+      <th class='deliver_date' style='display :none;'>提货日期</th>
+
+      <th class='deliver_region' style='display :none;'>送货区域</th>
+
+      <th class='pay_date' style='display :none;'>提款日期</th>
+      <th class='phone_notice_state_for_arrive' style='display :none;'>电话</th>
+      <th class='sms_notice_state_for_arrive' style='display :none;'>短信</th>
+      <th class='print_counter' style='display :none;'>打印次数</th>
+      <th class='note text-center'>备注</th>
+
+      <!--吨/方合计-->
+      <th class='goods_weight' style='display :none;'>重量</th>
+      <th class='goods_volume' style='display :none;'>体积</th>
+
+      <!--运费分成设置 -->
+      <th class='from_org_divide_fee' style='display : none;'>发货地分成</th>
+      <th class='transit_org_divide_fee' style='display : none;'>返程部分成</th>
+      <th class='to_org_divide_fee' style='display : none;'>到货地分成</th>
+      <th class='summary_org_divide_fee' style='display : none;'>总部分成</th>
+
+      <!--回单-->
+      <th class='is_receipt_des' style='display : none;'>回单</th>
+      <!--加急-->
+      <th class='is_urgent_des' style='display : none;'>加急</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+        sorted_bills = bills
+    #默认情况下,在view上进行排序
+    sorted_bills = bills.sort_by {|bill| bill.sort_seq } if params[:dont_sort_in_view].blank?
+  %>
+<% sorted_bills.each_with_index do |bill,index| %>
+  <tr class="<%= cycle("odd", "even") %> <%=stranded_class(bill.stranded_days)%> <%="notice_#{bill.try(:phone_notice_state_for_arrive)}"%>" id='<%=bill.id%>' data-dblclick='true'>
+    <td class='cbx_select_bill' style='display : none;'>
+      <%= link_to "查看",  polymorphic_url(bill,:format => parent? ? :js : nil),:class => (parent? ? "show_link popup-box" : "show_link"),:style => 'display : none;'%>
+      <%=check_box_tag "bill_ids[]",bill.id,true,"data-bill" => "#{bill.to_json(bill_to_json_methods)}" %>
+    </td>
+    <td class='bill_date' style='display : none;'>
+      <%=bill.bill_date.strftime('%y-%m-%d')%>
+    </td>
+
+    <td class='order_no'>
+      <%= order_no(index,params[:page]) %>
+    </td>
+    <td class='bill_no'>
+      <%= link_to bill.bill_no,polymorphic_url(bill,:format => :js),:class => :fancybox %>
+    </td>
+    <td class='goods_no'>
+      <%=bill.goods_no%>
+    </td>
+    <td class='from_to'>
+      <%=bill.from_org_name%>~<%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.try(:transit_org).try(:name)}~#{bill.try(:area)}" : bill.to_org_name%>
+    </td>
+    <td class='customer'>
+      <%=bill.from_customer_name%>
+      ~
+      <%=bill.to_customer_name%>
+    </td>
+    <!--运费 -->
+    <td class='pay_type'><%=pay_type_des(bill.pay_type) %>
+      <span style="color:blue;"><%= bill.is_qrcode_pay ? "/二维码" : "" %></span>
+    </td>
+    <td class="carrying_fee"><%=bill.carrying_fee %></td>
+    <td class="carrying_fee_th" style='display : none;'><%=bill.carrying_fee_th %></td>
+    <td class="k_carrying_fee" style='display : none;'><%= bill.k_carrying_fee %></td>
+    <!--运费调整-->
+    <td class="adjust_carrying_fee_plus" style='display : none;'><%= bill.adjust_carrying_fee_plus %></td>
+    <td class="adjust_carrying_fee_minus" style='display : none;'><%= bill.adjust_carrying_fee_minus %></td>
+
+
+    <!--保险费 -->
+    <td class="insured_fee" style='display : none;'><%=bill.insured_fee%></td>
+    <td class="insured_fee_th" style='display : none;'><%=bill.insured_fee_th%></td>
+    <td class="k_insured_fee" style='display : none;'><%=bill.k_insured_fee%></th>
+
+    <td class="manage_fee" style='display : none;'><%= bill.manage_fee %></td>
+    <td class="manage_fee_th" style='display : none;'><%= bill.manage_fee_th %></td>
+    <td class="k_manage_fee" style='display : none;'><%= bill.k_manage_fee %></td>
+    <!--短途运费 -->
+    <td class="from_short_carrying_fee" style='display : none;'><%= bill.from_short_carrying_fee %></td>
+    <td class="from_short_carrying_fee_th" style='display : none;'><%= bill.from_short_carrying_fee_th %></td>
+    <td class="k_from_short_carrying_fee" style='display : none;'><%= bill.k_from_short_carrying_fee %></td>
+    <td class="to_short_carrying_fee" style='display : none;'><%= bill.to_short_carrying_fee %></td>
+    <td class="to_short_carrying_fee_th" style='display : none;'><%= bill.to_short_carrying_fee_th%></td>
+    <td class="k_to_short_carrying_fee" style='display : none;'><%= bill.k_to_short_carrying_fee %></td>
+
+    <!--前段运费及后段运费-->
+    <td class="carrying_fee_1st" style='display : none;'><%= bill.carrying_fee_1st %></td>
+    <td class="carrying_fee_2st" style='display : none;'><%= bill.carrying_fee_2st %></td>
+
+
+    <!--运费合计 -->
+    <td class="carrying_fee_total" style='display : none;'><%= bill.carrying_fee_total %></td>
+    <td class="carrying_fee_th_total" style='display : none;'><%= bill.carrying_fee_th_total%></th>
+    <td class="k_carrying_fee_total" style='display : none;'><%= bill.k_carrying_fee_total%></th>
+
+    <!--代收货款 -->
+    <td class="goods_fee"><%=bill.goods_fee %></td>
+
+    <!--中转费用-->
+    <td class="transit_carrying_fee" style='display : none;'><%=bill.transit_carrying_fee%></td>
+    <td class="transit_hand_fee" style='display : none;'><%=bill.transit_hand_fee%></td>
+    <td class="agent_carrying_fee" style='display : none;'><%=bill.agent_carrying_fee%></td>
+    <td class="th_amount" style='display : none;'><%=bill.th_amount%></td>
+
+    <!--手续费-->
+    <td class="k_hand_fee" style='display : none;'><%=bill.k_hand_fee%></td>
+    <td class="act_pay_fee" style='display : none;'><%= bill.act_pay_fee %></td>
+
+    <!--中转资料-->
+    <td class="transit_company" style='display : none;'><%= bill.transit_info.try(:transit_company) %></td>
+    <td class="transit_bill_no" style='display : none;'><%= bill.transit_bill_no %></td>
+    <td class="transit_to_phone" style='display : none;'><%= bill.transit_to_phone %></td>
+
+    <!--其他-->
+    <td class="state" style='display : none;'><%= bill.human_state_name %></td>
+    <td class="from_short_fee_state" style='display : none;'><%= bill.human_from_short_fee_state_name %></td>
+    <td class="to_short_fee_state" style='display : none;'><%= bill.human_to_short_fee_state_name %></td>
+    <td class='send_state' style='display :none;'><%=bill.send_state%></td>
+    <td class='stranded_days' style='display :none;'><%=bill.stranded_days%>天</td>
+    <td class='deliver_date' style='display :none;'><%=bill.deliver_info.try(:deliver_date)%></td>
+    <td class='deliver_region' style='display :none;'><%= bill.deliver_region %></td>
+    <td class='pay_date' style='display :none;'><%=bill.pay_info.try(:bill_date)%></td>
+    <td class='phone_notice_state_for_arrive' style='display :none;'><%=notice_line_state_desc bill.try(:phone_notice_state_for_arrive)%></td>
+    <td class='sms_notice_state_for_arrive' style='display :none;'><%=notice_line_state_desc bill.try(:sms_notice_state_for_arrive)%></td>
+    <td class='print_counter' style='display :none;'><%= bill.print_counter %></td>
+    <td class="note" style='overflow :hidden;'>
+      <div style='height : 13px;width : 50px;'><%= bill.note%></div>
+    </td>
+
+    <!--吨/方合计-->
+    <td class='goods_weight' style='display :none;'><%= bill.goods_weight %></td>
+    <td class='goods_volume' style='display :none;'><%= bill.goods_volume %></td>
+
+    <!--运费分成设置 -->
+    <td class='from_org_divide_fee' style='display : none;'><%= bill.try(:bill_association_object).try(:from_org_divide_fee) %></td>
+    <td class='transit_org_divide_fee' style='display : none;'><%= bill.try(:bill_association_object).try(:transit_org_divide_fee) %></td>
+    <td class='to_org_divide_fee' style='display : none;'><%= bill.try(:bill_association_object).try(:to_org_divide_fee) %></td>
+    <td class='summary_org_divide_fee' style='display : none;'><%= bill.try(:bill_association_object).try(:summary_org_divide_fee) %></td>
+
+    <!--回单-->
+    <td class='is_receipt_des' style='display : none;'><%= bill.is_receipt_des %></td>
+    <!--加急-->
+    <td class='is_urgent_des' style='display : none;'><%= bill.is_urgent_des %></td>
+
+  </tr>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="cbx_select_bill" style='display : none;'>&nbsp;</td>
+      <td class='bill_date' style='display : none;'>&nbsp;</td>
+      <td class='order_no'>&nbsp;</td>
+      <td class='bill_no'>&nbsp;</td>
+      <td class='goods_no'>&nbsp;</td>
+      <td class='from_to'>&nbsp;</td>
+      <td class='customer'>总计:</td>
+      <!--运费-->
+      <td class='pay_type'><%=sum_info[:sum_count]%>票</td>
+      <td class="carrying_fee"><%=sum_info[:sum_carrying_fee]%></td>
+      <td class="carrying_fee_th" style='display : none;'><%=sum_info[:sum_carrying_fee_th]%></td>
+      <td class="k_carrying_fee" style='display : none;'><%= sum_info[:sum_k_carrying_fee] %></td>
+
+      <!--运费调整-->
+      <td class="adjust_carrying_fee_plus" style='display : none;'><%= sum_info[:sum_adjust_carrying_fee_plus] %></td>
+      <td class="adjust_carrying_fee_minus" style='display : none;'><%= sum_info[:sum_adjust_carrying_fee_minus] %></td>
+
+
+      <!--保险费-->
+      <td class="insured_fee" style='display : none;'><%=sum_info[:sum_insured_fee]%></td>
+      <td class="insured_fee_th" style='display : none;'><%=sum_info[:sum_insured_fee_th]%></td>
+      <td class="k_insured_fee" style='display : none;'><%=sum_info[:sum_k_insured_fee]%></td>
+
+      <!--管理费-->
+      <td class="manage_fee" style='display : none;'><%= sum_info[:sum_manage_fee] %></td>
+      <td class="manage_fee_th" style='display : none;'><%= sum_info[:sum_manage_fee_th] %></td>
+      <td class="k_manage_fee" style='display : none;'><%= sum_info[:sum_k_manage_fee] %></td>
+      <!--短途运费-->
+      <td class="from_short_carrying_fee" style='display : none;'><%= sum_info[:sum_from_short_carrying_fee] %></td>
+      <td class="from_short_carrying_fee_th" style='display : none;'><%= sum_info[:sum_from_short_carrying_fee_th] %></td>
+      <td class="k_from_short_carrying_fee" style='display : none;'><%= sum_info[:sum_k_from_short_carrying_fee] %></td>
+      <td class="to_short_carrying_fee" style='display : none;'><%= sum_info[:sum_to_short_carrying_fee] %></td>
+      <td class="to_short_carrying_fee_th" style='display : none;'><%= sum_info[:sum_to_short_carrying_fee_th] %></td>
+      <td class="k_to_short_carrying_fee" style='display : none;'><%= sum_info[:sum_k_to_short_carrying_fee] %></td>
+      <!--前段运费及后段运费-->
+      <td class="carrying_fee_1st" style='display : none;'><%= sum_info[:sum_carrying_fee_1st] %></td>
+      <td class="carrying_fee_2st" style='display : none;'><%= sum_info[:sum_carrying_fee_2st] %></td>
+
+      <!--运费合计-->
+      <td class="carrying_fee_total" style='display : none;'><%= sum_info[:sum_carrying_fee_total] %></td>
+      <td class="carrying_fee_th_total" style='display : none;'><%= sum_info[:sum_carrying_fee_th_total] %></td>
+      <td class="k_carrying_fee_total" style='display : none;'><%= sum_info[:sum_k_carrying_fee_total] %></td>
+
+      <!--代收货款-->
+      <td class="goods_fee"><%=sum_info[:sum_goods_fee]%></td>
+      <!--中转费用-->
+      <td class="transit_carrying_fee" style='display : none;'><%=sum_info[:sum_transit_carrying_fee]%></td>
+      <td class="transit_hand_fee" style='display : none;'><%=sum_info[:sum_transit_hand_fee]%></td>
+      <td class="agent_carrying_fee" style='display : none;'><%=sum_info[:sum_agent_carrying_fee]%></td>
+      <td class="th_amount" style='display : none;'><%=sum_info[:sum_th_amount]%></td>
+
+      <!--手续费-->
+      <td class="k_hand_fee" style='display : none;'><%=sum_info[:sum_k_hand_fee]%></td>
+      <td class="act_pay_fee" style='display : none;'><%= sum_info[:sum_act_pay_fee] %></td>
+      <!--中转资料-->
+      <td class="transit_company" style='display : none;'>&nbsp;</td>
+      <td class="transit_bill_no" style='display : none;'>&nbsp;</td>
+      <td class="transit_to_phone" style='display : none;'>&nbsp;</td>
+
+      <!--其他-->
+      <td class='state' style='display : none;'>&nbsp;</td>
+      <td class='from_short_fee_state' style='display :none;'>&nbsp;</td>
+      <td class='to_short_fee_state' style='display :none;'>&nbsp;</td>
+      <td class='send_state' style='display :none;'>&nbsp;</td>
+      <td class='stranded_days' style='display :none;'>&nbsp;</td>
+      <td class='deliver_date' style='display :none;'>&nbsp;</td>
+      <td class='deliver_region' style='display :none;'>&nbsp;</td>
+      <td class='pay_date' style='display :none;'>&nbsp;</td>
+      <td class='phone_notice_state_for_arrive' style='display :none;'>&nbsp;</td>
+      <td class='sms_notice_state_for_arrive' style='display :none;'>&nbsp;</td>
+      <td class='print_counter' style='display :none;'>&nbsp;</td>
+      <td class='note'>&nbsp;</td>
+
+      <!--吨/方合计-->
+      <td class='goods_weight' style='display :none;'><%= sum_info[:sum_goods_weight] %></td>
+      <td class='goods_volume' style='display :none;'><%= sum_info[:sum_goods_volume] %></td>
+
+      <!--运费分成设置 -->
+      <td class='from_org_divide_fee' style='display : none;'><%= sum_info[:sum_from_org_divide_fee] %></td>
+      <td class='transit_org_divide_fee' style='display : none;'><%=sum_info[:sum_transit_org_divide_fee] %></td>
+      <td class='to_org_divide_fee' style='display : none;'><%=sum_info[:sum_to_org_divide_fee] %></td>
+      <td class='summary_org_divide_fee' style='display : none;'><%=sum_info[:sum_summary_org_divide_fee] %></td>
+
+      <!--回单-->
+      <td class='is_receipt_des' style='display : none;'></td>
+      <!--加急-->
+      <td class='is_urgent_des' style='display : none;'></td>
+
+    </tr>
+  </tfoot>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%unless params[:without_paginate].present?%>
+      <%=will_paginate bills%>
+    <%end%>
+  </div>
+</div>

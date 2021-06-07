@@ -1,0 +1,107 @@
+<%=f.error_messages %>
+<%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+<%= f.hidden_field :load_list_id %>
+<%= f.hidden_field :from_org_id%>
+<%= f.hidden_field :to_org_id%>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>单据日期:</th>
+      <th><%= f.text_field :bill_date,:size => 20,:readonly => true%></th>
+      <th>单据号:</th>
+      <th><%= f.text_field :bill_no,:size => 20 %></th>
+    </tr>
+    <%= render 'from_to_org_select',:f => f %>
+    <%if not f.object.new_record?%>
+    <tr>
+      <th>发货地:</th>
+      <th><%= f.object.from_org.try(:name) %></th>
+      <th>到货地:</th>
+      <th><%= f.object.to_org.try(:name) %></th>
+    </tr>
+    <%end%>
+
+    <tr>
+      <th>备注:</th>
+      <th colspan='4'><%= f.text_field :note,:size => 60%></th>
+    </tr>
+  </thead>
+</table>
+<table class='table'>
+  <thead>
+    <tr>
+      <th class='text-center'>
+      <%if params[:show_confirm_num].blank? %>
+        <%=link_to_function "全选","",:id => "btn_act_load_list_line_select_all"%>
+        |
+        <%=link_to_function "不选","",:id => "btn_act_load_list_line_unselect_all"%>
+      <%end%>
+      </th>
+      <th class='text-center'>票号</th>
+      <th class='text-center'>货号</th>
+      <th class='text-center'>起止点</th>
+      <th class='text-center'>付款方式</th>
+      <th class='text-center'>运费</th>
+      <th class='text-center'>代收货款</th>
+      <th class='text-center'>保价费</th>
+      <th class='text-center'>运费合计</th>
+      <th class='text-center'>备注</th>
+      <th class='text-center'>货物数量</th>
+      <%if params[:action].eql?('new')%>
+        <%if resource.is_a?(YardInventory) %>
+          <th>在场数量</th>
+          <th>已盘数量</th>
+        <%else%>
+          <th class='text-center'>已盘数量</th>
+        <%end%>
+      <%end%>
+      <th class='text-center'>装车数量</th>
+      <%if params[:show_confirm_num].present? %>
+        <th class='text-center'>确认数量</th>
+      <% end %>
+    </tr>
+  </thead>
+  <%
+    #排序操作
+    sorted_lines = f.object.act_load_list_lines.sort_by {|l| l.try(:order_by)}
+  %>
+  <tbody>
+    <%= f.fields_for :act_load_list_lines,sorted_lines do |line| %>
+      <tr>
+        <td class='text-center'>
+          <%if params[:show_confirm_num].blank? %>
+            <%= line.check_box :_select,:class => "act_load_list_line_selector"%>
+          <%end%>
+          <%= line.hidden_field :carrying_bill_id %>
+          <%= line.hidden_field :rest_num %>
+        </td>
+        <td><%= link_to line.object.carrying_bill.bill_no,carrying_bill_path(line.object.carrying_bill,:format => :js),:class => :fancybox %></td>
+        <td><%= line.object.carrying_bill.goods_no%></td>
+        <td><%= line.object.carrying_bill.from_org%>~<%= line.object.carrying_bill.to_org%></td>
+        <td><%= pay_type_des line.object.carrying_bill.pay_type%></td>
+        <td><%= line.object.carrying_bill.carrying_fee%></td>
+        <td><%= line.object.carrying_bill.goods_fee%></td>
+        <td><%= line.object.carrying_bill.insured_fee%></td>
+        <td><%= line.object.carrying_bill.carrying_fee_total%></td>
+        <td><%= line.object.carrying_bill.note%></td>
+        <td><%= line.object.carrying_bill.goods_num%></td>
+        <%if params[:action].eql?('new')%>
+          <%if line.object.line_type.eql?('yard') %>
+            <td><%= line.object.try(:branch_reached_num) %></td>
+            <td><%= line.object.try(:branch_reached_num) - line.object.rest_num.to_i %></td>
+          <%else%>
+              <td><%= line.object.carrying_bill.goods_num - line.object.rest_num.to_i %></td>
+          <%end%>
+        <%end%>
+        <%if params[:show_confirm_num].present? %>
+          <td><%= line.text_field :load_num,:size => 5,:readonly => true %></td>
+          <td>
+            <%= line.text_field :confirm_num,:value => line.object.load_num,:size => 5%>
+          </td>
+        <%else%>
+          <td><%= line.text_field :load_num,:size => 5 %></td>
+        <% end %>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

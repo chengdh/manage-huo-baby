@@ -1,0 +1,2 @@
+module ScanHeaderLocalTownLoadOutsHelper
+end

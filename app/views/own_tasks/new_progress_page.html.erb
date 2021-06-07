@@ -1,0 +1,16 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">任务进度上报</h2>
+    <div class="inner">
+      <%= render "tasks/show" %>
+      <div id='<%="#{resource_class.name.underscore}_form_wrap" %>' >
+        <%= form_for resource,:url => {:action => :save_progress},:method => :put,:html => {:id => "task_form"} do |f|%>
+          <%=f.error_messages %>
+          <%=render :partial => 'form_progress',:locals => { :f => f} %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

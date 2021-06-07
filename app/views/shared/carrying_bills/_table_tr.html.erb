@@ -1,0 +1,80 @@
+<tr id='<%="bill_#{bill.id}" %>' data-bill='<%=bill.to_json(bill_to_json_methods)%>' class='bill_cal_sum'>
+  <td class='bill_date' style='display : none;'>
+    <%= link_to "查看",   polymorphic_url(bill,:format => :js),:class => "show_link fancybox",:style => 'display : none;'%>
+    <%=bill.bill_date.strftime('%y-%m-%d')%>
+  </td>
+  <td class='bill_no'>
+    <%=bill.bill_no%>
+  </td>
+  <td class='goods_no'>
+    <%=bill.goods_no%>
+  </td>
+  <td class='from_to'>
+    <%=bill.from_org_name%>~<%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.try(:transit_org).try(:name)}~#{bill.try(:area)}" : bill.to_org_name%>
+  </td>
+  <td class='customer'>
+    <%=bill.from_customer_name%>
+    <%="(#{bill.from_customer_mobile})"%>
+    ~
+    <%=bill.to_customer_name%>
+    <%="(#{bill.to_customer_mobile})"%>
+  </td>
+  <!--运费-->
+  <td class='pay_type'>
+    <%=pay_type_des(bill.pay_type) %>
+    <span><%= bill.is_qrcode_pay ? "/二维码" : "" %></span>
+  </td>
+  <td class="carrying_fee"><%=bill.carrying_fee %></td>
+  <td class="carrying_fee_th" style='display : none;'><%=bill.carrying_fee_th %></td>
+  <td class="k_carrying_fee" style='display : none;'><%= bill.k_carrying_fee %></td>
+  <!--保险费-->
+  <th class="insured_fee text-center" style='display : none;'><%= bill.insured_fee %></td>
+  <td class="insured_fee_th text-center" style='display : none;'><%= bill.insured_fee_th %></td>
+  <td class="k_insured_fee text-center" style='display : none;'><%= bill.k_insured_fee %></td>
+
+  <!--短途运费-->
+  <td class="from_short_carrying_fee text-center" style='display : none;'><%= bill.from_short_carrying_fee %></td>
+  <td class="from_short_carrying_fee_th" style='display : none;'><%= bill.from_short_carrying_fee_th %></td>
+  <td class="k_from_short_carrying_fee" style='display : none;'><%= bill.k_from_short_carrying_fee %></td>
+  <td class="to_short_carrying_fee text-center" style='display : none;'><%= bill.to_short_carrying_fee %></td>
+  <td class="to_short_carrying_fee_th" style='display : none;'><%= bill.to_short_carrying_fee_th %></td>
+  <td class="k_to_short_carrying_fee" style='display : none;'><%= bill.k_to_short_carrying_fee %></td>
+  <!--运费合计-->
+  <td class="carrying_fee_total text-center" style='display : none;'><%= bill.carrying_fee_total %></td>
+  <td class="carrying_fee_th_total" style='display : none;'><%= bill.carrying_fee_th_total %></td>
+  <td class="k_carrying_fee_total" style='display : none;'><%= bill.k_carrying_fee_total %></td>
+
+  <!--代收货款-->
+  <td class="goods_fee"><%=bill.goods_fee %></td>
+
+  <!--中转资料-->
+  <td class="transit_company" style='display : none;'><%= bill.transit_info.try(:transit_company) %></td>
+  <td class="transit_bill_no" style='display : none;'><%= bill.transit_bill_no %></td>
+  <td class="transit_bill_no_edit" style='display : none;'><%= text_field_tag "transit_bill_no_edit[]",bill.transit_bill_no %></td>
+  <td class="transit_to_phone" style='display : none;'><%= bill.transit_to_phone %></td>
+  <td class="transit_to_phone_edit" style='display : none;'><%= text_field_tag "transit_to_phone_edit[]",bill.transit_to_phone %></td>
+
+  <td class="transit_carrying_fee" style='display : none;'><%= bill.transit_carrying_fee %></td>
+  <td class="transit_carrying_fee_edit" style='display : none;'><%= text_field_tag "transit_carrying_fee_edit[]",bill.transit_carrying_fee %></td>
+  <td class="transit_hand_fee" style='display : none;'><%= bill.transit_hand_fee %></td>
+  <td class="transit_hand_fee_edit" style='display : none;'><%= text_field_tag "transit_hand_fee_edit[]",bill.transit_hand_fee %></td>
+  <td class="agent_carrying_fee" style='display : none;'><%= bill.agent_carrying_fee %></td>
+  <td class="th_amount" style='display : none;'><%= bill.th_amount %></td>
+
+  <!--手续费-->
+  <td class="k_hand_fee" style='display : none;'><%=bill.k_hand_fee%></td>
+  <td class="act_pay_fee" style='display : none;'><%= bill.act_pay_fee %></td>
+
+
+  <!--其他-->
+  <td class="note">
+    <div style='width : 50px;height : 1em;overflow : hidden;'>
+      <%= bill.note %>
+    </div>
+  </td>
+  <td class="state" style='display : none;'><%= bill.human_state_name %></td>
+  <td class='send_state' style='display :none;'><%=bill.send_state%></td>
+  <td>
+    <%=link_to_function  image_tag("mouse--minus.png"),"$('#bill_#{bill.id}').remove();$('#bills_table_body').trigger('tr_changed')",:class => "tipsy",:title => '删除' %>
+  </td>
+</tr>

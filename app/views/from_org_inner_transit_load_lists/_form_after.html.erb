@@ -1,0 +1,8 @@
+<div class='actions-bar'>
+  <%= link_to image_tag("plus-white.png") + "选择要装车的运单",
+    search_carrying_bills_path(show_or_hidden_fields.merge(:format => :js,:set_disable => 1)),
+    :id =>"btn_generate_load_list",:class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+    :title => "录入查询条件,查询要装车的运单" %>
+</div>
+<hr/>
+<div id="table_wrap"></div>

@@ -1,0 +1,43 @@
+<table class='table'>
+  <tr>
+    <th>日期:</th>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <th>部门:</th>
+    <td><%=resource.to_org %></td>
+  </tr>
+  <tr>
+    <th>操作员:</th>
+    <td><%=resource.user%></td>
+    <td></td>
+    <td><%= resource.human_state_name %></td>
+  </tr>
+  <tr>
+    <th>备注:</th>
+    <td colspan="3"><%=resource.note %></td>
+  </tr>
+
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>数量</th>
+      <th>货物状态</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% resource.scan_lines.each_with_index do |sl,i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= sl.carrying_bill.bill_no %></td>
+        <td><%= sl.carrying_bill.goods_no %></td>
+        <td><%= sl.qty.blank? ? sl.carrying_bill.goods_num : sl.qty %></td>
+        <td><%= sl.goods_status_type_des%></td>
+        <td><%= sl.goods_status_note%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

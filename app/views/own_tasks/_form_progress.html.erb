@@ -1,0 +1,4 @@
+<%= f.fields_for :task_progresses,resource.task_progresses.build do |f_tp| %>
+  <%= f_tp.hidden_field :user_id,:value => current_user.id %>
+  <%= f_tp.text_area :content,:row => 10,:cols => 120,:placeholder => "录入进展情况",:style => "width: 95%;height: 100px;" %>
+<% end %>

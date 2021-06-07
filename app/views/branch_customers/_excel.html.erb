@@ -1,0 +1,32 @@
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr><td colspan='5'><h3>客户资料</h3></td></tr>
+    <tr>
+      <td>序号</td>
+      <td>所属机构</td>
+      <td>区域</td>
+      <td>姓名</td>
+      <td>电话</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%@search.all.each_with_index do |customer,index|%>
+      <tr>
+        <td><%= order_no(index,params[:page]) %></td>
+        <td><%= customer.try(:org).try(:name) %></td>
+        <td><%= customer.deliver_region %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.mobile %></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>合计</td>
+      <td>共<%=@search.count%>人</td>
+    </tr>
+  </tfoot>
+</table>

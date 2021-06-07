@@ -1,0 +1,67 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show" or params[:action] == "edit" or params[:action] == "show_export_sms" or params[:action] == "build_notice"%>
+      <li>
+        <%= link_to image_tag("arrow-turn-180-left.png",:alt => "返回"),  :back,:title => "返回",:class => "tipsy" %>
+      </li>
+    <%end%>
+    <%if can? :read_arrive,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") , collection_path("search[state_eq]" => "shipped"),:title => "#{resource_class.model_name.human}列表",:class => "tipsy"  %>
+      </li>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <li><%= link_to image_tag("application-search-result.png",:alt => "查询#{resource_class.model_name.human}"),
+          self.send("search_#{controller_name.tableize}_path"),
+          :title => "查询#{resource_class.model_name.human}",
+          :class => "fancybox tipsy" %>
+        </li>
+      <%end%>
+    <%end%>
+    <%if params[:action] == "show" or params[:action] == 'process_handle'%>
+      <%if can? :reach,resource%>
+        <li>
+          <%= link_to image_tag("auction-hammer--arrow.png",:alt => "到货确认") ,
+            process_handle_arrive_outter_transit_load_list_path(resource),:title => "到货确认",
+            :class => "tipsy btn_process_handle"  %>
+        </li>
+      <%end%>
+      <%if can? :export_sms_txt,resource%>
+        <li>
+          <%= link_to image_tag("sms.png",:alt => "导出短信群发文件",:size => "16x16"),
+            show_export_sms_arrive_outter_transit_load_list_path(resource),
+            :title => "导出短信群发文件",
+            :class => "tipsy"  %>
+        </li>
+      <%end%>
+
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"),
+          export_excel_arrive_outter_transit_load_list_path(resource),
+          :title => "导出为EXCEL",
+          :class => "tipsy"  %>
+      </li>
+      <%if can? :show_print_th_bill,resource%>
+        <li>
+          <%= link_to image_tag("barcode-icon.png",:alt => "批量打印提货单",:size => "16x16"),
+            show_print_th_bill_arrive_outter_transit_load_list_path(resource),
+            :title => "批量打印提货单",
+            :class => "tipsy"  %>
+        </li>
+      <%end%>
+    <%end%>
+    <%if params[:action] == "show_export_sms" %>
+      <li>
+        <%= link_to_function image_tag("disk-black.png",:alt => "保存短信群发文件"), "",:id => "btn_export_sms_txt",:title => "保存短信群发文本",:class => "tipsy btn_save"  %>
+      </li>
+    <%end%>
+    <%if params[:action] == "show_print_th_bill" %>
+      <li>
+      <%= link_to image_tag("printer.png",:alt => "仅打印提货单"), "#",
+        :title => "仅打印提货单",
+        "data-print-template" => "#{render 'base_deliver_infos/th_bill' }",
+        :class => "tipsy btn_print_th_bills_in_arrive_outter_transit_load_list" %>
+      </li>
+    <%end%>
+  </ul>
+</div>

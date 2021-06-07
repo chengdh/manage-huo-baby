@@ -1,0 +1,33 @@
+<%if params[:action] == "show" or params[:action] == 'process_handle'%>
+  <%if can? :ship,resource%>
+    <li>
+      <%= link_to image_tag("auction-hammer--arrow.png",:alt => "发货处理") ,
+        process_handle_outter_transit_load_list_path(resource),:title => "发货处理",:class => "tipsy btn_process_handle"  %>
+    </li>
+    <li>
+  <%end%>
+  <%if can? :print_th_bill,resource%>
+    <li>
+    <%= link_to image_tag("printer.png",:alt => "打印提货单"), "#",
+      :title => "打印提货单",
+      "data-print-template" => "#{render 'deliver_infos/th_bill' }",
+      :class => "tipsy btn_print_th_bill" %>
+    </li>
+  <%end%>
+  <%if can? :build_act_load_list,resource%>
+    <li>
+      <%= link_to image_tag("act-load-list.png",:alt => "生成实际装车清单",:size => '16x16') ,
+        build_act_load_list_outter_transit_load_list_path(resource),:title => "生成实际装车清单",:class => "tipsy"  %>
+    </li>
+  <%end%>
+
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_outter_transit_load_list_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>
+
+<%if params[:action] == "build_act_load_list" %>
+  <li>
+    <%= link_to_function image_tag("disk-black.png",:alt => "保存实际装车清单"), "$('#act_load_list_form').trigger('submit')",:title => "保存实际装车清单",:class => "tipsy btn_save"  %>
+  </li>
+<%end%>

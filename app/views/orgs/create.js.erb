@@ -1,0 +1,11 @@
+<%if resource.valid? %>
+  $.notifyBar({
+      html: "机构信息保存成功!",
+      delay: 3000,
+      animationSpeed: "normal",
+      cls : 'success'
+  });
+$.fancybox.close();
+<%else%>
+  $('#fancybox-content').find('div').first().html('<%= escape_javascript(render("form")) %>');
+<%end%>

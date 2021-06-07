@@ -1,0 +1,37 @@
+<%= semantic_form_for resource,:html => {:id => "vote_config_with_org_form"} do |f|%>
+  <%= f.error_messages%>
+  <%= f.inputs :name,:mth %>
+  <%= f.inputs :expire_date %>
+  <table class="table">
+    <tr>
+      <td>选择投票机构</td>
+      <td>
+        <%= select_tag :org_ids,orgs_option_groups_string,
+          :multiple => "multiple",
+          :class => "select_org_multi_for_vote",
+          :style => "width : 300px;",
+          "data-orgs" => f.object.base_vote_config_orgs.to_json %>
+      </td>
+    </tr>
+    <%= f.semantic_fields_for :votable_items do |vi| %>
+      <tr>
+        <td colspan="2">
+          <%= vi.inputs :name,:input_html => {:size => 10} %></td>
+        <!--
+        <th>投票机构:</th>
+        <td>
+          <%# <%= vi.semantic_fields_for :votable_item_orgs do |f_vi_orgs| %>
+            <%#   <%= f_vi_orgs.input :org_id %>
+            <%# <%end%>
+
+          <%= select_tag :org_ids,orgs_option_groups_string,
+          :multiple => "multiple",
+          :class => "select_org_multi_for_vote",
+          :style => "width : 300px;",
+          "data-orgs" => vi.object.votable_item_orgs.to_json %>
+      </td>
+      -->
+    </tr>
+  <%end%>
+</table>
+<%end%>

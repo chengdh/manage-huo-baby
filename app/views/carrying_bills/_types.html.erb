@@ -1,0 +1,8 @@
+<%
+  #如果传入的有bill_types,则按照传入的数
+  types = bill_types
+  types = params[:bill_types] if params[:bill_types].present?
+%>
+<% types.each do |t|%>
+  <%= hidden_field_tag "search[type_in][]",t %>
+<%end%>

@@ -1,0 +1,40 @@
+<%= semantic_form_for resource_class.search,:url => collection_path,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :creator_id_eq,
+      :as => :select,
+      :label => "发布人",
+      :collection => users_option_groups_string(true,false)
+    %>
+    <%= f.input :task_users_id_eq,
+      :as => :select,
+      :label => "责任人",
+      :collection => users_option_groups_string(true,false)
+    %>
+
+    <%# <%= select_tag :creator_id_in,users_option_groups_string(true,false),
+    <%#   :multiple => "multiple",
+    <%#   :class => "1select_user_multi_for_search",
+    <%#   :style => "width : 300px;" 
+    <%# %>
+    <%# <%= select_tag :task_users_id_in,users_option_groups_string(true,false),
+    <%#   :multiple => "multiple",
+    <%#   :class => "select_user_multi_for_search",
+    <%#   :style => "width : 300px;" 
+    <%# %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :created_at_gte,:label => "发布日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :created_at_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :accept_date_gte,:label => "接收日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :accept_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :submit_date_gte,:label => "完成日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :submit_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :state_eq,:label => "状态",:as => :select,:collection => task_states_for_select %>
+    <%= f.input :audit_state_eq,:label => "审核状态",:as => :select,:collection => audit_states_for_select%>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end %>

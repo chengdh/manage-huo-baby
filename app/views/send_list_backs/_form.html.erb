@@ -1,0 +1,10 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "send_list_back_form",:class => 'bill_selector'} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :org_id,:label =>"机构" ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id => "to_org_id"} %>
+    <%= f.input :sender,:label => "送货人",:collection => current_ability_senders,:include_blank => false,:input_html => {:id => :sender_id} %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <% end %>
+<% end%>

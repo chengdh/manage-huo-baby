@@ -1,0 +1,20 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title"><%= resource.name%></h2>
+    <div class="inner">
+      <table class="table">
+      <%@vote_items.each do |vi|%>
+          <tr>
+            <th>
+              <%= vi.votable.try(:name)%>
+            </th>
+          <td>
+            <%= vi.vote_weight %> 分
+          </td>
+        </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+</div>

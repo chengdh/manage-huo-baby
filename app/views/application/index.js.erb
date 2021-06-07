@@ -1,0 +1,3 @@
+if($('#table_wrap').length == 0) $('.inner').html('<div id="table_wrap"></div>');
+$('#table_wrap').html('<%= escape_javascript(render("table")) %>');
+

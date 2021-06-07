@@ -1,0 +1,11 @@
+var table =$('<%= escape_javascript(render "show") %>');
+
+table.find('th,td').css({border : 'thin solid #000',borderCollapse : 'collapse'});
+
+var set_style = function(work_sheet){
+  work_sheet.Columns.ColumnWidth = 7;
+  work_sheet.Columns(1).ColumnWidth = 5;
+  work_sheet.Columns(2).ColumnWidth = 15;
+
+};
+$.export_excel(table.wrap('<div></div>').parent().html(),set_style);

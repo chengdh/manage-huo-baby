@@ -1,0 +1,41 @@
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('<%= asset_path "login-bg.jpeg" %>');">
+    <div class="wrap-login100" style="background: #160f745c">
+      <%=form_for resource,:as => resource_name,:class => "login100-form validate-form",:url => session_path(resource_name) do |f| -%>
+        <%=hidden_field_tag "user[is_active]",1 %>
+        <span class="login100-form-logo">
+          <%# <i class="zmdi zmdi-landscape"></i> %>
+          <%= image_tag "yujiu-logo.png",:size=> "100x50"%>
+        </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+          <%= IlConfig.client_name%>
+        </span>
+        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+          <%=f.text_field :username,:class => "input100"%>
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <%=f.password_field :password,:class => "input100"%>
+          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        </div>
+        <% if devise_mapping.rememberable? -%>
+          <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+            <%= f.check_box :remember_me,:class => "input-checkbox100" %>
+            <%= f.label :remember_me,'记住我',:class => "label-checkbox100" %>
+          </div>
+        <%end%>
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            登录
+          </button>
+        </div>
+        <div class="text-center p-t-90">
+          <a class="txt1" href="#">
+          </a>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>

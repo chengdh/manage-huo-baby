@@ -1,0 +1,44 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th colspan="9">装卸工作量统计</th>
+    </tr>
+    <tr>
+      <th>序号</th>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>发货地</th>
+      <th>到货地</th>
+      <th>支付方式</th>
+      <th>货款</th>
+      <th>运费</th>
+      <th>发货地短途费</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@scan_lines.each_with_index do |line,index|%>
+      <tr>
+        <td><%=index + 1%></td>
+        <td><%= line.carrying_bill.bill_no %></td>
+        <td><%= line.carrying_bill.goods_no %></td>
+        <td><%= line.carrying_bill.from_org%></td>
+        <td><%= line.carrying_bill.to_org%></td>
+        <td><%= pay_type_des(line.carrying_bill.pay_type)%></td>
+        <td><%= line.carrying_bill.goods_fee%></td>
+        <td><%= line.carrying_bill.carrying_fee%></td>
+        <td><%= line.carrying_bill.from_short_carrying_fee%></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><%=@scan_lines.size%></td>
+    <td><%=@scan_lines.sum(&:goods_fee)%></td>
+    <td><%=@scan_lines.sum(&:carrying_fee)%></td>
+    <td><%=@scan_lines.sum(&:from_short_carrying_fee)%></td>
+  </tfoot>
+</table>

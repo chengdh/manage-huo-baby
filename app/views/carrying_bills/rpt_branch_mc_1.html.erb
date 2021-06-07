@@ -1,0 +1,72 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">提货分公司管控报表</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_for CarryingBill.search,:method => :post,:html => {:id =>"form_search_rpt_branch_mc_1"},:url => {:action => :rpt_branch_mc_1} do |f|%>
+            <%# <%= f.select :to_org_id_in,orgs_option_groups_string,{},
+            <%#   :id => "select_to_org_ids_in_rpt_turnover",
+            <%#   :multiple => "multiple",
+            <%#   :class => "select_org_multi",
+            <%#   :style => "width : 300px;" %>
+            <%= select_tag "search[to_org_id_in][]",branches_option_groups_string,
+            :id => "select_to_org_ids_in_rpt_branch_mc_1",
+            :multiple => "multiple",
+            :class => "select_org_multi",
+            :style => "width : 300px;"
+          %>
+        <%= hidden_field_tag "search[type_in][]",'ComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'AutoCalculateComputerBill'%>
+        <%= hidden_field_tag "search[type_in][]",'HandBill'%>
+        <%= hidden_field_tag "search[type_in][]",'ReturnBill'%>
+        &nbsp;&nbsp;
+        <%= f.submit "统计",:class => "sexybutton sexysimple sexyblue" %>
+      <%end%>
+    </div>
+  </div>
+  <div style='overflow-x : auto;width : 100%;'>
+    <table class='table' id='rpt_branch_mc_1'>
+      <thead>
+        <tr>
+          <th>分公司</th>
+          <th>保证金</th>
+          <th>管控底限</th>
+          <th>未提货</th>
+          <th>未到货</th>
+          <th>当天收货</th>
+          <th>合计</th>
+          <th>超限额</th>
+          <th>风险比例</th>
+          <th>未返款+当日返款</th>
+          <th>中转未返款+当日返款</th>
+          <th>合计</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@carrying_bills.each do |b|%>
+          <tr>
+            <td><%=b[:org_name]%></td>
+            <td><%=b[:deposit_fee]%></td>
+            <td><%=b[:bottom_deposit_fee]%></td>
+            <td><%=b[:th_amount_no_delivery]%></td>
+            <td><%=b[:th_amount_no_reached]%></td>
+            <td><%=b[:th_amount_today_bills]%></td>
+            <td><%=b[:sum_th_amount]%></td>
+            <td><%=b[:sum_diff]%></td>
+            <td><%="#{b[:risk_rate]} %" %></td>
+            <td><%=b[:th_amount_no_refunded]%></td>
+            <td><%=b[:th_amount_inner_no_refunded]%></td>
+            <td><%=b[:sum_2]%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+  <div id='table_wrap'>
+  </div>
+</div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

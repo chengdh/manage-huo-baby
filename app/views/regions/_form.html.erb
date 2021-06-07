@@ -1,0 +1,28 @@
+<%= form_for resource, :html => {:id => "region_form"} do |f|%>
+  <%=f.error_messages %>
+  <table class="table">
+    <tr>
+      <th>名称:</th>
+      <td>
+        <%= f.text_field :name,:size => 60,:placeholder => "请输入区域名称" %>
+      </td>
+    </tr>
+    <tr>
+      <th>备注:</th>
+      <td>
+        <%= f.text_area :note, :placeholder => "请输入区域备注",:rows => 10, :cols => 120 %>
+      </td>
+    </tr>
+    <tr>
+      <th>机构:</th>
+      <td>
+        <%= select_tag :select_region_org,orgs_option_groups_string(false,true),
+          :multiple => "multiple",
+          :class => "select_org_multi_in_region_form",
+          "data-orgs" => resource.orgs.to_json,
+          :style => "width : 300px;" 
+        %>
+    </td>
+  </tr>
+</table>
+<% end%>

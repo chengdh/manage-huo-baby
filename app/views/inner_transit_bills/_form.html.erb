@@ -1,0 +1,137 @@
+<%= semantic_form_for resource,:validate=> false,:remote=> true,:html => {:id => "carrying_bill_form",:class => "wat-cf carrying_bill #{get_bill_update_class(resource)}"} do |f|%>
+  <%= f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <%= f.hidden_field :original_bill_id%>
+  <table class='table bill_input'>
+    <tbody>
+      <tr>
+        <td>单据编号</td>
+        <td><%= f.text_field :bill_no,:size => 20,:class => :bill_no,:maxlength => 7 %></td>
+        <td>货号</td>
+        <td><%= f.text_field :goods_no,:size => 20,:class => :goods_no %></td>
+        <td>单据日期</td>
+        <td><%= f.text_field :bill_date,:size => 10 ,:readonly => true,:class => :bill_date %></td>
+      </tr>
+      <tr>
+        <%= render 'org_select',:f => f %>
+      </tr>
+
+      <tr>
+        <td>客户编号</td>
+        <td><%= f.text_field :customer_code,:id => 'customer_code',:size => 10 %></td>
+        <td colspan='4'></td>
+      </tr>
+      <tr>
+        <td>发货人</td>
+        <td>
+          <%= f.text_field :from_customer_name,:id => 'from_customer_name',:size => 20  %>
+          <%= f.fields_for :bill_association_object,
+            f.object.bill_association_object.blank? ? f.object.build_bill_association_object : f.object.bill_association_object do |c|%>
+            <%= c.hidden_field :from_customer_id,:id => "imported_from_customer_id" %>
+            <%= c.hidden_field :to_customer_id,:id => "imported_to_customer_id" %>
+          <% end %>
+          <a href='#' id="btn_find_from_customer"></a>
+          <div><span class='from_customer_detail'></span></div>
+        </td>
+        <td>手机</td>
+        <td><%= f.text_field :from_customer_mobile,:id => 'from_customer_mobile',:size => 20  %></td>
+        <td>电话</td>
+        <td><%= f.text_field :from_customer_phone,:id => 'from_customer_phone',:size => 20  %></td>
+      </tr>
+      <tr>
+        <td>收货人</td>
+        <td>
+          <%= f.text_field :to_customer_name,:id => 'to_customer_name',:size => 20  %>
+          <a href='#' id="btn_find_to_customer"></a>
+          <div><span class='to_customer_detail'></span></div>
+        </td>
+        <td>手机</td>
+        <td><%= f.text_field :to_customer_mobile,:id => 'to_customer_mobile',:size => 20  %></td>
+        <td>电话</td>
+        <td><%= f.text_field :to_customer_phone,:id => 'to_customer_phone',:size => 20  %></td>
+      </tr>
+
+      <tr>
+        <td>运费支付方式</td>
+        <td><%= f.select :pay_type,resource_class.pay_types,{},:id => :pay_type %></td>
+        <td><span style="color:red;font-size: 14px;font-weight: bold;">代收货款</span></td>
+        <td><%= f.text_field :goods_fee,:id => "goods_fee",:size => 15  %></td>
+        <td colspan='2'></td>
+      </tr>
+      <!-- <tr> -->
+        <!--   <td>运费</td> -->
+        <!--   <td><%= f.text_field :carrying_fee,:id => "carrying_fee",:class => "only_integer",:size => 15  %></td> -->
+        <!--   <td></td> -->
+        <!--   <td><%= f.hidden_field :carrying_fee_1st,:class => :carrying_fee_1st,:size => 15 %></td> -->
+        <!--   <td></td> -->
+        <!--   <td><%= f.hidden_field :carrying_fee_2st,:class => :carrying_fee_2st,:size => 15  %></td> -->
+        <!-- </tr> -->
+      <tr>
+        <td>前段运费</td>
+        <td><%= f.text_field :carrying_fee_1st,:class => :carrying_fee_1st,:size => 15 %></td>
+        <td>后段运费</td>
+        <td><%= f.text_field :carrying_fee_2st,:class => :carrying_fee_2st,:size => 15  %></td>
+        <td>运费</td>
+        <td><%= f.text_field :carrying_fee,:id => "carrying_fee",:class => "only_integer",:readonly => true,:size => 15  %></td>
+      </tr>
+      <tr>
+        <td>管理费</td>
+        <td>
+          <%=f.text_field :manage_fee,:id => "manage_fee",:readonly => true,:value => 0,:size => 15 %>
+          <!--中转票据保险费为0-->
+          <%=f.hidden_field :insured_fee,:id => "insured_fee",:readonly => true,:value =>0,:size => 15 %>
+        </td>
+        <!-- <td> -->
+          <!--   <%=f.text_field :manage_fee,:id => "manage_fee",:readonly => true,:value => 2,:size => 15 %> -->
+          <!--   <!&#45;&#45;中转票据保险费为0&#45;&#45;> -->
+          <!--   <%=f.hidden_field :insured_fee,:id => "insured_fee",:readonly => true,:value =>0,:size => 15 %> -->
+          <!-- </td> -->
+        <td>发货地短途运费</td>
+        <td><%= f.text_field :from_short_carrying_fee,:id => "from_short_carrying_fee",:class => "only_integer",:size => 15  %></td>
+        <td>到货地短途运费</td>
+        <td><%= f.text_field :to_short_carrying_fee,:id => "to_short_carrying_fee",:class => "only_integer",:size => 15  %></td>
+      </tr>
+      <tr>
+        <td>运费总计</td>
+        <td><span id='sum_carrying_fee'></span></td>
+        <td colspan='4'></td>
+      </tr>
+      <tr style="display: none;">
+          <%= f.fields_for :bill_association_object do |f_bao|%>
+              <td>总部分成</td>
+              <td>
+                  <%= f_bao.text_field :summary_org_divide_fee,:id => "summary_org_divide_fee",:readonly => true  %>
+                </td>
+              <td>发货地分成</td>
+              <td>
+                  <%= f_bao.text_field :from_org_divide_fee,:id => "from_org_divide_fee",:readonly => true %>
+                </td>
+              <td>到货地分成</td>
+              <td>
+                  <%= f_bao.text_field :to_org_divide_fee,:id => "to_org_divide_fee",:readonly => true  %>
+                </td>
+            <% end %>
+        </tr>
+      <tr>
+        <td>货物名称</td>
+        <td colspan='3'>
+          <%= f.text_field :goods_info,:size => 60,:id => :goods_info %>
+        </td>
+        <td>包装</td>
+        <td><%= f.text_field :package,:size => 15%></td>
+      </tr>
+      <tr>
+        <td>数量</td>
+        <td><%= f.text_field :goods_num,:size => 15,:class => :goods_num %></td>
+        <td>重量</td>
+        <td><%= f.text_field :goods_weight,:size => 15  %></td>
+        <td>体积</td>
+        <td><%= f.text_field :goods_volume,:size => 15,:id => :goods_volume  %></td>
+      </tr>
+      <tr>
+        <td>备注</td>
+        <td colspan='5'><%= f.text_field :note,:size => 100,:id => :note %></td>
+      </tr>
+    </tbody>
+  </table>
+<%end%>

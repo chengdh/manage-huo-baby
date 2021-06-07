@@ -1,0 +1,9 @@
+<%= semantic_form_for resource_class.search,:url => collection_path,:html => {:method => :get,:style => "width : 300px;" } do |f| %>
+  <%= f.inputs do |f|%>
+    <%= f.input :to_org_id_eq,:label => "机构",:as => :select,:collection => branches_for_select_ex %>
+    <%= f.input :bill_date_eq,:label => false,:as => :date_select %>
+  <%end%>
+<%=f.actions do %>
+  <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

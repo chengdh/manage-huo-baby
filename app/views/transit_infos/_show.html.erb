@@ -1,0 +1,21 @@
+<table class='table' data-detailUrl="<%=transit_info_carrying_bills_path(resource,show_or_hidden_fields) %>">
+  <tbody>
+    <tr>
+      <td>中转部门:</td>
+      <td><%=resource.org.name %></td>
+      <td>中转日期:</td>
+      <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    </tr>
+    <tr>
+      <td>中转公司:</td>
+      <td><%=resource.transit_company.name%></td>
+      <td>电话:</td>
+      <td><%=resource.transit_company.phone%></td>
+    </tr>
+    <tr>
+      <td>备注:</td>
+      <td colspan="3"><%=resource.note%></td>
+    </tr>
+  </tbody>
+</table>
+<div id="table_wrap"></div>

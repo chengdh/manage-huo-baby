@@ -1,0 +1,72 @@
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%= form_for AddressBook.search do |f|%>
+      <div class="city-group">
+        <%= f.hidden_field :tag_eq,:value => params[:search][:tag_eq] %>
+        <select name="search[province_code_like]" class="city-select city-province">
+          <option value="">--省份--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+        <select name="search[city_code_like]"  class="city-select city-city">
+          <option value="">--城市--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+        <select name="search[district_code_like]" class="city-select city-district">
+          <option value="">--地区--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+
+        <%= f.text_field :name_like,:placeholder => "机构名称",:size => 20 %>
+        <%= f.text_field :phone_like,:placeholder => "联系方式",:size => 15%>
+        <%= f.text_field :address_like,:placeholder => "地址",:size => 40%>
+        <%= f.submit "查询",:class => "sexybutton sexysimple sexyblue" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<table class="table" id="address_books_index_table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>机构名称</th>
+      <th>简称</th>
+      <th>第一负责人</th>
+      <th>手机</th>
+      <th>联系电话</th>
+      <th>第二负责人</th>
+      <th>手机</th>
+      <th>所在地</th>
+      <th>地址</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%collection.each do |ab|%>
+      <tr class="<%= cycle 'odd', 'even' %>",title="双击显示详细信息" class='tipsy' data-dblclick='true'>
+        <td> <%= ab.order_by %>
+        <td><%= ab.name%></td>
+        <td><%= ab.simp_name%></td>
+        <td><%= ab.leader %></td>
+        <td><%= ab.leader_mobile %></td>
+        <td><%= ab.phone%></td>
+        <td><%= ab.second_leader %></td>
+        <td><%= ab.second_leader_mobile %></td>
+        <td><%= ab.location%></td>
+        <td><%= ab.address%></td>
+        <td>
+          <%= link_to "查看", resource_url(ab),:class => "show_link",:style => 'display : none;'%>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to image_tag("application--pencil.png"),  edit_resource_path(ab),:title => "修改当前记录",:class => "tipsy edit_link",:style => 'display : none;' if can? :update,ab %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to image_tag("cross.png"), ab,:method => :delete,:class =>"tipsy delete_link",:style => 'display : none;',:title => "删除该记录",:confirm => "你确定要删除吗?" if can? :destroy,ab%>
+        </td>
+
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

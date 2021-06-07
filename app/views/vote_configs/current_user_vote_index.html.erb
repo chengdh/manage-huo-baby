@@ -1,0 +1,20 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">投票历史列表</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <td>序号</td>
+          <td>名称</td>
+        </tr>
+        <% @vote_configs.each_with_index do |vc,idx|%>
+          <tr>
+            <td><%= idx+1 %></td>
+            <td><%= link_to vc.name,show_vote_info_vote_config_path(vc)%></td>
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+</div>

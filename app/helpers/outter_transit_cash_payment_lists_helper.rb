@@ -1,0 +1,2 @@
+module OutterTransitCashPaymentListsHelper
+end

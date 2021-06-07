@@ -1,0 +1,12 @@
+<%= semantic_form_for @search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :bill_type_eq,:label => "票据类型",:as => :select,:collection => bill_types_for_select %>
+    <%= f.input :from_org_id_eq,:label => "发货地",:as => :select,:collection => branches_for_select,:input_html => {:class => "select_org"} %>
+    <%= f.input :to_org_id_eq,:label => "到货地",:as => :select,:collection => branches_for_select,:input_html => {:class => "select_org"} %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询",:class => "sexybutton sexysimple sexyblue",:disable_with => "查询中..." %>
+  <% end %>
+<% end%>

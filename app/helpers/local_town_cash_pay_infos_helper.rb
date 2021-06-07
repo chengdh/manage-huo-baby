@@ -1,0 +1,2 @@
+module LocalTownCashPayInfosHelper
+end

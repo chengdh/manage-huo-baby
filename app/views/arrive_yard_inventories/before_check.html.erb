@@ -1,0 +1,12 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">分理处盘货单检查</h2>
+    <div class="inner">
+      <%= form_for resource,:remote => true,:method => :put,:url => {:action => :check},:html => {:class => "inventory_form",:id => "#{resource_class.to_s.underscore}_form"} do |f|%>
+        <%= render 'shared/act_load_lists/form_partial',:f => f %>
+      <% end%>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

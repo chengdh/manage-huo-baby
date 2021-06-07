@@ -1,0 +1,18 @@
+<div style="display: none;">
+  <table id="pop_message_show" class="table" style="width: 700px;" data-message="<%= message.to_json %>">
+    <tr>
+      <td colspan="4" style="text-align: center;"><h3><%= message.title %></h3></td>
+    </tr>
+    <tr>
+      <th colspan="4" style="text-align: center;">
+        <%= message.user %>
+        &nbsp;&nbsp;&nbsp;
+        <%= message.created_at.strftime("%Y-%m-%d") %>
+    </th>
+  </tr>
+  <tr>
+    <td colspan="4"><%= message.body.html_safe %></td>
+  </tr>
+  </table>
+</div>
+<a href="#pop_message_show" id="btn_show_message" style="width: 0;height: 0;">show message</a>

@@ -1,0 +1,9 @@
+<div class='actions-bar'>
+  <%= link_to image_tag("plus-white.png") + "生成返款清单",
+    carrying_bills_path("search[type_in]" => ["TransitBill", "HandTransitBill","OutterTransitReturnBill"]),
+    :remote => true,
+    :class => 'tipsy sexybutton sexysimple sexyblue',
+    :title => "生成返款清单",
+    :id => 'btn_generate_outter_transit_refund' %>
+</div>
+<div id="table_wrap"></div>

@@ -1,0 +1,113 @@
+<table class='table'>
+  <caption>帐目盘点登记表</caption>
+  <thead>
+    <tr>
+      <th colspan='2'>
+        分公司:
+        <%= resource.org.try(:name) %>
+      </th>
+      <th colspan='2'>
+        <%= resource.bill_date.strftime('%Y-%m-%d') %>
+      </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th colspan='2'>帐目金额</th>
+      <th colspan='2'>库存金额</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>已结算未汇金额</td>
+    <td><%=resource.settled_no_rebate_fee %></td>
+    <td>库存现金</td>
+    <td><%= resource.cash %></td>
+  </tr>
+  <tr>
+    <td>已提未结算金额</td>
+    <td><%= resource.deliveried_no_settled_fee %></td>
+    <td>银行存款</td>
+    <td><%= resource.deposits %></td>
+  </tr>
+  <tr>
+    <td><%= resource.input_name_1 %></td>
+    <td><%= resource.input_fee_1 %></td>
+    <td>返程货款</td>
+    <td><%= resource.goods_fee %></td>
+  </tr>
+  <tr>
+    <td><%= resource.input_name_2 %></td>
+    <td><%= resource.input_fee_2 %></td>
+    <td>短途及赔偿</td>
+    <td><%= resource.short_fee %></td>
+  </tr>
+  <tr>
+    <td><%= resource.input_name_3 %></td>
+    <td><%= resource.input_fee_3 %></td>
+    <td>其他开支</td>
+    <td><%= resource.other_fee %></td>
+  </tr>
+  <tr>
+    <td>合计</td>
+    <td><span id='journal_sum_1'><%=resource.sum_1%></span></td>
+    <td>合计</td>
+    <td><span id='journal_sum_2'><%=resource.sum_2%></span></td>
+  </tr>
+  <thead>
+    <tr>
+      <th colspan='2'>未提货票据</th>
+      <th colspan='2'>客户欠款</th>
+    </tr>
+  </thead>
+
+  <tr>
+    <td>黑票</td>
+    <td><%= resource.black_bills %></td>
+    <td>当日欠款</td>
+    <td><%= resource.current_debt %></td>
+  </tr>
+  <tr>
+    <td>红票</td>
+    <td><%= resource.red_bills %></td>
+    <td>2-3日欠款</td>
+    <td><%= resource.current_debt_2_3 %></td>
+  </tr>
+  <tr>
+    <td>黄票</td>
+    <td><%= resource.yellow_bills %></td>
+    <td>4-5日欠款</td>
+    <td><%= resource.current_debt_4_5 %></td>
+  </tr>
+  <tr>
+    <td>绿票</td>
+    <td><%= resource.green_bills %></td>
+    <td>6日以上欠款</td>
+    <td><%= resource.current_debt_ge_6 %></td>
+  </tr>
+  <tr>
+    <td>蓝票</td>
+    <td><%= resource.blue_bills %></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>白票</td>
+    <td><%= resource.white_bills %></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tfoot>
+    <tr>
+      <td>合计</td>
+      <td><%= resource.sum_3 %></td>
+      <td>合计</td>
+      <td><span id='journal_sum_4'><%= resource.sum_4 %></span></td>
+    </tr>
+    <tr>
+      <td>分公司经理</td>
+      <td>&nbsp;</td>
+      <td>会计</td>
+      <td><%=resource.user.try(:username) %></td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <%= form_tag search_service_by_customer_code_carrying_bills_path,:method => :get,:target => "_blank",:id => "search_service_form",:class => "well well-sm" do %>
+      <div class="form-group">
+        <%=text_field_tag "search[from_customer_code_eq]",nil,:placeholder => "请输入会员卡号",:id => 'search_from_customer_code',:class => 'form-control' %>
+        <%= hidden_field_tag "search[state_ni][]","invalided" %>
+        <%= hidden_field_tag "search[state_ni][]","canceled" %>
+      </div>
+      <div class="form-group">
+        <%=text_field_tag "search[from_customer_name_eq]",nil,:placeholder => "请输入会员姓名",:id => 'search_from_customer_name',:class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%=select_tag :select_search_service_bill_state,options_for_select(search_service_bill_states_for_select),:id => 'select_search_service_bill_state',:class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%=text_field_tag "search[bill_date_gte]",nil,:placeholder => "起始日期",:id => 'search_bill_date_gte',:class => 'form-control datepicker' %>
+      </div>
+      <div class="form-group">
+        <%=text_field_tag "search[bill_date_lte]",nil,:placeholder => "结束日期",:id => 'search_bill_date_lte',:class => 'form-control datepicker' %>
+      </div>
+      <button type="button" class="btn btn-block btn-primary" id="btn_query_submit">查询运单</button>
+    <% end %>
+  </div>
+</div>

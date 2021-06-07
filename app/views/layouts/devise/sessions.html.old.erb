@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="chengdh" />
+    <meta name="keywords" content="物流,软件,系统" />
+    <meta name="description" content="基于互联网的第三方物流管理系统" />
+    <meta name="robots" content="all" />
+    <title>-登录</title>
+    <script type="text/javascript"></script>
+    <%= javascript_include_tag :defaults %>
+    <%= stylesheet_link_tag 'login','SexyButtons/sexybuttons' %>
+    <!--[if IE]> 
+    <link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection"/> 
+    <![endif]-->	
+  </head>
+  <body class='login'>
+    <div id="header" class='clearfix'>
+      <h1><a href="http://www.strongu.com/" class="logo">创艺公司</a></h1>
+    </div>
+    <div id="login_content" >
+      <%= yield %>
+    </div>
+  </body>
+</html>

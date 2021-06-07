@@ -1,0 +1,2 @@
+module OutterTransitPostInfosHelper
+end

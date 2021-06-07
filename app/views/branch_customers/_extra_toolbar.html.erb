@@ -1,0 +1,6 @@
+<!--动态toolbar-->
+<%if params[:action].eql?('index') and can? :export_excel,ImportedCustomer %>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_branch_customers_path(:search => params[:search]),:title => "导出为EXCEL",:class => "tipsy",:class => "btn_export_imported_customers" %>
+  </li>
+<%end%>

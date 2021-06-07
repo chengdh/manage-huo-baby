@@ -1,0 +1,13 @@
+<tfoot>
+  <tr>
+    <td colspan='6'>合计:</td>
+    <td><%= @search.sum(:origin_carrying_fee) %></td>
+    <td><%= @search.sum(:adjust_fee) %></td>
+    <td><%= @search.sum(:origin_carrying_fee) +  @search.sum(:adjust_fee)  %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tfoot>

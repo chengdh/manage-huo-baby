@@ -1,0 +1,55 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <td colspan='10' style='text-align : center;font-size : 14px;'>发货短途运费核销信息<%="(#{@from_short_fee_info.from_org}-#{@from_short_fee_info.to_org})"%></td>
+    </tr>
+    <tr>
+      <th style='border : thin solid #000;'>日期:</th>
+      <th style='border : thin solid #000;' colspan='3'><%=@from_short_fee_info.bill_date.strftime('%Y-%m-%d')%></th>
+      <th style='border : thin solid #000;'>发货地-到货地:</td>
+      <th style='border : thin solid #000;' colspan='2'><%=@from_short_fee_info.from_org%>-<%=@from_short_fee_info.to_org%></th>
+      <th style='border : thin solid #000;'>操作员:</th>
+      <th style='border : thin solid #000;' colspan='2'><%=@from_short_fee_info.user%></th>
+    </tr>
+    <tr>
+      <th style='border : thin solid #000;'>序号</th>
+      <th style='border : thin solid #000;'>运单号</th>
+      <th style='border : thin solid #000;'>货号</th>
+      <th style='border : thin solid #000;'>发货地</th>
+      <th style='border : thin solid #000;'>到货地</th>
+      <th style='border : thin solid #000;'>支付方式</th>
+      <th style='border : thin solid #000;'>货款</th>
+      <th style='border : thin solid #000;'>运费</th>
+      <th style='border : thin solid #000;'>发货短途费</th>
+      <th style='border : thin solid #000;'>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.from_short_fee_lines.each_with_index do |line,index|%>
+      <tr>
+        <td style='border : thin solid #000;'><%=index + 1%></td>
+        <td style='border : thin solid #000;'>&nbsp;<%=line.carrying_bill.bill_no%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.goods_no%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.from_org%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.to_org%></td>
+        <td style='border : thin solid #000;'><%=pay_type_des(line.carrying_bill.pay_type)%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.carrying_fee%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.from_short_carrying_fee%></td>
+        <td style='border : thin solid #000;'><%=line.carrying_bill.note%></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+    <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:goods_fee)%></td>
+    <td style='border : thin solid #000;'><%=resource.carrying_bills.sum(:carrying_fee)%></td>
+    <td style='border : thin solid #001;'><%=resource.carrying_bills.sum(:from_short_carrying_fee)%></td>
+    <td style='border : thin solid #000;'>&nbsp;</td>
+  </tfoot>
+</table>

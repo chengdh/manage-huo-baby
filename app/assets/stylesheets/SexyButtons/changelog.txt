@@ -1,0 +1,21 @@
+==================================================
+  Sexy Buttons Changelog
+  http://code.google.com/p/sexybuttons/
+==================================================
+
+
+Version 1.1			(02/16/2010)
+	- New Feature: Buttons now have a disabled state and support the disabled attribute.
+
+Version 1.0.3		(02/11/2010)
+	- Fixed: [Issue 7] Existing CSS styles (especially for link colors & fonts) can override sexy button styles.
+
+Version 1.0.2		(02/10/2010)
+	- Fixed: [Issue 6] Buttons don't look good when used on top of non-white backgrounds.
+	- Added: Alternate .PNG versions of skin images with alpha transparency. 
+
+Version 1.0.1		(02/10/2010)
+	- Fixed: [Issue 5] Icons not appearing for sexyorange and sexyyellow skins.
+
+Version 1.0			(12/09/2010)
+	- Initial release.

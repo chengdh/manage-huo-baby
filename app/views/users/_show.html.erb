@@ -1,0 +1,18 @@
+<table class='table'>
+  <tr>
+    <td>用户名:</td>
+    <td><%=resource.username%></td>
+    <td>有效:</td>
+    <td><%=resource.is_active? ? '是' : '否'%></td>
+    <td>管理员:</td>
+    <td><%= resource.is_admin? ? '是' : '否' %></td>
+
+  </tr>
+  <tr>
+    <td>默认机构:</td>
+    <td><%=resource.default_org.try(:name)%></td>
+    <td>默认角色:</td>
+    <td><%=resource.default_role.try(:name)%></td>
+    <td colspan='2'></td>
+  </tr>
+</table>

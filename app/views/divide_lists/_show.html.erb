@@ -1,0 +1,46 @@
+<table class='table'>
+  <tr>
+    <th>分理处</th>
+    <td><%= resource.org %></td>
+    <th>有效</th>
+    <td><%= resource.is_active ? "是" : "否" %></td>
+  </tr>
+  <tr>
+    <th>距总部距离(公里)</th>
+    <td>
+      <%= resource.distance_from_summary%>
+    </td>
+    <th>油价(元/公里)</th>
+    <td><%= resource.price_per_mile %></td>
+  </tr>
+</table>
+
+<table class='table'>
+  <tr>
+    <th>分公司</th>
+    <th>计量单位</th>
+    <th>单价(元)</th>
+    <th>运费下限(元)</th>
+    <th>单车装载量</th>
+    <th>分成比例</th>
+  </tr>
+  <% resource.grouped_all_lines.each do |org,lines|%>
+    <tr>
+      <td rowspan="<%= lines.size %>"><%= org %></td>
+      <td><%= lines[0].price_list_line.fee_unit.name %></td>
+      <td><%= lines[0].price_list_line.price %></td>
+      <td><%= lines[0].price_list_line.min_price %></td>
+      <td><%= lines[0].load_per_vehicle %></td>
+      <td><%= lines[0].divide_rate_desc %></td>
+    </tr>
+    <% lines[1,lines.size - 1].each do |line| %>
+      <tr>
+        <td><%= line.price_list_line.fee_unit.name %></td>
+        <td><%= line.price_list_line.price %></td>
+        <td><%= line.price_list_line.min_price %></td>
+        <td><%= line.load_per_vehicle %></td>
+        <td><%= line.divide_rate_desc %></td>
+      </tr>
+    <%end%>
+  <%end%>
+</table>

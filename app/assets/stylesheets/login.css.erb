@@ -1,0 +1,93 @@
+.highlight { background: #ffff00; }
+body.login {
+  background: #eeeeee url(<%= asset_path "login_bg_tile.png" %>) repeat-x scroll left -25px !important;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+body.login #header { height: 40px; }
+body.login #header h1 {
+  float: right;
+  margin: 10px 30px 0 0;
+  text-align: left;
+  text-indent: -9999px;
+  width: 200px;
+}
+body.login #login_content {
+  background: transparent url(<%= asset_path "login_sprites.png" %>) no-repeat scroll 5px 25px;
+  margin: 130px auto 20px;
+  padding-bottom: 20px;
+  width: 968px;
+}
+body.login #login_content #login_dialog {
+  margin: 0 auto;
+  width: 300px;
+}
+body.login #login_content #login_dialog .top {
+  background: transparent url(<%= asset_path "login_sprites.png" %>) no-repeat scroll -962px top;
+  height: 15px;
+  width: 300px;
+}
+body.login #login_content #login_dialog .bottom {
+  background: transparent url(<%= asset_path "login_sprites.png" %>) no-repeat scroll -962px bottom;
+  padding: 1px 45px 25px;
+  color: #000000;
+  width: 210px;
+}
+body.login #login_content #login_dialog .bottom #user_name_login h1 {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 19px;
+  margin: 13px 0 15px;
+  padding : 10px;
+  border-bottom : 2px solid #ECEDE5;
+
+}
+body.login #login_content #login_dialog .bottom #user_name_login h1 strong {
+  font-size: 19px;
+  display: block;
+}
+body.login #login_content #login_dialog .bottom #user_name_login p { margin: 0 0 10px; }
+body.login #login_content #login_dialog .bottom #user_name_login p .overlay_wrapper {
+  background: white none repeat scroll 0 0;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+body.login #login_content #login_dialog .bottom #user_name_login p .overlay_wrapper .overlabel {
+  position: absolute;
+  color: #999999 !important;
+  left: 6px;
+  top: -2px;
+  z-index: 1;
+  font-size: 18px;
+}
+body.login #login_content #login_dialog .bottom #user_name_login p .overlay_wrapper input {
+  background: transparent none repeat scroll 0 0;
+  position: relative;
+  top: 0;
+  z-index: 10;
+  font-size: 18px;
+  padding: 3px;
+  width: 200px;
+}
+body.login #login_content #login_dialog .bottom #remember_container {
+  color: #333333;
+  font-size: 12px;
+  margin: 0 0 15px;
+}
+body.login #login_content #login_dialog .bottom #signin_button
+{
+  color: #000000;
+  margin-top : 15px;
+  padding : 10px;
+  border-top : 2px solid #ECEDE5;
+
+}
+body.login .extras {
+  color: #000000;
+  margin: 10px auto;
+  text-align: center;
+  width: 300px;
+}
+body.login .extras a { color: #33a02c; }

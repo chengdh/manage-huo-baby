@@ -1,0 +1,14 @@
+<%= semantic_form_for search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :carrying_bills_bill_no_or_carrying_bills_goods_no_like,:label =>"票据号/货号",:input_html => {:size => 30,:id => "keyword"} %>
+    <%= f.input :customer_name_like,:label =>"提货人姓名",:input_html => {:size => 30} %>
+    <%= f.input :account_name_eq,:label =>"转账户名",:input_html => {:size => 30} %>
+    <%= f.input :bill_date_gte,:label => "提款日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

@@ -1,0 +1,22 @@
+<tr>
+  <th class='col_24mm'><span class='label'>货物名称</span></th>
+  <th class='col_16mm'><span class='label'>包装</span></th>
+  <th class='col_14mm'><span class='label'>数量</span></th>
+  <th class='col_14mm'><span class='label'>重量</span></th>
+  <th class='col_13mm'><span class='label'>体积</span></th>
+  <th class='col_13mm'><span class='label'>运费单价</span></th>
+  <!-- th class='col_13mm'><span class='label'>运费合计</span></th -->
+  <th class='col_43mm' colspan='2'><span class='label'>备注</span></th>
+</tr>
+<% bill_lines.each do |l| %>
+<tr>
+  <td><%= l.goods_cat.present? ? l.try(:goods_cat).try(:name) : l.try(:name) %></td>
+  <td><%= l.package %></td>
+  <td><%= l.qty %></td>
+  <td><%= l.weight %></td>
+  <td><%= l.volume%></td>
+  <td><%= l.price %></td>
+  <!--td></td -->
+  <td colspan="2"><%= l.carrying_bill.try(:note) %></td>
+</tr>
+<% end %>

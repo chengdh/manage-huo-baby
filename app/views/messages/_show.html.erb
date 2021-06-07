@@ -1,0 +1,21 @@
+<div style="width : 600px;">
+  <h3 style="text-align: center;"><%= @message.title %></h3>
+  <h4 style="text-align: center;">
+    <%= @message.org_name %>
+    &nbsp;&nbsp;
+    <%= @message.created_at.strftime("%Y-%m-%d %H:%M") %>
+  </h4>
+  <hr/>
+  <p>
+    <%= @message.body.html_safe %>
+  </p>
+  <hr/>
+  <!-- <p><span>附件</span>:<%= link_to @message.attach_file_name,"#{Settings.messages_host}/#{@message.attach_url}" if @message.attach_url.present?%></p> -->
+
+  <% if request.format.to_s.eql?("text/javascript")%>
+    <div style="text-align: center;padding: 5px;">
+      <%= link_to "确认", update_view_count_message_path(@message,:format => :js),:method => :put,:remote => true,:class => "sexybutton sexysimple sexyblue" %>
+      <%= link_to "关闭", "#",:class => "sexybutton sexysimple sexyred",:onclick => "$.fancybox.close();" %>
+    </div>
+  <% end %>
+</div>

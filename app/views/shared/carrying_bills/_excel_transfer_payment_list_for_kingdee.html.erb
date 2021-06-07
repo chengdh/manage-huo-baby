@@ -1,0 +1,50 @@
+<%sum_info = search_sum%>
+<table style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>实付代收货款</th>
+      <th>开户行</th>
+      <th>原代收货款</th>
+      <th>扣运费</th>
+      <th>扣手续费</th>
+      <th>扣保险费</th>
+      <th>扣发货短途</th>
+      <th>扣到货短途</th>
+      <th>发货地</th>
+      <th>到货地</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @search.all(:include => [:from_org,:to_org,:transit_org,:user]).each_with_index do |bill,index| %>
+    <tr>
+      <td> <%= index + 1 %></td>
+      <td> <%= bill.act_pay_fee %></td>
+      <td> <%= bill.try(:from_customer).try(:bank).try(:name)%></td>
+      <td> <%= bill.try(:goods_fee)%></td>
+      <td> <%= bill.try(:k_carrying_fee)%></td>
+      <td> <%= bill.try(:k_hand_fee)%></td>
+      <td> <%= bill.try(:k_insured_fee)%></td>
+      <td> <%= bill.try(:k_from_short_carrying_fee)%></td>
+      <td> <%= bill.try(:k_to_short_carrying_fee)%></td>
+      <td class='from_org'><%=bill.from_org_name%></td>
+      <td class='to_org'><%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.area}" : bill.to_parent_org_name%></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class='first'>合计</td>
+      <td class="sum_act_pay_fee"><%=sum_info[:sum_act_pay_fee]%></td>
+      <td></td>
+      <td class="sum_goods_fee"><%=sum_info[:sum_goods_fee]%></td>
+      <td class="sum_k_carrying_fee"><%=sum_info[:sum_k_carrying_fee]%></td>
+      <td class="sum_k_hand_fee"><%=sum_info[:sum_k_hand_fee]%></td>
+      <td class="sum_k_insured_fee"><%=sum_info[:sum_k_insured_fee]%></td>
+      <td class="sum_k_insured_fee"><%=sum_info[:sum_k_from_short_carrying_fee]%></td>
+      <td class="sum_k_insured_fee"><%=sum_info[:sum_k_to_short_carrying_fee]%></td>
+      <td class="from_org"></td>
+      <td class="to_org"></td>
+    </tr>
+  </tfoot>
+</table>

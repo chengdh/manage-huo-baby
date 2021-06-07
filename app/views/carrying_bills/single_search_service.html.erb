@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <table class='table table-condensed table-striped'>
+      <% if @carrying_bill.present? %>
+        <tr>
+          <td class='bill-state' style='font-weight : bold;color : red;'>
+            <%=@carrying_bill.human_state_name%>
+            &nbsp;&nbsp;
+            <%=@carrying_bill.human_additional_state_name%>
+          </td>
+          <td colspan="5" style='font-size : 1.4em;font-weight : bold;color : blue;text-align: center;'><%=@carrying_bill.bill_no%></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;"><%=@carrying_bill.from_org_name%></td>
+          <td colspan="2" style="text-align: center;">至</td>
+          <% if ["TransitBill","HandTransitBill"].include? @carrying_bill.type %>
+            <td colspan="2" style="text-align: center;"><%= "#{@carrying_bill.transit_org.name}~#{@carrying_bill.area}" %></td>
+          <%else%>
+            <td colspan="2" style="text-align: center;"><%=@carrying_bill.to_org_name%></td>
+          <%end%>
+        </tr>
+        <!--
+        <tr>
+          <th>录入时间:</th>
+          <td><%= @carrying_bill.created_at.strftime('%Y-%m-%d %H:%M:%S')%></td>
+          <th  class='col_14mm'><span class='label'>提货日期:</span></th>
+          <td colspan='2' style='font-size : 1.4em;font-weight : bold;color : blue;'>
+            <%= @carrying_bill.deliver_info.try(:deliver_date)%>
+            <%= @carrying_bill.transit_deliver_info.try(:bill_date)%>
+          </td>
+          <th class='col_18mm'><span class='label'>提款日期:</span></th>
+          <td colspan='2' style='font-size : 1.4em;font-weight : bold;color : blue;'>
+            <%= @carrying_bill.pay_info.try(:bill_date)%>
+          </td>
+        </tr>
+        -->
+        <tr><td colspan="6" style="text-align: center;">货物流程追踪</td></tr>
+        <% @carrying_bill.track_info.each_with_index do |l,idx| %>
+          <tr>
+            <th><%= idx + 1 %></th>
+            <!-- <td><%= l[:username] %></td> -->
+            <td colspan='5'><%= l[:op_type] %></td>
+          </tr>
+        <% end  %>
+      <% else %>
+          <tr class="error"><td colspan="6" style="text-align: center;">未查询到运单信息!</td></tr>
+      <% end  %>
+    </table>
+  </div>
+</div>

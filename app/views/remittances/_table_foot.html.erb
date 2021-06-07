@@ -1,0 +1,18 @@
+<tfoot>
+  <tr>
+    <td colspan="4">合计:</td>
+    <td><%=@search.sum(:should_fee)%></td>
+    <td><%=@search.sum(:inner_transit_refund_should_fee)%></td>
+    <td><%=@search.sum("should_fee + inner_transit_refund_should_fee")%></td>
+    <td><%=@search.sum(:act_fee)%></td>
+    <td><%=@search.sum(:pos_fee)%></td>
+    <td><%=@search.sum(:quick_fee)%></td>
+    <td><%=@search.sum(:other_fee)%></td>
+    <td><%=@search.sum("act_fee + pos_fee + quick_fee + other_fee")%></td>
+    <td><%=@search.sum("should_fee + inner_transit_refund_should_fee - act_fee - pos_fee - quick_fee - other_fee")%></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tfoot>

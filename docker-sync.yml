@@ -1,0 +1,9 @@
+version: "2"
+
+options:
+  verbose: true
+syncs:
+  il-yanzhao-sync: # tip: add -sync and you keep consistent names as a convention
+    src: '.'
+    # sync_strategy: 'native_osx' # not needed, this is the default now
+    sync_excludes: ['.git']

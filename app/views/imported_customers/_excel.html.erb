@@ -1,0 +1,27 @@
+<%grouped_customers = @search.all.group_by(&:level_des)%>
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr><td colspan='5'><h3>客户资料</h3></td></tr>
+    <tr>
+      <th>序号</th>
+      <th>所属机构</th>
+      <th>姓名</th>
+      <th>电话</th>
+      <th>当月运费</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%grouped_customers.each do |level_des,customers|%>
+      <tr><td colspan='5'><%= level_des %></td></tr>
+      <% customers.each_with_index do |c,i| %>
+        <tr>
+        <td><%= i+1 %></td>
+        <td><%= c.org.try(:name) %></td>
+        <td><%= c.name %></td>
+        <td><%= c.mobile %></td>
+        <td><%= c.cur_fee %></td>
+        </tr>
+      <% end %>
+    <%end%>
+  </tbody>
+</table>

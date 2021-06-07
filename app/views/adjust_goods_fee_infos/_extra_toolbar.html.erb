@@ -1,0 +1,25 @@
+<%if params[:action] == "index"%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_adjust_goods_fee_infos_path(:search => params[:search],:show_fields => params[:show_fields],:hide_fields => params[:hide_fields],:sort => params[:sort],:direction => params[:direction],:without_paginate => 1),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>
+
+<%if params[:action] == "show"%>
+  <%if can? :pass,resource%>
+    <li>
+      <%= link_to image_tag("glyph_check.png",:size => "16x16",:alt => "审核"),  show_operate_form_adjust_goods_fee_info_path(resource,:operate_action => :pass),:title => "审核",:class => "tipsy fancybox" %>
+    </li>
+  <%end%>
+  <%if can? :deny,resource%>
+    <li>
+      <%= link_to image_tag("invalid.gif",:size => "16x16",:alt => "驳回"),  show_operate_form_adjust_goods_fee_info_path(resource,:operate_action => :deny),:title => "驳回",:class => "tipsy fancybox" %>
+    </li>
+  <%end%>
+  <!--
+  <%if can? :re_submit,resource%>
+    <li>
+      <%= link_to image_tag("tick-octagon-frame.png",:size => "16x16",:alt => "重新上报"),  re_submit_adjust_goods_fee_info_path(resource,:operate_action => :deny),:title => "重新上报",:class => "tipsy",:method => :put %>
+    </li>
+  <%end%>
+  -->
+<%end%>

@@ -1,0 +1,28 @@
+<table class='table'>
+  <tr>
+    <td>提款日期:</td>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <td>分理处:</td>
+    <td><%=resource.org.name%></td>
+    <td>提款人姓名:</td>
+    <td><%=resource.customer_name%></td>
+    <td>身份证号:</td>
+    <td><%=resource.id_number%></td>
+    <td>状态:</td>
+    <td><%=resource.human_state_name%> </td>
+  </tr>
+  <tr>
+    <td>转账户名:</td>
+    <td><%= resource.account_name %></td>
+    <td>卡号:</td>
+    <td><%= resource.account_no %></td>
+    <td>手机:</td>
+    <td><%= resource.mobile%></td>
+    <td>备注:</td>
+    <td colspan='3'><%= resource.note %></td>
+  </tr>
+</table>
+<!--客户提款凭条-->
+<div style='display : none;'>
+  <%= render "shared/pay_infos/certificate" %>
+</div>

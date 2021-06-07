@@ -1,0 +1,9 @@
+<%= render :partial => "shared/carrying_bills/dynamic_toolbar",
+  :locals => {:search_bill_path => 
+              search_outter_transit_return_bills_path(
+                                       :sort => "carrying_bills.bill_date desc,goods_no",
+                                       :direction => "asc",
+                                       :not_remote => true,
+                                       :format => :js
+                                      )
+} %>

@@ -1,0 +1,56 @@
+<% if @vote_config.blank?%>
+<div class="block">
+  <div class="content">
+    <div class="inner">
+    <p>没有找到有效的投票设置,请与管理员联系!</p>
+    </div>
+  </div>
+</div>
+<% end%>
+<% if @vote_config.present?%>
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title"><%= @vote_config.name%></h2>
+    <div class="inner">
+      <%= hidden_field_tag :vote_config_id,@vote_config.id,:id => "vote_scope" %>
+      <table class="table vote_config_table">
+        <%@vote_config.votable_items.each do |vi|%>
+          <tr>
+            <th>
+              <span class="vote_item"><%= vi.name%></span>
+            </th>
+            <%if can? :new_vote_unlimited,VoteConfig%>
+              <td>
+                <%= text_field_tag "text_vote_weight",5,:class => "vote-weight","data-vote_item_id" => vi.id %>
+              </td>
+            <%else%>
+              <td>
+                <%= radio_button_tag "#{vi.id}",1,false,:id => "one_#{vi.id}",:class => "radio-vote"%>
+                <%= label_tag "one_#{vi.id}","1分",:style => "font-size : 16px;font-weight : bold;" %>
+              </td>
+              <td>
+                <%= radio_button_tag "#{vi.id}",2,false,:id => "two_#{vi.id}",:class => "radio-vote"%>
+                <%= label_tag "two_#{vi.id}","2分",:style => "font-size : 16px;font-weight : bold;"  %>
+              </td>
+              <td>
+                <%= radio_button_tag "#{vi.id}",3,false,:id => "three_#{vi.id}",:class => "radio-vote"%>
+                <%= label_tag  "three_#{vi.id}","3分",:style => "font-size : 16px;font-weight : bold;"  %>
+              </td>
+              <td>
+                <%= radio_button_tag "#{vi.id}",4,false,:id => "four_#{vi.id}",:class => "radio-vote"%>
+                <%= label_tag  "four_#{vi.id}","4分",:style => "font-size : 16px;font-weight : bold;"  %>
+              </td>
+              <td>
+                <%= radio_button_tag "#{vi.id}",5,false,:id => "five_#{vi.id}",:class => "radio-vote"%>
+                <%= label_tag  "five_#{vi.id}","5分",:style => "font-size : 16px;font-weight : bold;"  %>
+              </td>
+            <%end%>
+          </tr>
+        <%end%>
+      </table>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>
+<%end%>

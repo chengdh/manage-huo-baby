@@ -1,0 +1,19 @@
+<%= form_for @notice,:remote => true,:html => {:id => "notice_form",:class => "bill_selector"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <%= f.hidden_field :org_id%>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>到货地:</th>
+        <th><%= @notice.org%></th>
+        <th>清单日期:</th>
+        <th><%= f.text_field :bill_date,:size => 15,:readonly => true,:class => "datepicker"%></th>
+      </tr>
+      <tr>
+        <th>备注:</th>
+        <th colspan='4'><%= f.text_field :note,:size => 100 %></th>
+      </tr>
+    </thead>
+  </table>
+<% end%>

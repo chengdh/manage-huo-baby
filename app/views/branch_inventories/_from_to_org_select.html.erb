@@ -1,0 +1,11 @@
+<%if f.object.new_record?%>
+<tr>
+  <th>发货地:</th>
+  <th>
+    <%= f.hidden_field :from_org_id %>
+    <%= resource.from_org.try(:name) %>
+  </th>
+  <th>到货地:</th>
+  <th><%= f.select :to_org_id,all_summary_orgs_for_select %></th>
+</tr>
+<%end%>

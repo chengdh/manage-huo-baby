@@ -1,0 +1,19 @@
+<table class='table'>
+  <tr><th colspan='<%= @date_range.count + 2%>'><h2><%=title%></h2></th</tr>
+  <tr>
+    <th>机构</th>
+    <% @date_range.each do |date|%>
+      <th><%= date.day%></th>
+    <%end%>
+    <th>合计</th>
+  </tr>
+  <% @group_rpts.each do |to_org,lines|%>
+    <tr>
+      <td><%= to_org.name%></td>
+      <% @date_range.each do |date|%>
+        <td><%= lines.detect {|l| l.bill_date.eql?(date)}.try(:carrying_fee) %></td>
+      <%end%>
+      <td><%= lines.sum(&:carrying_fee)%></td>
+    </tr>
+  <%end%>
+</table>

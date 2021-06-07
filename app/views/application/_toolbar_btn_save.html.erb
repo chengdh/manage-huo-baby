@@ -1,0 +1,3 @@
+<li>
+  <%= link_to_function image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "$('##{resource_class.model_name.underscore}_form').trigger('submit')",:title => "保存#{resource_class.model_name.human}",:class => "tipsy btn_save"  %>
+</li>

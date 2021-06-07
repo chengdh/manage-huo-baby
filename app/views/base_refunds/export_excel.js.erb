@@ -1,0 +1,9 @@
+<%
+  #判断是显示分组还是显示普通表格
+  partial = "base_refunds/excel"
+  partial = "base_refunds/excel_group" if params[:show_group]
+
+%>
+var render_table = '<%= escape_javascript(render partial)%>'.replace(/\n\s*/g,"");
+//table.find('td').css({border : "thin solid #000"});
+$.export_excel(render_table);

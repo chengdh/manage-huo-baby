@@ -1,0 +1,8 @@
+var render_table = '<%= escape_javascript(render "excel")%>'.replace(/\n\s*/g,"");
+var set_style = function(work_sheet){
+  work_sheet.Columns.ColumnWidth = 7;
+  work_sheet.Columns(4).ColumnWidth = 21;
+  work_sheet.Columns(11).ColumnWidth = 18;
+
+};
+$.export_excel(render_table);

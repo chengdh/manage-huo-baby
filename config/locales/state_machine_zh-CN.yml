@@ -1,0 +1,265 @@
+# Chinese (China) translations for Ruby on Rails
+# by tsechingho (http://github.com/tsechingho)
+
+zh-CN:
+  activerecord:
+    state_machines:
+      base_load_list:
+        state:
+          states:
+           billed: "已开票"
+           loaded: "已装车"
+           shipped: "在途"
+           reached: "已到货"
+           transit_reached: "中转到货"
+           transit_shipped: "中转发货"
+
+      act_load_list:
+        state:
+          states:
+           billed: "已开票"
+           loaded: "已装车"
+           shipped: "在途"
+           reached: "已到货"
+
+
+      carrying_bill:
+        state:
+          states:
+           billed: "已开票"
+           sorted_in: "分拣组已入库"
+           loaded_in: "装卸组已入库"
+           inner_transit_loaded_in: 装卸组已入库
+           inner_transit_loaded_out: 已装车
+           loaded: "已装车"
+           shipped: "在途"
+           reached: "已到货"
+           distributed: "已分货"
+           deliveried: "已提货"
+           transited: "已中转"
+           settlemented: "已日结"
+           refunded: "已返款"
+           refunded_confirmed: "已到帐"
+           payment_listed: "等待支付货款"
+           paid: "已提款"
+           posted: "已结帐"
+           returned: "已退货"
+           invalided: "已作废"
+           canceled: "已注销"
+           transit_reached: "中转到货"
+           transit_shipped: "中转发货"
+           transit_refunded_confirmed: 总部已确认
+           short_list_loaded: 短驳已装车
+           short_list_shipped: 短驳已发车
+           short_list_reached: 短驳已到货
+
+        from_short_fee_state:
+          states:
+            draft: "草稿"
+            saved: "已保存"
+            offed: "已核销"
+        to_short_fee_state:
+          states:
+            draft: "草稿"
+            saved: "已保存"
+            offed: "已核销"
+
+        additional_state:
+          states:
+            draft: ""
+            detained: "已暂扣"
+            lossed: "已挂失"
+            customer_paid: 月结-回执已付
+
+
+
+      distribution_list:
+        state:
+          states:
+           billed: "草稿"
+           distributed: "已分货"
+
+      transit_info:
+        state:
+          states:
+            billed: "草稿"
+            transited: "已中转"
+
+      deliver_info:
+        state:
+          states:
+            billed: "草稿"
+            deliveried: "已提货"
+
+      base_settlement:
+        state:
+          states:
+            billed: "草稿"
+            settlemented: "已结算"
+            refunded_confirmed: "已到帐"
+            confirmed: "已收款"
+
+      base_refund:
+        state:
+          states:
+            billed: 草稿
+            refunded: 已返款
+            refunded_confirmed: 已收款
+            transit_refunded_confirmed: 总部已确认
+
+      payment_list:
+        state:
+          states:
+            billed: "草稿"
+            payment_listed: "准备支付"
+            transfered: "已转账"
+
+      pay_info:
+        state:
+          states:
+            billed: "草稿"
+            paid: "货款已付"
+
+      base_post_info:
+        state:
+          states:
+            billed: 草稿
+            posted: 已结算
+            transfered: 已转账
+
+      goods_exception:
+        state:
+          states:
+            submited: "已提交"
+            authorized: "已核销"
+            compensated: "已赔偿"
+            identified: "责任已鉴定"
+            posted: "已支付销号"
+
+      goods_error:
+        state:
+          states:
+            submited: "已提交"
+            authorized: "已核销"
+
+      remittance:
+        state:
+          states:
+            draft: "草稿"
+            complete: "已汇款"
+            validated: 已审核
+
+      send_list_line:
+        state:
+          states:
+            sended: "已送货"
+            posted: "已核销"
+            backed: "已退回"
+
+      short_fee_info:
+        state:
+          states:
+            draft: "草稿"
+            saved: "已保存"
+            offed: "已核销"
+
+      transit_deliver_info:
+        state:
+          states:
+            billed: "草稿"
+            deliveried: "已提货"
+
+      goods_fee_settlement_list:
+        state:
+          states:
+            draft: "草稿"
+            posted: "已确认"
+
+      adjust_fee_info:
+        state:
+          states:
+            billed: "草稿"
+            submited: "已上报"
+            authorized: "已审批"
+            denied: "已驳回"
+
+      adjust_goods_fee_info:
+        state:
+          states:
+            billed: "草稿"
+            submited: "已上报"
+            authorized: "已审批"
+            denied: "已驳回"
+
+
+      in_stock_bill:
+        state:
+          states:
+            billed: "草稿"
+            confirmed: "已确认"
+
+      debt_bill:
+        state:
+          states:
+            billed: "草稿"
+            confirmed: "已确认"
+
+      vip:
+        vip_state:
+          states:
+            draft: 草稿
+            audited: 已审核
+      task:
+        state:
+          states:
+            draft: 草稿
+            saved: 已保存
+            sended: 已下发
+            accepted: 已接收
+            finished: 已完成
+
+      scan_header:
+        state:
+          states:
+            draft: "草稿"
+            sorted_in: "已分拣入库"
+            loaded_in: "装卸组已入库"
+            loaded_out: "已装车"
+            inner_transit_loaded_in: "装卸组已入库"
+            inner_transit_loaded_out: "已装车"
+            transit_shipped: 已发车
+            shipped: 已发车
+
+      message:
+        state:
+          states:
+            draft: 草稿
+            published: 已发布
+
+      from_short_fee_info:
+        state:
+          states:
+            draft: 草稿
+            passed: 已通过
+            rejected: 已拒绝
+
+      short_list:
+        state:
+          states:
+            billed: 草稿
+            loaded: 已装车
+            shipped: 已发车
+            reached: 已到达
+
+      customer_payment_info:
+        state:
+          states:
+            draft: 草稿
+            customer_paid: 已付款
+            confirmed: 已确认
+      divide_rpt_yujiu:
+        state:
+          states:
+            draft: 草稿
+            saved: 已保存
+            confirmed: 已确认

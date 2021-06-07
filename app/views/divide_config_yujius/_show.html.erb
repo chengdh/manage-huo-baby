@@ -1,0 +1,27 @@
+<table class="table">
+  <tr>
+    <th>分理处/分公司</th>
+    <td> <%= resource.org %>
+  </tr>
+  <tr>
+    <th>始发货分成比例</th>
+    <td> <%= resource.rate_from%></td>
+  </tr>
+  <tr>
+    <th>返程货分成比例</th>
+    <td> <%= resource.rate_to %></td>
+  </tr>
+  <tr>
+    <th>内部中转始发货分成比例</th>
+    <td> <%= resource.rate_inner_transit_from %></td>
+  </tr>
+
+  <tr>
+    <th>内部中转返程货分成比例</th>
+    <td> <%= resource.rate_inner_transit_to %></td>
+  </tr>
+  <tr>
+    <th>外部中转分成比例</th>
+    <td> <%= resource.rate_outter_transit_from %></td>
+  </tr>
+</table>

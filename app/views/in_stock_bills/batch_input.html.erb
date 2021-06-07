@@ -1,0 +1,31 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <%= render "dynamic_toolbar" %>
+  </div>
+  <div class="content">
+    <h2 class="title">批量录入在库单</h2>
+    <div class="inner">
+      <%= render "form",:bill_selector => true %>
+      <div class='actions-bar'>
+        <%= link_to image_tag("plus-white.png") + "选择运单",carrying_bills_path(
+          show_or_hidden_fields.merge(
+            :format => :js,
+            :set_disable => 1,
+            "search[state_eq]" => "distributed",
+            "search[completed_eq]" => 0,
+            "search[type_in][]" => ["ComputerBill","HandBill","ReturnBill","AutoCalculateComputerBill","InnerTransitBill","HandInnerTransitBill"],
+          )),
+          :remote => true,
+          :id =>"btn_generate_in_stock_bills",
+          :class => 'tipsy sexybutton sexysimple sexyblue',
+          :disable_with => "查询中...",
+          :title => "查询要本地未提货票据" 
+        %>
+      </div>
+      <div id="table_wrap"></div>
+    </div>
+  </div>
+  <div class="secondary-navigation">
+    <%= render "dynamic_toolbar" %>
+  </div>
+</div>

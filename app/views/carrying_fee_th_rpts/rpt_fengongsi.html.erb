@@ -1,0 +1,39 @@
+<div class="block">
+  <%= render "toolbar_fengongsi" %>
+  <div class="content">
+    <h2 class="title"><%= title %></h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= select_year(Date.today, :field_name => 'year', :prefix => 'search') %>
+          <%= select_month(Date.today, :field_name => 'mth', :prefix => 'search') %>
+          <%= link_to "查询",rpt_fengongsi_carrying_fee_th_rpts_path(:a => :b,"search[year]" => Date.today.year,"search[mth]" => Date.today.month),
+            "data-href" => rpt_fengongsi_carrying_fee_th_rpts_path(:a => :b),
+            :class => "btn_query_carrying_fee_th_rpt sexybutton sexysimple sexyblue"
+          %>
+        </div>
+        </div>
+        <div style='overflow-x : auto;width : 100%;'>
+          <table class='table'>
+            <tr>
+              <th>机构</th>
+              <% @date_range.each do |date|%>
+                <th><%= date.day%></th>
+              <%end%>
+              <th>合计</th>
+            </tr>
+            <% @group_rpts.each do |from_org,lines|%>
+              <tr>
+              <th><%= from_org.name%></th>
+              <% @date_range.each do |date|%>
+                <td><%= lines.detect {|l| l.bill_date.eql?(date)}.try(:carrying_fee) %></td>
+              <%end%>
+              <td><%= lines.sum(&:carrying_fee)%></td>
+            </tr>
+          <%end%>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%= render "toolbar_fengongsi" %>
+  </div>

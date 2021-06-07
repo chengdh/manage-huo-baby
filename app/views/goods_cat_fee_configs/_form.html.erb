@@ -1,0 +1,46 @@
+<%= semantic_form_for resource ,:html => {:id => "#{resource_class.name.underscore}_form" } do |f|%>
+  <%= f.error_messages %>
+<table class='table'>
+  <tr>
+    <td>发货地</td>
+    <td><%= f.select :from_org_id,branches_for_select  %></td>
+    <td>到货地</td>
+    <td><%= f.select :to_org_id,branches_for_select  %></td>
+  </tr>
+</table>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>&nbsp;</td>
+      <td>类别</td>
+      <td>起步价(元)</td>
+      <td>系统默认价(元)</td>
+      <td>单价(元)</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% f.object.all_group_lines.each do |parent_cat,lines|%>
+    <tr><td colspan='5'><%= parent_cat.name %></td></tr>
+  <%= f.semantic_fields_for :goods_cat_fee_config_lines,lines do |f_line|%>
+    <tr>
+    <td>&nbsp;</td>
+    <td>
+      <%= f_line.hidden_field :goods_cat_id %>
+      <%= f_line.object.goods_cat.name %>
+    </td>
+    <td>
+      <%= f_line.text_field :bottom_price,:class => "bottom-price" %>
+    </td>
+    <td>
+      <%= hidden_field_tag :default_price,f_line.object.goods_cat.default_price,:class => "default-price" %>
+      <%= f_line.object.goods_cat.default_price%>
+    </td>
+    <td>
+      <%= f_line.text_field :unit_price,:class => "unit-price" %>
+    </td>
+  </tr>
+<%end%>
+<% end%>
+  </tbody>
+</table>
+<% end %>

@@ -1,0 +1,12 @@
+#到货通知
+notice_arrive:
+  sms: "宇玖速运货到%s,货号%s,货款%s元,地址:%s,电话%s"
+  phone: "您好,宇玖速运货物已到,稍后短信通知,请查收."
+  sms_batch: "%s  货到%s,运单%s,货款%s元,带证件提货,地址:%s,电话%s\r\n"
+
+#现金提款通知
+notice_cash_payment_list:
+  sms_batch: "%s  您的运单%s货款已到,请在周一至周六携带发货票 建行卡及有效证件到总公司办理.客服400-619-4448\r\n"
+
+#获取规章制度及通知公告的url地址
+messages_host: "http://bg.yanzhaowuliu.com"

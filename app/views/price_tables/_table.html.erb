@@ -1,0 +1,74 @@
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%= form_for PriceTable.search do |f|%>
+      <div class="city-group">
+        <select name="search[province_code_like]" class="city-select city-province">
+          <option value="">--省份--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+        <select name="search[city_code_like]"  class="city-select city-city">
+          <option value="">--城市--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+        <select name="search[district_code_like]" class="city-select city-district">
+          <option value="">--地区--</option>
+          <%= options_for_select ChinaCity.list %>
+        </select>
+
+        <%= f.select :to_org_id_eq,orgs_for_select,:prompt => "分公司" %>
+
+        <%= f.submit "查询",:class => "sexybutton sexysimple sexyblue" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<table class="table" id="price_index_index_table">
+  <thead>
+    <tr>
+      <td colspan="19">
+        备注说明：内部中转运费核算参考：两地价格相加X0.75（75%）= 运价;
+      </td>
+    </tr>
+    <tr>
+      <th>序号</th>
+      <th>到达站</th>
+      <th>单件(起步)/元</th>
+      <th>零担(公斤)/元</th>
+      <th>纯泡(方)/元</th>
+      <th>纯重(吨)/元</th>
+      <th>重泡(吨)/元</th>
+      <th>送货区域及费用</th>
+      <th>代收限额</th>
+      <th>备注</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%collection.each do |ab|%>
+      <tr class="<%= cycle 'odd', 'even' %>",title="双击显示详细信息" class='tipsy' data-dblclick='true'>
+        <td> <%= ab.order_by %>
+        <td><%= ab.to_org%></td>
+        <td><%= ab.price_1%></td>
+        <td><%= ab.price_5%></td>
+        <td><%= ab.price_2%></td>
+        <td><%= ab.price_4%></td>
+        <td><%= ab.price_3%></td>
+        <td><%= ab.price_6%></td>
+        <td><%= ab.price_7%></td>
+        <td><%= ab.note%></td>
+        <td>
+          <%= link_to "查看", resource_url(ab),:class => "show_link",:style => 'display : none;'%>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to image_tag("application--pencil.png"),  edit_resource_path(ab),:title => "修改当前记录",:class => "tipsy edit_link",:style => 'display : none;' if can? :update,ab %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to image_tag("cross.png"), ab,:method => :delete,:class =>"tipsy delete_link",:style => 'display : none;',:title => "删除该记录",:confirm => "你确定要删除吗?" if can? :destroy,ab%>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

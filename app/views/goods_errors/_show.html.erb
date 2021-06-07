@@ -1,0 +1,35 @@
+<table class='table'>
+  <tr>
+    <td>上报机构</td>
+    <td><%=resource.org.name%></td>
+    <td>上报日期</td>
+    <td><%=resource.bill_date.strftime("%Y-%m-%d")%></td>
+    <td>上报人</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <td>异常类型</td>
+    <td><%=resource.except_des %></td>
+    <td>异常数量</td>
+    <td><%=resource.except_num%></td>
+    <td colspan='2'></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='3'><%=resource.note%></td>
+    <td>状态</td>
+    <td><%=resource.human_state_name%></td>
+  </tr>
+  <%if resource.gerror_authorize.present?%>
+    <tr>
+      <td>核销时间</td>
+      <td><%=resource.gerror_authorize.bill_date.strftime("%Y-%m-%d")%></td>
+      <td colspan='3'>核销人</td>
+      <td><%=resource.gerror_authorize.user %></td>
+    </tr>
+    <tr>
+      <td>核销信息</td>
+      <td colspan='5'><%=resource.gerror_authorize.note %></td>
+    </tr>
+  <%end%>
+</table>

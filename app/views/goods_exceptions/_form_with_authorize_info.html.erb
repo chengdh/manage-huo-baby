@@ -1,0 +1,8 @@
+<%=f.semantic_fields_for :gexception_authorize_info do |a_info|%>
+  <%= a_info.inputs "授权核销信息" do%>
+    <%= a_info.hidden_field :user_id,:value => current_user.id if a_info.object.new_record?%>
+    <%= a_info.input :op_type,:as => :select,:collection => GexceptionAuthorizeInfo.op_types,:include_blank => false %>
+    <%= a_info.input :compensation_fee %>
+    <%= a_info.input :note ,:as => :string,:input_html => {:size => 100} %>
+  <%end%>
+<% end%>

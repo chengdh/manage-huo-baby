@@ -1,0 +1,15 @@
+<table class='table' data-detailUrl="<%=transit_deliver_info_carrying_bills_path(resource,show_or_hidden_fields)%>">
+  <tbody>
+    <tr>
+      <td>提货部门:</td>
+      <td><%="#{resource.org.name} | #{resource.user}" %></td>
+      <td>提货日期:</td>
+      <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    </tr>
+    <tr>
+      <td>备注:</td>
+      <td colspan="3"><%=resource.note%></td>
+    </tr>
+  </tbody>
+</table>
+<div id="table_wrap"></div>

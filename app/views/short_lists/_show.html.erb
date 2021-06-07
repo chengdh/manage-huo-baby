@@ -1,0 +1,31 @@
+<table class='table' data-detailUrl='<%=short_list_carrying_bills_path(resource,show_or_hidden_fields)%>'>
+  <tr>
+    <td>日期:</td>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <td>单据号:</td>
+    <td><%=resource.bill_no%></td>
+    <td>发货地:</td>
+    <td><%=resource.from_org_name%></td>
+    <td>到货地:</td>
+    <td><%=resource.to_org_name%></td>
+    <td>状态:</td>
+    <td><%=resource.human_state_name%></td>
+    <td>操作员:</td>
+    <td><%=resource.user%></td>
+  </tr>
+  <tr>
+    <td>司机:</td>
+    <td><%=resource.driver %></td>
+    <td>车牌号:</td>
+    <td><%=resource.vehicle_no %></td>
+    <td>收货人:</td>
+    <td><%=resource.try(:reached_user) %></td>
+    <td>收货时间:</td>
+    <td><%=resource.reached_datetime.try(:strftime,"%Y-%m-%d %H:%M") %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<div id="table_wrap" class="bill_selector"></div>

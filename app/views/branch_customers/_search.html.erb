@@ -1,0 +1,21 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <% if current_user.default_org.in_summary? %>
+      <%= f.input :org_id_eq,:label =>"所属机构",:as => :select,:collection => orgs_for_select,:include_blank => true %>
+    <% else %>
+    <%= f.input :org_id_eq,:label =>"所属机构",:as => :select,
+      :collection => branches_for_select,
+      :selected => current_user.default_org.id,
+      :include_blank => current_user.default_org.is_summary? %>
+    <% end %>
+    <%= f.input :deliver_region_id_eq,:label =>"所属区域",:as => :select,
+      :collection => deliver_regions_for_select(current_user.default_org_id),:prompt => "--选择送货区域--" %>
+
+    <%= f.input :name_or_mobile_or_mobile_2_or_mobile_3_or_mobile_4_or_mobile_5_like,:label =>"姓名/手机",:input_html => {:size => 30} %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询",:class => "sexybutton sexysimple sexyblue",:disable_with => "正在查询..." %>
+  <% end %>
+<% end%>

@@ -1,0 +1,32 @@
+<table  style='border-collapse : collapse;border : thin solid #000;' class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>所属机构</th>
+      <th>姓名</th>
+      <th>编号</th>
+      <th>联系电话</th>
+      <th>手机</th>
+      <th>身份证号</th>
+      <th>联系地址</th>
+      <th>银行</th>
+      <th>银行卡号</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@search.all.each_with_index do |v,index|%>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= v.org %></td>
+        <td><%= v.name  %></td>
+        <td>&nbsp;<%= v.code  %></td>
+        <td><%= v.phone %></td>
+        <td><%= v.mobile %></td>
+        <td>&nbsp;<%= v.id_number %></td>
+        <td><%= v.address %></td>
+        <td><%= v.bank %></td>
+        <td>&nbsp;<%= v.bank_card %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

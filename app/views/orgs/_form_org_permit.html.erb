@@ -1,0 +1,15 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "org_permit_form",:style => "width : 300px;"} do |f|%>
+  <%=f.error_messages %>
+  <h3><%= f.object.name  %></h3>
+  <%=f.hidden_field  :id %>
+  <%=f.inputs "请将运单录入时不允许显示的到货地打勾:" do %>
+    <table class="table">
+      <%=f.semantic_fields_for :org_permits,resource.all_org_permits!.select { |op| op.permit_org.parent_id.blank?} do |child_org_permit|%>
+        <%= render "org_permit_recursive",:org_permit => child_org_permit,:f => f %>
+      <%end%>
+    </table>
+  <%end%>
+  <%=f.actions do%>
+    <%= f.action :submit,:label => "保存",:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '正在保存...' } %>
+  <%end%>
+<%end%>

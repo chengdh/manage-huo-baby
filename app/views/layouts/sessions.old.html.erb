@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="chengdh" />
+    <meta name="keywords" content="物流,软件,系统" />
+    <meta name="description" content="基于互联网的第三方物流管理系统" />
+    <meta name="robots" content="all" />
+    <title><%="#{IlConfig.system_title}"%>-登录</title>
+    <%= stylesheet_link_tag 'il_login' %>
+    <!--[if IE 6]><%=stylesheet_link_tag :il_ie_stylesheets %><![endif]-->
+    <%= javascript_include_tag 'il_login_javascripts' %>
+    <!--[if lte IE 6]><%= javascript_include_tag :il_ie6_javascripts %><![endif]-->
+
+  </head>
+  <body class='login'>
+    <div id="header" class='clearfix'>
+      <h1><a href="http://www.strongu.com/" class="logo">创艺公司</a></h1>
+    </div>
+    <div id="login_content" >
+      <%= yield %>
+    </div>
+  </body>
+</html>

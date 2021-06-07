@@ -1,0 +1,41 @@
+<table class="table">
+  <tr>
+    <th>单据类型</th>
+    <td><%= resource.bill_type_des %></td>
+  </tr>
+  <tr>
+    <th>发货地</th>
+    <td> <%= resource.from_org %>
+  </tr>
+  <tr>
+    <th>发货地分成</th>
+    <td> <%= resource.from_org_divide_rate_des %></td>
+  </tr>
+  <tr>
+    <th>中转地</th>
+    <td> <%= resource.try(:transit_org) %></td>
+  </tr>
+  <tr>
+    <th>中转地分成</th>
+    <td> <%= resource.try(:transit_org_divide_rate_des) %></td>
+  </tr>
+
+  <tr>
+    <th>到货地</th>
+    <td> <%= resource.to_org %></td>
+  </tr>
+  <tr>
+    <th>到货地分成</th>
+    <td> <%= resource.try(:to_org_divide_rate_des) %></td>
+  </tr>
+
+  <tr>
+    <th>总部</th>
+    <td> <%= resource.try(:summary_org) %></td>
+  </tr>
+  <tr>
+    <th>总部分成</th>
+    <td> <%= resource.summary_org_divide_rate_des %></td>
+  </tr>
+</table>
+

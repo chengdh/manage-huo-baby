@@ -1,0 +1,5 @@
+<td>发货站</td>
+<td><%= f.select :from_org_id,current_ability_orgs_for_select,{},:readonly => true,:id => :from_org_id %></td>
+<td>到货站</td>
+<td><%= f.select :to_org_id,exclude_current_ability_orgs_for_select(false,false,false,true) ,{:include_blank => true},:class =>:select_org,:id =>:to_org_id %></td>
+<td colspan='2'>&lt;&lt;输入拼音可查询到货地</td>

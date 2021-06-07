@@ -1,0 +1,14 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "adjust_goods_fee_info_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do%>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record? %>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :org_id ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false %>
+    <%= f.input :op_org_id ,:as => :select,:collection => branches_for_select,:input_html => {:class => :op_org_id} %>
+    <%= f.input :adjust_goods_fee %>
+    <%= f.input :other_adjust_note,:hint => "调整支付方式,联系方式,备注等信息" %>
+    <%= f.input :note ,:as => :string,:input_html => {:size => 100} %>
+  <%end%>
+<% end%>
+<hr/>
+<%= render "form_before" %>

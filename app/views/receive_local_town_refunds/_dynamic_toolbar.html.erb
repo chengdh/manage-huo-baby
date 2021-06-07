@@ -1,0 +1,49 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show" or params[:action] == "edit"%>
+      <li>
+        <%= link_to image_tag("arrow-turn-180-left.png",:alt => "返回"),  :back,:title => "返回",:class => "tipsy" %>
+      </li>
+    <%end%>
+    <%if can? :read_arrive,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") , collection_path("search[state_eq]" => "refunded"),:title => "#{resource_class.model_name.human}列表",:class => "tipsy"  %>
+      </li>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <li><%= link_to image_tag("application-search-result.png",:alt => "查询#{resource_class.model_name.human}"),self.send("search_#{controller_name.tableize}_path"),:title => "查询#{resource_class.model_name.human}",:class => "fancybox tipsy" %></li>
+      <%end%>
+
+    <%end%>
+
+    <%if cannot? :read_arrive,resource_class and can? :read_confirmed,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid-snap.png",:alt => "待确认收款清单") , collection_path("search[state_eq]" => :refunded_confirmed),:title => "待确认收款清单",:class => "tipsy"  %>
+      </li>
+    <%end%>
+
+    <%if params[:action] == "show" or params[:action] =='process_handle'%>
+      <li>
+        <%= link_to image_tag("table-sum.png",:alt => "按发货地分组核算") , resource_path(resource,:show_group => 1),:title => "按发货地分组核算",:class => "tipsy"  %>
+      </li>
+      <%if can? :refound_confirm,resource %>
+        <li>
+          <%= link_to image_tag("auction-hammer--arrow.png",:alt => "收款确认") , process_handle_receive_local_town_refund_path(resource),:title => "收款确认",:class => "tipsy btn_process_handle"  %>
+        </li>
+      <%end%>
+      <li>
+        <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), params[:show_group].present? ? export_excel_receive_local_town_refund_path(resource,:show_group => 1) : export_excel_receive_local_town_refund_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+      </li>
+    <%end%>
+    <!--生成凭证-->
+    <%if can? :build_accounting_document_from_th,CarryingBill %>
+      <li>
+      <%= link_to image_tag("money--arrow.png",:alt => "生成凭证"),"#",
+        "data-href" => build_accounting_document_from_th_carrying_bills_path(:a => :b ),
+        :title => "凭证生成",:style => "display : none;",
+        :class => "tipsy btn_build_accounting_document_from_th"  %>
+    </li>
+  <%end%>
+
+  </ul>
+</div>

@@ -1,0 +1,52 @@
+<table class='table'>
+  <tr>
+    <th>付款机构</th>
+    <td><%= resource.from_org.try(:name )%></td>
+    <th>收款机构</th>
+    <td><%= resource.to_org.try(:name )%></td>
+    <th>返款清单日期</th>
+    <td><%= resource.bill_date.strftime("%Y-%m-%d") %></td>
+    <th>返款清单</th>
+    <td><%= link_to "#{resource.refound.bill_date.strftime("%Y-%m-%d")}/#{resource.refound.from_org.name}-#{resource.refound.to_org.name}", resource.refound %></td>
+  </tr>
+  <tr>
+    <th>应付合计</th>
+    <td colspan="3"><%= resource.should_fee + resource.inner_transit_refund_should_fee%></td>
+    <th>(其中郑发)</th>
+    <td><%= resource.should_fee %></td>
+    <th>(内部中转)</th>
+    <td><%= resource.inner_transit_refund_should_fee%></td>
+  </tr>
+</table>
+
+<%= form_for resource ,:remote => true,:html => {:id => "remittance_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <%= f.hidden_field :should_fee %>
+  <%= f.hidden_field :inner_transit_refund_should_fee%>
+  <%= f.hidden_field :state,:value => :complete %>
+  <table class="table">
+    <tr>
+      <th>实汇现金</th>
+      <td><%= f.text_field :act_fee,:size => 10 %>
+      <th>银联POS</th>
+      <td><%= f.text_field :pos_fee,:size => 10  %>
+    </tr>
+    <tr>
+      <th>快捷支付</th>
+      <td><%= f.text_field :quick_fee,:size => 10  %>
+      <th>其他方式</th>
+      <td><%= f.text_field :other_fee,:size => 10  %>
+    </tr>
+    <tr>
+      <th>实汇合计</th>
+      <td>&yen;<span class="total_fee"><%= f.object.total_fee %></span></td>
+      <th>差额</th>
+      <td>&yen;<span class="diff_fee"><%= f.object.diff_fee %></span></td>
+    </tr>
+    <tr>
+      <th>备注</th>
+      <td colspan="3"><%= f.text_field :note,:size => 150 %>
+    </tr>
+  </table>
+<% end%>

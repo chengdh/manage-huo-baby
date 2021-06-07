@@ -1,0 +1,14 @@
+<%= semantic_form_for FromShortFeeLine.search,:url => report_lines_from_short_fee_infos_path,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= f.inputs do %>
+    <%= f.input :from_short_fee_info_bill_date_gte,:label => "录入日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :from_short_fee_info_bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+
+    <%= f.input :from_short_fee_info_from_org_id_or_from_short_fee_info_to_org_id_eq,:label => "分理处/分公司",:as => :select,:collection => orgs_for_select %>
+    <%= f.input :from_short_fee_info_state_eq,:label => "申请单状态",:as => :select,:collection => from_short_fee_info_states_for_select %>
+
+    <%= f.input :bills_weather_deliveried,:label => "提货状态",:as => :select,:collection => carrying_bills_states_for_select%>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<%end%>

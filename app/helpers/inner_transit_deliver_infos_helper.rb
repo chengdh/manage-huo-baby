@@ -1,0 +1,2 @@
+module InnerTransitDeliverInfosHelper
+end

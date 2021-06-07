@@ -1,0 +1,11 @@
+<div class='actions-bar'>
+  <input type='text' size="10" class="search_box search_box_pay_info" data-params='{"search[state_eq]" : "payment_listed","search[completed_eq]" : 0,"search[type_in][]" : ["ComputerBill","AutoCalculateComputerBill","HandBill","ReturnBill"],"search[from_customer_id_is_not_null]" : 1,<%= show_or_hidden_fields_to_str%>,"show_multi" : "<%=params[:show_multi].present? ? 1 : ""%>"}'/>
+</div>
+<hr />
+<%if params[:show_multi].blank?%>
+  <div id="table_wrap" class='pay_info_list'></div>
+<%else%>
+  <div class='pay_info_list'>
+  <%= render "shared/carrying_bills/table_no_paginate" %>
+  </div>
+<%end%>

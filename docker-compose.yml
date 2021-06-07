@@ -1,0 +1,41 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.5.51
+    environment:
+      MYSQL_ROOT_PASSWORD: fizzbuzz
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-local
+    # command: bundle exec unicorn
+    command: bundle exec rails s
+    volumes:
+      # This seems to work as-is once you expose /Users to the boot2docker vm.
+      - il-yanzhao-sync:/il_yanzhao
+    links:
+      - mysql
+    ports:
+      - "5000:3000"
+    # dns: localhost
+    volumes_from:
+      - bundle
+
+  bundle:
+    # 'image' will vary depending on your docker-compose 
+    # project name. You may need to run `docker-compose build web`
+    # before this works.
+    image: il_yanzhao_new_web
+    command: echo "I'm a little data container, short and stout..."
+    volumes:
+      - bundle_data:/bundle
+
+volumes:
+  mysql_data:
+  bundle_data:
+  il-yanzhao-sync:
+    external: true

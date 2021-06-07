@@ -1,0 +1,38 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "role_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :name,:label => "角色名称",:hint => "无效的角色将不在用户管理中显示", :input_html => {:title => "必填字段"} %>
+    <%= f.input :is_active,:label =>"有效" %>
+  <% end %>
+  <% cache "role_sfs_#{resource.id}_#{resource.updated_at.to_i}" do %>
+    <table class='table' id="role_system_functions_list">
+      <%SystemFunctionGroup.where(:is_active => true).each do |group|%>
+        <thead>
+          <tr>
+            <th colspan='2'>
+              <%=group.name%>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%group.system_functions.each do |sf|%>
+            <tr>
+              <td>
+                <%=sf.subject_title%>
+              </td>
+              <td>
+                <%=f.semantic_fields_for :role_system_function_operates,resource.single_function_operates(sf) do |opt|%>
+                  <span style='width : 250px;padding-right : 20px;'>
+                    <%=opt.hidden_field :system_function_operate_id%>
+                    <%=opt.check_box :is_select %>
+                    <%=opt.label :is_select,opt.object.system_function_operate.name%>
+                  </span>
+                <%end%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      <%end%>
+    </table>
+  <%end%>
+<%end%>

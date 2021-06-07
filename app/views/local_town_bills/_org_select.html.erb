@@ -1,0 +1,5 @@
+<td>发货站</td>
+<td><%= f.select :from_org_id,current_ability_orgs_for_select,{},:readonly => true,:id => :from_org_id %></td>
+<td>到货地</td>
+<td><%= f.select :to_org_id,local_town_to_orgs_list(false,true),{:include_blank => true},:id =>:to_id,:class => "select_org"%></td>
+<td colspan="19"></td>

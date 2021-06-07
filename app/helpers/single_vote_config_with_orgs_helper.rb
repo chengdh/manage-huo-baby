@@ -1,0 +1,2 @@
+module SingleVoteConfigWithOrgsHelper
+end

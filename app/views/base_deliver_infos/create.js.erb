@@ -1,0 +1,9 @@
+<%if resource.valid? %>
+  var  url = '<%=resource_path(resource)%>';
+  <%if params[:print].present?%>
+    url = '<%=resource_path(resource,:print => 1)%>';
+  <%end%>
+  window.location = url;
+<%else%>
+  $('#<%="#{resource_class.name.underscore}_form_wrap" %>').html('<%= escape_javascript(render("form")) %>');
+<%end%>

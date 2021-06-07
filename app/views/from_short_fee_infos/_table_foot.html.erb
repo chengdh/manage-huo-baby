@@ -1,0 +1,9 @@
+<tfoot>
+  <tr>
+    <td colspan='5'>合计:</td>
+    <td><%= @search.all.sum(&:sum_from_short_carrying_fee) %></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</tfoot>

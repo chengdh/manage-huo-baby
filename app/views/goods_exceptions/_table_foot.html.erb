@@ -1,0 +1,12 @@
+<tfoot>
+  <tr>
+    <td colspan='5'>合计:</td>
+    <td><%= @search.all.sum(&:except_num) %></td>
+    <td><%= @search.all.sum(&:from_fee) %></td>
+    <td><%= @search.all.sum(&:to_fee)%></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</tfoot>

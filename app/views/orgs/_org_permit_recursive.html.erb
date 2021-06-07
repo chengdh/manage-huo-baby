@@ -1,0 +1,15 @@
+<!--此处是个递归-->
+<tr>
+  <td colspan='10'>
+    <%if org_permit.object.permit_org.parent_id.present?%>
+      &nbsp;&nbsp;
+    <%end%>
+    <%=org_permit.hidden_field :permit_org_id %>
+    <%=label_tag "select_org_#{org_permit.object.permit_org.id}",org_permit.object.permit_org.name%>
+    <%=org_permit.check_box :is_select,:id => "select_org_permit_#{org_permit.object.permit_org_id}"%>
+  </td>
+</tr>
+<%=f.semantic_fields_for :org_permits,resource.all_org_permits!.select {|the_org_permit| the_org_permit.permit_org.parent_id == org_permit.object.permit_org_id} do |child_org_permit|%>
+  <!--in recursive-->
+  <%= render "org_permit_recursive",:org_permit => child_org_permit,:f => f %>
+<%end%>

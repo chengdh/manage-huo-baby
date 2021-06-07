@@ -1,0 +1,90 @@
+<%
+    group_bills_by_from_org = @carrying_bills.group_by(&:from_org)
+    group_bills_by_to_org = @carrying_bills.group_by(&:to_org)
+    from_orgs = group_bills_by_from_org.keys
+    to_orgs = group_bills_by_to_org.keys
+%>
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">返程票营业额统计</h2>
+    <div class="inner">
+      <div class='actions-bar wat-cf'>
+        <div class='actions'>
+          <%= form_for @search,:html => {:id =>"form_search_rpt_turnover_for_refund"},:url => {:action => :rpt_turnover_for_refund} do |f|%>
+            <%# <%= f.select :to_org_id_in,orgs_option_groups_string,{},
+            <%#   :id => "select_to_org_ids_in_rpt_turnover",
+            <%#   :multiple => "multiple",
+            <%#   :class => "select_org_multi",
+            <%#   :style => "width : 300px;" %>
+            <%= select_tag "search[to_org_id_in][]",orgs_option_groups_string,
+              :id => "select_to_org_ids_in_rpt_turnover_for_refund",
+              :multiple => "multiple",
+              :class => "select_org_multi",
+              :style => "width : 300px;"
+            %>
+            <%= f.text_field :bill_date_gte,:class => "datepicker", :readonly => true,:size => 15 %>
+            &rarr;
+            <%= f.text_field :bill_date_lte,:class => "datepicker", :readonly => true,:size => 15 %>
+            <%= hidden_field_tag "search[type_in][]",'ComputerBill'%>
+            <%= hidden_field_tag "search[type_in][]",'AutoCalculateComputerBill'%>
+            <%= hidden_field_tag "search[type_in][]",'HandBill'%>
+            <%= hidden_field_tag "search[type_in][]",'ReturnBill'%>
+            &nbsp;&nbsp;
+            <%= f.submit "统计",:class => "sexybutton sexysimple sexyblue" %>
+          <%end%>
+        </div>
+      </div>
+      <div style='overflow-x : auto;width : 100%;'>
+        <table class='table' id='rpt_turnover_for_refund'>
+          <thead>
+            <tr>
+              <td>发货地</td>
+              <th>合计</th>
+              <th>货物数量</th>
+              <%to_orgs.each do |org|%>
+                <th><%= org.try(:name) %></th>
+              <%end%>
+            </tr>
+          </thead>
+          <tbody>
+            <%from_orgs.each do |from_org|%>
+              <tr>
+                <td><%=from_org.try(:name)%></td>
+                <td><%=group_bills_by_from_org[from_org].sum(&:sum_carrying_fee)%></td>
+                <td><%=group_bills_by_from_org[from_org].sum(&:sum_goods_num)%></td>
+                <%to_orgs.each do |to_org|%>
+                  <td>
+                    <% current_from_org_fee = group_bills_by_to_org[to_org].find {|bill| bill.from_org_id == from_org.id} %>
+                    <%=current_from_org_fee.present? ? current_from_org_fee.sum_carrying_fee : 0 %>
+                  </td>
+                <%end%>
+              </tr>
+            <%end%>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>合计</td>
+              <td><%=@carrying_bills.to_a.sum(&:sum_carrying_fee)%></td>
+              <td><%=@carrying_bills.to_a.sum(&:sum_goods_num)%></td>
+              <%to_orgs.each do |org|%>
+                <td><%=group_bills_by_to_org[org].sum(&:sum_carrying_fee)%></td>
+              <%end%>
+            </tr>
+            <tr>
+              <td>货物数量</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <%to_orgs.each do |org|%>
+                <td><%=group_bills_by_to_org[org].sum(&:sum_goods_num)%></td>
+              <%end%>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div id='table_wrap'>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

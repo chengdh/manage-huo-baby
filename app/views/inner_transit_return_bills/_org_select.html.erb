@@ -1,0 +1,8 @@
+<td>发货站</td>
+<td>
+  <%= f.select :from_org_id,current_ability_orgs_for_select,{},:readonly => true,:id => :from_org_id %>
+  <%= f.hidden_field :transit_org_id %>
+</td>
+<td>到货站</td>
+<td><%= f.select :to_org_id,orgs_for_select ,{:include_blank => true},:class =>:select_org,:id =>:to_org_id %></td>
+<td colspan='2'></td>

@@ -1,0 +1,38 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>客户姓名:</th>
+      <th><%= @customer.name %></th>
+      <th>手机:</th>
+      <th><%= @customer.mobile %></th>
+      <th>卡号:</th>
+      <th><%= @customer.code %></th>
+    </tr>
+  </thead>
+</table>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>月份</th>
+      <th>运费合计</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customer_fee_info_lines.each_with_index do |l,idx| %>
+      <tr>
+        <td> <%= idx+1 %></td>
+        <td> <%=  l.customer_fee_info.mth%>
+        <td> <%=  l.fee%>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td>合计:</td>
+      <td><%= @customer_fee_info_lines.sum(&:fee) %></td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,15 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 350px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :org_id_eq,:label =>"分理处/分公司",:as => :select,:collection => current_ability_orgs_for_select %>
+    <%= f.input :bill_date_gte,:label => "结算日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :transfer_date_gte,:label => "转账日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :transfer_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :state_eq,:label => "状态",:as => :select,:collection => post_info_states_for_select %>
+  <% end %>
+  <%=f.actions do %>
+    <%= f.action :submit,:label => :search,:button_html => { :class => "sexybutton sexysimple sexyblue",:disable_with => '查询中...' } %>
+  <% end %>
+<% end%>

@@ -1,0 +1,19 @@
+<%if can? :new_vote,VoteConfig%>
+  <!--
+  <li>
+  <%= link_to image_tag("list_28.png",:size => "16x16",:alt => "投票记录") , current_user_vote_index_single_vote_config_with_orgs_path,:title => "投票记录",:class => "tipsy"  %>
+  </li>
+  -->
+<%end%>
+
+<%if params[:action].eql?("new_vote") %>
+  <li>
+  <%= link_to image_tag("auction-hammer--arrow.png",:alt => "确认") , "#",:title => "投票确认",:class => "tipsy btn-single-vote-config-with-org-confirm"  %>
+  </li>
+<%end%>
+
+<%if params[:action].eql?("show") and can? :show_sum,resource %>
+  <li>
+  <%= link_to image_tag("chart_bar.png",:size => "16x16",:alt => "投票统计表") , show_sum_single_vote_config_with_org_path(resource),:title => "投票统计表",:class => "tipsy"  %>
+  </li>
+<%end%>

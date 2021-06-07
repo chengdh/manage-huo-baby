@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered">
+      <%if @carrying_bills.blank?%>
+        <tr class="danger">
+          <td colspan='8' style="text-align: center;">您所查询的运单不存在!</td>
+        </tr>
+      <%end%>
+      <tr>
+        <th>序号</th>
+        <th>运单号</th>
+        <th>起止点</th>
+        <th>发货人~收货人</th>
+        <!-- <th>付款方式</th> -->
+        <!-- <th>运费</th> -->
+        <th>代收货款</th>
+        <th>状态</th>
+        <th>提货日期</th>
+        <th>提款日期</th>
+      </tr>
+      <%@carrying_bills.each_with_index do |bill,i|%>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><%=bill.bill_no%></td>
+          <td>
+            <%=bill.from_org_name%>~<%=["TransitBill","HandTransitBill"].include?(bill.type) ? "#{bill.transit_org.name}~#{bill.area}" : bill.to_org_name%>
+          </td>
+          <td class='customer'>
+            <%=bill.from_customer_name%>
+            ~
+            <%=bill.to_customer_name%>
+          </td>
+          <!-- <td class='pay_type'><%=pay_type_des(bill.pay_type) %></td> -->
+          <!-- <td class="carrying_fee"><%=bill.carrying_fee %></td> -->
+          <td class="goods_fee"><%=bill.goods_fee %></td>
+          <td>
+            <%=bill.translate_state %>
+          </td>
+          <td class='deliver_date'><%=bill.deliver_info.try(:deliver_date)%></td>
+          <td class='pay_date'><%=bill.pay_info.try(:bill_date)%></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

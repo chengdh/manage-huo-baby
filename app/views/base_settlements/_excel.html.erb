@@ -1,0 +1,83 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    <tr>
+      <th colspan='16' style='text-align : center;font-size : 14px;'>(<%="#{resource.org_name}-#{resource.bill_date}" %>)结算员交款清单</th>
+    </tr>
+    <tr>
+      <th colspan='2'>货款</th>
+      <th colspan='2'>+运费[提]</th>
+      <th colspan='2'>+保险费[提]</th>
+      <th colspan='2'>+发货短途[提]</th>
+      <th colspan='2'>+到货短途[提]</th>
+      <th colspan='2'>-中转运费</th>
+      <th colspan='2'>-中转手续费</th>
+      <th colspan='2'>合计</th>
+    </tr>
+    <tr>
+      <td colspan='2'><span id='settlement_sum_goods_fee'><%= resource.sum_goods_fee %></span></td>
+      <td colspan='2'><span id='settlement_sum_carrying_fee_th'><%= resource.sum_carrying_fee_th %></span></td>
+      <td colspan='2'><span id='settlement_sum_insured_fee_th'><%= resource.sum_insured_fee_th %></span></td>
+      <td colspan='2'><span id='settlement_sum_from_short_carrying_fee_th'><%= resource.sum_from_short_carrying_fee_th %></span></td>
+      <td colspan='2'><span id='settlement_sum_to_short_carrying_fee_th'><%= resource.sum_to_short_carrying_fee_th %></span></td>
+      <td colspan='2'><span id='settlement_sum_transit_carrying_fee'><%=resource.sum_transit_carrying_fee %></span></td>
+      <td colspan='2'><span id='settlement_sum_transit_hand_fee'><%=resource.sum_transit_hand_fee %></span></td>
+      <td colspan='2'><span id='settlement_sum_th_amount'><%=resource.sum_th_amount %></span></td>
+    </tr>
+    <tr>
+      <td style='border : thin solid #000;'>序号</td>
+      <td style='border : thin solid #000;'>运单号</td>
+      <td style='border : thin solid #000;'>货号</td>
+      <td style='border : thin solid #000;'>发货人</td>
+      <td style='border : thin solid #000;'>收货人</td>
+      <td style='border : thin solid #000;'>运费[提]</td>
+      <td style='border : thin solid #000;'>保险费[提]</td>
+      <td style='border : thin solid #000;'>发货短途[提]</td>
+      <td style='border : thin solid #000;'>到货短途[提]</td>
+      <td style='border : thin solid #000;'>运费合计[提]</td>
+      <td style='border : thin solid #000;'>代收货款</td>
+      <td style='border : thin solid #000;'>中转运费</td>
+      <td style='border : thin solid #000;'>中转手续费</td>
+      <td style='border : thin solid #000;'>提货应收</td>
+      <td style='border : thin solid #000;'>运费支付方式</td>
+      <td style='border : thin solid #000;'>备注</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.each_with_index do |bill,index| %>
+      <tr>
+        <td style='border : thin solid #000;'><%= index + 1 %></td>
+        <td style='border : thin solid #000;'>&nbsp;<%= bill.bill_no %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_no %></td>
+        <td style='border : thin solid #000;'><%= bill.from_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.to_customer_name %></td>
+        <td style='border : thin solid #000;'><%= bill.carrying_fee_th %></td>
+        <td style='border : thin solid #000;'><%= bill.insured_fee_th %></td>
+        <td style='border : thin solid #000;'><%= bill.from_short_carrying_fee_th %></td>
+        <td style='border : thin solid #000;'><%= bill.to_short_carrying_fee_th %></td>
+        <td style='border : thin solid #000;'><%= bill.carrying_fee_th_total %></td>
+        <td style='border : thin solid #000;'><%= bill.goods_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.transit_carrying_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.transit_hand_fee%></td>
+        <td style='border : thin solid #000;'><%= bill.th_amount%></td>
+        <td style='border : thin solid #000;'><%= bill.pay_type_des%></td>
+        <td style='border : thin solid #000;'><%= bill.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='5' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%=resource.sum_carrying_fee_th%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_insured_fee_th%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_from_short_carrying_fee_th%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_to_short_carrying_fee_th%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_carrying_fee_th_total%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_goods_fee%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_transit_carrying_fee%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_transit_hand_fee%></td>
+      <td style='border : thin solid #000;'><%=resource.sum_th_amount %></td>
+      <td style='border : thin solid #000;'></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

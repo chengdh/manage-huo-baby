@@ -1,0 +1,62 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if params[:action] == "show"%>
+      <li>
+        <%= link_to image_tag("arrow-turn-180-left.png",:alt => "返回"),  :back,:title => "返回",:class => "tipsy" %>
+      </li>
+    <%end%>
+    <%if can? :read,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") ,
+          collection_path("search[state_or_audit_state_in]" => ["sended","rejected"]),
+          :title => "#{resource_class.model_name.human}列表",
+          :class => "tipsy"  %>
+      </li>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <li><%= link_to image_tag("application-search-result.png",:alt => "查询#{resource_class.model_name.human}"),self.send("search_#{controller_name.tableize}_path"),:title => "查询#{resource_class.model_name.human}",:class => "fancybox tipsy" %></li>
+      <%end%>
+    <%end%>
+
+    <%if params[:action] == "new_progress_page"%>
+      <li>
+        <%= link_to image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "#",
+          :title => "保存#{resource_class.model_name.human}",:class => "tipsy btn_save_progress"  %>
+      </li>
+    <% end  %>
+    <%if params[:action] == "show_finish_page"%>
+      <li>
+        <%= link_to image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "#",
+          :title => "保存#{resource_class.model_name.human}",:class => "tipsy btn_save_finish"  %>
+      </li>
+    <% end  %>
+
+    <%if params[:action] == "show" or params[:action] == 'process_handle'%>
+      <%if can? :do_accept,resource and resource.users.include?(current_user)%>
+        <li>
+          <%= link_to image_tag("auction-hammer--arrow.png",:alt => "接收任务") ,
+            process_handle_own_task_path(resource,:update_attrs => {:acceptor_id => current_user.id,:accept_date => Date.today}),
+            :title => "接收任务",
+            :class => "tipsy btn_process_handle"  %>
+        </li>
+      <%end%>
+      <%if can? :new_progress_page,resource%>
+        <li>
+          <%= link_to image_tag("vote_chart.png",:alt => "上报进度",:size => "20x20") ,
+            new_progress_page_own_task_path(resource),
+            :title => "上报进度",
+            :class => "tipsy"  %>
+        </li>
+      <%end%>
+
+      <%if can? :show_finish_page,resource%>
+        <li>
+          <%= link_to image_tag("auction-hammer--arrow.png",:alt => "任务完成",:size => '16x16') ,
+            show_finish_page_own_task_path(resource),
+            :title => "任务完成",
+            :class => "tipsy"  %>
+        </li>
+      <%end%>
+    <%end%>
+  </ul>
+</div>

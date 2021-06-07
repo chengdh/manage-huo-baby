@@ -1,0 +1,142 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="8" style="text-align: center;">运费分成明细表</th>
+    </tr>
+    <tr>
+      <th>分理处/分公司:</th>
+      <th colspan="7"><%= resource.org %></th>
+    </tr>
+    <tr>
+      <th>运费结算</th>
+      <th>金额</th>
+      <th>应补项目结算</th>
+      <th>金额</th>
+      <th>应扣项目结算</th>
+      <th>金额</th>
+      <th>其他应扣结算</th>
+      <th>金额</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>营业收入</td>
+      <td><%=resource.carrying_fee_from%></td>
+
+      <td><%=resource.plus_item_name_1%></td>
+      <td><%=resource.plus_fee_1%></td>
+
+      <td><%=resource.deduct_item_name_1%></td>
+      <td><%=resource.deduct_fee_1%></td>
+
+      <td><%=resource.other_deduct_item_name_1%></td>
+      <td><%=resource.other_deduct_fee_1%></td>
+    </tr>
+    <tr>
+      <td>分成额</td>
+      <td><%=resource.divide_carrying_fee_from%></td>
+      <td><%=resource.plus_item_name_2%></td>
+      <td><%=resource.plus_fee_2%></td>
+
+      <td><%=resource.deduct_item_name_2%></td>
+      <td><%=resource.deduct_fee_2%></td>
+
+      <td><%=resource.other_deduct_item_name_2%></td>
+      <td><%=resource.other_deduct_fee_2%></td>
+    </tr>
+
+    <tr>
+      <td>返程收入</td>
+      <td><%=resource.carrying_fee_to%></td>
+      <td><%=resource.plus_item_name_3%></td>
+      <td><%=resource.plus_fee_3%></td>
+
+      <td><%=resource.deduct_item_name_3%></td>
+      <td><%=resource.deduct_fee_3%></td>
+
+      <td><%=resource.other_deduct_item_name_3%></td>
+      <td><%=resource.other_deduct_fee_3%></td>
+    </tr>
+
+    <tr>
+      <td>分成额</td>
+
+      <td><%=resource.divide_carrying_fee_to%></td>
+      <td><%=resource.plus_item_name_4%></td>
+      <td><%=resource.plus_fee_4%></td>
+
+      <td><%=resource.deduct_item_name_4%></td>
+      <td><%=resource.deduct_fee_4%></td>
+
+      <td><%=resource.other_deduct_item_name_4%></td>
+      <td><%=resource.other_deduct_fee_4%></td>
+    </tr>
+    <tr>
+      <td>内部中转运费</td>
+      <td><%=resource.inner_transit_carrying_fee_from%></td>
+      <td><%=resource.plus_item_name_5%></td>
+      <td><%=resource.plus_fee_5%></td>
+
+      <td><%=resource.deduct_item_name_5%></td>
+      <td><%=resource.deduct_fee_5%></td>
+
+      <td><%=resource.other_deduct_item_name_5%></td>
+      <td><%=resource.other_deduct_fee_5%></td>
+    </tr>
+    <tr>
+      <td>分成额</td>
+      <td><%=resource.divide_inner_transit_carrying_fee_from%></td>
+      <td><%=resource.plus_item_name_6%></td>
+      <td><%=resource.plus_fee_6%></td>
+
+      <td><%=resource.deduct_item_name_6%></td>
+      <td><%=resource.deduct_fee_6%></td>
+
+      <td><%=resource.other_deduct_item_name_6%></td>
+      <td><%=resource.other_deduct_fee_6%></td>
+    </tr>
+
+    <tr>
+      <td>外部中转运费</td>
+      <td><%=resource.outter_transit_carrying_fee_from%></td>
+      <td><%=resource.plus_item_name_7%></td>
+      <td><%=resource.plus_fee_7%></td>
+
+      <td><%=resource.deduct_item_name_7%></td>
+      <td><%=resource.deduct_fee_7%></td>
+
+      <td><%=resource.other_deduct_item_name_7%></td>
+      <td><%=resource.other_deduct_fee_7%></td>
+    </tr>
+    <tr>
+      <td>分成额</td>
+      <td><%=resource.divide_outter_transit_carrying_fee_from %></td>
+      <td><%=resource.plus_item_name_8%></td>
+      <td><%=resource.plus_fee_8%></td>
+
+      <td><%=resource.deduct_item_name_8%></td>
+      <td><%=resource.deduct_fee_8%></td>
+
+      <td><%=resource.other_deduct_item_name_8%></td>
+      <td><%=resource.other_deduct_fee_8%></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>合计:</td>
+      <td><span id="sum_divide_fee"><%= resource.sum_divide_fee %></span></td>
+      <td>金额</td>
+      <td><span id="sum_plus_fee"><%= resource.sum_plus_fee %></span></td>
+      <td>金额</td>
+      <td><span id="sum_deduct_fee"><%= resource.sum_deduct_fee %></span></td>
+      <td>金额</td>
+      <td><span id="sum_other_deduct_fee"><%= resource.sum_other_deduct_fee %></span></td>
+    </tr>
+    <tr>
+      <td colspan="2">分部实提金额(人民币大写):</td>
+      <td colspan="4"><span id="sum_fee_chinese"><%= convertNumToChinese(resource.sum_fee) %></span></td>
+      <td>小写:</td>
+      <td><span id="sum_fee"><%= resource.sum_fee %></span></td>
+    </tr>
+  </tfoot>
+</table>

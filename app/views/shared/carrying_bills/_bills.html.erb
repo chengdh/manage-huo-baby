@@ -1,0 +1,68 @@
+<table class="table">
+  <tr>             
+    <th class="first">序号</th>
+    <th><%=sortable "bill_date","票据日期" %></th>
+    <th><%=sortable "bill_no","票号" %></th>
+    <th><%=sortable "goods_no","货号" %></th>
+    <th><%=sortable "from_org_id","发货地" %></th>
+    <th><%=sortable "to_org_id","到货地" %></th>
+    <th>发货人</th>
+    <th>收货人</th>
+    <th><%=sortable "pay_type","付款方式" %></th>
+    <th>运费</th>
+    <th>代收货款</th>
+    <th>保价费</th>
+    <th>&nbsp;</th>
+  </tr>
+  <% bills.each_with_index do |bill,index| %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td>
+        <%= order_no(index,params[:page]) %>
+      </td>
+      <td>
+        <%=bill.bill_date.strftime('%Y-%m-%d')%>
+      </td>
+      <td>
+        <%=bill.bill_no%>
+      </td>
+      <td>
+        <%=bill.goods_no%>
+      </td>
+      <td>
+        <%=bill.from_org_name%>
+      </td>
+      <td>
+        <%=bill.to_org_name%>
+      </td>
+      <td>
+        <%="#{bill.from_customer_name}(#{bill.from_customer_phone})"%>
+      </td>
+
+      <td>
+        <%="#{bill.to_customer_name}(#{bill.to_customer_phone})"%>
+      </td>
+      <td>
+        <%=pay_type_des(bill.pay_type) %>
+      </td>
+      <td>
+        <%=bill.carrying_fee %>
+      </td>
+      <td>
+        <%=bill.goods_fee %>
+      </td>
+      <td>
+        <%=bill.insured_fee %>
+      </td>
+      <td>
+        <%= link_to image_tag("application-document.png"),bill,:title => "查看或打印该运单",:class => "vtip" %> |
+        <%= link_to image_tag("application--pencil.png"), self.send("edit_#{@param_name}_path",bill),:title => "修改该运单",:class => "vtip" %> 
+      </td>
+    </tr>          
+  <% end -%>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate bills%>
+  </div>
+</div>
+

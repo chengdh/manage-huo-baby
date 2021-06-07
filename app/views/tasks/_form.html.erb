@@ -1,0 +1,47 @@
+<%= form_for resource, :html => {:id => "task_form"} do |f|%>
+  <%=f.error_messages %>
+  <table class="table">
+    <tr>
+      <th>任务标题:</th>
+      <td>
+        <%= f.hidden_field :creator_id,:value => current_user.id if f.object.new_record?%>
+        <%= f.text_field :title,:size => 60,:placeholder => "请输入任务标题" %>
+      </td>
+    </tr>
+    <tr>
+      <th>任务描述:</th>
+      <td>
+        <!-- 用于在内容中插入图片 -->
+        <input name="image_upload" type="file" id="upload_image_in_task_form" accept="image/*" style="display: none;" onchange="">
+        <%= f.text_area :content, :class => "tinymce",:placeholder => "请输入任务描述",:rows => 20, :cols => 120 %>
+      </td>
+    </tr>
+    <tr>
+      <th>完成时间:</th>
+      <td>
+        <%= f.text_field :plan_complete_date,:readonly => true,:size => 20,:class => 'datepicker' %>
+      </td>
+    </tr>
+    <tr>
+      <th>负责人:</th>
+      <td>
+        <%= select_tag :select_task_user,users_option_groups_string(true,false),
+          :multiple => "multiple",
+          :class => "select_user_multi",
+          "data-users" => resource.users.to_json,
+          :style => "width : 300px;" 
+        %>
+    </td>
+  </tr>
+  <tr>
+    <th>参与人:</th>
+    <td>
+      <%= select_tag :select_task_par_user,users_option_groups_string(true,false),
+        :multiple => "multiple",
+        :class => "select_user_multi",
+        "data-users" => resource.participation_users.to_json,
+        :style => "width : 300px;" %>
+    </td>
+</tr>
+</table>
+<% end%>

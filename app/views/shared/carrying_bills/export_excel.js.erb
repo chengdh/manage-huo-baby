@@ -1,0 +1,33 @@
+//删除换行和空格
+var render_table = '<%= escape_javascript(render "shared/carrying_bills/excel")%>'.replace(/\n\s*/g,"");
+var table_doc =$('<div/>').html(render_table);
+
+//处理显示问题
+var show_fields = '<%=params[:show_fields]%>';
+var hide_fields = '<%=params[:hide_fields]%>';
+//如果显示carrying_fee_total,carrying_fee_total_th,k_carrying_fee_total,则显示关联发货短途及到货短途
+var show_relate_fields = "";
+
+if(show_fields.indexOf('.carrying_fee_total') != -1)
+show_relate_fields +=',.from_short_carrying_fee,.to_short_carrying_fee';
+
+if(show_fields.indexOf('.carrying_fee_th_total') != -1)
+show_relate_fields +=',.from_short_carrying_fee_th,.to_short_carrying_fee_th';
+
+if(show_fields.indexOf('.k_carrying_fee_total') != -1)
+show_relate_fields +=',.k_from_short_carrying_fee,.k_to_short_carrying_fee';
+
+show_fields += show_relate_fields;
+table_doc.find(show_fields).removeClass('hide');
+table_doc.find(hide_fields).remove();
+table_doc.find(".hide").remove();
+table_doc.find('td,th,tr').removeAttr('class');
+//table_doc.css({border : 'thin solid #000'});
+var set_style = function(work_sheet){
+  work_sheet.Columns.ColumnWidth = 7;
+  work_sheet.Columns('A:A').ColumnWidth = 5;
+  work_sheet.Columns(2).ColumnWidth = 10; //日期
+  work_sheet.Columns(4).ColumnWidth = 15; //货号
+
+};
+$.export_excel_zip(table_doc.html());

@@ -1,0 +1,23 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "user_form",:class => "#{resource.new_record? ? 'new_user' : ''} #{params[:action] == 'reset_usb_pin' ? 'reset_usb_pin' : ''}"} do |f|%>
+  <%=f.error_messages %>
+  <%=f.inputs :username,:real_name,:is_admin,:is_active,:name => "用户信息" %>
+  <%=f.inputs :password,:password_confirmation,:name => "密码" %>
+  <%=f.inputs :name => "使用usb_key" do %>
+    <%=f.input :use_usb %>
+    <%=f.input :usb_pin,:as => :hidden %>
+  <%end%>
+  <%=f.inputs "选择角色" do %>
+    <%=f.semantic_fields_for :user_roles,resource.all_user_roles! do |user_role| %>
+      <%=user_role.hidden_field :role_id %>
+      <%=user_role.check_box :is_select%>
+      <%=user_role.label :is_select,user_role.object.role.name%>
+    <%end%>
+  <%end%>
+  <%=f.inputs "可访问机构" do %>
+    <table class="table">
+      <%=f.semantic_fields_for :user_orgs,resource.all_user_orgs!.select { |user_org| user_org.org.parent_id.blank?} do |user_org|%>
+        <%= render "user_org_recursive",:user_org => user_org,:f => f %>
+      <%end%>
+    </table>
+  <%end%>
+<%end%>

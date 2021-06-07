@@ -1,0 +1,38 @@
+<table class='table' data-detailUrl='<%=base_deliver_info_carrying_bills_path(resource,show_or_hidden_fields)%>'>
+  <tr>
+    <td>提货日期:</td>
+    <td><%= resource.deliver_date.strftime('%Y-%m-%d') %></td>
+    <td>提货人:</td>
+    <td>
+      <%=resource.customer_name %>
+    </td>
+    <td>身份证号:</td>
+    <td> <%=resource.customer_no %></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='5'>
+      <%=resource.note %>
+    </td>
+  </tr>
+  <tr>
+    <td>付款截图</td>
+    <td colspan='5'>
+      <% if resource.photo_1.present? %>
+        <%= link_to image_tag(resource.photo_1.url(:thumb)),resource.photo_1.url,:class => :fancybox %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<div id="table_wrap"></div>
+<!--自动打印使用-->
+<div style='display : none;'>
+  <%resource.carrying_bills.each do |bill|%>
+    <%= link_to_function "打印运单", "",
+      :class =>"tipsy #{params[:print].present? ? 'auto_print_bill' : ''}",
+      :title => "打印运单",
+      "data-print-template" => "#{render 'th_bill' }",
+      "data-bill" => bill.to_json(bill_to_json_methods),
+      "data-print" => "#{bill.to_print_json}" %>
+  <%end%>
+</div>

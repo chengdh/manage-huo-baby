@@ -1,0 +1,32 @@
+  <table class='table'>
+    <thead>
+      <tr>
+        <td colspan='4' class='text-center'><%= "#{resource.org}#{resource.mth}客户信息列表" %></td>
+      </tr>
+      <tr>
+        <td>序号</td>
+        <td>姓名</td>
+        <td>电话</td>
+        <td>运费合计</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%resource.customer_fee_info_lines.each_with_index do |cl,index|%>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= cl.name %></td>
+          <td><%= cl.phone%></td>
+          <td><%= cl.fee %></td>
+        </tr>
+      <%end%>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>&nbsp;</td>
+        <td>合计</td>
+        <td>共<%=resource.customer_fee_info_lines.count%>人</td>
+        <td>&yen;&nbsp;&nbsp;<%=resource.customer_fee_info_lines.sum(:fee)%></td>
+      </tr>
+    </tfoot>
+  </table>
+<%end%>

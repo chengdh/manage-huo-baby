@@ -1,0 +1,122 @@
+<!--不带分页的运单列表,在批量提货/批量提款时使用-->
+<table class="table" id="bills_table" >
+  <thead>
+    <tr>
+      <th class='bill_date' style='display : none;'>&nbsp;</td>
+      <th class='bill_no'>&nbsp;</td>
+      <th class='goods_no'>&nbsp;</td>
+      <th class='from_to'>&nbsp;</td>
+      <th class='customer'>总计</td>
+      <!--运费-->
+      <th class='pay_type'><span id="sum_count"></span></th>
+      <th class="carrying_fee"><span id="sum_carrying_fee"></span></th>
+      <th class="carrying_fee_th" style='display : none;'><span id="sum_carrying_fee_th"></span></th>
+      <th class="k_carrying_fee" style='display : none;'><span id="sum_k_carrying_fee"></span></th>
+      <!--保险费 -->
+      <th class="insured_fee text-center" style='display : none;'><span id="sum_insured_fee"></span></th>
+      <th class="insured_fee_th text-center" style='display : none;'><span id="sum_insured_fee_th"></span></th>
+      <th class="k_insured_fee text-center" style='display : none;'><span id="sum_k_insured_fee"></span></th>
+      <!--短途运费-->
+      <th class="from_short_carrying_fee text-center" style='display : none;'><span id="sum_from_short_carrying_fee"></span></th>
+      <th class="from_short_carrying_fee_th" style='display : none;'><span id="sum_from_short_carrying_fee_th"></span></th>
+      <th class="k_from_short_carrying_fee" style='display : none;'><span id="sum_k_from_short_carrying_fee"></span></th>
+      <th class="to_short_carrying_fee text-center" style='display : none;'><span id="sum_to_short_carrying_fee"></span></th>
+      <th class="to_short_carrying_fee_th" style='display : none;'><span id="sum_to_short_carrying_fee_th"></span></th>
+      <th class="k_to_short_carrying_fee" style='display : none;'><span id="sum_k_to_short_carrying_fee"></span></th>
+      <!--运费合计-->
+      <th class="carrying_fee_total text-center" style='display : none;'><span id="sum_carrying_fee_total"></span></th>
+      <th class="carrying_fee_th_total" style='display : none;'><span id="sum_carrying_fee_th_total"></span></th>
+      <th class="k_carrying_fee_total" style='display : none;'><span id="sum_k_carrying_fee_total"></span></th>
+
+      <!--代收货款-->
+      <th class="goods_fee"><span id="sum_goods_fee"></span></th>
+      <!--中转费用-->
+      <th class="transit_company" style='display : none;'>&nbsp;</th>
+      <th class="transit_bill_no" style='display : none;'>&nbsp;</th>
+      <th class="transit_bill_no_edit" style='display : none;'>&nbsp;</th>
+      <th class="transit_to_phone" style='display : none;'>&nbsp;</th>
+      <th class="transit_to_phone_edit" style='display : none;'>&nbsp;</th>
+
+      <th class="transit_carrying_fee" style='display : none;'><span id="sum_transit_carrying_fee"></span></th>
+      <th class="transit_carrying_fee_edit" style='display : none;'><span id="sum_transit_carrying_fee_edit"></span></th>
+      <th class="transit_hand_fee" style='display : none;'><span id="sum_transit_hand_fee"></span></th>
+      <th class="transit_hand_fee_edit" style='display : none;'><span id="sum_transit_hand_fee_edit"></span></th>
+      <th class="agent_carrying_fee" style='display : none;'><span id="sum_agent_carrying_fee"></span></th>
+      <th class="th_amount" style='display : none;'><span id="sum_th_amount"></span></th>
+
+      <!--手续费-->
+      <th class="k_hand_fee" style='display : none;'><span id="sum_k_hand_fee"></span></th>
+      <th class="act_pay_fee text-center" style='display : none;'><span id="sum_act_pay_fee"></span></th>
+
+
+      <!--其他-->
+      <th class="note">&nbsp;</td>
+      <th class="state" style='display : none;'>&nbsp;</td>
+      <th class="send_state" style='display : none;'>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+
+    <tr class='text-center'>
+      <th class='bill_date' style='display:none;'>开票日期</th>
+      <th class='bill_no'>票号</th>
+      <th class='goods_no'>货号</th>
+      <th class='from_to'>起止点</th>
+      <th class='customer'>发货人~收货人</th>
+      <!--运费-->
+      <th class='pay_type'>付款方式</th>
+      <th class="carrying_fee">运费</th>
+      <th class="carrying_fee_th" style='display : none;'>运费[提]</th>
+      <th class="k_carrying_fee" style='display : none;'>运费[扣]</th>
+      <!--保险费-->
+      <th class="insured_fee text-center" style='display : none;'>保险费</th>
+      <th class="insured_fee_th text-center" style='display : none;'>保险费[提]</th>
+      <th class="k_insured_fee text-center" style='display : none;'>保险费[扣]</th>
+      <!--短途运费-->
+      <th class="from_short_carrying_fee text-center" style='display : none;'>发货短途</th>
+      <th class="from_short_carrying_fee_th" style='display : none;'>发货短途[提]</span></th>
+      <th class="k_from_short_carrying_fee" style='display : none;'>发货短途[扣]</th>
+      <th class="to_short_carrying_fee text-center" style='display : none;'>到货短途</th>
+      <th class="to_short_carrying_fee_th" style='display : none;'>到货短途[提]</span></th>
+      <th class="k_to_short_carrying_fee" style='display : none;'>到货短途[扣]</th>
+      <!--运费合计-->
+      <th class="carrying_fee_total text-center" style='display : none;'>
+        <%=link_to_function '运费合计','',:class => "tipsy btn_carrying_fee_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+      <th class="carrying_fee_th_total" style='display : none;'>
+        <%=link_to_function '运费合计[提]','',:class => "tipsy btn_carrying_fee_th_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+      <th class="k_carrying_fee_total" style='display : none;'>
+        <%=link_to_function '运费合计[扣]','',:class => "tipsy btn_k_carrying_fee_total_toogle",:title => "点击切换显示组成明细费用" %>
+      </th>
+
+      <!--代收货款-->
+      <th class="goods_fee">代收货款</th>
+
+      <!--中转资料-->
+      <th class="transit_company" style='display : none;'>中转公司</th>
+      <th class="transit_bill_no" style='display : none;'>中转票号</th>
+      <th class="transit_bill_no_edit" style='display : none;'>中转票号</th>
+      <th class="transit_to_phone" style='display : none;'>到货电话</th>
+      <th class="transit_to_phone_edit" style='display : none;'>到货电话</th>
+
+      <!--中转费用-->
+      <th class="transit_carrying_fee" style='display : none;'>中转运费</th>
+      <th class="transit_carrying_fee_edit" style='display : none;'>中转运费</th>
+      <th class="transit_hand_fee" style='display : none;'>中转手续费</th>
+      <th class="transit_hand_fee_edit" style='display : none;'>中转手续费</th>
+      <th class="agent_carrying_fee" style='display : none;'>代收运费</th>
+      <th class="th_amount" style='display : none;'>提货应收</th>
+
+      <!--手续费-->
+      <th class="k_hand_fee" style='display : none;'>手续费[扣]</th>
+      <th class="act_pay_fee text-center" style='display : none;'>实提货款</th>
+
+      <!--其他-->
+      <th class="note">备注</th>
+      <th class="state" style='display : none;'>状态</th>
+      <th class="send state" style='display : none;'>送货状态</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody id='bills_table_body'></tbody>
+</table>

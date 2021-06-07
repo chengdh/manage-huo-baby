@@ -1,0 +1,24 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "#{resource_class.name.underscore}_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs :name,:simp_name  %>
+  <%= f.inputs do %>
+    <%= f.input :parent_id,:as => :select,:collection => orgs_for_select,:include_blank => true %>
+  <% end %>
+
+  <%=f.inputs :phone,:manager,:location,:code,:py %>
+  <%=f.inputs :is_visible,:is_active,:order_by %>
+  <%=f.inputs "选择机构" do %>
+
+    <table class="table">
+      <%=f.semantic_fields_for :org_load_orgs,resource.all_org_load_orgs! do |f_oso| %>
+        <tr>
+          <td>
+            <%= f_oso.hidden_field :org_id %>
+            <%= f_oso.check_box :is_select %>
+            <%= f_oso.label :is_select,f_oso.object.org.name %>
+          </td>
+        </tr>
+      <%end%>
+    </table>
+  <%end%>
+<% end %>

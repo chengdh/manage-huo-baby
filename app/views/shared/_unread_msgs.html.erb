@@ -1,0 +1,6 @@
+<!--通知列表-->
+<%if defined? @unread_messages%>
+  <%@unread_messages.each do|m|%>
+    <%= link_to(m.title,message_path(m,:format =>:js),:style => "display: none1;",:class => "fancybox unread_msg") %>
+  <%end%>
+<%end%>

@@ -1,0 +1,15 @@
+<div class='actions-bar'>
+  <%=label_tag "查询待核销运单:"%>
+  <%=text_field_tag :refound_bill_date_gte,1.months.ago.beginning_of_month.to_date,:readonly => true,:class => "datepicker",:size => 15%>
+  <%=label_tag "~"%>
+  <%=text_field_tag :refound_bill_date_lte,1.months.ago.end_of_month.to_date,:readonly => true,:class => "datepicker",:size => 15%>
+
+  <%= link_to image_tag("plus-white.png") + "发货短途费(提付/货款扣)-报销",carrying_bills_path,:remote => true,:id=>"btn_generate_from_short_fee_info", :class => 'tipsy sexybutton sexysimple sexyblue',:title => "发货短途费-报销" %>
+  <%= link_to image_tag("plus-white.png") + "到货短途费(提付)-报销",carrying_bills_path,:remote => true,:id=>"btn_generate_to_short_fee_info", :class => 'tipsy sexybutton sexysimple sexygreen',:title => "到货短途费-报销" %>
+
+  <%= link_to image_tag("plus-white.png") + "发货(现付/回执付)-报销",carrying_bills_path,:remote => true,:id=>"btn_generate_from_short_fee_info_cash", :class => 'tipsy sexybutton sexysimple',:title => "现付/回执付无货款发货短途费-报销" %>
+  <%= link_to image_tag("plus-white.png") + "到货(现付/回执付/货款扣)-报销",carrying_bills_path,:remote => true,:id=>"btn_generate_to_short_fee_info_cash", :class => 'tipsy sexybutton sexysimple',:title => "现付/回执付无货款到货短途费-报销" %>
+</div>
+<hr/>
+<div id="table_wrap">
+</div>

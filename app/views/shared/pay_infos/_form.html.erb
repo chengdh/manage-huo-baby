@@ -1,0 +1,18 @@
+<%= semantic_form_for resource,:remote => true,:html => {:id => "#{resource_class.name.underscore}_form",
+                                                         :class => "#{can?(:unlimited_account_name,resource) ? 'unlimited_account_name' : ''}"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:label => "提款日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :org_id,:label =>"分理处/分公司" ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id => "from_org_id"} %>
+    <%= f.input :customer_name,:label => "姓名" %>
+    <%= f.input :id_number,:label => "身份证号" %>
+    <%= f.input :mobile,:label => "手机号" %>
+    <%if f.object.respond_to?(:bank)%>
+      <%= f.input :bank,:label =>"开户行",:collection => banks_for_select,:include_blank => false%>
+    <%end%>
+    <%= f.input :account_name,:input_html => {:id => :account_name} %>
+    <%= f.input :account_no%>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <% end %>
+<% end%>

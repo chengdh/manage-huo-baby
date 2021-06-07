@@ -1,0 +1,26 @@
+<!--条码标签-->
+<table style='width: 100%;border-collapse : collapse;font-size : 12px;margin : 0;padding : 0;border: 1px sold #000;'>
+  <tr style="font-size: 14px;border: 1px solid #000;">
+    <td colspan="2" style="font-size: 14px;font-weight: bold;">
+      <%= IlConfig.client_name %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span>{bill_no}</span>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;"><div>目</div><div>的</div><div>地</div></td>
+    <td style="border: 1px solid #000;font-size: 15px;font-weight: bold;"><span>{to_org.name}</span><span>({to_customer_name})</span></td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;"><div>货</div><div>物</div><div>信</div><div>息</div></td>
+    <td style="border: 1px solid #000;">
+      <div style="float: left;font-size: 18px;font-weight: bold;margin-top: 5mm;">{seq}/{goods_num}</div>
+      <div class='barcode' style='float: left;margin : auto;'></div>
+      <!-- <div style='text&#45;align: right;'>{barcode}</div> -->
+    </td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #000;"><div>发</div><div>货</div><div>地</div></td>
+    <td style="border: 1px solid #000;">{from_org.name}&nbsp;&nbsp;&nbsp;&nbsp;{created_at_str}</td>
+  </tr>
+</table>

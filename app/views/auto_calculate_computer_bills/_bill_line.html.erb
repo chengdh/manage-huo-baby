@@ -1,0 +1,72 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>货物名称</th>
+      <th>数量</th>
+      <th>重量</th>
+      <th>体积</th>
+      <th>包装</th>
+      <th>单价</th>
+      <!--th>最低运费</th -->
+      <th>金额</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= f.fields_for :bill_lines do |f_bill_line|%>
+      <tr class='line_tr' style='display: none;'>
+        <td>
+          <%= f_bill_line.select :goods_cat_id,goods_cats_for_select,{:include_blank => true },:class => :goods_cat_id %>
+        </td>
+        <td>
+          <%= f_bill_line.text_field :qty,:size => 10,:class => :qty%>
+        </td>
+        <td>
+          <%= f_bill_line.text_field :weight,:size => 10,:class => :weight %>
+        </td>
+        <td>
+          <%= f_bill_line.text_field :volume,:size => 10,:class => :volume%>
+        </td>
+        <td>
+          <%= f_bill_line.text_field :package,:size => 10,:class => :package %>
+        </td>
+
+        <td>
+          <%= f_bill_line.text_field :price,:size => 10,:readonly => true,:class => :price %>&nbsp;&nbsp;<span>元/件</span>
+          <span class='bottom_price' style='display : none;'></span>
+        </td>
+        <td>
+          <%= f_bill_line.text_field :amt,:readonly => true,:class => :amt,:size => 10 %>
+        </td>
+        <td>
+          <%= link_to image_tag("minus_alt.png",:size => "16x16"), "#",:class => "btn-delete-line" %>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>&nbsp;</td>
+      <td><%= f.text_field :goods_num,:id => "goods_num",:size => 10,:readonly => true %></td>
+      <td colspan="2">调整运费(+/-):</td>
+      <td>&yen;&nbsp;&nbsp;<%= f.text_field :adjust_carrying_fee,:id => "adjust_carrying_fee",:size => 10 %></td>
+      <td>现运费:</td>
+      <td>
+        <span  style='display : none;'>原运费:</span>
+        <span  style='display : none;' class='origin_carrying_fee'></span>
+        &yen;&nbsp;&nbsp;<%= f.text_field :carrying_fee,:id => "carrying_fee",:size => 10,:readonly => true %>
+      </td>
+      <td>
+        <%= link_to_function "新增行","",:class => "btn-add-bill-line sexybutton sexysimple sexyblue" %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan='5'>&nbsp;</td>
+      <td>运费总计:</td>
+      <td>
+        &yen;&nbsp;&nbsp;<span class='sum_carrying_fee'></span>
+      </td>
+      <td><span class='sum_fee' style='display : none;'></span></td>
+    </tr>
+  </tfoot>
+</table>

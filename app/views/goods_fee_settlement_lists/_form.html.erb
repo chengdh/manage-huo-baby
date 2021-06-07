@@ -1,0 +1,138 @@
+<%= semantic_form_for resource ,:remote => true,:html =>{:id => "goods_fee_settlement_list_form"}  do |f|%>
+  <%=f.error_messages %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <td class='text-center' colspan='6'><%="#{IlConfig.client_name}分理处货款收支清单"%></td>
+      </tr>
+      <tr>
+        <td class='text-center' colspan='2'><%= resource.org %></td>
+        <td class='text-center' colspan='2'>&nbsp;</td>
+        <td class='text-center' colspan='2'><%= resource.bill_date %></td>
+      </tr>
+      <tr>
+        <td class='text-center' colspan='3'>收入</td>
+        <td class='text-center' colspan='3'>支出</td>
+      </tr>
+      <tr>
+        <td class='text-center'>&nbsp;</td>
+        <td class='text-center'>项目</td>
+        <td class='text-center'>金额</td>
+        <td class='text-center'>&nbsp;</td>
+        <td class='text-center'>项目</td>
+        <td class='text-center'>金额</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class='text-center' rowspan='6'>电脑录入</td>
+        <td class='text-center'>手续费</td>
+        <td><span id='amount_hand_fee_auto'><%= resource.amount_hand_fee_auto %></span></td>
+        <td class='text-center' rowspan='6'>电脑录入</td>
+        <td class='text-center' rowspan='12'>原代收货款</td>
+        <td rowspan='6'><span id='amount_goods_fee_auto'><%= resource.amount_goods_fee_auto %></span></td>
+      </tr>
+      <tr>
+        <td class='text-center'>货款扣运费</td>
+        <td><span id='amount_k_carrying_fee_auto'><%= resource.amount_k_carrying_fee_auto %></span></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣保险费</td>
+        <td><span id='amount_k_insured_fee_auto'><%= resource.amount_k_insured_fee_auto %></span></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣发货短途</td>
+        <td><span id='amount_k_from_short_carrying_fee_auto'><%= resource.amount_k_from_short_carrying_fee_auto %></span></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣到货短途</td>
+        <td><span id='amount_k_to_short_carrying_fee_auto'><%= resource.amount_k_to_short_carrying_fee_auto %></span></td>
+      </tr>
+
+
+
+      <tr>
+        <td class='text-center'>票据数</td>
+        <td><span id='amount_bills_auto'><%= resource.amount_bills_auto %></span></td>
+      </tr>
+      <tr>
+        <td class='text-center' rowspan='6'>手工录入</td>
+        <td class='text-center'>手续费</td>
+        <td><%= f.text_field :amount_hand_fee,:size => 10 %></td>
+        <td class='text-center' rowspan='6'>手工录入</td>
+        <td rowspan='6'><%= f.text_field :amount_goods_fee,:size => 10 %></td>
+      </tr>
+      <tr>
+        <td class='text-center'>货款扣运费</td>
+        <td><%= f.text_field :amount_k_carrying_fee,:size => 10 %></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣保险费</td>
+        <td><%= f.text_field :amount_k_insured_fee,:size => 10 %></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣发货短途</td>
+        <td><%= f.text_field :amount_k_from_short_carrying_fee,:size => 10 %></td>
+      </tr>
+      <tr>
+        <td class='text-center'>扣到货短途</td>
+        <td><%= f.text_field :amount_k_to_short_carrying_fee,:size => 10 %></td>
+      </tr>
+
+      <tr>
+        <td class='text-center'>票据数</td>
+        <td><%= f.text_field :amount_bills,:size => 10 %></td>
+      </tr>
+      <tr>
+        <td class='text-center'>实领金额</td>
+        <td colspan='2'><%= f.text_field :amount_fee,:size => 10 %></td>
+        <td class='text-center'>票据数合计</td>
+        <td colspan='2'><span id='sum_bills'><%=resource.sum_bills%></span></td>
+      </tr>
+      <tr>
+        <td class='text-center'>收入金额合计</td>
+        <td colspan='3'>
+          <span id='sum_income_fee_chinese'><%= convertNumToChinese(resource.sum_income_fee)%></span>
+        </td>
+        <td colspan='2'>
+          &yen;&nbsp;&nbsp;<span id='sum_income_fee'><%= resource.sum_income_fee%></span>
+        </td>
+      </tr>
+
+      <tr>
+        <td class='text-center'>支出金额合计</td>
+        <td colspan='3'>
+          <span id='sum_spending_fee_chinese'><%=convertNumToChinese resource.sum_spending_fee %></span>
+        </td>
+        <td colspan='2'>
+          &yen;&nbsp;&nbsp;<span id='sum_spending_fee'><%= resource.sum_spending_fee %></span>
+        </td>
+      </tr>
+      <tr>
+        <td class='text-center'>余款金额合计</td>
+        <td colspan='3'>
+          <span id='sum_rest_fee_chinese'><%=convertNumToChinese resource.sum_rest_fee %></span>
+        </td>
+        <td colspan='2'>
+          &yen;&nbsp;&nbsp;<span id='sum_rest_fee'><%= resource.sum_rest_fee %></span>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class='text-center'>交单人:</td>
+        <td class='text-center' colspan='2'><%= resource.user%></td>
+        <td class='text-center'>票据审核人:</td>
+        <td colspan='2' class='text-center'></td>
+      </tr>
+      <tr>
+        <td class='text-center'>财务分票人:</td>
+        <td class='text-center'></td>
+        <td class='text-center'>财务审核人:</td>
+        <td class='text-center'></td>
+        <td class='text-center'>总公司会计:</td>
+        <td class='text-center'></td>
+      </tr>
+    </tfoot>
+  </table>
+<%end%>

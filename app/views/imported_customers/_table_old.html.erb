@@ -1,0 +1,19 @@
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%= label_tag :imported_customer_org_id,"选择机构:" %>
+    <%if params[:search].present? and params[:search][:org_id_eq].present?%>
+      <%=select_tag :imported_customer_org_id,options_for_select(branches_for_select,:selected => params[:search][:org_id_eq]),:include_blank => true  %>
+    <%else%>
+      <%=select_tag :imported_customer_org_id,options_for_select(branches_for_select),:include_blank => true  %>
+    <%end%>
+  </div>
+</div>
+<ul class='tabs' id='imported_customers_tab'>
+  <li><%= link_to image_tag('diamond.png') + "钻石客户", collection_path("search[level_eq]" => CustomerLevelConfig::VIP_DIAMOND,:sort => :cur_fee,:direction => "DESC"),:remote => true,:class => :here %></li>
+  <li><%= link_to image_tag('medal.png')+"金卡客户", collection_path("search[level_eq]"=> CustomerLevelConfig::VIP_GOLD,:sort => :cur_fee,:direction => "DESC"),:remote => true %></li>
+  <li><%= link_to image_tag('medal-silver.png') + "银卡客户", collection_path("search[level_eq]"=> CustomerLevelConfig::VIP_SLIVER,:sort => :cur_fee,:direction => "DESC"),:remote => true %></li>
+  <li><%= link_to image_tag('mask.png') + "普通客户", collection_path("search[level_eq]"=> CustomerLevelConfig::VIP_NORMAL,:sort => :cur_fee,:direction => "DESC"),:remote => true %></li>
+</ul>
+<div id="customers_wrap">
+  <%= render 'customers' %>
+</div>

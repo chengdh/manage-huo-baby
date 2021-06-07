@@ -1,0 +1,60 @@
+<!-- <table class='table' data&#45;detailUrl='<%=base_refund_carrying_bills_path(resource.refound,:show_group => params[:show_group]) %>' data&#45;params='{"hide_fields": ".carrying_fee,.insured_fee","show_fields": ".carrying_fee_th,.th_amount"}'> -->
+<table class='table'>
+  <tr>
+    <th colspan="8" style="color: blue;font-weight: bold;"><%= resource.human_state_name %></th>
+  </tr>
+  <tr>
+    <th>付款机构</th>
+    <td><%= resource.from_org.try(:name )%></td>
+    <th>收款机构</th>
+    <td><%= resource.to_org.try(:name )%></td>
+    <th>返款清单日期</th>
+    <td><%= resource.bill_date.strftime("%Y-%m-%d") %></td>
+    <th>返款清单</th>
+    <td><%= "#{resource.refound.bill_date.strftime("%Y-%m-%d")}/#{resource.refound.from_org.name}-#{resource.refound.to_org.name}"%></td>
+  </tr>
+  <tr>
+    <th>应付金额</th>
+    <td colspan="3"><%= resource.should_fee + resource.inner_transit_refund_should_fee%></td>
+    <th>(其中郑发)</th>
+    <td><%= resource.should_fee %></td>
+    <th>(内部中转)</th>
+    <td><%= resource.inner_transit_refund_should_fee%></td>
+  </tr>
+  <tr>
+    <th>实汇现金</th>
+    <td><%= resource.act_fee %>
+    <th>银联POS</th>
+    <td><%= resource.pos_fee %>
+    <th>快捷支付</th>
+    <td><%= resource.quick_fee %>
+    <th>其他方式</th>
+    <td><%= resource.other_fee %>
+  </tr>
+  <tr>
+    <th>实汇合计</th>
+    <td colspan="3">
+      <%= resource.total_fee %>
+    </td>
+    <th>差额</th>
+    <td colspan="3">
+      <%= resource.diff_fee %>
+    </td>
+  </tr>
+  <tr>
+    <th>备注</th>
+    <td colspan="7"><%= resource.note%>
+  </tr>
+
+  <tr>
+    <th>汇款人</th>
+    <td><%= resource.user %></td>
+    <th>汇款时间</th>
+    <td><%= resource.bill_date %></td>
+    <th>审核人</th>
+    <td><%= resource.validate_user %></td>
+    <th>审核时间</th>
+    <td><%= resource.validate_date.try(:strftime,"%Y-%m-%d %H:%M")%></td>
+  </tr>
+</table>
+<div id="table_wrap"></div>

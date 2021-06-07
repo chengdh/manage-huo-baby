@@ -1,0 +1,74 @@
+<% sum_info = CarryingBill.search_sum(resource.carrying_bills.search)%>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>单据号:</th>
+      <th colspan='2'><%= resource.bill_no %></th>
+      <th>清单日期:</th>
+      <th colspan='2'><%= resource.bill_date %></th>
+      <th>发货地:</th>
+      <th colspan='2'><%= resource.from_org%></th>
+      <th>到货地:</th>
+      <th colspan='2'><%= resource.to_org%></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>备注:</th>
+      <th colspan='12'><%= resource.note %></th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th class='text-center'>序号</th>
+      <th class='text-center'>票号</th>
+      <th class='text-center'>货号</th>
+      <th class='text-center'>起止点</th>
+      <th class='text-center'>付款方式</th>
+      <th class='text-center'>运费</th>
+      <th class='text-center'>代收货款</th>
+      <th class='text-center'>保价费</th>
+      <th class='text-center'>运费合计</th>
+      <th class='text-center'>货物数量</th>
+      <th class='text-center'>装车数量</th>
+      <th class='text-center'>确认数量</th>
+      <th class='text-center'>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%
+      #排序
+    sorted = resource.act_load_list_lines.sort_by {|l| l.try(:order_by)}
+  %>
+    <% sorted.each_with_index do |line,index| %>
+      <tr>
+        <td><%= index + 1%></td>
+        <td>&nbsp;<%= line.carrying_bill.bill_no%></td>
+        <td><%= line.carrying_bill.goods_no%></td>
+        <td><%= line.carrying_bill.from_org%>~<%= line.carrying_bill.to_org%></td>
+        <td><%= pay_type_des line.carrying_bill.pay_type%></td>
+        <td><%= line.carrying_bill.carrying_fee%></td>
+        <td><%= line.carrying_bill.goods_fee%></td>
+        <td><%= line.carrying_bill.insured_fee%></td>
+        <td><%= line.carrying_bill.carrying_fee_total%></td>
+        <td><%= line.carrying_bill.goods_num %></td>
+        <td><%= line.load_num %></td>
+        <td></td>
+        <td><%= line.carrying_bill.note%></td>
+      </tr>
+    <%end%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class='text-right' colspan='4'>合计:</td>
+      <td>共<%= sum_info[:sum_count]%>票</td>
+      <td><%= sum_info[:sum_carrying_fee]%></td>
+      <td><%= sum_info[:sum_goods_fee]%></td>
+      <td><%= sum_info[:sum_insured_fee]%></td>
+      <td><%= sum_info[:sum_carrying_fee_total]%></td>
+      <td><%= sum_info[:sum_goods_num]%></td>
+      <td><%= resource.act_load_list_lines.sum(:load_num)%></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tfoot>
+</table>

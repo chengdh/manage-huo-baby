@@ -1,0 +1,30 @@
+<!--动态toolbar-->
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <%if can? :read,resource_class%>
+      <li class="first">
+        <%= link_to image_tag("grid.png",:alt => "#{resource_class.model_name.human}列表") ,
+          current_user.default_org.in_summary? ? remittances_path('search[to_org_id_in]' =>  current_user.current_ability_org_ids,'search[state_in]' => ['draft','complete'])
+          : remittances_path('search[from_org_id_in]' => current_user.current_ability_org_ids,'search[state_in]' => ['draft','complete']),
+          :title => "#{resource_class.model_name.human}列表",:class => "tipsy"  %>
+      </li>
+      <%if self.respond_to?("search_#{controller_name.tableize}_path")%>
+        <li><%= link_to image_tag("application-search-result.png",:alt => "查询#{resource_class.model_name.human}"),self.send("search_#{controller_name.tableize}_path"),:title => "查询#{resource_class.model_name.human}",:class => "fancybox tipsy" %></li>
+      <%end%>
+    <%end%>
+    <%if params[:action] == "edit"%>
+      <li>
+        <%= link_to image_tag("disk-black.png",:alt => "保存#{resource_class.model_name.human}"), "#",
+          :id=> "btn_submit_remittance_form",:title => "保存#{resource_class.model_name.human}",:class => "tipsy"  %>
+      </li>
+    <%end%>
+    <%if params[:action] == "show"%>
+      <%if can? :update,resource%>
+        <li>
+          <%= link_to image_tag("application--pencil.png",:alt => "录入汇款记录"),  edit_resource_path(resource),:title => "录入汇款记录",:class => "tipsy" %>
+        </li>
+      <%end%>
+    <%end%>
+    <%= render "extra_toolbar" %>
+  </ul>
+</div>

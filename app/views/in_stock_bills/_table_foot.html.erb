@@ -1,0 +1,16 @@
+<tfoot>
+  <tr>
+    <td>合计:</td>
+    <td></td>
+    <td></td>
+    <td><%= @in_stock_bills.sum(&:bills_count)%>票</td>
+    <td><%= @in_stock_bills.sum(&:sum_goods_fee)%></td>
+    <td><%= @in_stock_bills.sum(&:sum_carrying_fee_th)%></td>
+    <td><%= @in_stock_bills.sum(&:sum_from_short_carrying_fee_th)%></td>
+    <td><%= @in_stock_bills.sum(&:sum_to_short_carrying_fee_th)%></td>
+    <td><%= @in_stock_bills.sum(&:sum_insured_fee_th)%></td>
+    <td><%= @in_stock_bills.sum(&:sum_manage_fee_th)%></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tfoot>

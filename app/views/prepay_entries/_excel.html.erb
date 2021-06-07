@@ -1,0 +1,27 @@
+<!--导出数据到excel-->
+<table class='table'>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>分公司</th>
+      <th>日期</th>
+      <th>备注</th>
+      <th>借方金额</th>
+      <th>贷方金额</th>
+      <th>余额</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @search.all.each_with_index do |a,i| %>
+  <tr>
+    <td><%= i+1 %></td>
+    <td><%= a.org %></td>
+    <td><%= a.bill_date %></td>
+    <td><%= a.note %></td>
+    <td><%= a.debit %></td>
+    <td><%= a.credit %></td>
+    <td><%= a.balance %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

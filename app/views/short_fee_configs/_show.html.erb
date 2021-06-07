@@ -1,0 +1,42 @@
+<table class='table'>
+  <tr>
+    <td>名称:</td>
+    <td colspan="3"><%=resource.name %></td>
+  </tr>
+  <tr>
+    <td>发货地:</td>
+    <td><%=resource.from_org %></td>
+    <td>到货地:</td>
+    <td><%=resource.to_org%></td>
+  </tr>
+  <tr>
+    <td>运费</td>
+    <td><%=resource.operator %></td>
+    <td><%=resource.carrying_fee %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>生成发货短途费比例</td>
+    <td><%=resource.from_short_fee_rate %></td>
+    <td>固定发货短途费金额</td>
+    <td><%=resource.fixed_from_short_fee %></td>
+  </tr>
+
+  <tr>
+    <td>生成到货短途费比例</td>
+    <td><%=resource.short_fee_rate %></td>
+    <td>固定到货短途费金额</td>
+    <td><%=resource.fixed_short_fee %></td>
+  </tr>
+  
+  <tr>
+    <td>备注</td>
+    <td colspan="3"><%=resource.note %></td>
+  </tr>
+  <tr>
+    <td>有效</td>
+    <td><%=resource.is_active %></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>

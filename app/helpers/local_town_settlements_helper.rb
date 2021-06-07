@@ -1,0 +1,2 @@
+module LocalTownSettlementsHelper
+end

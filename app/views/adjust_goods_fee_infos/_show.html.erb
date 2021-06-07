@@ -1,0 +1,40 @@
+<table class='table' id="adjust_fee_info_show">
+  <tr>
+    <td>状态</td>
+    <td><%=resource.human_state_name%></td>
+    <td>上报人</td>
+    <td><%=resource.user%></td>
+  </tr>
+
+  <tr>
+    <td>上报机构</td>
+    <td><%=resource.org.name%></td>
+    <td>上报日期</td>
+    <td><%=resource.created_at.strftime("%Y-%m-%d %H:%M")%></td>
+  </tr>
+  <tr>
+    <td>审批人</td>
+    <td><%=resource.try(:op_user)%></td>
+    <td>审批时间</td>
+    <td><%=resource.op_datetime.try(:strftime,"%Y-%m-%d %H:%M")%></td>
+  </tr>
+
+
+  <tr>
+    <td>调整金额</td>
+    <td><%=resource.adjust_goods_fee %></td>
+    <td>运单号/货号</td>
+    <td>
+      <%=link_to "#{resource.carrying_bill.bill_no}/#{resource.carrying_bill.goods_no}",polymorphic_path(resource.carrying_bill,:format => :js),:class => 'fancybox'%>
+    </td>
+  </tr>
+  <tr>
+    <td>其他调整</td>
+    <td colspan='3'><%=resource.other_adjust_note %></td>
+  </tr>
+
+  <tr>
+    <td>备注</td>
+    <td colspan='3'><%=resource.note%></td>
+  </tr>
+</table>

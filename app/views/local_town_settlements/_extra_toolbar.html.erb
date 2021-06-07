@@ -1,0 +1,25 @@
+<%if params[:action] == "show" or params[:action] == "process_handle"%>
+  <!--暂时去除了该功能
+  <%if can? :direct_refunded_confirmed,resource%>
+    <li>
+      <%= link_to image_tag("calendar-task.png",:alt => "中转交款确认"), direct_refunded_confirmed_settlement_path(resource),:method => :put,:title => "中转交款确认",:class => "tipsy"  %>
+    </li>
+  <%end%>
+  -->
+  <!--生成凭证-->
+  <%if can? :build_accounting_document_to_th,CarryingBill %>
+      <li>
+      <%= link_to image_tag("money--arrow.png",:alt => "生成凭证"), build_accounting_document_to_th_carrying_bills_path(:search => {:settlement_id_eq => resource.id }),:title => "凭证生成",:class => "tipsy"  %>
+      </li>
+  <%end%>
+
+  <%if can? :settlement_confirm,resource%>
+    <li>
+      <%= link_to image_tag("blue-folder-stamp.png",:alt => "交款确认") , process_handle_local_town_settlement_path(resource),:title => "交款确认",:class => "tipsy"  %>
+    </li>
+  <%end%>
+
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_local_town_settlement_path(resource),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>

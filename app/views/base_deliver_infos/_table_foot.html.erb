@@ -1,0 +1,18 @@
+<tfoot>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>合计:</td>
+    <td><%= collection.sum(&:sum_bills_count)%>票</td>
+    <td><%= collection.sum(&:sum_carrying_fee_th)%></td>
+    <td><%= collection.sum(&:sum_insured_fee_th)%></td>
+    <td><%= collection.sum(&:sum_from_short_carrying_fee_th)%></td>
+    <td><%= collection.sum(&:sum_to_short_carrying_fee_th)%></td>
+    <td><%= collection.sum(&:sum_carrying_fee_th_total)%></td>
+    <td><%= collection.sum(&:sum_goods_fee)%></td>
+    <td><%= collection.sum(&:sum_th_amount)%></td>
+    <td></td>
+  </tr>
+</tfoot>

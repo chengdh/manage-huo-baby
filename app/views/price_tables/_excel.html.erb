@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>到达站</th>
+      <th>单件/起步</th>
+      <th>纯泡/方</th>
+      <th>重泡/吨</th>
+      <th>纯重/吨</th>
+      <th>零担/公斤</th>
+      <th>零担/公斤</th>
+      <th>送货区域及费用</th>
+      <th>代收限额</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%collection.each do |ab|%>
+      <tr>
+        <td> <%= ab.order_by %>
+        <td><%= ab.to_org%></td>
+        <td><%= ab.price_1%></td>
+        <td><%= ab.price_2%></td>
+        <td><%= ab.price_3%></td>
+        <td><%= ab.price_4%></td>
+        <td><%= ab.price_5%></td>
+        <td><%= ab.price_6%></td>
+        <td><%= ab.price_7%></td>
+        <td><%= ab.note%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+

@@ -1,0 +1,12 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :sender_id_eq,:label =>"送货人",:collection => current_ability_senders %>
+    <%= f.input :bill_date_gte,:label => "清单日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true,:value => Date.today} %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询清单",:class => "sexybutton sexysimple sexyblue" %>
+  <% end %>
+<% end%>

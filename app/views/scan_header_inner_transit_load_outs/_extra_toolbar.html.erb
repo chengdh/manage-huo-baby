@@ -1,0 +1,11 @@
+<%if params[:action] == "show" %>
+  <%if can? :ship,resource%>
+    <li>
+      <%= link_to image_tag("auction-hammer--arrow.png",:alt => "发车处理"),
+        ship_scan_header_inner_transit_load_out_path(resource),
+        :title => "发车处理",
+        :method => :put,
+        :class => "tipsy btn_process_handle"  %>
+    </li>
+  <%end%>
+<%end%>

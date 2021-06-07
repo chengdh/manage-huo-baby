@@ -1,0 +1,18 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <div class="inner">
+      <ul class='tabs'>
+        <li><a  class='here tab_accounting_document' href='#'>记账凭证</a></li>
+        <li><a href='#' class='tab_accounting_document_detail'>附表</a></li>
+      </ul>
+      <div class='accounting_document_wrap'>
+        <%= render :partial => 'shared/accounting_document',:locals => {:cr_lines => @cr_lines,:dr_lines => @dr_lines,:context => @context} %>  
+      </div>
+      <div class='accounting_document_detail_wrap' style='display : none;'>
+        <%= render :partial => 'shared/accounting_document_detail',:locals => {:cr_detail_lines => @cr_detail_lines,:dr_detail_lines => @dr_detail_lines,:context => @context}  %>  
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

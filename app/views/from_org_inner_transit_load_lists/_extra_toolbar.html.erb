@@ -1,0 +1,37 @@
+<%if params[:action] == "show" or params[:action] == 'process_handle'%>
+  <%if can? :ship_from_org,resource%>
+    <li>
+      <%= link_to image_tag("auction-hammer--arrow.png",:alt => "发货处理") ,
+        process_handle_from_org_inner_transit_load_list_path(resource),
+        :title => "发货处理",
+        :class => "tipsy btn_process_handle"  %>
+    </li>
+  <%end%>
+
+  <%if can? :build_act_load_list,resource%>
+    <li>
+      <%= link_to image_tag("act-load-list.png",:alt => "生成实际装车清单",:size => '16x16') ,
+        build_act_load_list_from_org_inner_transit_load_list_path(resource),
+        :title => "生成实际装车清单",
+        :class => "tipsy"  %>
+    </li>
+  <%end%>
+
+  <%if can? :export_from_org,resource%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"),
+      export_excel_from_org_inner_transit_load_list_path(resource),
+      :title => "导出为EXCEL",
+      :class => "tipsy"  %>
+  </li>
+  <%end%>
+<%end%>
+
+<%if params[:action] == "build_act_load_list" %>
+  <li>
+    <%= link_to_function image_tag("disk-black.png",:alt => "保存实际装车清单"),
+      "$('#act_load_list_form').trigger('submit')",
+      :title => "保存实际装车清单",
+      :class => "tipsy btn_save"  %>
+  </li>
+<%end%>

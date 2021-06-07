@@ -1,0 +1,25 @@
+<div class='actions-bar'>
+  <%= link_to image_tag("plus-white.png") + "选择短驳已到货的运单", search_carrying_bills_path(
+  show_or_hidden_fields.merge(:format => :js,:set_disable => 1)),
+  :id =>"btn_generate_load_list_for_short_list_reached",
+  :class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+  :title => "录入查询条件,查询要短驳已到货的运单" %>
+
+
+  <%= link_to image_tag("plus-white.png") + "选择要装车的运单", search_carrying_bills_path(
+    show_or_hidden_fields.merge(:format => :js,:set_disable => 1)),
+  :id =>"btn_generate_load_list",
+  :class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+  :title => "录入查询条件,查询状态为草稿的运单" %>
+  <%#
+  <%# <%= link_to image_tag("plus-white.png") + "选择已经入库的运单", search_carrying_bills_path(
+  <%# show_or_hidden_fields.merge(:format => :js,:set_disable => 1)),
+  <%# :id =>"btn_generate_load_list_for_load_in",
+  <%# :class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+  <%# :title => "录入查询条件,查询要装车的运单" %>
+  <%#
+  <%# <%=hidden_field_tag :state_in,"","data-states" => [:billed,:short_list_loaded,:short_list_shipped,:short_list_reached,:sorted_in,:loaded_in]%>
+  <%=hidden_field_tag :state_eq,"billed"%>
+  <%=hidden_field_tag :type_in,"","data-type" => ['ComputerBill','HandBill','ReturnBill','AutoCalculateComputerBill'].to_json %>
+</div>
+<div id="table_wrap"></div>

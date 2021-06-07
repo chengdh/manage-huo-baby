@@ -1,0 +1,2 @@
+module LoadListWithBarcodesHelper
+end

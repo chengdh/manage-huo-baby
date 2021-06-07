@@ -1,0 +1,55 @@
+<!--导出数据到excel-->
+<table class='table'>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>上报机构</th>
+      <th>上报日期</th>
+      <th>上报人</th>
+      <th>运单号</th>
+      <th>货号</th>
+      <th>发货地</th>
+      <th>到货地</th>
+      <th>原运费</th>
+      <th>调整金额</th>
+      <th>调整后运费</th>
+      <th>状态</th>
+      <th>处理机构</th>
+      <th>处理时间</th>
+      <th>处理人</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @search.all.each_with_index do |a,i| %>
+  <tr>
+    <td><%= i + 1 %></td>
+    <td><%= a.org %></td>
+    <td><%= a.bill_date %></td>
+    <td><%= a.user %></td>
+    <td><%= a.carrying_bill.try(:bill_no) %></td>
+    <td><%= a.carrying_bill.try(:goods_no) %></td>
+    <td><%= a.carrying_bill.try(:from_org) %></td>
+    <td><%= a.carrying_bill.try(:to_org) %></td>
+    <td><%= a.origin_carrying_fee %></td>
+    <td><%= a.adjust_fee %></td>
+    <td><%= a.after_adjust_carrying_fee %></td>
+    <td><%= a.human_state_name %></td>
+    <td><%= a.op_org %></td>
+    <td><%= a.op_datetime %></td>
+    <td><%= a.op_user %></td>
+  </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='6'>合计:</td>
+      <td><%= @search.sum(:origin_carrying_fee) %></td>
+      <td><%= @search.sum(:adjust_fee) %></td>
+      <td><%= @search.sum(:origin_carrying_fee) + @search.sum(:adjust_fee) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,2 @@
+module ArriveBranchInventoriesHelper
+end

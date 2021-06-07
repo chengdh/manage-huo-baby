@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>机构名称</th>
+      <th>简称</th>
+      <th>第一负责人</th>
+      <th>手机</th>
+      <th>第二负责人</th>
+      <th>手机</th>
+      <th>联系电话</th>
+      <th>所在地</th>
+      <th>地址</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_address_books.each do |ab|%>
+      <tr>
+        <td> <%= ab.order_by %>
+        <td><%= ab.name%></td>
+        <td><%= ab.simp_name%></td>
+        <td><%= ab.leader %></td>
+        <td><%= ab.leader_mobile %></td>
+        <td><%= ab.second_leader %></td>
+        <td><%= ab.second_leader_mobile %></td>
+        <td><%= ab.phone %></td>
+        <td><%= ab.location %></td>
+        <td><%= ab.address %></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

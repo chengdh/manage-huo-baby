@@ -1,0 +1,41 @@
+<table class='table'>
+  <tr>
+    <td>发货地</td>
+    <td><%= resource.from_org.try(:name)  %></td>
+    <td>到货地</td>
+    <td><%= resource.to_org.try(:name)  %></td>
+  </tr>
+</table>
+<table class='table'>
+  <thead>
+    <tr>
+      <td>&nbsp;</td>
+      <td>类别</td>
+      <td>起步价(元)</td>
+      <td>系统默认价(元)</td>
+      <td>单价(元)</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% resource.all_group_lines.each do |parent_cat,lines|%>
+      <tr><td colspan='5'><%= parent_cat.name %></td></tr>
+      <% lines.each do |l|%>
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <%= l.goods_cat.name %>
+          </td>
+          <td>
+            <%= l.bottom_price %>
+          </td>
+          <td>
+            <%= l.goods_cat.default_price %>
+          </td>
+          <td>
+            <%= l.unit_price %>
+          </td>
+        </tr>
+      <%end%>
+    <% end%>
+  </tbody>
+</table>

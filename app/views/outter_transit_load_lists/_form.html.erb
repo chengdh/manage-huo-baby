@@ -1,0 +1,23 @@
+<%= semantic_form_for resource, :remote => true,:html => {:id => "outter_transit_load_list_form",:class => "bill_selector"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :bill_no,:hint => "装车单编号",:input_html => {:title => "必填字段"} %>
+    <li class="checkbox">
+      <%= check_box_tag :is_outter_transit_return %>
+      <%= label_tag :is_outter_transit_return,"处理退货单" %>
+    </li>
+    <%= f.input :from_org_id,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id => "from_org_id"} %>
+  <% end %>
+
+  <%= f.inputs :class => "outter_transit_to_org_id_with_yards_wrapper" do %>
+      <%= f.input :to_org_id,:as => :select,:collection => all_yards_for_select,:include_blank => false,:input_html => {:id => :transit_org_id,:rel => "transit_org_id_yards"} %>
+  <% end %>
+  <%= f.inputs :class => "outter_transit_to_org_id_with_branches_wrapper",:style => "display : none;" do %>
+    <%= f.input :to_org_id,:as => :select,:collection => branches_for_select_ex,:include_blank => false,:input_html => {:id => :transit_org_id,:disabled => true,:rel => "transit_org_id_branches"} %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <% end %>
+<% end%>

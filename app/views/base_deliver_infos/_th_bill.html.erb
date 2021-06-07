@@ -1,0 +1,171 @@
+<!--提货单-->
+<table style='border-collapse : collapse;font-size : 12px;margin : 0;padding : 0;'>
+  <tr>
+    <td style="border-right : 1px dotted #000;padding : 0 5px 0 0;">
+      <table style='border-collapse : collapse;margin-right : 5mm;table-layout:fixed;width : 85mm;font-size : 13px;'>
+        <tr>
+          <td colspan='4' style='text-align : center;'>
+            <h4 style="padding : 0;margin : 0;"><%= IlConfig.client_name%></h4>
+            <h4 style="padding : 5px;margin : 0;">客户提货存根</h4>
+          </td>
+        </tr>
+        <tr>
+          <td style='width : 20mm;'>起&nbsp;&nbsp;止&nbsp;&nbsp;地:</td>
+          <td style='width : 40mm;' colspan='2'>{from_to_description}</td>
+          <td style='width : 20mm;'>{bill_date}</td>
+        </tr>
+
+        <tr>
+          <td>支付方式:</td>
+          <td>{pay_type_des}</td>
+          <td>票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
+          <td>{bill_no}</td>
+        </tr>
+        <tr>
+          <td>货&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
+          <td  style="font-weight : bold;font-size : 14px;text-decoration : underline;" colspan='2'>{goods_no}</td>
+          <td  style="font-weight : bold;font-size : 14px;">{is_receipt_des}</td>
+        </tr>
+        <tr>
+          <td>发&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+          <td>{from_customer_name}</td>
+          <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+          <td>{from_customer_mobile}</td>
+        </tr>
+        <tr>
+          <td>收&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+          <td>{to_customer_name}</td>
+          <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+          <td>{to_customer_mobile}</td>
+        </tr>
+        <tr>
+          <td>货物名称:</td>
+          <td>{goods_info}</td>
+          <td>数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量:</td>
+          <td>{goods_num}</td>
+        </tr>
+        <tr>
+          <td>运费合计(含服务费):</td>
+          <td style="font-size : 14px;font-weight : bold;">{carrying_fee_total}&nbsp;&nbsp;元</td>
+          <td>保险费:</td>
+          <td style="font-size : 14px;font-weight : bold;">{insured_fee}&nbsp;&nbsp;元</td>
+
+          <!-- <td>其中服务费:</td> -->
+          <!-- <td>{service_fee}&#38;nbsp;&#38;nbsp;元&#38;nbsp;&#38;nbsp;&#38;nbsp;{to_short_carrying_fee_flag}</td> -->
+        </tr>
+        <tr>
+          <td>代收货款:</td>
+          <td style="font-size : 14px;font-weight : bold;">{goods_fee}&nbsp;&nbsp;元</td>
+          <td>提货应收:</td>
+          <td style="font-size : 14px;font-weight : bold;">{th_amount}&nbsp;&nbsp;元</td>
+        </tr>
+        <tr>
+          <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
+          <td colspan='3'>{note}</td>
+        </tr>
+        <tr>
+          <td>客户地址:</td>
+          <td colspan='3' style='border-bottom : 1px dotted #000;'>{deliver_region}</td>
+        </tr>
+        <tr>
+          <td>身份证号:</td>
+          <td colspan='3' style='border-bottom : 1px dotted #000;'></td>
+        </tr>
+        <tr>
+          <td colspan='2'>提货人签字:</td>
+          <td colspan='2'></td>
+        </tr>
+        <tr>
+          <td colspan='4' style="text-align : right;">{th_bill_print_count}</td>
+        </tr>
+
+      </table>
+    </td>
+    <td style="padding : 0 0 0 5px;">
+      <table style='border-collapse : collapse;table-layout : fixed;margin-left : 5mm;width : 100mm;font-size : 13px;'>
+        <tr>
+          <td colspan='4' style='text-align : center;'>
+            <h4 style="padding : 0;margin : 0;"><%= IlConfig.client_name%></h4>
+            <h4 style="padding : 5px;margin : 0;">客户提货单</h4>
+          </td>
+        </tr>
+        <tr>
+          <td style='width : 25mm;'>起&nbsp;&nbsp;止&nbsp;&nbsp;地:</td>
+          <td style='width : 40mm;' colspan='2'>{from_to_description}</td>
+          <td style='width : 25mm;'>{bill_date}</td>
+        </tr>
+
+        <tr>
+          <td>支付方式:</td>
+          <td>{pay_type_des}</td>
+          <td>票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
+          <td>{bill_no}</td>
+        </tr>
+        <tr>
+          <td style='width : 20mm;'>货&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
+          <td  style="font-weight : bold;font-size : 14px;text-decoration : underline;" colspan='2'>{goods_no}</td>
+          <td  style="font-weight : bold;font-size : 14px;">{is_receipt_des}</td>
+        </tr>
+
+        <tr>
+          <td>发&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+          <td>{from_customer_name}</td>
+          <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+          <td>{from_customer_mobile}</td>
+        </tr>
+        <tr>
+          <td>收&nbsp;&nbsp;货&nbsp;&nbsp;人:</td>
+          <td>{to_customer_name}</td>
+          <td>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</td>
+          <td>{to_customer_mobile}</td>
+        </tr>
+        <tr>
+          <td>货物名称:</td>
+          <td>{goods_info}</td>
+          <td>数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量:</td>
+          <td>{goods_num}</td>
+        </tr>
+        <tr>
+          <td>运费合计:</td>
+          <td style="font-size : 14px;font-weight : bold;">{carrying_fee_total}&nbsp;&nbsp;元</td>
+          <td>保险费:</td>
+          <td>{insured_fee}&nbsp;&nbsp;元</td>
+        </tr>
+        <tr>
+          <td>代收货款:</td>
+          <td style="font-size : 14px;font-weight : bold;">{goods_fee}&nbsp;&nbsp;元</td>
+          <td>提货应付:</td>
+          <td style="font-size : 14px;font-weight : bold;">{th_amount}&nbsp;&nbsp;元</td>
+        </tr>
+
+        <tr>
+          <td>应付代收货款:</td>
+          <td style="font-size : 14px;font-weight : bold;">{act_pay_fee}&nbsp;&nbsp;元</td>
+          <td>应收款:</td>
+          <td style="font-size : 14px;font-weight : bold;">{carrying_fee_th_total_plus_k_hand_fee}&nbsp;&nbsp;元</td>
+        </tr>
+
+        <!--
+        <tr>
+          <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
+          <td colspan='3'>{note}</td>
+        </tr>
+        -->
+        <tr>
+          <td>分部电话:</td>
+          <td colspan='3'>{transit_org.phone}{to_org.phone}</td>
+        </tr>
+        <tr>
+          <td colspan='3'>(备注:运费合计含短途/叉车/等费用)</td>
+          <!-- <td rowspan="4"><%= image_tag(IlConfig.weixin_qr_logo,:size => "64x64")%></td> -->
+          <td rowspan="4">
+            <img src="{from_customer_qrcode}" alt="from customer qr code",style="height: 45px;width: 45px;">
+          </td>
+        </tr>
+        <tr>
+          <td colspan='3'>全国统一客服电话:400-618-5856</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,1161 @@
+zh-CN:
+  "false": "否"
+  "true": "是"
+
+  flash:
+    actions:
+      create:
+        notice: "%{resource_name} 保存成功!"
+
+  formtastic:
+    actions:
+        create: "保存"
+        update: "更新数据"
+        reset: "表单重置"
+        cancel: "取消"
+        submit: "提交"
+        search: "查询"
+
+  activerecord:
+
+    models:
+      bank: "银行信息"  #g
+      carrying_bill: "运输单"  #g
+      cash_payment_list: "代收货款支付清单(现金)"  #g
+      cash_pay_info: "客户提款信息(现金)"  #g
+      claim: "理赔信息"  #g
+      computer_bill: "机打运单"  #g
+      auto_calculate_computer_bill: "机打运单-自动计算运费"  #g
+      ton_volume_bill: "机打运单-按照吨/方计费"  #g
+      branch_bill: "分公司手工运单"  #g
+      config_cash: "手续费设置(现金)"  #g
+      config_transit: "手续费设置(转账)"  #g
+      customer: "客户资料"  #g
+      customer_fee_info: "客户运费信息"  #g
+      customer_fee_info_line: "客户运费信息明细"  #g
+      customer_level_config: "客户级别设置"  #g
+      base_deliver_info: "提货信息"  #g
+      department: "科室"  #g
+      base_distribution_list: "分货清单"  #g
+      gexception_authorize_info: "货物异常审核信息"  #g
+      role_system_function_operate: "角色权限"  #g
+      sender: "送货员"  #g
+      send_list: "送货清单"  #g
+      send_list_back: "送货员未交票统计"  #g
+      send_list_line: "送货清单明细"  #g
+      send_list_post: "送货核销清单"  #g
+      base_settlement: "结算员交款清单"  #g
+      short_fee_info: "短途运费核销信息"  #g
+      system_function: "系统功能"  #g
+      system_function_group: "系统功能分类"  #g
+      system_function_operate: "功能-操作"  #g
+      transfer_payment_list: "代收货款支付清单(转账)"  #g
+      summary_org_transfer_payment_list: "返程货-代收货款支付清单"  #g
+      summary_org_inner_transit_transfer_payment_list: "内部中转-总部代收货款转账支付清单"  #g
+      summary_org_outter_transit_transfer_payment_list: "外部中转-总部代收货款转账支付清单"  #g
+      summary_org_local_town_transfer_payment_list: "同城-总部代收货款转账支付清单"  #g
+      transfer_pay_info: "客户提款信息(转账)"  #g
+      transit_bill: "中转运单"  #g
+      transit_company: "中转公司资料"  #g
+      transit_deliver_info: "中转运单提货信息"  #g
+      transit_info: "货物中转信息"  #g
+      user: "用户"  #g
+      user_role: "用户角色"  #g
+      vip: "贵宾资料"  #g
+      goods_exception_identify: "货物异常信息责任鉴定"  #g
+      hand_bill: "手工运单"  #g
+      hand_transit_bill: "手工中转运单"  #g
+      il_config: "系统设置"  #g
+      imported_customer: "客户资料"  #g
+      branch_customer: "机构客户资料"  #g
+      journal: "帐目盘点登记表"  #g
+      base_load_list: "货物运输清单"  #g
+      outter_transit_load_list: 外部中转-货物运输清单
+      inner_transit_load_list: 内部中转-货物运输清单
+      org: "组织机构"  #g
+      org_sorting: "分拣组"  #g
+      org_load: "装卸组"  #g
+      payment_list: "代收货款支付清单"  #g
+      pay_info: "代收货款支付信息"  #g
+      base_post_info: "客户提款结算清单"  #g
+      base_refund: "返款清单"  #g
+      remittance: "汇款记录"   #g
+      return_bill: "退货单"  #g
+      role: "角色"  #g
+      branch: "分理处/分公司"  #g
+      goods_exception: "货物异常信息"  #g
+      goods_error: "多货信息"  #g
+      role_org: "角色-机构"  #g
+      area: "中转到货地"
+      notify: "通知提醒"
+      goods_fee_settlement_list: "分理处货款收支清单"
+      act_load_list: "装车清单"
+      act_load_list_line: "装车清单明细"
+      goods_cat: 货物分类
+      goods_cat_fee_config: 货物分类-运费设置
+      goods_cat_fee_config_line: 货物分类-运费设置明细
+      notice: 到货通知清单
+      notice_line: 到货通知清单明细
+      branch_inventory: 分理处盘货单
+      yard_inventory: 分公司盘货单
+      transit_load_list: 中转装车单
+      transit_org_load_list: 中转到货单
+      to_org_load_list:  中转到货单
+      adjust_fee_info: 运费调整申请
+      adjust_goods_fee_info: 货款调整申请
+      in_stock_bill: 在库清单
+      in_stock_bill_line: 在库清单明细
+      debt_bill: 欠款提货清单
+      debt_bill_line: 欠款提货清单明细
+      prepay_entry: 预付款凭证
+      base_vote_config: 投票设置
+      votable_item: 投票对象
+      rpt_from_org_mth: 统计对比图
+      local_town_bill: 同城快运-运单
+      hand_local_town_bill: 同城快运-手工运单
+      local_town_load_list: 同城快运-运输清单
+      local_town_distribution_list: 同城快运-分货清单
+      local_town_settlement: 同城快运-结算员交款清单
+      local_town_refund: 同城快运-返款单
+      local_town_cash_payment_list: 同城快运-货款支付清单(现金)
+      local_town_transfer_payment_list: 同城快运-货款支付清单(转帐)
+      local_town_cash_pay_info: 同城快运-客户提款(现金)
+      local_town_transfer_pay_info: 同城快运-客户提款(转账)
+      local_town_post_info: 同城快运-客户提款结算清单
+      address_book: 通讯录
+      short_fee_config: 短途费生成设置
+      deliver_region: 送货区域
+      fee_unit: 计量单位
+      price_list: 分公司运价单
+      price_list_line: 运价单明细
+      divide_list: 分理处分成比例表
+      divide_config: 票据分成设置
+      scan_header_sorting_in: 分拣组入库单
+      scan_header_load_in: 装卸组入库单
+      scan_header_load_out: 装卸组出库单
+      scan_header_inner_transit_load_in: 内部中转-装卸组入库单
+      scan_header_inner_transit_load_out: 内部中转-装卸组出库单
+      scan_header_local_town_load_in: 同城-装卸组入库单
+      scan_header_local_town_load_out: 同城-装卸组出库单
+      scan_header_sub_branch: 分理处装车单
+      scan_header_team: 装卸量统计单
+      message: 系统弹出通知
+      deposit: 保证金
+      price_table: 收货价格参考表
+      task: 工作任务
+      message: 通知公告
+      region: 区域划分
+      region_divide_config: 内部中转分成设置
+      from_short_fee_info: 发货短途费申报
+      short_list: 短驳单
+      customer_payment_info: "[月结回执]收款"
+      customer_payment_info_line: "[月结回执]收款明细"
+      divide_config_yujiu: 运费分成设置-宇玖
+      divide_rpt_yujiu: 运费分成表-宇玖
+
+    attributes:
+      public_attrs:
+        from_org_id: "发货地"
+        to_org_id: "到货地"
+        org_id: "所属机构"
+        user_id: "操作员"
+        transit_org_id: "中转地"
+        created_at: "录入时间"
+        updated_at: "最后修改"
+        bill_date: "单据日期"
+        bill_no: 清单号
+        note: "备注"
+        is_active: "有效标志"
+        human_state_name: "状态"
+        user: "操作员"
+        bank: "银行"
+        carrying_bill: "运单"
+        org: "机构"
+        from_org: "发货地"
+        to_org: "到货地"
+        is_active: "有效"
+        note: "备注"
+        order_by: 排序
+        state: 状态
+        state_desc: 状态
+
+      area:
+        name: 名称
+        simp_name: 简称
+        order_by: 排序
+        is_active: 有效
+        note: 备注
+
+      bank:
+        name: "名称"  #g
+        code: "编码"  #g
+        is_active: "有效"  #g
+
+      carrying_bill:
+        bill_date: "票据日期"  #g
+        bill_no: "运单编号"  #g
+        goods_no: "货号"  #g
+        from_org_id: "发货地"
+        transit_org_id: "中转地"
+        to_org_id: "到货地"
+        customer_code: "客户编号"
+        insured_rate_disp: "保价比例"
+        from_customer_name: "发货人"  #g
+        from_customer_phone: "发货人电话"  #g
+        from_customer_mobile: "发货人手机"  #g
+        from_customer_bank_card: "帐号"
+        from_customer_code: "客户编码"
+        from_customer_bank_name: "开户行"
+        to_customer_name: "收货人"  #g
+        to_customer_phone: "收货人电话"  #g
+        to_customer_mobile: "收货人手机"  #g
+        to_area: "到货地"  #g
+        insured_amount: "保价金额"  #g
+        insured_rate: "保价比例"  #g
+        insured_fee: "保价费"  #g
+        carrying_fee: "运费"  #g
+        goods_fee: "代收货款"  #g
+        from_short_carrying_fee: "发货地短途运费"  #g
+        to_short_carrying_fee: "到货地短途运费"  #g
+        pay_type: "运费支付方式"  #g
+        goods_num: "货物数量"  #g
+        goods_weight: "货物重量"  #g
+        goods_volume: "货物体积"  #g
+        goods_info: "货物信息"  #g
+        note: "备注"  #g
+        state: "运单状态"  #g
+        k_hand_fee: "扣手续费"  #g
+        transit_carrying_fee: "中转运费"  #g
+        transit_hand_fee: "中转手续费"  #g
+        short_fee_state: "短途运费状态"  #g
+        original_carrying_fee: "原始运费"  #g
+        original_goods_fee: "原代收货款"  #g
+        original_insured_amount: "原保价金额"  #g
+        original_insured_fee: "原保价费"  #g
+        original_from_short_carrying_fee: "原发货地短途运费"  #g
+        original_to_short_carrying_fee: "原到货地短途运费"  #g
+        from_org: "发货地"  #g
+        transit_org: "中转地"  #g
+        to_org: "到货地"  #g
+        from_customer: "发货人"  #g
+        base_load_list: "货物运输清单"  #g
+        base_distribution_list: "分货清单"  #g
+        base_deliver_info: "提货信息"  #g
+        base_settlement: "结算员交款清单"  #g
+        base_refund: "返款清单"  #g
+        payment_list: "代收货款支付清单"  #g
+        pay_info: "代收货款支付信息"  #g
+        post_info: "客户提款结算清单"  #g
+        transit_info: "货物中转信息"  #g
+        transit_deliver_info: "中转提货信息"  #g
+        original_bill: "原始运单信息"  #g
+        return_bill: "退货单信息"  #g
+        short_fee_info: "短途运费信息"  #g
+        send_list_line: "送货清单信息"  #g
+        from_org_name: "发货地"
+        to_org_name: "到货地"
+        transit_org_name: "中转地"
+        pay_type_des: "付款方式"
+        carrying_fee_th: "提货应付运费"
+        k_carrying_fee: "扣运费"
+        act_pay_fee: "实际支付货款"
+        agent_carrying_fee: "代收运费"
+        th_amount: "提货应收合计"
+        carrying_fee_1st: "前段运费"
+        carrying_fee_2st: "后段运费"
+        adjust_carrying_fee: "调整运费"
+        bank_name: 银行
+        card_no: 卡号
+        human_state_name: "状态"
+
+
+      cash_pay_info:
+        customer_name: "提款人姓名"  #g
+        id_number: "身份证号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        bill_date: "日期"  #g
+        carrying_bills: "运单明细"  #g
+        org: "组织机构"  #g
+
+      claim:
+        bill_date: "日期" #g
+        act_compensate_fee: "实际赔付金额"  #g
+        note: "备注"  #g
+        user: "操作员"  #g
+        goods_exception: "货物异常信息"  #g
+
+      config_cash:
+        fee_from: "起始金额"  #g
+        fee_to: "结束金额"  #g
+        hand_fee: "手续费"  #g
+        is_active: "有效"  #g
+        org: "发货地"
+        to_org: "到达地"
+        rate: 比例
+
+      config_transit:
+        name: "名称"  #g
+        rate: "费率"  #g
+        org: "发货地"
+        to_org: "到达地"
+        is_active: "有效"  #g
+        note: "备注"  #g
+      notify:
+        notify_text: "通知信息"
+        user: "创建人"
+
+      customer:
+        name: "姓名"  #g
+        phone: "电话"  #g
+        mobile: "手机"  #g
+        mobile_2: "手机2"  #g
+        mobile_3: "手机3"  #g
+        mobile_4: "手机4"  #g
+        mobile_5: "手机5"  #g
+        address: "地址"  #g
+        company: "公司"  #g
+        code: "客户编号"  #g
+        id_number: "身份证号码"  #g
+        bank_card: "银行卡号"  #g
+        is_active: "有效"  #g
+        note: "备注"  #g
+        cur_fee: "当月运费"  #g
+        level: "级别"  #g
+        last_import_mth: "最后导入日期"  #g
+        state: "状态"  #g
+        org: "所属机构"  #g
+        org_id: "所属机构"  #g
+        bank_id: "银行"  #g
+        bank: "开户银行"  #g
+        config_transit: "手续费配置"  #g
+        config_transit_id: "手续费配置"  #g
+        deliver_region_id: 送货区域
+        deliver_region: 送货区域
+        vip_flag: 贵宾标志
+        is_month_pay: 月结客户
+        is_qrcode_pay: 二维码客户
+        qr_photo_1: 二维码图片
+        qr_photo_2: 二维码图片
+        usually_location: 常用发货地
+        sales_man: 服务专员
+        sales_man_mobile: 服务专员手机
+
+      customer_fee_info:
+        mth: "月份"  #g
+        org: "机构"  #g
+        user: "操作员"  #g
+        customer_fee_info_lines: "明细信息"  #g
+
+      customer_fee_info_line:
+        name: "客户名称"  #g
+        phone: "电话"  #g
+        fee: "费用"  #g
+        customer_fee_info: "费用信息"  #g
+
+      customer_level_config:
+        name: "名称"  #g
+        from_fee: "运费起点"  #g
+        to_fee: "运费止点"  #g
+        org: "所属机构"  #g
+
+      base_deliver_info:
+        deliver_date: "提货日期"  #g
+        bill_no: "运单编号"
+        customer_name: "提货人姓名"  #g
+        customer_no: "身份证号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        org: "机构"  #g
+        carrying_bills: "提货明细"  #g
+        sum_carrying_fee_th: "运费[提]"
+        sum_insured_fee_th: "保险费[提]"
+        sum_from_short_carrying_fee_th: "发货短途[提]"
+        sum_to_short_carrying_fee_th: "到货短途[提]"
+        sum_carrying_fee_th_total: "运费合计[提]"
+        sum_goods_fee: "应收货款"
+        sum_th_amount: "提货应收"
+        photo_1: 提货截图
+        photo_2: 提货截图
+
+      org:
+        name: "机构名称"  #g
+        simp_name: "简称"  #g
+        phone: "联系电话"  #g
+        is_active: "有效"  #g
+        yard: 所属分拨中心
+        yard_id: 所属分拨中心
+        manager: "负责人"  #g
+        parent_id: 上级机构
+        location: "地址"  #g
+        is_allocation: 分拨中心
+        code: "编码"  #g
+        lock_input_time: "录单截至时间"  #g
+        py: "拼音简写"  #g
+        parent: "上级机构"  #g
+        children: "下级机构"  #g
+        customer_level_configs: "VIP分级设置"  #g
+        is_yard: "中转货场"
+        is_summary: "总部"
+        carrying_fee_gte_on_insured_fee: 生成保险费限制(>=运费,空=不限制)
+        fixed_insured_fee: 固定保险费
+        auto_generate_to_short_carrying_fee: 自动生成到货短途
+        agtscf_rate: 到货短途费比例
+        fixed_to_short_carrying_fee: 固定到货短途费
+        auto_generate_from_short_carrying_fee: 自动生成发货短途
+        agfscf_rate: 发货短途费比例
+        fixed_from_short_carrying_fee: 固定发货短途费
+
+        order_by: "排序"
+        is_visible: 可见
+        limit_goods_fee: 货款限额
+        note: 备注
+
+      base_distribution_list:
+        bill_date: "清单日期"  #g
+        note: "备注"  #g
+        state: "状态"  #g
+        carrying_bills: "清单明细"  #g
+        org: "所属机构"  #g
+
+      gexception_authorize_info:
+        bill_date: "日期"  #g
+        note: "备注"  #g
+        op_type: "赔偿处理方式"  #g
+        compensation_fee: "赔偿金额"  #g
+        user: "操作员"  #g
+        goods_exception: "货物异常信息"  #g
+
+      role_system_function_operate:
+        is_select: "选择"  #g
+        role: "角色"  #g
+        system_function_operate: "系统功能"  #g
+
+      sender:
+        name: "送货员姓名"  #g
+        mobile: "手机"  #g
+        address: "地址"  #g
+        is_active: "有效"  #g
+        org: "组织机构"  #g
+        org_id: "组织机构"  #g
+        id_number: "身份证号"
+
+      send_list:
+        bill_date: "清单日期"  #g
+        note: "备注"  #g
+        sender: "送货员"  #g
+        sender_id: "送货员"  #g
+        org: "所属机构"  #g
+        user: "操作员"  #g
+        send_list_lines: "送货清单明细"  #g
+
+      send_list_back:
+        bill_date: "清单日期"  #g
+        note: "备注"  #g
+        org: "所属机构"  #g
+        sender: "送货员"  #g
+        sender_id: "送货员"  #g
+        user: "操作员"  #g
+        send_list_lines: "送货明细"  #g
+
+      send_list_line:
+        state: "状态"  #g
+        send_list: "送货清单"  #g
+        carrying_bill: "运单"  #g
+        send_list_post: "送货清单核销信息"  #g
+        send_list_back: "送货清单返回信息"  #g
+
+      send_list_post:
+        bill_date: "核销时间"  #g
+        note: "备注"  #g
+        user: "操作员"  #g
+        org: "操作机构"  #g
+        sender: "送货员"  #g
+        sender_id: "送货员"  #g
+        send_list_lines: "送货明细"  #g
+
+      base_settlement:
+        title: "标题"  #g
+        sum_goods_fee: "代收货款合计"  #g
+        sum_carrying_fee_th: "运费[提]"  #g
+        sum_insured_fee_th: "保险费[提]"  #g
+        sum_from_short_carrying_fee_th: "发货短途[提]"  #g
+        sum_to_short_carrying_fee_th: "到货短途[提]"  #g
+        sum_th_amount: "提货应收"  #g
+        note: "备注"  #g
+        state: "状态"  #g
+        bill_date: "日期"  #g
+        carrying_bills: "运单"  #g
+        org: "所属机构"  #g
+        user: "结算员"
+        human_state_name: "状态"
+
+      short_fee_info:
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        org_id: "所属机构"  #g
+        op_org_id: "处理部门"
+        op_org: "处理部门"
+        user: "操作员"  #g
+        sum_write_off_fee: "报销金额"
+        write_off_date: "核销日期"
+        carrying_bills: "清单明细"  #g
+
+      system_function:
+        subject_title: "功能名称"  #g
+        order: "排序"  #g
+        is_active: "有效"  #g
+        default_action: default_action  #g
+        system_function_group: "功能分类"  #g
+        system_function_operates: "功能操作"  #g
+
+      system_function_group:
+        name: "分类名称"  #g
+        order: "排序"  #g
+        is_active: "有效"  #g
+        system_functions: "系统功能"  #g
+
+      system_function_operate:
+        name: "系统功能操作"  #g
+        function_obj: function_obj  #g
+        order: "排序"  #g
+        is_active: "有效"  #g
+        system_function: "系统功能"  #g
+
+      transfer_pay_info:
+        customer_name: "提款人姓名"  #g
+        id_number: "身份证号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        bill_date: "日期"  #g
+        carrying_bills: "运单明细"  #g
+        org: "组织机构"  #g
+
+      transit_company:
+        name: "公司名称"  #g
+        address: "地址"  #g
+        phone: "联系电话"  #g
+        is_active: "有效"  #g
+        note: "备注"  #g
+        leader: "联系人"  #g
+
+      transit_deliver_info:
+        bill_date: "日期"  #g
+        note: "备注"  #g
+        transit_hand_fee: "中转手续费"  #g
+        state: "状态"  #g
+        org: "组织机构"  #g
+        carrying_bills: "中转运单"  #g
+
+      transit_info:
+        to_station_phone: "到货地电话"  #g
+        bill_date: "中转日期"  #g
+        state: "状态"  #g
+        transit_carrying_fee: "中转运费"  #g
+        note: "备注"  #g
+        org: "所属机构"  #g
+        transit_company_id: "中转公司"  #g
+        transit_company: "中转公司"  #g
+        carrying_bills: "中转运单"  #g
+
+      user:
+        email: "电子邮箱"  #g
+        current_sign_in_at: "当前登录时间"  #g
+        last_sign_in_at: "最后登录时间"  #g
+        current_sign_in_ip: "当前登录的IP"  #g
+        last_sign_in_ip: "最后登录IP"  #g
+        is_active: "有效"  #g
+        is_admin: "管理员"  #g
+        username: "用户名"  #g
+        real_name: "姓名"
+        user_roles: "用户角色"  #g
+        roles: "角色"  #g
+        default_org_id: "默认机构"  #g
+        default_role_id: "默认角色"  #g
+        current_password: "原密码"
+        password: "密码"
+        password_confirmation: "验证密码"
+        use_usb: "使用usb key控制用户登录"
+
+      user_role:
+        is_select: "选择"  #g
+        user: "用户"  #g
+        role: "角色"  #g
+
+      goods_exception_identify:
+        bill_date: "日期"  #g
+        note: "赔偿原因"  #g
+        from_org_fee: "发货地赔偿"  #g
+        to_org_fee: "到货地赔偿"  #g
+        driver_fee: "司机赔偿"  #g
+        goods_exception: "货物异常信息"  #g
+        user: "操作员"  #g
+
+      il_config:
+        key: "关键字"  #g
+        title: "名称"  #g
+        value: "值"  #g
+
+      journal:
+        bill_date: "日期"  #g
+        settled_no_rebate_fee: "已结算未汇金额"  #g
+        deliveried_no_settled_fee: "已提未结算金额"  #g
+        input_name_1: "录入项目1"  #g
+        input_fee_1: "录入费用1"  #g
+        input_name_2: "录入项目2"  #g
+        input_fee_2: "录入费用2"  #g
+        input_name_3: "录入项目3"  #g
+        input_fee_3: "录入费用3"  #g
+        cash: "库存现金"  #g
+        deposits: "银行存款"  #g
+        goods_fee: "返程货款"  #g
+        short_fee: "短途及赔偿"  #g
+        other_fee: "其他开支"  #g
+        black_bills: "黑票"  #g
+        red_bills: "红票"  #g
+        yellow_bills: "黄票"  #g
+        green_bills: "绿票"  #g
+        blue_bills: "蓝票"  #g
+        white_bills: "白票"  #g
+        current_debt: "当日欠款"  #g
+        current_debt_2_3: "2~3日欠款"  #g
+        current_debt_4_5: "4~5日欠款"  #g
+        current_debt_ge_6: "6日以上欠款"  #g
+        note: "备注"  #g
+        org: "组织机构"  #g
+        user: "操作员"  #g
+
+      short_list:
+        bill_date: "日期"  #g
+        bill_no: "清单编号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        driver: "司机"  #g
+        vehicle_no: "运输车辆"  #g
+        from_org: "发货地"  #g
+        to_org: "到货地"  #g
+        from_org_id: "发货地"  #g
+        to_org_id: "货场"  #g
+        mobile: 手机
+        human_state_name: '状态'
+        carrying_bills: "短驳单明细"  #g
+
+
+      base_load_list:
+        bill_date: "日期"  #g
+        bill_no: "清单编号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        driver: "司机"  #g
+        vehicle_no: "运输车辆"  #g
+        from_org: "发货地"  #g
+        to_org: "到货地"  #g
+        from_org_id: "发货地"  #g
+        transit_org_id: 中转地
+        to_org_id: "到货地"  #g
+        human_state_name: '状态'
+        carrying_bills: "装车明细"  #g
+
+      payment_list:
+        state: "状态"  #g
+        note: "备注"  #g
+        bill_date: "日期"  #g
+        bank_id: "银行"  #g
+        org_id: "所属机构"  #g
+        carrying_bills: "运单明细"  #g
+
+      pay_info:
+        customer_name: "提款人姓名"  #g
+        id_number: "身份证号"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        bill_date: "日期"  #g
+        carrying_bills: "运单明细"  #g
+        org: "所属机构"  #g
+        sum_k_carrying_fee: "扣运费"
+        sum_k_hand_fee: "扣手续费"
+        sum_act_pay_fee: "实付货款"
+        sum_goods_fee: "代收货款"
+        sum_transit_hand_fee: "中转手续费"
+        bill_no: "货号"
+        from_customer: "发货人"
+        account_name: "转账户名"
+        account_no: "转账卡号"
+
+      base_post_info:
+        note: "备注"  #g
+        bill_date: "日期"  #g
+        sum_goods_fee: "原代收货款"
+        sum_k_carrying_fee: "扣运费"
+        sum_k_hand_fee: "扣手续费"
+        sum_act_pay_fee: "实付货款"
+        amount_fee: "合计金额"  #g
+        state: "状态"  #g
+        org: "所属机构"  #g
+        carrying_bills: "运单明细"  #g
+
+      base_refund:
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        sum_goods_fee: "代收货款合计"  #g
+        sum_carrying_fee_th: "运费[提]"  #g
+        sum_insured_fee_th: "保险费[提]"  #g
+        sum_from_short_carrying_fee_th: "发货短途[提]"  #g
+        sum_to_short_carrying_fee_th: "到货短途[提]"  #g
+        sum_carrying_fee_th: "运费[提]"  #g
+        sum_transit_hand_fee: "中转手续费"
+        sum_transit_carrying_fee: "中转运费"
+        sum_th_amount: "提货应收"
+        sum_carrying_fee_1st: "前段运费"
+        sum_carrying_fee_2st: "后段运费"
+        carrying_bills: "运单明细"  #g
+        from_org_id: "付款机构"
+        from_org: "付款机构"  #g
+        to_org: "收款机构"  #g
+        to_org_id: "收款机构"  #g
+        remittance: "汇款记录"  #g
+
+      remittance:
+        bill_date: "日期"  #g
+        note: "备注"  #g
+        sum_should_fee: "应汇合计"  #g
+        should_fee: "应汇金额(郑发)"  #g
+        inner_transit_refund_should_fee: 应汇金额(内部中转)
+        act_fee: "实汇现金"  #g
+        pos_fee: "银联POS"  #g
+        quick_fee: "快捷支付"  #g
+        other_fee: "其他方式"  #g
+        total_fee: 实汇款合计
+        diff_fee:  差额
+        rest_fee: 差额
+        validate_fee: 核对金额
+        state: "状态"  #g
+        from_org: "汇款机构"  #g
+        to_org: "收款机构"  #g
+        user: "操作员"  #g
+        refound_id: "返款清单"  #g
+        validate_user: 审核人
+        validate_user_id: 审核人
+
+      role:
+        name: "名称"  #g
+        is_active: "有效"  #g
+        user_roles: "用户-角色"  #g
+        users: "角色"  #g
+        role_system_function_operates: "角色-权限"  #g
+        system_function_operates: "角色所有权限"  #g
+        role_orgs: "角色-机构"  #g
+        orgs: "机构"  #g
+
+      goods_exception:
+        exception_type: "异常类别"  #g
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        except_num: "异常数量"  #g
+        except_des: "异常类别"
+        note: "备注"  #g
+        carrying_bill_id: "运单"  #g
+        carrying_bill: "运单"  #g
+        user: "操作员"  #g
+        org_id: "上报机构"  #g
+        op_org_id: "处理部门"
+        op_org: "处理部门"
+        from_fee: "发货地赔付"
+        to_fee: "到货地赔付"
+        posted_date: "核销日期"
+        gexception_authorize_info: "货物异常核销信息"  #g
+        goods_exception_identify: "责任鉴定信息"  #g
+        claim:
+          act_compensate_fee: "实赔金额"
+
+      goods_error:
+        except_type: "异常类别"  #g
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        except_num: "异常数量"  #g
+        except_des: "异常类别"
+        note: "备注"  #g
+        carrying_bill_id: "运单"  #g
+        user: "操作员"  #g
+        org_id: "上报机构"  #g
+        op_org_id: "处理部门"
+        op_org: "处理部门"
+
+      gerror_authorize:
+        note: "核销备注"
+        user_id: "核销人"
+        user: "核销人"
+
+      role_org:
+        is_select: "选中"  #g
+        role: "角色"  #g
+        org: "机构"  #g
+
+      goods_fee_settlement_list:
+        sum_income_fee: "收入金额合计"
+        sum_spending_fee: "支出金额合计"
+        sum_rest_fee: "余额合计"
+        amount_fee: "实领金额"
+        amount_goods_fee: "手工(货款合计)"
+        amount_hand_fee: "手工(手续费合计)"
+        amount_k_carying_fee: "手工(扣运费合计)"
+
+      act_load_list:
+        bill_date: "日期"
+        bill_no: "单据号"
+        from_org: "发货地"
+        to_org: "到货地"
+        bills_count: 运单数
+        act_load_list_lines:
+          load_num: "装车数量"
+          rest_num: "剩余数量"
+          confirm_num: "确认数量"
+
+      act_load_list_line:
+        load_num: "装车数量"
+        rest_num: "剩余数量"
+        confirm_num: "确认数量"
+
+
+      goods_cat:
+        parent: 所属分类
+        parent_id: 所属分类
+        name: 名称
+        bottom_price: 最低价
+        default_price: 默认单价
+        easy_code: 拼音简写
+        order_by: 排序
+        is_active: 有效标志
+        note: 备注
+
+      notice:
+        load_list: 关联到货清单
+
+      notice_line:
+        from_customer_phone: 电话/手机
+        calling_text: 语音文本
+        sms_text: 短信文本
+        calling_state: 通知状态
+        sms_state: 短信状态
+        calling_count: 呼叫次数
+        sms_count: 短信次数
+        last_calling_time: 最后呼叫时间
+        las_sms_time: 最后短信发送时间
+
+      adjust_fee_info:
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        carrying_bill_id: "运单"  #g
+        carrying_bill: "运单"  #g
+        user: "操作员"  #g
+        op_user: "审批人"  #g
+        op_datetime: "审批时间"  #g
+        org_id: "上报机构"  #g
+        op_org_id: "处理部门"
+        op_org: "处理部门"
+        adjust_fee: 调整金额
+        origin_carrying_fee: 原运费
+        goods_no: 货号
+        bill_no: 运单编号
+        after_adjust_carrying_fee: 调整后运费
+
+      adjust_goods_fee_info:
+        bill_date: "日期"  #g
+        state: "状态"  #g
+        note: "备注"  #g
+        carrying_bill_id: "运单"  #g
+        carrying_bill: "运单"  #g
+        user: "操作员"  #g
+        op_user: "审批人"  #g
+        op_datetime: "审批时间"  #g
+        org_id: "上报机构"  #g
+        op_org_id: "处理部门"
+        op_org: "处理部门"
+        adjust_goods_fee: 调整货款
+        origin_goods_fee: 原货款
+        other_adjust_note: 其他调整
+        goods_no: 货号
+        bill_no: 运单编号
+        after_adjust_goods_fee: 调整后货款
+
+
+      in_stock_bill:
+        bill_date: 日期
+        org_id: 所属机构
+        note: 备注
+        bills_count: 运单数
+        sum_goods_fee: 货款合计
+        sum_carrying_fee_th: 提付运费
+        sum_from_short_carrying_fee_th: 发货短途(提)
+        sum_to_short_carrying_fee_th: 到货短途(提)
+        sum_insured_fee_th: 保价费(提)
+        sum_manage_fee_th: 管理费(提)
+        state: 状态
+
+      debt_bill:
+        bill_date: 日期
+        org_id: 所属机构
+        op_org_id: 处理单位
+        note: 备注
+        bills_count: 运单数
+        sum_goods_fee: 货款合计
+        sum_carrying_fee_th: 提付运费
+        sum_from_short_carrying_fee_th: 发货短途(提)
+        sum_to_short_carrying_fee_th: 到货短途(提)
+        sum_insured_fee_th: 保价费(提)
+        sum_manage_fee_th: 管理费(提)
+        state: 状态
+
+      prepay_entry:
+        org: 机构
+        bill_date: 凭证日期
+        debit: 借方金额
+        credit: 贷方金额
+        balance: 余额
+        note: 备注
+        entry_type: 类型
+
+      vip:
+        human_vip_state_name: 状态
+        level_star: 级别
+        
+
+      base_vote_config:
+        name: 名称
+        mth: 月份
+        expire_date: 过期时间
+
+      votable_item:
+        name: 名称
+        order_by: 排序
+
+      address_book:
+        province_code: 省份
+        city_code: 城市
+        district_code: 区县
+        name: 名称
+        simp_name: 简称
+        address: 地址
+        phone: 联系电话
+        org: 关联机构
+        org_id: 关联机构
+        leader: 负责人
+        leader_mobile: 手机
+        second_leader: 第二负责人
+        second_leader_mobile: 手机
+        note: 运价介绍
+        tag: 分类
+        is_active: 有效
+        order_by: 排序
+
+      short_fee_config:
+        name: 名称
+        from_org_id: 发货地
+        from_org: 发货地
+        to_org_id: 到货地
+        to_org: 到货地
+        operator: 比较
+        carrying_fee: 运费
+        short_fee_rate: 到货短途生成比例
+        fixed_short_fee: 固定到货短途费
+        from_short_fee_rate: 发货短途生成比例
+        fixed_from_short_fee: 固定发货短途费
+
+        note: 备注
+        is_active: 有效
+
+      deliver_region:
+        org_id: 机构
+        org: 机构
+        name: 区域名称
+        province_code: 所属省份
+        city_code: 所属城市
+        district_code: 所属县区
+        district_desc: 所属辖
+        is_active: 有效
+        order_by: 排序
+        note: 备注
+
+      fee_unit:
+        name: 名称
+        unit_simp: 单位
+        order_by: 排序
+        is_active: 启用
+        default_price: 默认单价
+        price_type: 计价方式
+        price_type_des: 计价方式
+        note: 备注
+
+      price_list_line:
+        fee_unit_id: 计量单位
+        price: 单价
+        min_price: 最低费用
+        divide_rate: 分成比例
+
+      divide_list:
+        distance_from_summary: 距总部距离
+        price_per_mile: 油价
+
+
+      divide_config:
+        bill_type: 票据类型
+        bill_type_des: 票据类型
+        from_org_id: 发货地
+        from_org_divide_rate: 始发地分成比例
+        from_org_divide_rate_des: 始发地分成比例
+        transit_org_id: 返程部
+        transit_org_divide_rate: 返程部分成比例
+        transit_org_divide_rate_des: 返程部分成比例
+        to_org_id: 到货地
+        to_org_divide_rate: 到货地分成比例
+        to_org_divide_rate_des: 到货地分成比例
+        summary_org_id: 总部
+        summary_org: 总部
+        summary_org_divide_rate: 总部分成比例
+        summary_org_divide_rate_des: 总部分成比例
+
+      price_table:
+        to_org_id: 分公司
+        to_org: 分公司
+        province_code: 省份
+        city_code: 城市
+        district_code: 区县
+        location: 所在地
+        price_1: 单件(起步)/元
+        price_2: 纯泡(方)/元
+        price_3: 重泡(吨)/元
+        price_4: 纯重(吨)/元
+        price_5: 零担(公斤)/元
+        price_6: 送货区域及费用
+        price_7: 代收限额
+        note: 备注
+        order_by: 排序
+
+      scan_header:
+        driver_name: 司机
+        v_no: 车牌号
+        mobile: 手机
+        id_no: 身份证号
+        from_org_id: 源机构
+        from_org: 源机构
+        to_org_id: 目的机构
+        to_org: 目的机构
+        user_id: 操作员
+        user: 操作员
+        bill_date: 日期
+        note: 备注
+      task:
+        title: 标题
+        content: 任务描述
+        plan_complete_date: 完成时间
+        creator_id: 创建人
+        creator: 创建人
+        acceptor_id: 接收人
+        acceptor: 接收人
+        accept_date: 接收日期
+        submitor_id: 提交人
+        submit_date: 完成日期
+        submitor: 提交人
+        auditor_id: 审核人
+        audit_date: 审核日期
+        auditor: 审核人
+        audit_state: 审核状态
+        audit_state_des: 审核状态
+        note: 备注
+        users_list: 负责人
+        participation_users_list: 参与人
+        user_id: 创建人
+        user: 创建人
+        users_list: 接收用户
+        state: 状态
+
+      region:
+        name: 名称
+        orgs_list: 机构列表
+
+      region_divide_config:
+        from_region_id: 发货区域
+        from_region: 发货区域
+        to_region_id: 到货区域
+        to_region: 到货区域
+        from_rate: 发货地分成比例
+        to_rate: 到货地分成比例
+        summary_rate: 总部分成比例
+        note: 备注
+
+
+
+      message:
+        title: 标题
+        body: 内容
+        publisher_id: 发布人
+        publisher: 发布人
+        org_id: 发布机构
+        org: 发布机构
+        publish_date: 发布时间
+
+      deposit:
+        org_id: 分公司
+        org: 分公司
+        deposit_fee_1: 保证金1
+        deposit_fee_2: 保证金2
+        deposit_fee_3: 保证金3
+        sum_deposit_fee: 保证金
+        note: 备注
+
+
+      from_short_fee_info:
+        from_org_id: 发货地
+        from_org: 发货地
+        to_org_id: 到货地
+        to_org:  到货地
+        bill_date: 申报日期
+        user: 申报人
+        user_id: 申报人
+        audit_user_id: 审核人
+        audit_user: 审核人
+        audit_date: 审核日期
+        note: 备注
+        from_short_fee_lines: 明细
+        sum_from_short_carrying_fee: 发货短途合计 
+
+      customer_payment_info:
+        bill_date: 收款日期
+        from_org: 收款机构
+        from_org_id: 收款机构
+        customer_name: 客户姓名
+        customer_id_no:  身份证号
+        pay_type_des: 付款方式
+        pay_type: 付款方式
+        note: 备注
+        pay_ref: 付款信息
+        sum_carrying_fee: 运费合计
+        sum_from_short_carrying_fee: 发货短途合计
+        sum_to_short_carrying_fee: 到货短途合计
+        sum_insured_fee: 保险费合计
+        sum_fee: 合计
+
+      divide_config_yujiu:
+        org_id: 分理处/分公司
+        rate_from: 始发货分成比例
+        rate_to: 返程货分成比例
+        rate_inner_transit_from: 内部中转始发货分成比例
+        rate_inner_transit_to: 内部中转返程货分成比例
+        rate_outter_transit_from: 外部中转货分成比例
+        is_active: 有效
+
+      divide_rpt_yujiu:
+        org: 分理处/分公司
+        org_id: 分理处/分公司
+        sum_divide_fee: 分成合计
+        sum_plus_fee: 补贴合计
+        sum_deduct_fee: 扣款合计
+        sum_other_deduct_fee: 其他扣款合计
+        sum_fee: 实际提金额
+        mth: 月份
+
+
+

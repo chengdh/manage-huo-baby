@@ -1,0 +1,58 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# Attributes names common to most models
+
+cn:
+  attributes:
+    created_at: "录入日期"
+    updated_at: "最近更新"
+    state: "状态"
+    from_org_id: "收货机构"
+    from_org_name: "收货机构"
+    to_org_id: "收货机构id"
+    to_org_name: "到货机构"
+    bill_date: "票据日期"
+    bill_no: "票据号"
+    note: "备注"
+  activerecord:
+    models:
+      carrying_bill: "运单"
+      computer_bill: "机打运单"
+      load_list: "装车单"
+      notify: "通知提醒"
+    attributes:
+      carrying_bill:
+        goods_no: "货号"
+        from_customer_name: "发货人"
+        from_customer_phone: "发货人电话"
+        to_customer_name: "收货人"
+        to_customer_phone: "收货人电话"
+        transit_org_id: "中转机构id"
+        transit_org_name: "中转机构名称"
+        to_area: "到货地"
+        insured_amount: "保价金额"
+        insured_rate: "保价比例(每千元)"
+        insured_fee: "保险费"
+        carrying_fee: "运费"
+        goods_fee: "代收货款"
+        from_short_carrying_fee: "发货地短途运费"
+        to_short_carrying_fee: "到货地短途运费"
+        pay_type: "运费支付方式"
+        goods_num: "货物件数"
+        goods_info: "货物信息"
+      load_list:
+        driver: "司机"
+        vehicle_no: "运输车辆"
+    errors:
+      template:
+        header:
+          one:   "保存{model}} 时发生了一个错误."
+          other: "保存{model}} 发生了{count}}个错误."
+        body:    "以下字段发生了错误:"
+      messages:
+        invalid: "非法"
+        invalid_event: "无效事件"
+        invalid_transition: "无效状态迁移"
+        record_invalid: "记录无效"
+        taken: "发生"
+

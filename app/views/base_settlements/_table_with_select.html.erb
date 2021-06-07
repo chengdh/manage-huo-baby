@@ -1,0 +1,39 @@
+<table id="<%= resource_class.name.underscore.pluralize %>_index_table" class="table">
+  <tr>
+    <th><%=check_box_tag "check_all",1,false,:title => "选择/不选全部",:class => "tipsy" %></th>
+      <th>序号</th>
+      <th>结算日期</th>
+      <th>结算机构</th>
+      <th>结算员</th>
+      <th>代收货款</th>
+      <th>运费[提]</th>
+      <th>保险费[提]</th>
+      <th>发货短途[提]</th>
+      <th>到货短途[提]</th>
+      <th>中转运费</th>
+      <th>中转手续费</th>
+      <th>合计</th>
+  </tr>
+  <% collection.each_with_index do |resource,index| %>
+    <tr class="<%= cycle 'odd', 'even' %>">
+      <td><%=check_box_tag "selector_#{resource.id}",resource.id %></td>
+      <td><%= order_no(index,params[:page]) %></td>
+      <td><%= resource.created_at.strftime('%Y-%m-%d') %></td>
+      <td><%= resource.org.name %></td>
+      <td><%= resource.user%></td>
+      <td><%= resource.sum_goods_fee %></td>
+      <td><%= resource.sum_carrying_fee_th %></td>
+      <td><%= resource.sum_insured_fee_th %></td>
+      <td><%= resource.sum_from_short_carrying_fee_th %></td>
+      <td><%= resource.sum_to_short_carrying_fee_th %></td>
+      <td><%= resource.sum_transit_carrying_fee %></td>
+      <td><%= resource.sum_transit_hand_fee %></td>
+      <td><%= resource.sum_th_amount %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="actions-bar wat-cf">
+  <div class="actions">
+    <%=will_paginate collection%>
+  </div>
+</div>

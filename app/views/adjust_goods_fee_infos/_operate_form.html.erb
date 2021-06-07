@@ -1,0 +1,42 @@
+<%= form_for resource,:url => {:action => params[:operate_action] },:method => :put do |f|%>
+  <%= f.hidden_field :op_user_id,:value => current_user.id %>
+  <table class='table' id="adjust_fee_info_show">
+  <thead>
+    <tr>
+      <th colspan='4'>
+        <h4>货款调整审核</h4>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>状态</td>
+    <td><%=resource.human_state_name%></td>
+    <td>上报人</td>
+    <td><%=resource.user%></td>
+  </tr>
+
+  <tr>
+    <td>上报机构</td>
+    <td><%=resource.org.name%></td>
+    <td>上报日期</td>
+    <td><%=resource.bill_date.strftime("%Y-%m-%d")%></td>
+  </tr>
+  <tr>
+    <td>调整金额</td>
+    <td><%= f.text_field :adjust_goods_fee %></td>
+    <td>运单号/货号</td>
+    <td>
+      <%=link_to "#{resource.carrying_bill.bill_no}/#{resource.carrying_bill.goods_no}",polymorphic_path(resource.carrying_bill,:format => :js),:class => 'fancybox'%>
+    </td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='3'><%=f.text_area :note,:size => "100x2"%></td>
+  </tr>
+  </tbody>
+</table>
+<div class='actions-bar'>
+  <%=  f.submit "保存",:class => " sexybutton sexysimple sexyblue",:disable_with => "正在保存..." %>
+</div>
+<%end%>

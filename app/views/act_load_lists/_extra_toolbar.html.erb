@@ -1,0 +1,5 @@
+<%if params[:action] == "show" %>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出为EXCEL"), export_excel_act_load_list_path(resource,:format => :js),:title => "导出为EXCEL",:class => "btn_export_excel tipsy"  %>
+  </li>
+<%end%>

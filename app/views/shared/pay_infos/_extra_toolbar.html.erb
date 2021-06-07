@@ -1,0 +1,18 @@
+<%if can? :batch_pay,resource_class%>
+  <li>
+    <%=link_to image_tag("cards-address.png",:alt => "批量提款:一次提取多票运单"),new_resource_path(:show_multi => 1),:class => "tipsy",:title => "批量提款:一次提取多票运单"%>
+  </li>
+  <li>
+    <%=link_to image_tag("batch_pay_infos_for_summary_org.png",:size => '18x18',:alt => "批量提款:分公司票据"),new_resource_path(:show_multi => 1,:for_summary_org => 1),:class => "tipsy",:title => "批量提款:分公司票据"%>
+  </li>
+<%end%>
+<%if params[:action] == "index"%>
+  <li>
+    <%= link_to image_tag("document-excel-table.png",:alt => "导出EXCEL"), collection_path(:search => params[:search],:format => :csv),:title => "导出为EXCEL",:class => "tipsy"  %>
+  </li>
+<%end%>
+<%if params[:action] == "show" and can? :print,resource%>
+  <li>
+    <%= link_to_function image_tag("printer.png",:alt => "打印客户转账凭条"), "",:title => "打印客户转账凭条",:class => "tipsy btn_print_pay_info_certificate"  %>
+  </li>
+<%end%>

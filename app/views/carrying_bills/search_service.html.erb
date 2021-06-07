@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row">
+    <table class="table table-condensed table-striped table-bordered">
+      <%if @carrying_bills.blank?%>
+        <tr class="danger">
+          <td colspan='2' style="text-align: center;">您所查询的运单不存在!</td>
+        </tr>
+      <%end%>
+      <%@carrying_bills.each do |bill|%>
+        <tr>
+          <td>
+            <%=bill.bill_no%>/<%=bill.goods_no%>
+          </td>
+          <td>
+            <%=bill.translate_state %>
+          </td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

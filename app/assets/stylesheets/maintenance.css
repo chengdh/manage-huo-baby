@@ -1,0 +1,201 @@
+
+/* GENERAL ------------------------------------------------------------------ */
+
+/* Zero default margin & padding around common elements */
+body, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, li, ol, p, ul
+{
+margin: 0;
+border: 0 none #FFFFFF;
+padding: 0;
+}
+
+body
+{
+background-color: #a6e9f5;
+color: #000000;
+line-height: 1.4;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 85%;
+text-align: left;
+}
+
+a
+{
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+a:visited
+{
+  color:      #0066cc;
+}
+
+a:hover
+{
+  text-decoration: none;
+}
+
+img
+{
+  border: 0 none    transparent;
+}
+
+input, select, table, textarea
+{
+  font-size: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.replacement
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+a .replacement
+{
+  cursor: hand;
+  c\ursor: pointer;
+}
+
+#top
+{
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+
+
+
+/* CONTENT ----------------------------------------------------------------- */
+
+#content
+{
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  z-index: 200;
+  width: 67%;
+  margin: -5em 0 0 -33%;
+  text-align: center;
+}
+
+h1
+{
+  font-size: 175%;
+  font-weight: normal;
+}
+
+p
+{
+  margin-top: 0.8em;
+  font-size: 175%;
+}
+#sky
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 131px;
+  overflow: hidden;
+}
+
+#cloud
+{
+  position: absolute;
+  left: 5%;
+  top: 15px;
+  z-index: 2;
+  width: 120px;
+  height: 91px;
+  background-image: url(/images/cloud.gif);
+  background-repeat: no-repeat;
+}
+
+#cloud2
+  {
+    position: absolute;
+    left: 25%;
+    top: 65px;
+    z-index: 3;
+    width: 101px;
+    height: 66px;
+    background-image: url(/images/cloud2.gif);
+    background-repeat: no-repeat;
+}
+
+#cloud3
+{
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  z-index: 1;
+  width: 496px;
+  height: 110px;
+  background-image: url(/images/cloud3.gif);
+  background-repeat: no-repeat;
+}
+
+#sand
+{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+  background-color: #eed2aa;
+}
+
+#waves2{
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 145px;
+  background-image: url(/images/waves.gif);
+  background-repeat: repeat-x;
+  }
+
+#waves2
+{
+  position: absolute;
+  top: 12px;
+  z-index: 2;
+  width: 100%12px;
+  height: 151px;
+  padding-right: 400px;
+  background-image: url(/images/waves2.gif);
+  background-repeat: repeat-x;
+}
+
+#waves3
+{
+  position: absolute;
+  top: 30px;
+  z-index: 1;
+  width: 100%;
+  height: 157px;
+  padding-right: 400px;
+  background-image: url(/images/waves3.gif);
+  background-repeat: repeat-x;
+}
+
+#feet
+{
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 100;
+  width: 571px;
+  height: 256px;
+  margin-left: -285px;
+  background-image: url(/images/feet.gif);
+}

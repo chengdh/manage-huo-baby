@@ -1,0 +1,69 @@
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <tr>
+    <th colspan='6' style='text-align : center;font-size : 14px;'>短驳单(<%=resource.from_org%>-><%=resource.to_org%> )</th>
+  </tr>
+  <tr>
+    <td>日期:</td>
+    <td><%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+    <td>单据号:</td>
+    <td><%=resource.bill_no%></td>
+    <td>发货地:</td>
+    <td><%=resource.from_org_name%></td>
+    <tr>
+      <td>到货地:</td>
+      <td><%=resource.to_org_name%></td>
+      <td>状态:</td>
+      <td><%=resource.human_state_name%></td>
+      <td>操作员:</td>
+      <td><%=resource.user%></td>
+    </tr>
+    <tr>
+      <td>司机:</td>
+      <td><%=resource.driver %></td>
+      <td>车牌号:</td>
+      <td><%=resource.vehicle_no %></td>
+      <td>收货人:</td>
+      <td><%=resource.try(:reached_user) %></td>
+    </tr>
+    <tr>
+      <td>收货时间:</td>
+      <td><%=resource.reached_datetime.try(:strftime,"%Y-%m-%d %H:%M") %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+</table>
+
+<table cellspacing='0' cellpadding='0' border='0' style='border-collapse : collapse;border : thin solid #000;'>
+  <thead>
+    
+    <tr>
+      <th width="30">序号</th>
+      <th width="64">运单号</th>
+      <th width="160">货号</th>
+      <th width="50">货物名称</th>
+      <th width="50">货物件数</th>
+      <th width="40">备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%resource.carrying_bills.sort_by {|bill| bill.sort_seq}.each_with_index do |bill,index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td>&nbsp;<%= bill.bill_no %></td>
+        <td><%= bill.goods_no %></td>
+        <td><%= bill.goods_info%></td>
+        <td><%= bill.goods_num %></td>
+        <td><%= bill.note.try(:[],(0..5)) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='4' style='text-align : right;border : thin solid #000;'>合计</td>
+      <td style='border : thin solid #000;'><%= resource.carrying_bills.sum(:goods_num)%></td>
+      <td style='border : thin solid #000;'></td>
+    </tr>
+  </tfoot>
+</table>

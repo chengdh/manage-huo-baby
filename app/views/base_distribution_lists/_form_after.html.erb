@@ -1,0 +1,10 @@
+<hr/>
+<div class='actions-bar'>
+  <%= link_to image_tag("plus-white.png") + "选择要分货的运单",
+    search_carrying_bills_path(show_or_hidden_fields.merge(:format => :js,
+                                                           :bill_date_lte => 'load_list_reached_date_lte',
+                                                           :bill_date_gte => 'load_list_reached_date_gte')),
+                                                           :class => 'fancybox tipsy sexybutton sexysimple sexyblue',
+                                                           :title => "录入查询条件,查询要分货的运单" %>
+</div>
+<div id="table_wrap"></div>

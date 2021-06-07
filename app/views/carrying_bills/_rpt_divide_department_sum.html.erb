@@ -1,0 +1,32 @@
+<% group_bills_by_from_org = bills.group_by(&:from_org) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>机构名称</th>
+      <th>运费</th>
+      <th>发货短途</th>
+      <th>到货短途</th>
+      <th>运费总计</th>
+    </tr>
+  </thead>
+  <% group_bills_by_from_org.each do |f_org,bs| %>
+    <tbody>
+      <tr>
+        <td><%= f_org.name%></td>
+        <td><%= bs.sum(&:carrying_fee) %></td>
+        <td><%= bs.sum(&:from_short_carrying_fee) %></td>
+        <td><%= bs.sum(&:to_short_carrying_fee) %></td>
+        <td><%= bs.sum(&:carrying_fee) + bs.sum(&:from_short_carrying_fee) + bs.sum(&:to_short_carrying_fee) %></td>
+      </tr>
+    </tbody>
+  <% end %>
+  <tfoot>
+    <tr>
+      <td>合计:</td>
+      <td><%= bills.sum(&:carrying_fee) %></td>
+      <td><%= bills.sum(&:from_short_carrying_fee) %></td>
+      <td><%= bills.sum(&:to_short_carrying_fee) %></td>
+      <td><%= bills.sum(&:carrying_fee) + bills.sum(&:from_short_carrying_fee) + bills.sum(&:to_short_carrying_fee) %></td>
+    </tr>
+  </tfoot>
+</table>

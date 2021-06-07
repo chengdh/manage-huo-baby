@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%="#{IlConfig.system_title}(#{current_user.default_org.name}|#{current_user.username})"%></title>
+    <%= stylesheet_link_tag "il_stylesheets" %>
+    <!--[if IE 6]>
+      <%= stylesheet_link_tag "il_ie_stylesheets" %>
+    <![endif]-->
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header" style="background: #2d5499;">
+        <h1 id='client_name'>
+        <!-- %=image_tag "#{IlConfig.client_logo}",:id => 'logo' % -->
+        &nbsp;&nbsp;
+        <%= link_to "#{IlConfig.client_name}", :root %></h1>
+        <!-- <div class="main&#45;business&#45;data"> -->
+        <!--   <table class='table'> -->
+        <!--     <tr> <td> 实提运费: -->
+        <!--         <span class='fee&#45;number'>&#38;yen;&#38;nbsp;&#38;nbsp;<%= @sum_cur_mth_carrying_fee_by_to_org.try(:first).try(:carrying_fee).to_i %></span> -->
+        <!--       </td> -->
+        <!--       <td> -->
+        <!--         实付运费: -->
+        <!--         <span class='fee&#45;number'>&#38;yen;&#38;nbsp;&#38;nbsp;<%= @sum_cur_mth_carrying_fee_by_from_org.try(:first).try(:carrying_fee).to_i %></span> -->
+        <!--       </td> -->
+        <!--  -->
+        <!--     </tr> -->
+        <!--   </table> -->
+        <!-- </div> -->
+        <div id="util-navigation">
+          <ul class="wat-cf">
+            <li>
+              <%= link_to "#{current_user.real_name}(#{current_user.default_role.name}) | #{current_user.default_org.name} ", edit_password_users_path %>
+            </li>
+            <li><%=link_to "退出系统",destroy_user_session_path,:class => 'logout'%></li>
+          </ul>
+        </div>
+        <div id="user-navigation">
+          <ul class="wat-cf">
+            <li>
+              <div id='home-search-box-wrap'>
+                <%=form_tag carrying_bills_path,:id => 'home-search-form',:method => :get do%>
+                  <span><%=text_field_tag "search[bill_no_eq]","",:id => 'home-search-box',:class => 'search rounded'%></span>
+                  <%=hidden_field_tag :show_fields,".state"%>
+                <%end%>
+              </div>
+            </li>
+            <li id='adv-query-wrap'>
+              <%if can? :advanced_search,CarryingBill %>
+                <%=link_to image_tag("advanced_search.png",:size => "24x24"),
+                  search_carrying_bills_path(:format => :js,:show_fields =>".from_short_carrying_fee,.to_short_carrying_fee",:not_remote => true),
+                  :class => 'fancybox tipsy',:title => "高级查询",:id => "btn_advanced_search" %>
+              <%end%>
+              &nbsp;&nbsp;&nbsp;
+              <%= link_to image_tag("help.png",:size => "24x24"), "/help.doc" %>
+            </li>
+          </ul>
+        </div>
+        <div id="main-navigation">
+          <ul class="wat-cf">
+            <li class='first active'><%= link_to image_tag('home.png') + "业务看板", root_path %></li>
+             </ul>
+        </div>
+      </div>
+      <div id='notify-bar' style='display : none;' class='notify'>
+        <%if Notify.current_notify_text.present? %>
+          <!--<span class='notify-close'><a title='关闭提醒信息'>x</a></span>-->
+          <span class='notify-text' data-notify='<%=Notify.last.to_json%>'>
+            <marquee behavior="scroll" scrollamount="1" direction="left">
+              <%=Notify.current_notify_text %>
+            </marquee>
+          </span> <%end%>
+      </div>
+      <div id="wrapper" class="wat-cf">
+        <div id="main">
+          <%= yield %>
+          <div id="footer">
+            <%= render "shared/footer" %>
+          </div>
+        </div>
+        <div id="sidebar">
+          <%= render "shared/menu_bar" %>
+        </div>
+      </div>
+    </div>
+    <span id="print_object">
+      <object id="print_object_ie" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+        <embed id="print_object_other" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+  </span>
+</body>
+<%= javascript_include_tag "il_javascripts" %>
+<!--[if IE]>
+  <%= javascript_include_tag "il_ie_javascripts" %>
+<![endif]-->
+<%flash.each do |key, msg| %>
+  <%= jquery_notify_bar(key, msg, :cls => key, :animation_speed => 'normal', :delay => 2000) %>
+<%end %>
+<%# <%= render "shared/gritter" %>
+<%= render "shared/unread_msgs" %>
+<!--全局的show_or_hide_fields-->
+<span style='display : none;' id='global_data'
+    data-show_or_hidden_fields=<%=show_or_hidden_fields.to_json%> 
+    data-orgs=<%=orgs_to_json_on_view%>
+    data-short_fee_configs=<%= ShortFeeConfig.where(:is_active => true).to_json %> >
+</span>
+</html>

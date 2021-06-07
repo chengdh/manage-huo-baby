@@ -1,0 +1,90 @@
+# *** Application-specific options follow here ***
+
+#
+# The MySQL server
+#
+[mysqld]
+
+# The maximum amount of concurrent sessions the MySQL server will
+# allow. One of these connections will be reserved for a user with
+# SUPER privileges to allow the administrator to login even if the
+# connection limit has been reached.
+max_connections = 100
+
+# Maximum allowed size for a single HEAP (in memory) table. This option
+# is a protection against the accidential creation of a very large HEAP
+# table which could otherwise use up all memory resources.
+max_heap_table_size = 64M
+
+# Size of the buffer used for doing full table scans.
+# Allocated per thread, if a full scan is needed.
+read_buffer_size = 2M
+
+# When reading rows in sorted order after a sort, the rows are read
+# through this buffer to avoid disk seeks. You can improve ORDER BY
+# performance a lot, if set this to a high value.
+# Allocated per thread, when needed.
+read_rnd_buffer_size = 16M
+
+# Sort buffer is used to perform sorts for some ORDER BY and GROUP BY
+# queries. If sorted data does not fit into the sort buffer, a disk
+# based merge sort is used instead - See the "Sort_merge_passes"
+# status variable. Allocated per thread if sort is needed.
+sort_buffer_size = 8M
+
+# This buffer is used for the optimization of full JOINs (JOINs without
+# indexes). Such JOINs are very bad for performance in most cases
+# anyway, but setting this variable to a large value reduces the
+# performance impact. See the "Select_full_join" status variable for a
+# count of full JOINs. Allocated per thread if full join is found
+join_buffer_size = 8M
+
+# Query cache is used to cache SELECT results and later return them
+# without actual executing the same query once again. Having the query
+# cache enabled may result in significant speed improvements, if your
+# have a lot of identical queries and rarely changing tables. See the
+# "Qcache_lowmem_prunes" status variable to check if the current value
+# is high enough for your load.
+# Note: In case your tables change very often or if your queries are
+# textually different every time, the query cache may result in a
+# slowdown instead of a performance improvement.
+query_cache_size = 64M
+
+# Only cache result sets that are smaller than this limit. This is to
+# protect the query cache of a very large result set overwriting all
+# other query results.
+query_cache_limit = 2M
+
+# Thread stack size to use. This amount of memory is always reserved at
+# connection time. MySQL itself usually needs no more than 64K of
+# memory, while if you use your own stack hungry UDF functions or your
+# OS requires more stack for some operations, you might need to set this
+# to a higher value.
+thread_stack = 192K
+
+# Set the default transaction isolation level. Levels available are:
+# READ-UNCOMMITTED, READ-COMMITTED, REPEATABLE-READ, SERIALIZABLE
+transaction_isolation = READ-COMMITTED
+
+# Maximum size for internal (in-memory) temporary tables. If a table
+# grows larger than this value, it is automatically converted to disk
+# based table This limitation is for a single table. There can be many
+# of them.
+tmp_table_size = 64M
+
+# Additional memory pool that is used by InnoDB to store metadata
+# information.  If InnoDB requires more memory for this purpose it will
+# start to allocate it from the OS.  As this is fast enough on most
+# recent operating systems, you normally do not need to change this
+# value. SHOW INNODB STATUS will display the current amount used.
+innodb_additional_mem_pool_size = 16M
+
+# InnoDB, unlike MyISAM, uses a buffer pool to cache both indexes and
+# row data. The bigger you set this the less disk I/O is needed to
+# access data in tables. On a dedicated database server you may set this
+# parameter up to 80% of the machine physical memory size. Do not set it
+# too large, though, because competition of the physical memory may
+# cause paging in the operating system.  Note that on 32bit systems you
+# might be limited to 2-3.5G of user level memory per process, so do not
+# set it too high.
+innodb_buffer_pool_size = 2G

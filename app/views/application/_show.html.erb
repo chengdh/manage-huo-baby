@@ -1,0 +1,5 @@
+<%= show_for resource do |a| %>
+  <% show_view_columns.each do |column| %>
+    <%= a.attribute  column %>
+  <% end %>
+<%end%>

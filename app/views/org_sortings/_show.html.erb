@@ -1,0 +1,31 @@
+<table class="table">
+  <tr>
+    <th>机构名称</th>
+    <td><%= resource.name %></td>
+    <th>上级机构</th>
+    <td><%= resource.parent.try(:name) %></td>
+  </tr>
+  <tr>
+    <th>经理</th>
+    <td><%= resource.manager %></td>
+    <th>联系电话</th>
+    <td><%= resource.phone  %></td>
+  </tr>
+  <tr>
+    <th>有效</th>
+    <td><%= resource.is_active? ? "是" : "否" %></td>
+    <th></th>
+    <td></td>
+  </tr>
+  <tr>
+    <th colspan="20" style="text-align: center;"><h4>可管理分理处</h4></th>
+  </tr>
+  <% resource.org_sorting_orgs.each_with_index do |oso,i| %>
+    <tr>
+      <% if oso.is_select %>
+        <th> <%= i+1 %></th>
+        <td colspan="3"> <%= oso.org.name %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

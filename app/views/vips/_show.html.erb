@@ -1,0 +1,51 @@
+<h3><%= resource.name %>[<%= resource.human_vip_state_name %>]</h3>
+<table class='table'>
+  <tr>
+    <td>所属机构:</td>
+    <td><%=resource.org.name%></td>
+    <td>姓名:</td>
+    <td>
+      <%=resource.name%>
+      <span><%=resource.level_star%></span>
+    </td>
+    <td>客户编号:</td>
+    <td><%= resource.code %></td>
+
+  </tr>
+  <tr>
+    <td>电话:</td>
+    <td><%=resource.phone%></td>
+    <td>手机:</td>
+    <td><%=resource.mobile%></td>
+    <td>地址:</td>
+    <td><%=resource.address%></td>
+  </tr>
+  <tr>
+    <td>身份证号:</td>
+    <td><%= resource.id_number %></td>
+    <td>开户银行:</td>
+    <td><%= resource.bank.name %></td>
+    <td>开户银行卡号:</td>
+    <td colspan='3'><%= resource.bank_card %></td>
+  </tr>
+  <tr>
+    <td>月结客户:</td>
+    <td><%= resource.is_month_pay? ? "是" : "否"%></td>
+    <td>二维码客户:</td>
+    <td><%= resource.is_qrcode_pay? ? "是" : "否" %></td>
+    <td colspan='4'></td>
+  </tr>
+  <% if resource.is_qrcode_pay %>
+  <tr>
+    <td colspan="8">
+      <% if resource.qr_photo_1.present? %>
+        <%= link_to image_tag(resource.qr_photo_1.url(:thumb)),resource.qr_photo_1.url,:class => :fancybox %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td>备注 :</td>
+    <td colspan="5"><%= resource.note %></td>
+  </tr>
+</table>

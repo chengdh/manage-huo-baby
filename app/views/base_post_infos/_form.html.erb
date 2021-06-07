@@ -1,0 +1,43 @@
+<%= semantic_form_for resource ,:remote => true,:html =>{:id => "#{resource_class.name.underscore}_form",:class => "bill_selector"}  do |f|%>
+  <%=f.error_messages %>
+  <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+  <table class='table'>
+    <tr class='odd'>
+      <td>结算员:</td>
+      <td><%= current_user %></td>
+      <td>结算单位:</td>
+      <td>
+        <%=f.select :org_id,current_ability_orgs_for_select,{},{:id => "from_org_id"} %>
+      </td>
+      <td>结算日期:</td>
+      <td> <%=Date.today().strftime('%Y-%m-%d')%></td>
+      <td colspan='2'></td>
+    </tr>
+    <tr>
+      <th>货款</th>
+      <th>-运费[扣]</th>
+      <th>-保险费[扣]</th>
+      <th>-发货短途[扣]</th>
+      <th>-到货短途[扣]</th>
+      <th>-手续费[扣]</th>
+      <th>-中转手续费[扣]</th>
+      <th>=实提货款</th>
+    </tr>
+    <tr>
+      <td><span id="post_info_sum_goods_fee">&nbsp;</span></td>
+      <td><span id="post_info_sum_k_carrying_fee"></span></td>
+      <td><span id="post_info_sum_k_insured_fee"></span></td>
+      <td><span id="post_info_sum_k_from_short_carrying_fee"></span></td>
+      <td><span id="post_info_sum_k_to_short_carrying_fee"></span></td>
+      <td><span id="post_info_sum_k_hand_fee"></span></td>
+      <td><span id="post_info_sum_transit_hand_fee"></span></td>
+      <td><span id="post_info_sum_act_pay_fee"></span></td>
+    </tr>
+    <tr class='odd'>
+      <td>备注</td>
+      <td colspan='7'>
+        <%=f.text_field :note %>
+      </td>
+    </tr>
+  </table>
+<% end %>

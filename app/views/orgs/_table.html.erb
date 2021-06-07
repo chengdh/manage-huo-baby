@@ -1,0 +1,24 @@
+<div id="orgs_table">
+  <table class='table'>
+    <thead>
+      <tr>
+        <td>名称</td>
+        <td>简称</td>
+        <td>编码</td>
+        <td>联系电话</td>
+        <td>联系人</td>
+        <td>地址</td>
+        <td>录单截止时间</td>
+        <td>有效</td>
+        <td>排序</td>
+        <td>&nbsp;</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%@orgs.select {|org| org.parent_id.blank?}.sort{|a,b| a.order_by <=> b.order_by}.each do |child_org|%>
+        <% @cur_level = 1 %>
+        <%= render "orgs_recursive",:org => child_org %>
+      <%end%>
+    </tbody>
+  </table>
+</div>

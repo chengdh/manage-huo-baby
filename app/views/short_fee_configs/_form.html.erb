@@ -1,0 +1,16 @@
+<%= semantic_form_for resource, :html => {:id => "short_fee_config_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :name,:as => :string,:input_html =>{:size => 60} %>
+    <%= f.input :from_org_id,:as => :select,:collection => orgs_for_select,:include_blank => false,:input_html => {:id => :from_org_id} %>
+    <%= f.input :to_org_id,:as => :select,:collection => orgs_for_select,:include_blank => false,:input_html => {:id => :to_org_id} %>
+    <%= f.input :operator,:as => :select,:collection => ShortFeeConfig.operates,:include_blank => false  %>
+    <%= f.input :carrying_fee,:min => 100,:input_html =>{:size => 20}   %>
+    <%= f.input :short_fee_rate,:hint => "例如:0.15表示按照运费的15%计算短途费",:input_html =>{:size => 20}   %>
+    <%= f.input :fixed_short_fee,:input_html =>{:size => 20}   %>
+    <%= f.input :from_short_fee_rate,:hint => "例如:0.15表示按照运费的15%计算短途费",:input_html =>{:size => 20}   %>
+    <%= f.input :fixed_from_short_fee,:input_html =>{:size => 20}   %>
+    <%= f.input :note,:input_html => {:rows => 4,:cols => 100}   %>
+    <%= f.input :is_active %>
+  <% end %>
+<% end%>

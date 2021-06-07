@@ -1,0 +1,2 @@
+module OutterTransitTransferPayInfosHelper
+end

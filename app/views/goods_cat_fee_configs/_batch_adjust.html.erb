@@ -1,0 +1,41 @@
+<div style='width : 300px;'>
+  <h3>批量调整货物单价</h3>
+  <table class='table'>
+    <tr>
+      <th><%= radio_button_tag :adjust_type,'by_scale',true %>&nbsp;按比例(±):</th>
+      <td>
+        <input type='text' size="10" class='txt-adjust-rate'> %
+      </td>
+    </tr>
+    <tr>
+      <th><%= radio_button_tag :adjust_type,'by_price' %>&nbsp;按金额(±):</th>
+      <td>
+        <input type='text' size="10" class='txt-adjust-price'>
+      </td>
+    </tr>
+    <tr>
+      <th><%= radio_button_tag :adjust_type,'by_bottom_price' %>&nbsp;最低价(±):</th>
+      <td>
+        <input type='text' size="10" class='txt-adjust-bottom-price'>
+      </td>
+    </tr>
+    <tr>
+      <th><%= radio_button_tag :adjust_type,'by_default_price' %>&nbsp;调整为默认价:</th>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <th><%= radio_button_tag :adjust_type,'by_other_config' %>&nbsp;从其他线路拷贝:</th>
+      <td>
+        <%= select_tag "select_other_config",options_for_select(goods_cat_fee_configs_for_select),:include_blank => true  %>
+      </td>
+    </tr>
+  </table>
+  <ol>
+  <li> 空或零为不修改</li>
+  <li> 减少使用<code>-</code>表示</li>
+  </ol>
+  <div class='actions-bar text-right'>
+    <button class='sexybutton sexysimple sexyblue' id='btn_batch_adjust'>执行调整</button>
+  </div>
+</div>

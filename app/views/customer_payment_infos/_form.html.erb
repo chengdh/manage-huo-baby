@@ -1,0 +1,14 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "customer_payment_info_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20,:class => 'datepicker'} %>
+    <%= f.input :from_org_id,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id=> "from_org_id"} %>
+    <%= f.input :customer_name,:as => :string,:input_html => {:size => 30} %>
+    <%= f.input :customer_id_no,:as => :string,:input_html => {:size => 30} %>
+    <%= f.input :pay_type,:as => :select,:collection => customer_pay_types_for_select,:include_blank => false %>
+    <%= f.input :pay_ref,:as => :string,:input_html => {:size => 30} %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <% end %>
+<% end%>
+<%= render "form_before" %>

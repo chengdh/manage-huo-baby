@@ -1,0 +1,48 @@
+<table style='border-collapse : collapse;border : thin solid #000;'>
+  <tr>
+    <th colspan='7' style='text-align : center;font-size : 14px;'>返款清单</th>
+  </tr>
+  <tr>
+    <td>返款单位:</td>
+    <td><%= collection.first.try(:from_org) %></td>
+    <td>返款日期:</td>
+    <td><%= Date.today.strftime("%Y-%m-%d") %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>序号</td>
+    <td>发货地</td>
+    <td>运费[提]</td>
+    <td>发货短途[提]</td>
+    <td>保险费[提]</td>
+    <td>代收货款</td>
+    <td>提货应收</td>
+  </tr>
+  <%
+    bills =[]
+    collection.each do |r|
+      bills += r.carrying_bills
+    end
+  %>
+  <%bills.sort_by {|bill| bill.from_org.try(:order_by)}.each_with_index do |bill,index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= bill.from_org %></td>
+        <td><%= bill.carrying_fee_th %></td>
+        <td><%= bill.from_short_carrying_fee_th %></td>
+        <td><%= bill.insured_fee_th %></td>
+        <td><%= bill.goods_fee%></td>
+        <td><%= bill.th_amount - bill.to_short_carrying_fee_th%></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td colspan='2' style='text-align : right;'>合计</td>
+    <td ><%=collection.sum(&:sum_carrying_fee_th)%></td>
+    <td><%=collection.sum(&:sum_from_short_carrying_fee_th)%></td>
+    <td><%=collection.sum(&:sum_insured_fee_th)%></td>
+    <td><%=collection.sum(&:sum_goods_fee)%></td>
+    <td><%=collection.sum(&:sum_th_amount) %></td>
+  </tr>
+</table>

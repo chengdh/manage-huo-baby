@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+    <th>发货地</th>
+    <td><%= resource.from_region %></td>
+    <th>到货地</th>
+    <td><%= resource.to_region %></td>
+  </tr>
+  <tr>
+    <th>发货地分成</th>
+    <td><%= resource.from_rate %></td>
+    <th>到货地分成</th>
+    <td><%= resource.to_rate %></td>
+  </tr>
+  <tr>
+    <th>总部分成</th>
+    <td><%= resource.summary_rate %></td>
+    <th></th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>备注</th>
+    <td colspan="3"><%= resource.note %></td>
+  </tr>
+</table>

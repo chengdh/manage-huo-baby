@@ -1,0 +1,9 @@
+<%= semantic_form_for resource, :html => {:id => "deposit_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :org_id,:as => :select,:collection => branches_for_select,:include_blank => false %>
+    <%= f.input :deposit_fee_1,:as => :string,:input_html => {:size => 20}  %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <% end %>
+<% end%>

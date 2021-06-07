@@ -1,0 +1,5 @@
+<%if params[:show_select].present?%>
+$('#table_wrap').html('<%= escape_javascript(render("table_with_select")) %>');
+<%else%>
+$('#table_wrap').html('<%= escape_javascript(render("table")) %>');
+<%end%>

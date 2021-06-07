@@ -1,0 +1,14 @@
+<h3 style="text-align: center;">货物异常列表</h3>
+<ul class="table" style="width: 500px;">
+  <% resource.barcode_exceptions.each_with_index do |ex,i| %>
+    <li style="padding: 5px;float: left;list-style-type: none;">
+        <% if ex.goods_photo_1.present? %>
+          <div>
+          <%= image_tag(ex.goods_photo_1.url(:medium))%>
+          </div>
+        <% end %>
+      <p style="text-align: center;margin: 0;padding: 5px;"> <%= ex.barcode%></p>
+      <p style="text-align: center;margin: 0;padding: 5px;"> <%= ex.note %></p>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,16 @@
+<%= semantic_form_for resource ,:remote => true,:html => {:id => "#{resource_class.name.underscore}_form"} do |f|%>
+  <%=f.error_messages %>
+
+  <%= f.inputs :class =>"city-group" do %>
+    <%= f.input :to_org_id,:as => :select ,:collection => orgs_for_select,:hint => "关联的分理处或分公司" %>
+    <%= f.input :province_code,:as => :select,:collection => ChinaCity.list,:input_html => {:class => 'city-select city-province'}%>
+    <%= f.input :city_code,:as => :select,:collection => ChinaCity.list,:input_html => {:class => 'city-select city-city'}%>
+    <%= f.input :district_code,:as => :select,:collection => ChinaCity.list,:input_html => {:class => 'city-select city-district'}%>
+  <%end%>
+  <%= f.inputs :price_1,:price_2,:price_3,:price_4,:price_5,:price_6,:price_7 %>
+
+  <%= f.inputs do %>
+    <%= f.input :note,:as => :text,:input_html => {:rows => 3},:hint => "可填写介绍,运价等信息" %>
+  <% end %>
+  <%= f.inputs :order_by %>
+<% end %>

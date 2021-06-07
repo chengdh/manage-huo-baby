@@ -1,0 +1,44 @@
+<table class='table' data-detailUrl='<%=base_post_info_carrying_bills_path(resource,show_or_hidden_fields)%>'>
+  <tr>
+    <td>结算员:</td>
+    <td><%=resource.user%></td>
+    <td>结算单位:</td>
+    <td><%= resource.org.name %></td>
+    <td colspan="3">结算日期:</td>
+    <td> <%=resource.bill_date.strftime('%Y-%m-%d')%></td>
+  </tr>
+  <tr>
+    <th>货款</th>
+    <th>-运费[扣]</th>
+    <th>-保险费[扣]</th>
+    <th>-发货短途[扣]</th>
+    <th>-到货短途[扣]</th>
+    <th>-手续费[扣]</th>
+    <th>-中转手续费[扣]</th>
+    <th>=实提货款</th>
+  </tr>
+  <tr>
+    <td><span id="post_info_sum_goods_fee"><%=resource.sum_goods_fee %></span></td>
+    <td><span id="post_info_sum_k_carrying_fee"><%=resource.sum_k_carrying_fee %></span></td>
+    <td><span id="post_info_sum_k_insured_fee"><%=resource.sum_k_insured_fee %></span></td>
+    <td><span id="post_info_sum_k_from_short_carrying_fee"><%=resource.sum_k_from_short_carrying_fee %></span></td>
+    <td><span id="post_info_sum_k_to_short_carrying_fee"><%=resource.sum_k_to_short_carrying_fee %></span></td>
+    <td><span id="post_info_sum_k_hand_fee"></span><%=resource.sum_k_hand_fee %></td>
+    <td><span id="post_info_sum_transit_hand_fee"><%=resource.sum_transit_hand_fee %></span></td>
+    <td><span id="post_info_sum_act_pay_fee"><%=resource.sum_act_pay_fee %></span></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td colspan='7'>
+      <%=resource.note %>
+    </td>
+  </tr>
+</table>
+<ul class='tabs'>
+  <li class='active'><%= link_to '提款信息列表',"#",:id => "tab_show_pay_info_list"%></li>
+  <li><%= link_to '运单列表',"#",:id => "tab_show_bill_list"%></li>
+</ul>
+<div id="pay_info_list_wrap">
+  <%=render 'cash_pay_info_list'  %>
+</div>
+<div id="table_wrap" style='display:none;'></div>

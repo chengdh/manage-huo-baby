@@ -1,0 +1,13 @@
+<div class="block">
+  <%= render "dynamic_toolbar" %>
+  <div class="content">
+    <h2 class="title">货物异常情况核销</h2>
+    <div class="inner">
+      <%= render "show" %>
+      <div id='<%="#{resource_class.name.underscore}_form_wrap" %>' >
+        <%= render 'form_with_authorize' %>
+      </div>
+    </div>
+  </div>
+  <%= render "dynamic_toolbar" %>
+</div>

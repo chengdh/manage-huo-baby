@@ -1,0 +1,11 @@
+<%= semantic_form_for resource, :validate => true,:remote => true,:html => {:id => "debt_bill_form"} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :user_id,:value => current_user.id if f.object.new_record?%>
+    <%= f.input :bill_date,:as => :string,:input_html =>{:readonly => true,:size => 20} %>
+    <%= f.input :org_id,:label =>"填报机构" ,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false,:input_html => {:id => "to_org_id"} %>
+    <%= f.input :op_org_id,:label =>"处理机构" ,:as => :select,:collection => all_summary_orgs_for_select,:include_blank => false,:input_html => {:id => "op_org_id"} %>
+    <%= f.input :note,:as => :string,:input_html => {:size => 60} %>
+  <%end%>
+<%end%>
+<hr />

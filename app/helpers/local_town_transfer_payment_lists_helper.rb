@@ -1,0 +1,2 @@
+module LocalTownTransferPaymentListsHelper
+end

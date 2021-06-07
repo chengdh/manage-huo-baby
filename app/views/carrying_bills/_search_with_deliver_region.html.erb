@@ -1,0 +1,50 @@
+<!-- 以到货区域查询 -->
+<%= semantic_form_for @search,:html => {:id => "simple_search_bill_form",:method => :get } do |f|%>
+  <%= f.inputs do %>
+    <%= hidden_field_tag :direction,params[:direction] %>
+    <%= hidden_field_tag :sort,params[:sort] %>
+    <%= hidden_field_tag :rpt_type,params[:rpt_type]%>
+    <%= hidden_field_tag :show_fields,params[:show_fields]%>
+    <%= hidden_field_tag :hide_fields,params[:hide_fields]%>
+    <%= hidden_field_tag :without_paginate,params[:without_paginate] if params[:without_paginate]%>
+    <%= hidden_field_tag "search[state_ni][]","invalided" %>
+    <%= hidden_field_tag "search[state_ni][]","canceled" %>
+    <%if params[:search].present?%>
+      <%params[:search].each do |search_key,search_val|%>
+        <%if search_val.is_a? Array%>
+          <%search_val.each do |a|%>
+            <%= f.hidden_field "#{search_key}][",:value => a %>
+          <%end%>
+        <%else%>
+          <%= f.hidden_field search_key,:value => search_val %>
+        <%end%>
+      <%end%>
+    <%end%>
+    <%if params[:show_bill_no_eq]%>
+      <%= f.input :bill_no_eq,:label => "运单编号",:as => :string,:input_html =>{:size => 20} %>
+    <%end%>
+    <%= f.input :bill_date_gte,:label => "票据日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+
+    <%= f.input :updated_at_gte,:label => "更新日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :updated_at_lte,:label => "更新日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+
+    <%= f.input :from_org_id_eq,:label => "发货地",:as => :select,:collection => params[:from_org_select].present? ? self.send(params[:from_org_select]) : branches_for_select%>
+
+    <%= f.input :to_org_id_or_transit_org_id_eq,:label =>"到货地",:as => :select,:collection => params[:to_org_select].present? ? self.send(params[:to_org_select]) : branches_for_select %>
+
+    <%= f.input :pay_type_eq,:label => "支付方式",:as => :select,:collection => CarryingBill.pay_types_for_search %>
+    <%= render "types" %>
+    <%= f.input :type_eq,:label => "运单类型",:as => :select,:collection => bill_types_for_select %>
+    <%= f.input :state_eq,:label => "票据状态",:as => :select,:collection => states_for_select  %>
+    <%= f.input :additional_state_eq,:label => "附加票据状态",:as => :select,:collection => additional_states_for_select,:include_blank => false  %>
+    <%= f.input :print_counter_gte,:label => "票据打印次数",:as => :select,:collection => print_counter_for_select  %>
+
+    <%= f.input :from_customer_id_is_not_null,:label => "只查询转账付款运单",:as => :boolean,:input_html => {:value => 1,:id => "simple_search_from_customer_id_not_null"} %>
+    <%= f.input :from_customer_id_is_null,:label => "只查询现金付款运单",:as => :boolean,:input_html => {:value => 1,:id => "simple_search_from_customer_id_null"} %>
+    <%= f.hidden_field :goods_fee_gt,:id => "simple_search_goods_fee_gt",:value => params[:search].try(:[],:goods_fee_gt)%>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询运单",:class => "sexybutton sexysimple sexyblue",:disable_with => "查询中..." %>
+  <% end %>
+<% end%>

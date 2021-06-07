@@ -1,0 +1,47 @@
+<div id="login_dialog" class="login_dialog">
+  <div class="top"></div>
+  <div class="bottom">
+    <%=form_for resource,:as => resource_name, :url => session_path(resource_name) do |f| -%>
+      <%=hidden_field_tag "user[is_active]",1 %>
+      <div id="user_name_login" class="login_type">
+        <%=flash[:notice]%>
+        <%=flash[:alert]%>
+        <h1>登录<strong>物流业务系统</strong></h1>
+        <p>
+        <span class='overlay_wrapper'>
+          <%=f.label :username,'用户名',:class => "overlabel",:id => 'label_username'%>
+          <%=f.text_field :username,:class => "overlayable",:live => false%>
+        </span>
+        </p>
+        <p>
+        <span class='overlay_wrapper'>
+          <%=f.label :password,'密码',:class => "overlabel",:id => "label_password"%>
+          <%=f.password_field :password,:class => "overlayable",:live => false%>
+        </span>
+        </p>
+      </div>
+      <div id="remember_container">
+        <% if devise_mapping.rememberable? -%>
+          <p><%= f.check_box :remember_me %> <%= f.label :remember_me,'记住我的登录信息' %></p>
+        <% end -%>
+      </div>
+      <div id="signin_button">
+        <%= f.submit "登录",:class => "sexybutton sexysimple sexylarge sexygreen" %>
+      </div>
+    <%end%>
+  </div>
+</div>
+<script type='text/javascript'>
+  //录入用户名和密码时,隐藏label
+var toggle_label = function(evt)
+{
+  el = $(this);
+  if(!el.val() == "")
+    $(evt.data.label).hide();
+  else
+    $(evt.data.label).show();
+};
+$('#user_username').change({label : '#label_username'},toggle_label).keyup(toggle_label);
+$('#user_password').change({label : '#label_password'}toggle_label).keyup(toggle_label);
+$('#user_username').focus();
+</script>

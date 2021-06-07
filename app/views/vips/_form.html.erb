@@ -1,0 +1,26 @@
+<%= semantic_form_for resource,:remote => true,:html => {:id => "vip_form",:multipart => true} do |f|%>
+  <%=f.error_messages %>
+  <%= f.inputs do %>
+    <%= f.input :org_id,:as => :select,:collection => current_ability_orgs_for_select,:include_blank => false %>
+    <% if not resource.new_record? and can? :edit_code,resource %>
+      <%= f.input :code%>
+    <%else%>
+      <li class="string input optional stringish">
+        <label class=" label" for="vip_address">编号</label>
+        <input maxlength="60" name="not_use" type="text" readonly value='<%= resource.code %>' />
+      </li>
+    <%end%>
+
+  <% end%>
+  <%= f.inputs :name,:phone,:mobile,:address,:id_number %>
+  <%= f.inputs do %>
+    <%= f.input :bank_id,:as => :select,:collection => Bank.where(:is_active => true),:include_blank => true %>
+    <%= f.input :bank_card %>
+    <%= f.input :vip_flag %>
+    <%= f.input :is_month_pay %>
+    <%= f.input :is_qrcode_pay %>
+    <%= f.input :qr_photo_1, :as => :file %>
+    <%= f.input :is_active %>
+    <%= f.input :note,:input_html => {:cols => 100,:rows => 3} %>
+  <%end%>
+<% end%>

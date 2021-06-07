@@ -1,0 +1,23 @@
+<%= semantic_form_for resource_class.search,:html => {:method => :get,:style => "width : 300px;" } do |f|%>
+  <%= hidden_field_tag :direction,params[:direction] %>
+  <%= hidden_field_tag :sort,params[:sort] %>
+  <%= f.inputs do %>
+    <%= f.input :carrying_bill_bill_no_eq,:label =>"运单号",:input_html => {:size => 30} %>
+    <%= f.input :bill_date_gte,:label => "上报日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :bill_date_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :op_datetime_gte,:label => "处理日期",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+    <%= f.input :op_datetime_lte,:label => "~",:as => :string,:input_html =>{:class => 'datepicker',:size => 20,:readonly => true} %>
+
+    <%= f.input :org_id_or_op_org_id_or_carrying_bill_from_org_id_or_carrying_bill_to_org_id_eq,:label =>"组织机构",
+      :as => :select,
+      :collection => (current_user.default_org.is_summary? ? orgs_for_select : current_ability_orgs_for_select),
+      :include_blank => current_user.default_org.is_summary?,
+      :input_html => {:class => :select_org }
+    %>
+
+    <%= f.input :state_eq,:label => "状态",:as => :select,:collection => adjust_goods_fee_info_states_for_select,:include_blank => true %>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "查询",:class => "sexybutton sexysimple sexyblue",:disable_with => "查询中..." %>
+  <% end %>
+<% end%>

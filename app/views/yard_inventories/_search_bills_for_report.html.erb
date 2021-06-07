@@ -1,0 +1,18 @@
+<%= semantic_form_for CarryingBill.search,:url => {:action => :do_search_bills},:html => {:id => "simple_search_bill_form",:method => :get } do |f|%>
+  <%= f.inputs do %>
+    <%= f.input :bill_no_eq,:label => "运单编号",:as => :string,:input_html =>{:size => 20} %>
+    <%= f.input :bill_date_gte,:label => "票据日期",:as => :hidden,:input_html =>{:value => '2014-07-01',:class => 'datepicker',:size => 20,:readonly => true} %>
+    <!--
+    <%= f.input :bill_date_lte,:label => "~",:as => :hidden,:input_html =>{:value => '2013-08-01',:class => 'datepicker',:size => 20,:readonly => true} %>
+    -->
+    <%= f.input :bills_inventory_report,:label =>"总部",:as => :select,:collection => all_summary_orgs_for_select,:include_blank => false %>
+    <%= f.input :to_org_id_eq,:label =>"到货地",:as => :select,:collection => branches_for_select,:include_blank => false %>
+    <%= f.input :pay_type_eq,:label => "支付方式",:as => :select,:collection => CarryingBill.pay_types %>
+    <%= f.input :type_eq,:label => "运单类型",:as => :select,:collection => bill_types_for_select %>
+    <%= f.input :state_eq,:label => "票据状态",:as => :select,:collection => states_for_select  %>
+    <%= f.hidden_field :state_ne,:value => "invalided"%>
+  <% end %>
+  <%=f.actions do %>
+    <%=submit_tag "统计滞留票据",:class => "sexybutton sexysimple sexyblue",:disable_with => '统计中...' %>
+  <% end %>
+<% end%>
