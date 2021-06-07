@@ -25,13 +25,12 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/chengdh/repo_name">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -40,14 +39,14 @@
   <p align="center">
   完全开源免费的零担(专线)物流业务管理软件
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>浏览代码库»</strong></a>
+    <a href="https://github.com/chengdh/repo_name"><strong>浏览代码库»</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">系统演示</a>
+    <a href="https://github.com/chengdh/repo_name">系统演示</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">提交Bug</a>
+    <a href="https://github.com/chengdh/repo_name/issues">提交Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">提交需求</a>
+    <a href="https://github.com/chengdh/repo_name/issues">提交需求</a>
   </p>
 </p>
 
@@ -124,7 +123,7 @@
 
 1. Clone代码仓库 
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/chengdh/repo_name.git
    ```
 
 2. Build docker镜像 
@@ -201,9 +200,10 @@
 ##  8. <a name='donate'></a>捐赠作者
 给作者一些动力,帮他买一杯 :coffee:
 
-<img src="alipy.JPG" alt="打赏" style="width:200px;"/>
+<img src="readme_images/alipay.jpg" alt="打赏" style="width:200px; height: 270px;"/>
 
-<img src="wechat_pay.JPG" alt="打赏" style="width:200px;"/>
+<img src="readme_images/wechat_pay.jpg" alt="打赏" style="width:200px; height: 270px;"/>
+
 
 <!-- ACKNOWLEDGEMENTS -->
 ##  9. <a name='acknowledgements'></a>术语参考 
@@ -213,15 +213,15 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/chengdh/repo.svg?style=for-the-badge
+[contributors-url]: https://github.com/chengdh/manage-huo-baby/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/chengdh/repo.svg?style=for-the-badge
+[forks-url]: https://github.com/chengdh/manage-huo-baby/network/members
+[stars-shield]: https://img.shields.io/github/stars/chengdh/repo.svg?style=for-the-badge
+[stars-url]: https://github.com/chengdh/manage-huo-baby/stargazers
+[issues-shield]: https://img.shields.io/github/issues/chengdh/repo.svg?style=for-the-badge
+[issues-url]: https://github.com/chengdh/manage-huo-baby/issues
+[license-shield]: https://img.shields.io/github/license/chengdh/repo.svg?style=for-the-badge
+[license-url]: https://github.com/chengdh/manage-huo-baby/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
+[linkedin-url]: https://linkedin.com/in/chengdh
