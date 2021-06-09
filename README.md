@@ -131,30 +131,36 @@
    docker compose build
    ```
 
-3. 创建数据库 
+3. 安装支持库 
+   ```sh
+    docker compose run web bundle install
+   ```
+
+
+4. 创建数据库 
     ```
     docker compose run web bundle exec rake db:create
     ```
 
-4.  migrate数据库
+5.  migrate数据库
     ```
     docker compose run web bundle exec rake db:migrate
     docker compose run web bundle exec rake db:convert_new_function_obj
     ```
-5. 生成demo数据 
+6. 生成demo数据 
     ```
     docker compose run web bundle exec rake db:gen_test_data
     docker compose run web bundle exec rake db:create_user
     ```
 
-6.  启动系统 
+7.  启动系统 
     ```
     docker compose up 
     ```
 
-7.  登录系统 
+8.  登录系统 
 
-    通过浏览器访问http://localhost:5003,登录系统
+    通过浏览器访问http://localhost:5000,登录系统
 
     用户名: admin
 

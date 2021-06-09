@@ -16,7 +16,7 @@ services:
     command: bundle exec rails s
     volumes:
       # This seems to work as-is once you expose /Users to the boot2docker vm.
-      - il-yanzhao-sync:/il_yanzhao
+      - .:/app
     links:
       - mysql
     ports:
@@ -29,7 +29,7 @@ services:
     # 'image' will vary depending on your docker-compose 
     # project name. You may need to run `docker-compose build web`
     # before this works.
-    image: il_yanzhao_new_web
+    image: manage-huo-baby_web
     command: echo "I'm a little data container, short and stout..."
     volumes:
       - bundle_data:/bundle
@@ -37,5 +37,5 @@ services:
 volumes:
   mysql_data:
   bundle_data:
-  il-yanzhao-sync:
-    external: true
+  # il-yanzhao-sync:
+  #   external: true

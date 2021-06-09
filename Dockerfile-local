@@ -22,11 +22,10 @@ ENV RBENV_ROOT /usr/local/rbenv
 ENV PATH $RBENV_ROOT/bin:$RBENV_ROOT/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN rbenv install  1.9.3-p448
-#RUN rbenv install  2.0.0-p598
 RUN bash -l -c 'rbenv global 1.9.3-p448; gem install bundler -v 1.17.3; rbenv rehash'
 
 
-ENV APP_HOME /il_yanzhao
+ENV APP_HOME /app
 WORKDIR $APP_HOME
 
 ADD Gemfile* $APP_HOME/
