@@ -21,21 +21,6 @@ services:
       - mysql
     ports:
       - "5000:3000"
-    # dns: localhost
-    volumes_from:
-      - bundle
-
-  bundle:
-    # 'image' will vary depending on your docker-compose 
-    # project name. You may need to run `docker-compose build web`
-    # before this works.
-    image: manage-huo-baby_web
-    command: echo "I'm a little data container, short and stout..."
-    volumes:
-      - bundle_data:/bundle
 
 volumes:
   mysql_data:
-  bundle_data:
-  # il-yanzhao-sync:
-  #   external: true

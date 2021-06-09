@@ -544,6 +544,7 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.datetime "updated_at",                         :null => false
     t.integer  "org_id",                             :null => false
     t.string   "type",                 :limit => 60
+    t.string   "photo_1_file_name"
     t.string   "photo_1_content_type"
     t.integer  "photo_1_file_size"
     t.datetime "photo_1_updated_at"
@@ -551,7 +552,6 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.string   "photo_2_content_type"
     t.integer  "photo_2_file_size"
     t.datetime "photo_2_updated_at"
-    t.string   "photo_1_file_name"
   end
 
   add_index "deliver_infos", ["deliver_date"], :name => "index_deliver_infos_on_deliver_date"
@@ -1080,7 +1080,7 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
   add_index "journals", ["org_id"], :name => "index_journals_on_org_id"
   add_index "journals", ["user_id"], :name => "index_journals_on_user_id"
 
-  create_table "lhma_2019_07_22_05_50_53_104_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_04_992_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                          :null => false
     t.string   "bill_no",                          :limit => 30,                                                     :null => false
     t.string   "goods_no",                         :limit => 30,                                                     :null => false
@@ -1143,38 +1143,38 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.integer  "print_counter",                                                                 :default => 0,       :null => false
   end
 
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_50_53_104_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_04_992_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_50_57_580_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_19_579_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                           :null => false
     t.string   "bill_no",                          :limit => 30,                                                      :null => false
     t.string   "goods_no",                         :limit => 30,                                                      :null => false
@@ -1239,39 +1239,39 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.decimal  "unit_price",                                      :precision => 15, :scale => 3, :default => 0.0
   end
 
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_50_57_580_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_19_579_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_51_00_099_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_27_610_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                           :null => false
     t.string   "bill_no",                          :limit => 30,                                                      :null => false
     t.string   "goods_no",                         :limit => 30,                                                      :null => false
@@ -1338,139 +1338,39 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.decimal  "carrying_fee_2st",                                :precision => 10, :scale => 2, :default => 0.0
   end
 
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_51_00_099_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_27_610_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_51_01_034_carrying_bills", :force => true do |t|
-    t.date     "bill_date",                                                                                           :null => false
-    t.string   "bill_no",                          :limit => 30,                                                      :null => false
-    t.string   "goods_no",                         :limit => 30,                                                      :null => false
-    t.integer  "from_customer_id"
-    t.string   "from_customer_name",               :limit => 60,                                                      :null => false
-    t.string   "from_customer_phone",              :limit => 60
-    t.string   "from_customer_mobile",             :limit => 60
-    t.integer  "to_customer_id"
-    t.string   "to_customer_name",                 :limit => 60,                                                      :null => false
-    t.string   "to_customer_phone"
-    t.string   "to_customer_mobile",               :limit => 60
-    t.integer  "from_org_id"
-    t.integer  "transit_org_id"
-    t.integer  "to_org_id"
-    t.decimal  "insured_amount",                                  :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "insured_rate",                                    :precision => 10, :scale => 5, :default => 0.0
-    t.decimal  "insured_fee",                                     :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "carrying_fee",                                    :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "goods_fee",                                       :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "from_short_carrying_fee",                         :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "to_short_carrying_fee",                           :precision => 10, :scale => 2, :default => 0.0
-    t.string   "pay_type",                         :limit => 20,                                                      :null => false
-    t.integer  "goods_num",                                                                      :default => 1
-    t.decimal  "goods_weight",                                    :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "goods_volume",                                    :precision => 10, :scale => 2, :default => 0.0
-    t.string   "goods_info"
-    t.text     "note"
-    t.string   "type",                             :limit => 100
-    t.string   "state",                            :limit => 60
-    t.boolean  "completed",                                                                      :default => false
-    t.integer  "user_id"
-    t.datetime "created_at",                                                                                          :null => false
-    t.datetime "updated_at",                                                                                          :null => false
-    t.integer  "original_bill_id"
-    t.integer  "load_list_id"
-    t.integer  "distribution_list_id"
-    t.integer  "deliver_info_id"
-    t.integer  "settlement_id"
-    t.integer  "refound_id"
-    t.integer  "payment_list_id"
-    t.integer  "pay_info_id"
-    t.integer  "post_info_id"
-    t.decimal  "k_hand_fee",                                      :precision => 15, :scale => 2, :default => 0.0
-    t.integer  "transit_info_id"
-    t.decimal  "transit_carrying_fee",                            :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "transit_hand_fee",                                :precision => 15, :scale => 2, :default => 0.0
-    t.integer  "transit_deliver_info_id"
-    t.decimal  "original_carrying_fee",                           :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "original_goods_fee",                              :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "original_insured_amount",                         :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "original_insured_fee",                            :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "original_from_short_carrying_fee",                :precision => 15, :scale => 2, :default => 0.0
-    t.decimal  "original_to_short_carrying_fee",                  :precision => 15, :scale => 2, :default => 0.0
-    t.string   "package",                          :limit => 30
-    t.string   "transit_bill_no",                  :limit => 20
-    t.string   "transit_to_phone",                 :limit => 20
-    t.integer  "area_id"
-    t.string   "to_short_fee_state",               :limit => 20,                                 :default => "draft"
-    t.string   "from_short_fee_state",             :limit => 20,                                 :default => "draft"
-    t.integer  "print_counter",                                                                  :default => 0,       :null => false
-    t.integer  "goods_cat_id"
-    t.decimal  "unit_price",                                      :precision => 15, :scale => 3, :default => 0.0
-    t.decimal  "carrying_fee_1st",                                :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "carrying_fee_2st",                                :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "adjust_carrying_fee",                             :precision => 10, :scale => 2, :default => 0.0
-  end
-
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_51_01_034_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
-
-  create_table "lhma_2019_07_22_05_51_03_740_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_32_020_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                           :null => false
     t.string   "bill_no",                          :limit => 30,                                                      :null => false
     t.string   "goods_no",                         :limit => 30,                                                      :null => false
@@ -1536,42 +1436,41 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.decimal  "carrying_fee_1st",                                :precision => 10, :scale => 2, :default => 0.0
     t.decimal  "carrying_fee_2st",                                :precision => 10, :scale => 2, :default => 0.0
     t.decimal  "adjust_carrying_fee",                             :precision => 10, :scale => 2, :default => 0.0
-    t.decimal  "manage_fee",                                      :precision => 10, :scale => 2, :default => 0.0
   end
 
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_51_03_740_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_32_020_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_51_06_112_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_40_099_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                           :null => false
     t.string   "bill_no",                          :limit => 30,                                                      :null => false
     t.string   "goods_no",                         :limit => 30,                                                      :null => false
@@ -1640,42 +1539,143 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.decimal  "manage_fee",                                      :precision => 10, :scale => 2, :default => 0.0
   end
 
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["created_at"], :name => "index_carrying_bills_on_created_at"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["distribution_list_id"], :name => "index_carrying_bills_on_distribution_list_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["updated_at"], :name => "index_carrying_bills_on_updated_at"
-  add_index "lhma_2019_07_22_05_51_06_112_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_40_099_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_51_07_919_carrying_bills", :force => true do |t|
+  create_table "lhma_2021_06_09_06_17_46_257_carrying_bills", :force => true do |t|
+    t.date     "bill_date",                                                                                           :null => false
+    t.string   "bill_no",                          :limit => 30,                                                      :null => false
+    t.string   "goods_no",                         :limit => 30,                                                      :null => false
+    t.integer  "from_customer_id"
+    t.string   "from_customer_name",               :limit => 60,                                                      :null => false
+    t.string   "from_customer_phone",              :limit => 60
+    t.string   "from_customer_mobile",             :limit => 60
+    t.integer  "to_customer_id"
+    t.string   "to_customer_name",                 :limit => 60,                                                      :null => false
+    t.string   "to_customer_phone"
+    t.string   "to_customer_mobile",               :limit => 60
+    t.integer  "from_org_id"
+    t.integer  "transit_org_id"
+    t.integer  "to_org_id"
+    t.decimal  "insured_amount",                                  :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "insured_rate",                                    :precision => 10, :scale => 5, :default => 0.0
+    t.decimal  "insured_fee",                                     :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "carrying_fee",                                    :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "goods_fee",                                       :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "from_short_carrying_fee",                         :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "to_short_carrying_fee",                           :precision => 10, :scale => 2, :default => 0.0
+    t.string   "pay_type",                         :limit => 20,                                                      :null => false
+    t.integer  "goods_num",                                                                      :default => 1
+    t.decimal  "goods_weight",                                    :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "goods_volume",                                    :precision => 10, :scale => 2, :default => 0.0
+    t.string   "goods_info"
+    t.text     "note"
+    t.string   "type",                             :limit => 100
+    t.string   "state",                            :limit => 60
+    t.boolean  "completed",                                                                      :default => false
+    t.integer  "user_id"
+    t.datetime "created_at",                                                                                          :null => false
+    t.datetime "updated_at",                                                                                          :null => false
+    t.integer  "original_bill_id"
+    t.integer  "load_list_id"
+    t.integer  "distribution_list_id"
+    t.integer  "deliver_info_id"
+    t.integer  "settlement_id"
+    t.integer  "refound_id"
+    t.integer  "payment_list_id"
+    t.integer  "pay_info_id"
+    t.integer  "post_info_id"
+    t.decimal  "k_hand_fee",                                      :precision => 15, :scale => 2, :default => 0.0
+    t.integer  "transit_info_id"
+    t.decimal  "transit_carrying_fee",                            :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "transit_hand_fee",                                :precision => 15, :scale => 2, :default => 0.0
+    t.integer  "transit_deliver_info_id"
+    t.decimal  "original_carrying_fee",                           :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "original_goods_fee",                              :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "original_insured_amount",                         :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "original_insured_fee",                            :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "original_from_short_carrying_fee",                :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "original_to_short_carrying_fee",                  :precision => 15, :scale => 2, :default => 0.0
+    t.string   "package",                          :limit => 30
+    t.string   "transit_bill_no",                  :limit => 20
+    t.string   "transit_to_phone",                 :limit => 20
+    t.integer  "area_id"
+    t.string   "to_short_fee_state",               :limit => 20,                                 :default => "draft"
+    t.string   "from_short_fee_state",             :limit => 20,                                 :default => "draft"
+    t.integer  "print_counter",                                                                  :default => 0,       :null => false
+    t.integer  "goods_cat_id"
+    t.decimal  "unit_price",                                      :precision => 15, :scale => 3, :default => 0.0
+    t.decimal  "carrying_fee_1st",                                :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "carrying_fee_2st",                                :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "adjust_carrying_fee",                             :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "manage_fee",                                      :precision => 10, :scale => 2, :default => 0.0
+  end
+
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["created_at"], :name => "index_carrying_bills_on_created_at"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["distribution_list_id"], :name => "index_carrying_bills_on_distribution_list_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["updated_at"], :name => "index_carrying_bills_on_updated_at"
+  add_index "lhma_2021_06_09_06_17_46_257_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+
+  create_table "lhma_2021_06_09_06_17_50_770_carrying_bills", :force => true do |t|
     t.date     "bill_date",                                                                                           :null => false
     t.string   "bill_no",                          :limit => 30,                                                      :null => false
     t.string   "goods_no",                         :limit => 30,                                                      :null => false
@@ -1745,42 +1745,42 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.integer  "th_bill_print_count",                                                            :default => 0
   end
 
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["created_at"], :name => "index_carrying_bills_on_created_at"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["distribution_list_id"], :name => "index_carrying_bills_on_distribution_list_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["updated_at"], :name => "index_carrying_bills_on_updated_at"
-  add_index "lhma_2019_07_22_05_51_07_919_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["area_id"], :name => "index_carrying_bills_on_area_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["bill_date"], :name => "index_carrying_bills_on_bill_date"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["bill_no"], :name => "index_carrying_bills_on_bill_no"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["completed"], :name => "index_carrying_bills_on_completed"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["created_at"], :name => "index_carrying_bills_on_created_at"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["deliver_info_id"], :name => "index_carrying_bills_on_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["distribution_list_id"], :name => "index_carrying_bills_on_distribution_list_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["from_customer_id"], :name => "index_carrying_bills_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["from_customer_name"], :name => "index_carrying_bills_on_from_customer_name"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["from_org_id"], :name => "index_carrying_bills_on_from_org_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["from_short_fee_state"], :name => "index_carrying_bills_on_from_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["goods_cat_id"], :name => "index_carrying_bills_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["goods_no"], :name => "index_carrying_bills_on_goods_no"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["load_list_id"], :name => "index_carrying_bills_on_load_list_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["original_bill_id"], :name => "index_carrying_bills_on_original_bill_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["pay_info_id"], :name => "index_carrying_bills_on_pay_info_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["pay_type"], :name => "index_carrying_bills_on_pay_type"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["payment_list_id"], :name => "index_carrying_bills_on_payment_list_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["post_info_id"], :name => "index_carrying_bills_on_post_info_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["print_counter"], :name => "index_carrying_bills_on_print_counter"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["refound_id"], :name => "index_carrying_bills_on_refound_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["settlement_id"], :name => "index_carrying_bills_on_settlement_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["state"], :name => "index_carrying_bills_on_state"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["to_customer_id"], :name => "index_carrying_bills_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["to_customer_name"], :name => "index_carrying_bills_on_to_customer_name"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["to_org_id"], :name => "index_carrying_bills_on_to_org_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["to_short_fee_state"], :name => "index_carrying_bills_on_to_short_fee_state"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["transit_bill_no"], :name => "index_carrying_bills_on_transit_bill_no"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["transit_deliver_info_id"], :name => "index_carrying_bills_on_transit_deliver_info_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["transit_info_id"], :name => "index_carrying_bills_on_transit_info_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["transit_org_id"], :name => "index_carrying_bills_on_transit_org_id"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["type"], :name => "index_carrying_bills_on_type"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["updated_at"], :name => "index_carrying_bills_on_updated_at"
+  add_index "lhma_2021_06_09_06_17_50_770_carrying_bills", ["user_id"], :name => "index_carrying_bills_on_user_id"
 
-  create_table "lhma_2019_07_22_05_51_23_344_bill_association_objects", :force => true do |t|
+  create_table "lhma_2021_06_09_06_18_32_282_bill_association_objects", :force => true do |t|
     t.integer  "from_customer_id"
     t.integer  "to_customer_id"
     t.datetime "created_at",                                         :null => false
@@ -1793,12 +1793,12 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.boolean  "is_list",                         :default => false
   end
 
-  add_index "lhma_2019_07_22_05_51_23_344_bill_association_objects", ["customerable_id"], :name => "index_bill_association_objects_on_customerable_id"
-  add_index "lhma_2019_07_22_05_51_23_344_bill_association_objects", ["customerable_type"], :name => "index_bill_association_objects_on_customerable_type"
-  add_index "lhma_2019_07_22_05_51_23_344_bill_association_objects", ["from_customer_id"], :name => "index_bill_association_objects_on_from_customer_id"
-  add_index "lhma_2019_07_22_05_51_23_344_bill_association_objects", ["to_customer_id"], :name => "index_bill_association_objects_on_to_customer_id"
+  add_index "lhma_2021_06_09_06_18_32_282_bill_association_objects", ["customerable_id"], :name => "index_bill_association_objects_on_customerable_id"
+  add_index "lhma_2021_06_09_06_18_32_282_bill_association_objects", ["customerable_type"], :name => "index_bill_association_objects_on_customerable_type"
+  add_index "lhma_2021_06_09_06_18_32_282_bill_association_objects", ["from_customer_id"], :name => "index_bill_association_objects_on_from_customer_id"
+  add_index "lhma_2021_06_09_06_18_32_282_bill_association_objects", ["to_customer_id"], :name => "index_bill_association_objects_on_to_customer_id"
 
-  create_table "lhma_2019_07_22_05_51_23_680_bill_lines", :force => true do |t|
+  create_table "lhma_2021_06_09_06_18_33_973_bill_lines", :force => true do |t|
     t.integer  "carrying_bill_id",                                                 :null => false
     t.integer  "goods_cat_id"
     t.integer  "qty",                                             :default => 1
@@ -1812,8 +1812,8 @@ ActiveRecord::Schema.define(:version => 20191209092729) do
     t.integer  "fee_unit_id"
   end
 
-  add_index "lhma_2019_07_22_05_51_23_680_bill_lines", ["carrying_bill_id"], :name => "index_bill_lines_on_carrying_bill_id"
-  add_index "lhma_2019_07_22_05_51_23_680_bill_lines", ["goods_cat_id"], :name => "index_bill_lines_on_goods_cat_id"
+  add_index "lhma_2021_06_09_06_18_33_973_bill_lines", ["carrying_bill_id"], :name => "index_bill_lines_on_carrying_bill_id"
+  add_index "lhma_2021_06_09_06_18_33_973_bill_lines", ["goods_cat_id"], :name => "index_bill_lines_on_goods_cat_id"
 
   create_table "load_list_with_barcode_lines", :force => true do |t|
     t.integer  "load_list_with_barcode_id",                                      :null => false

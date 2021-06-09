@@ -30,10 +30,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/chengdh/manage-huo-baby">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">管货宝</h3>
 
   <p align="center">
@@ -81,7 +77,7 @@
 <!-- ABOUT THE PROJECT -->
 ##  1. <a name='about-the-project'></a>项目简介 
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![](readme_images/screen.png)
 
 管货宝是功能完善的零担(专线)物流业务管理软件，功能涵盖运单处理、货物运输、运费货款管控、客户关系管理、公司分成核算等业务。
 软件在多家物流公司应用，当前开源的是业务简化后的版本，去除了部分通用性不高的功能模块。
