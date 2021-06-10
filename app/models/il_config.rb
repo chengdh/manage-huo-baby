@@ -82,7 +82,7 @@ class IlConfig < ActiveRecord::Base
 
   def self.client_name
     client_name ||=self.find_by_key(KEY_CLIENT_NAME)
-    client_name ||= self.create(:key => KEY_CLIENT_NAME,:title => '公司名称',:value => 'XXX物流公司')
+    client_name ||= self.create(:key => KEY_CLIENT_NAME,:title => '公司名称',:value => '管货宝')
     client_name.value
   end
   def self.client_logo
@@ -92,7 +92,7 @@ class IlConfig < ActiveRecord::Base
   end
   def self.system_title
     system_title ||= self.find_by_key(KEY_TITLE)
-    system_title ||= self.create(:key => KEY_TITLE,:title => '系统名称',:value => 'IL综合物流业务系统')
+    system_title ||= self.create(:key => KEY_TITLE,:title => '系统名称',:value => '管货宝-开源物流平台')
     system_title.value
   end
   def self.max_hand_fee

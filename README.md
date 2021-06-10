@@ -165,7 +165,7 @@
 <!-- USAGE EXAMPLES -->
 ##  3. <a name='usage'></a>操作指南 
 
-操作手册完善中，可以参考[操作手册](https://example.com)_
+操作指南完善中，可以参考[操作手册](public/help.doc)
 
 <!-- ROADMAP -->
 ##  4. <a name='roadmap'></a>研发路线图 
