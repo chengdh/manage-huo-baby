@@ -1,3 +1,5 @@
+
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -83,7 +85,7 @@
 软件在多家物流公司应用，当前开源的是业务简化后的版本，去除了部分通用性不高的功能模块。
 
 * 系统支持多分公司，多线路运营。
-* 系统支持货场手持设备扫码分捡、装车。
+* 系统支持货场手持设备扫码分拣、装车。
 * 系统包含PC端管理软件和手机APP。
 
 ###  1.1. <a name='built-with'></a>相关技术 
